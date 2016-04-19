@@ -9,10 +9,12 @@
   "license": "FREE",
   "homepage": "www.home.eu",
   "dependencies": {
-    "angular": "1.5.1"
+    "angular": "1.5.1",
+	"angular-ui-router": "0.2.15"
   },
   "appPath": "src/",
   "resolutions": {
-    "angular": "1.5.1"
+    "angular": "1.5.1",
+	"angular-ui-router": "0.2.15"
   }
 }

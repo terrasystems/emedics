@@ -1,0 +1,55 @@
+<!-- Login Form-->
+
+<form name="loginForm" ng-submit="submitForm(loginForm.$valid)" id="loginForm">
+	<div class="pad"></div>
+
+	<div class="header">Sales Management Tool
+		<div class="text-center">
+			<img src="/images/logo.jpg" style="vertical-align: middle;" width="120">
+		</div>
+	</div>
+	<div class="body">
+		<div class="pad">Login:</div>
+
+		<!-- login -->
+		<div class="input-group ng-valid-email">
+			<span class="input-group-addon"> <i
+					class="fa fa-fw fa-user"></i>
+			</span> <input type="text" ng-model="login.user" name="user"
+						   id="user" class="form-control"
+						   placeholder="Your name" required
+						   ng-pattern="/^[A-Za-z]([.A-Za-z0-9-_]{1,18})([A-Za-z0-9])$/"
+						   lowercase /> <!-- ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" -->
+		</div>
+		<!-- email validation -->
+		<div class="animate"
+			 ng-if="loginForm.$submitted || loginForm.password.$touched"
+			 ng-messages="loginForm.user.$error" ng-messages-multiple>
+			<div ng-message="required">Field required</div>
+			<div ng-message="pattern">Login not valid!</div>
+		</div>
+
+		<!-- password -->
+		<div class="input-group">
+			<span class="input-group-addon"> <i
+					class="fa fa-fw fa-lock"></i>
+			</span> <input type="password" name="password" class="form-control"
+						   placeholder="Your password"
+						   ng-model="login.password" required />
+		</div>
+
+		<!-- pass validation -->
+		<div class="has-warning"
+			 ng-if="loginForm.$submitted || loginForm.password.$touched"
+			 ng-messages="loginForm.password.$error" ng-messages-multiple>
+			<div ng-message="required">Field required</div>
+		</div>
+	</div>
+	<div class="footer">
+		<button type="submit" ng-disabled="loginWasSent"
+				class="btn btn-block btn-primary">Sign in</button>
+		<div>
+			<a class="text-muted" ui-sref="main.public.passrecovery" >Forgot Password</a>
+		</div>
+	</div>
+</form>
