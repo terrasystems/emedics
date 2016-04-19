@@ -1,0 +1,18 @@
+{
+  "name": "eMedics",
+  "version": "0.0.1",
+  "description": "Web application eMedics",
+  "main": "src/js/app.js",
+  "authors": [
+    "* LTD, EU"
+  ],
+  "license": "FREE",
+  "homepage": "www.home.eu",
+  "dependencies": {
+    "angular": "1.5.1"
+  },
+  "appPath": "src/",
+  "resolutions": {
+    "angular": "1.5.1"
+  }
+}
