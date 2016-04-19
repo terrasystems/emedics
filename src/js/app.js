@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var eMedics = angular.module('eMedics', ['ui.router', 'modules.core', 'modules.public']);
+var eMedics = angular.module('eMedics', ['ui.router', 'modules.core', 'modules.public', 'ui.bootstrap']);
 
 eMedics.config(function(statesList, $stateProvider, $urlRouterProvider) {
 

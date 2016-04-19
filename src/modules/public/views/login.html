@@ -3,11 +3,8 @@
 <form name="loginForm" ng-submit="submitForm(loginForm.$valid)" id="loginForm">
 	<div class="pad"></div>
 
-	<div class="header">Sales Management Tool
-		<div class="text-center">
-			<img src="/images/logo.jpg" style="vertical-align: middle;" width="120">
-		</div>
-	</div>
+
+	<div class="container">
 	<div class="body">
 		<div class="pad">Login:</div>
 
@@ -25,8 +22,8 @@
 		<div class="animate"
 			 ng-if="loginForm.$submitted || loginForm.password.$touched"
 			 ng-messages="loginForm.user.$error" ng-messages-multiple>
-			<div ng-message="required">Field required</div>
-			<div ng-message="pattern">Login not valid!</div>
+			<div ng-message="required" class="alert alert-danger">Field required</div>
+			<div ng-message="pattern" class="alert alert-danger">Login not valid!</div>
 		</div>
 
 		<!-- password -->
@@ -53,3 +50,4 @@
 		</div>
 	</div>
 </form>
+</div>
