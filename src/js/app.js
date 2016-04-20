@@ -2,18 +2,22 @@
 
 /* App Module */
 
-var eMedics = angular.module('eMedics', ['ui.router', 'modules.core', 'modules.public', 'ui.bootstrap','formly', 'formlyBootstrap']);
+var eMedics = angular.module('eMedics', ['ui.router', 'modules.core', 'modules.public']);
 
-eMedics.config(function( $statesList, $stateProvider, $urlRouterProvider) {
+eMedics.config(function(statesList, $stateProvider, $urlRouterProvider) {
 
 	$stateProvider.state('login222', {
-		url: '/login',
-		templateUrl: 'modules/public/views/login.html',
-		controller: 'LoginCtrl'
-	});
+			url: '/login',
+     		templateUrl: 'modules/public/views/login.html',
+			controller: 'LoginCtrl'
+		});
+
+
+	//angular.forEach(statesList, function(state) {
+	//	$stateProvider.state(state.name, state);
+	//});
+
 	$urlRouterProvider.otherwise('login');
 })
 
-	.run(function() {
-
-	});
+.run(function() {});
