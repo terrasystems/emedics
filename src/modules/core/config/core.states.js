@@ -25,10 +25,10 @@ angular.module('modules.core')
 		},
 		{
 			name: 'main.public.login',
-			url: 'login',
-			onEnter: /*@ngInject*/ function ($rootScope, $state) {
-				//if (angular.isDefined($rootScope.authToken)) $state.go('main.private.dashboard');
-			}
+			url: '/login',
+			templateUrl: 'modules/public/views/login.html',
+			controller: 'LoginCtrl'
+
 		},
 
 		// private

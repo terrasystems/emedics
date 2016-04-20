@@ -1,53 +1,7 @@
-<!-- Login Form-->
-
-<form name="loginForm" ng-submit="submitForm(loginForm.$valid)" id="loginForm">
-	<div class="pad"></div>
 
 
-	<div class="container">
-	<div class="body">
-		<div class="pad">Login:</div>
+<formly-form model="vm.user" fields="vm.userFields">
+	<button type="submit" class="btn btn-default" ng-click="vm.submit(vm.user)">Submit</button>
+</formly-form>
 
-		<!-- login -->
-		<div class="input-group ng-valid-email">
-			<span class="input-group-addon"> <i
-					class="fa fa-fw fa-user"></i>
-			</span> <input type="text" ng-model="login.user" name="user"
-						   id="user" class="form-control"
-						   placeholder="Your name" required
-						   ng-pattern="/^[A-Za-z]([.A-Za-z0-9-_]{1,18})([A-Za-z0-9])$/"
-						   lowercase /> <!-- ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" -->
-		</div>
-		<!-- email validation -->
-		<div class="animate"
-			 ng-if="loginForm.$submitted || loginForm.password.$touched"
-			 ng-messages="loginForm.user.$error" ng-messages-multiple>
-			<div ng-message="required" class="alert alert-danger">Field required</div>
-			<div ng-message="pattern" class="alert alert-danger">Login not valid!</div>
-		</div>
 
-		<!-- password -->
-		<div class="input-group">
-			<span class="input-group-addon"> <i
-					class="fa fa-fw fa-lock"></i>
-			</span> <input type="password" name="password" class="form-control"
-						   placeholder="Your password"
-						   ng-model="login.password" required />
-		</div>
-
-		<!-- pass validation -->
-		<div class="has-warning"
-			 ng-if="loginForm.$submitted || loginForm.password.$touched"
-			 ng-messages="loginForm.password.$error" ng-messages-multiple>
-			<div ng-message="required">Field required</div>
-		</div>
-	</div>
-	<div class="footer">
-		<button type="submit" ng-disabled="loginWasSent"
-				class="btn btn-block btn-primary">Sign in</button>
-		<div>
-			<a class="text-muted" ui-sref="main.public.passrecovery" >Forgot Password</a>
-		</div>
-	</div>
-</form>
-</div>
