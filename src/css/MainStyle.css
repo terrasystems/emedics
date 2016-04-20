@@ -1,0 +1,14 @@
+.login-form {
+	width: 500px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #E2E2E2;
+	border-radius: 10px;
+}
+
+.login-button {
+	float: right;
+	margin-right: 15px;
+	background-color: #259ff3;
+}

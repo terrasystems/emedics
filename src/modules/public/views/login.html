@@ -1,7 +1,13 @@
+<div class="login-form">
+
+	<formly-form model="vm.user" fields="vm.userFields">
+		<button type="submit" class="btn btn-default login-button"  ng-click="vm.submit(vm.user)">Submit</button>
+		<ul style="list-style: none">
+			<li><a href="#">Registration</a></li>
+			<li><a href="#">Forgot password ?</a></li>
+		</ul>
+
+	</formly-form>
 
 
-<formly-form model="vm.user" fields="vm.userFields">
-	<button type="submit" class="btn btn-default" ng-click="vm.submit(vm.user)">Submit</button>
-</formly-form>
-
-
+</div>
