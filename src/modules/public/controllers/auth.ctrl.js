@@ -10,6 +10,7 @@ angular.module('modules.public', [])
 		vm.user = {};
 		vm.userFields = [
 			{
+				className: 'col-md-12',
 				key: 'email',
 				type: 'input',
 				templateOptions: {
@@ -19,6 +20,7 @@ angular.module('modules.public', [])
 				}
 			},
 			{
+				className: 'col-md-12',
 				key: 'password',
 				type: 'input',
 				templateOptions: {
@@ -29,7 +31,7 @@ angular.module('modules.public', [])
 			}
 		];
 
-		function onSubmit() {
+		function submit() {
 			console.log('1');
 		}
 	});
