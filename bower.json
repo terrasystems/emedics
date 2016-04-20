@@ -9,23 +9,25 @@
   "license": "FREE",
   "homepage": "www.home.eu",
   "dependencies": {
-    "angular": "1.5.1",
+    "angular": "^1.5.5",
     "angular-ui-router": "0.2.15",
     "bootstrap": "^3.3.6",
-    "angular-bootstrap": "^1.3.2"
+    "angular-bootstrap": "^1.3.2",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.2.0"
   },
   "appPath": "src/",
   "resolutions": {
     "angular": "1.5.1",
     "angular-ui-router": "0.2.15"
   },
-  "overrides":{
-	"bootstrap" : {
-	  "main": [
-		"less/bootstrap.less",
-		"dist/css/bootstrap.css",
-		"dist/js/bootstrap.js"
-	  ]
-	}
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
   }
 }
