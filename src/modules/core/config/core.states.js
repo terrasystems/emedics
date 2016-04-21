@@ -28,6 +28,19 @@ angular.module('modules.core')
 			onEnter: function($rootScope, $stateParams) {
 					console.log('...befor Login state');
 				}
+		},
+		{
+			name: 'main.public.registration',
+			url: 'registration',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/public/views/registration.html',
+					controller: 'LoginCtrl as vm'
+				}
+			},
+			onEnter: function($rootScope, $stateParams) {
+				console.log('...befor Login state');
+			}
 		}
 
 	]);
