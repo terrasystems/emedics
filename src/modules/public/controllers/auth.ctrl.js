@@ -3,7 +3,7 @@
 angular.module('modules.public', [])
 
 
-	.controller('LoginCtrl', function ($rootScope, $scope, $state) {
+	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout) {
 		console.log('..LoginCtrl');
 		var vm = this;
 		vm.onSubmit = onSubmit;
