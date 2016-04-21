@@ -2,7 +2,9 @@
 
 /* App Module */
 
-var eMedics = angular.module('eMedics', ['ui.router', 'modules.core', 'modules.public', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate']);
+var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
+	//--
+	'modules.core', 'modules.public', 'modules.dashboard' ]);
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider) {
 	angular.forEach(statesList, function(state) {

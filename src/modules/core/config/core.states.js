@@ -13,7 +13,7 @@ angular.module('modules.core')
 		{
 			name: 'main.public',
 			url: '/',
-			template: 'modules/core/views/main.public.html',
+			templateUrl: 'modules/core/views/main.public.html',
 			abstract: true
 		},
 		{
@@ -27,7 +27,7 @@ angular.module('modules.core')
 			},
 			onEnter: function($rootScope, $stateParams) {
 					console.log('...befor login state');
-				}
+			}
 		},
 		{
 			name: 'main.public.registration',
@@ -53,6 +53,23 @@ angular.module('modules.core')
 			},
 			onEnter: function($rootScope, $stateParams) {
 				console.log('...befor newpassword state');
+			}
+		},
+		// private
+		{
+			name: 'main.private',
+			url: '/',
+			templateUrl: 'modules/dashboard/views/dashboard.html',
+			abstract: true
+		},
+		{
+			name: 'main.private.dashboard',
+			url: 'dashboard',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/dashboard/views/dashboard.html',
+					controller: 'DashboardCtrl as vm'
+				}
 			}
 		}
 

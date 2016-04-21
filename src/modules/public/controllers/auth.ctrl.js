@@ -7,6 +7,7 @@ angular.module('modules.public', [])
 		console.log('..LoginCtrl');
 		var vm = this;
 		vm.onSubmit = onSubmit;
+
 		vm.user = {};
 		vm.options = {};
 		vm.userFields = [
@@ -36,17 +37,56 @@ angular.module('modules.public', [])
 
 		function onSubmit() {
 			console.log('submit');
-			if (vm.form.$valid) {
-				console.log('..Ok!');
+			if  (vm.form.$valid) {
+			    console.log('..Ok!');
+				doLogin();
 			}
 		}
+
+		function doLogin() {
+			$http.post('/rest/login', {
+				user: vm.user.email,
+				password: vm.user.password
+			}).then(function(res) {
+				console.log(res);
+				//blockUI.stop();
+				//if (res.data.result) {
+				//	localStorageService.set('userData', res.data);
+				//	$rootScope.userData = res.data;
+				//	$rootScope.currentuser = $rootScope.userData.user_name;
+				//	localStorageService.set('token', res.data.token);
+				//	$rootScope.token = res.data.token;
+				//	$timeout(function() {
+				//		$state.go('main.private.dashboard', {
+				//			reload: true
+				//		});
+				//	}, 0);
+				//} else {
+				//	blockUI.stop();
+				//	alertService.add(2, res.data.message);
+				//}
+			}, function(){
+				console.log('...error');
+				$timeout(function() {
+					$state.go('main.private.dashboard');
+				}, 0);
+			});
+		}
+
 	})
 
 
 	.controller('Registration', function ($rootScope, $scope, $state) {
 		console.log('..Registration');
 		var vm = this;
+		vm.onSubmit = onSubmit;
 
+		function onSubmit() {
+			console.log('submit');
+			if (vm.form.$valid) {
+				console.log('..Ok!');
+			}
+		}
 		vm.patient = {
 			FirstName: '',
 			LastName:'',
@@ -69,10 +109,8 @@ angular.module('modules.public', [])
 			Address:''
 		};
 		vm.model = {};
-
 		vm.tabs = [
 			{
-
 				title: 'Patient',
 				type: 'Patient',
 				active: true,
@@ -89,7 +127,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your First Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -100,7 +137,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your Last Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -112,7 +148,6 @@ angular.module('modules.public', [])
 								label: 'Email address',
 								placeholder: 'Enter email'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -124,9 +159,7 @@ angular.module('modules.public', [])
 								label: 'Password',
 								placeholder: 'Enter password'
 							}
-
 						}
-
 					]
 				}
 			},
@@ -145,7 +178,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your First Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -156,7 +188,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your Last Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -168,7 +199,6 @@ angular.module('modules.public', [])
 								label: 'Email address',
 								placeholder: 'Enter email'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -180,7 +210,6 @@ angular.module('modules.public', [])
 								label: 'Password',
 								placeholder: 'Enter password'
 							}
-
 						}
 					]
 				}
@@ -202,7 +231,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your First Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -213,7 +241,6 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Enter your Last Name'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -225,7 +252,6 @@ angular.module('modules.public', [])
 								label: 'Email address',
 								placeholder: 'Enter email'
 							}
-
 						},
 						{
 							className: 'col-md-12',
@@ -270,9 +296,7 @@ angular.module('modules.public', [])
 								required: true,
 								placeholder: 'Organization Address'
 							}
-
 						}
-
 					]
 				}
 			}
@@ -292,6 +316,7 @@ angular.module('modules.public', [])
 				console.log('..Ok!');
 			}
 		}
+
 	}
 
 );
