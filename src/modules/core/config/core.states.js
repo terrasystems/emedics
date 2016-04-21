@@ -26,7 +26,7 @@ angular.module('modules.core')
 				}
 			},
 			onEnter: function($rootScope, $stateParams) {
-					console.log('...befor Login state');
+					console.log('...befor login state');
 				}
 		},
 		{
@@ -35,11 +35,24 @@ angular.module('modules.core')
 			views: {
 				'content@main': {
 					templateUrl: 'modules/public/views/registration.html',
-					controller: 'LoginCtrl as vm'
+					controller: 'Registration as vm'
 				}
 			},
 			onEnter: function($rootScope, $stateParams) {
-				console.log('...befor Login state');
+				console.log('...befor registration state');
+			}
+		},
+		{
+			name: 'main.public.newpassword',
+			url: 'newpassword',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/public/views/newpassword.html',
+					controller: 'NewPassword as vm'
+				}
+			},
+			onEnter: function($rootScope, $stateParams) {
+				console.log('...befor newpassword state');
 			}
 		}
 

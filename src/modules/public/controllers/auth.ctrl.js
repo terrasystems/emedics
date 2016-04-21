@@ -2,6 +2,7 @@
 
 angular.module('modules.public', [])
 
+
 .controller('LoginCtrl', function($rootScope, $scope, $state)
 	{
 		console.log('..LoginCtrl');
@@ -39,6 +40,35 @@ angular.module('modules.public', [])
 			   console.log('..Ok!');
 			}
 		}
+	})
 
 
-	});
+.controller('Registration', function($rootScope, $scope, $state)
+	{
+		console.log('..Registration');
+		var vm = this;
+		vm.onSubmit = onSubmit;
+
+		function onSubmit() {
+			console.log('submit');
+			if (vm.form.$valid) {
+				console.log('..Ok!');
+			}
+		}
+	})
+
+
+.controller('NewPassword', function($rootScope, $scope, $state)
+	{
+		console.log('..NewPassword');
+		var vm = this;
+		vm.onSubmit = onSubmit;
+
+		function onSubmit() {
+			console.log('submit');
+			if (vm.form.$valid) {
+				console.log('..Ok!');
+			}
+		}
+	}
+);
