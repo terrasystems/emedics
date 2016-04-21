@@ -18,6 +18,7 @@ angular.module('modules.public', [])
 				type: 'input',
 				templateOptions: {
 					type: 'email',
+					required: true,
 					label: 'Email address',
 					placeholder: 'Enter email'
 				}
@@ -28,6 +29,7 @@ angular.module('modules.public', [])
 				type: 'input',
 				templateOptions: {
 					type: 'password',
+					required: true,
 					label: 'Password',
 					placeholder: 'Password'
 				}
