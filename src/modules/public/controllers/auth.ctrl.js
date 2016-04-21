@@ -38,7 +38,7 @@ angular.module('modules.public', [])
 		function onSubmit() {
 			console.log('submit');
 			if (vm.form.$valid) {
-				console.log('..Ok!');
+				console.log('..Ok');
 			}
 		}
 	})
