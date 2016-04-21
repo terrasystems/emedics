@@ -1,3 +1,5 @@
+
+
 <div class="container reg_form">
 	<div class="col-md6">
 		<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
@@ -8,7 +10,7 @@
 						 disable="tab.disabled">
 					<formly-form model="tab.form.model" fields="tab.form.fields" form="vm.form"
 								 options="tab.form.options">
-						<button type="submit" class="btn btn-default login-button submit-button">Submit</button>
+						<button type="submit" class="btn btn_submit btn-default login-button submit-button">Submit</button>
 					</formly-form>
 				</uib-tab>
 
@@ -22,3 +24,4 @@
 		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
 	</div>
 </script>
+

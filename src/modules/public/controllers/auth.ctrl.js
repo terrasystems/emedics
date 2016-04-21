@@ -7,7 +7,6 @@ angular.module('modules.public', [])
 		console.log('..LoginCtrl');
 		var vm = this;
 		vm.onSubmit = onSubmit;
-
 		vm.user = {};
 		vm.options = {};
 		vm.userFields = [
@@ -48,6 +47,27 @@ angular.module('modules.public', [])
 		console.log('..Registration');
 		var vm = this;
 
+		vm.patient = {
+			FirstName: '',
+			LastName:'',
+			Emeil: '',
+			Password:''
+		};
+		vm.doctor = {
+			FirstName: '',
+			LastName:'',
+			Emeil: '',
+			Password:''
+		};
+		vm.organization = {
+			FirstName: '',
+			LastName:'',
+			Emeil: '',
+			Password:'',
+			Website:'',
+			OrganizationName:'',
+			Address:''
+		};
 		vm.model = {};
 
 		vm.tabs = [
@@ -58,34 +78,34 @@ angular.module('modules.public', [])
 				active: true,
 				form: {
 					options: {},
-					model: vm.model,
+					model: vm.patient,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'firstName',
+							key: 'FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
 								required: true,
-								placeholder:'Enter your First Name'
+								placeholder: 'Enter your First Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'lastName',
+							key: 'LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
 								required: true,
-								placeholder:'Enter your Last Name'
+								placeholder: 'Enter your Last Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'email',
-							type: 'input',
+							key: 'Emeil',
+							type:'input',
 							templateOptions: {
 								type: 'email',
 								required: true,
@@ -96,7 +116,7 @@ angular.module('modules.public', [])
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -114,33 +134,33 @@ angular.module('modules.public', [])
 				title: 'Doctor',
 				type: 'Doctor',
 				form: {
-					model: vm.model,
+					model: vm.doctor,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'firstName',
+							key: 'FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
 								required: true,
-								placeholder:'Enter your First Name'
+								placeholder: 'Enter your First Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'lastName',
+							key: 'LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
 								required: true,
-								placeholder:'Enter your Last Name'
+								placeholder: 'Enter your Last Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'email',
+							key: 'Email',
 							type: 'input',
 							templateOptions: {
 								type: 'email',
@@ -152,7 +172,7 @@ angular.module('modules.public', [])
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -167,37 +187,37 @@ angular.module('modules.public', [])
 			},
 			{
 				title: 'Homecare Organization',
-				type:'Homecare Organization',
+				type: 'Homecare Organization',
 				active: true,
 				form: {
 					options: {},
-					model: vm.model,
+					model: vm.organization,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'firstName',
+							key: 'FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
 								required: true,
-								placeholder:'Enter your First Name'
+								placeholder: 'Enter your First Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'lastName',
+							key: 'LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
 								required: true,
-								placeholder:'Enter your Last Name'
+								placeholder: 'Enter your Last Name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: 'email',
+							key: 'Email',
 							type: 'input',
 							templateOptions: {
 								type: 'email',
@@ -209,7 +229,7 @@ angular.module('modules.public', [])
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -221,34 +241,34 @@ angular.module('modules.public', [])
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'Website',
 							type: 'input',
 							templateOptions: {
 								label: 'website',
 								required: true,
-								placeholder:'Enter your web-site'
+								placeholder: 'Enter your web-site'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'OrganizationName',
 							type: 'input',
 							templateOptions: {
 								label: 'Organization name',
 								required: true,
-								placeholder:'Full organization name'
+								placeholder: 'Full organization name'
 							}
 
 						},
 						{
 							className: 'col-md-12',
-							key: '',
+							key: 'Address',
 							type: 'input',
 							templateOptions: {
 								label: 'Address',
 								required: true,
-								placeholder:'Organization Address'
+								placeholder: 'Organization Address'
 							}
 
 						}
@@ -258,8 +278,8 @@ angular.module('modules.public', [])
 			}
 		];
 
-	})
 
+	})
 
 	.controller('NewPassword', function ($rootScope, $scope, $state) {
 		console.log('..NewPassword');
@@ -273,4 +293,5 @@ angular.module('modules.public', [])
 			}
 		}
 	}
+
 );
