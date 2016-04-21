@@ -61,7 +61,7 @@ angular.module('modules.public', [])
 					model: vm.model,
 					fields: [
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'firstName',
 							type: 'input',
 							templateOptions: {
@@ -72,7 +72,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'lastName',
 							type: 'input',
 							templateOptions: {
@@ -83,7 +83,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'email',
 							type: 'input',
 							templateOptions: {
@@ -95,7 +95,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: '',
 							type: 'input',
 							templateOptions: {
@@ -117,7 +117,7 @@ angular.module('modules.public', [])
 					model: vm.model,
 					fields: [
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'firstName',
 							type: 'input',
 							templateOptions: {
@@ -128,7 +128,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'lastName',
 							type: 'input',
 							templateOptions: {
@@ -139,7 +139,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'email',
 							type: 'input',
 							templateOptions: {
@@ -151,7 +151,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: '',
 							type: 'input',
 							templateOptions: {
@@ -174,7 +174,7 @@ angular.module('modules.public', [])
 					model: vm.model,
 					fields: [
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'firstName',
 							type: 'input',
 							templateOptions: {
@@ -185,7 +185,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'lastName',
 							type: 'input',
 							templateOptions: {
@@ -196,7 +196,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: 'email',
 							type: 'input',
 							templateOptions: {
@@ -208,7 +208,7 @@ angular.module('modules.public', [])
 
 						},
 						{
-							className: 'col-md-6',
+							className: 'col-md-12',
 							key: '',
 							type: 'input',
 							templateOptions: {
@@ -216,6 +216,39 @@ angular.module('modules.public', [])
 								required: true,
 								label: 'Password',
 								placeholder: 'Enter password'
+							}
+
+						},
+						{
+							className: 'col-md-12',
+							key: '',
+							type: 'input',
+							templateOptions: {
+								label: 'website',
+								required: true,
+								placeholder:'Enter your web-site'
+							}
+
+						},
+						{
+							className: 'col-md-12',
+							key: '',
+							type: 'input',
+							templateOptions: {
+								label: 'Organization name',
+								required: true,
+								placeholder:'Full organization name'
+							}
+
+						},
+						{
+							className: 'col-md-12',
+							key: '',
+							type: 'input',
+							templateOptions: {
+								label: 'Address',
+								required: true,
+								placeholder:'Organization Address'
 							}
 
 						}
