@@ -11,15 +11,23 @@ angular.module('modules.core')
 		},
 		// public
 		{
-			name: 'main.main2',
-			url: '/login',
+			name: 'main.public',
+			url: '/',
+			template: 'modules/core/views/main.public.html',
+			abstract: true
+		},
+		{
+			name: 'main.public.login',
+			url: 'login',
 			views: {
 				'content@main': {
 					templateUrl: 'modules/public/views/login.html',
 					controller: 'LoginCtrl as vm'
 				}
 			},
-			parent: 'main'
+			onEnter: function($rootScope, $stateParams) {
+					console.log('...befor Login state');
+				}
 		}
 
 	]);

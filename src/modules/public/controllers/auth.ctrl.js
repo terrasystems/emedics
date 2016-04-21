@@ -6,8 +6,10 @@ angular.module('modules.public', [])
 	{
 		console.log('..LoginCtrl');
 		var vm = this;
+		vm.onSubmit = onSubmit;
 
 		vm.user = {};
+		vm.options = {};
 		vm.userFields = [
 			{
 				className: 'col-md-12',
@@ -31,7 +33,12 @@ angular.module('modules.public', [])
 			}
 		];
 
-		function submit() {
-			console.log('1');
+		function onSubmit() {
+			console.log('submit');
+			if (vm.form.$valid) {
+			   console.log('..Ok!');
+			}
 		}
+
+
 	});
