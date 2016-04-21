@@ -1,1 +1,24 @@
-<p>Registration</p>
+<div class="container reg_form">
+	<div class="col-md6">
+		<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+			<uib-tabset>
+				<uib-tab ng-repeat="tab in vm.tabs"
+						 heading="{{tab.title}}"
+						 active="tab.active"
+						 disable="tab.disabled">
+					<formly-form model="tab.form.model" fields="tab.form.fields" form="vm.form"
+								 options="tab.form.options">
+						<button type="submit" class="btn btn-default login-button submit-button">Submit</button>
+					</formly-form>
+				</uib-tab>
+
+			</uib-tabset>
+		</form>
+	</div>
+</div>
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+	</div>
+</script>

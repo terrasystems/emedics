@@ -12,3 +12,12 @@
 	margin-right: 15px;
 	background-color: #259ff3;
 }
+ul.nav.nav-tabs{
+	background: rgb(82, 102, 128);
+}
+.reg_form{
+	border: solid;
+	border-color: rgb(82, 102, 128);
+	border-radius: 10px;
+	padding: 0px
+}
