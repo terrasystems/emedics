@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.public', [])
+angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 
 
 	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout) {
@@ -108,7 +108,6 @@ angular.module('modules.public', [])
 			OrganizationName:'',
 			Address:''
 		};
-		vm.model = {};
 		vm.tabs = [
 			{
 				title: 'Patient',
