@@ -1,10 +1,19 @@
+body {
+	background: url(../images/background.jpg);
+}
+
+
 .login-form {
-	width: 500px;
-	min-height: 200px;
+	width: 350px;
+	min-height: 250px;
 	margin-left: auto;
 	margin-right: auto;
 	background: #E2E2E2;
 	border-radius: 10px;
+	margin-top: 20%;
+}
+#login-form-div{
+	padding-top: 30px;
 }
 
 .login-button {
@@ -12,12 +21,17 @@
 	margin-right: 15px;
 	background-color: #259ff3;
 }
-ul.nav.nav-tabs{
+
+ul.nav.nav-tabs {
 	background: rgb(82, 102, 128);
 }
-.reg_form{
+
+.reg_form {
 	border: solid;
 	border-color: rgb(82, 102, 128);
 	border-radius: 10px;
-	padding: 0px
+	padding: 0px;
+    background: #E2E2E2;
+	width: 350px;
+	margin-top: 5%;
 }
