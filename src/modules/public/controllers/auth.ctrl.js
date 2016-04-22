@@ -19,7 +19,10 @@ angular.module('modules.public', ['ui.bootstrap', 'ngAnimate'])
 					type: 'email',
 					required: true,
 					label: 'Email address',
-					placeholder: 'Enter email'
+					placeholder: 'Enter email',
+					addonRight: {
+						class: 'glyphicon glyphicon-user'
+					}
 				}
 			},
 			{
@@ -30,7 +33,11 @@ angular.module('modules.public', ['ui.bootstrap', 'ngAnimate'])
 					type: 'password',
 					required: true,
 					label: 'Password',
-					placeholder: 'Password'
+					placeholder: 'Password',
+					addonRight: {
+						class: 'glyphicon glyphicon-lock'
+					}
+
 				}
 			}
 		];
