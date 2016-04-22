@@ -2,7 +2,6 @@ body {
 	background: url(../images/background.jpg);
 }
 
-
 .login-form {
 	width: 350px;
 	min-height: 250px;
@@ -12,7 +11,8 @@ body {
 	border-radius: 10px;
 	margin-top: 20%;
 }
-.login-form-div{
+
+.login-form-div {
 	padding-top: 30px;
 }
 
@@ -31,10 +31,25 @@ ul.nav.nav-tabs {
 	border-color: rgb(82, 102, 128);
 	border-radius: 10px;
 	padding: 0px;
-    background: #E2E2E2;
+	background: #E2E2E2;
 	width: 350px;
 	margin-top: 5%;
 }
-.btn_submit{
+
+.btn_submit {
 	margin-bottom: 10px;
+}
+
+.Forgot-password {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #E2E2E2;
+	margin-top: 20%;
+	height: 100px;
+	padding-top: 10px;
+	border-radius:10px;
+}
+.btn-forgot {
+	float: right;
 }

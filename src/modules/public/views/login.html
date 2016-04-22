@@ -1,5 +1,5 @@
 <div class="login-form">
-
+<div class="login-form-div">
 <form ng-submit="vm.onSubmit()" name="vm.form">
 
 	<formly-form model="vm.user" fields="vm.userFields" options="vm.options" form="vm.form">
@@ -20,5 +20,5 @@
 			<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
 		</div>
 	</script>
-
+</div>
 </div>
