@@ -5,8 +5,8 @@ angular.module('modules.core')
 	.constant('reg_fields', [
 		{
 			title: 'Patient',
-			type: 'Patient',
 			active: true,
+			type: 'Patient',
 			form: {
 				options: {},
 				model: undefined,
@@ -58,6 +58,7 @@ angular.module('modules.core')
 		},
 		{
 			title: 'Doctor',
+			active: false,
 			type: 'Doctor',
 			form: {
 				model: undefined,
@@ -109,8 +110,8 @@ angular.module('modules.core')
 		},
 		{
 			title: 'Homecare Organization',
+			active: false,
 			type: 'Homecare Organization',
-			active: true,
 			form: {
 				options: {},
 				model: undefined,
