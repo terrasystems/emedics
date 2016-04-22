@@ -83,31 +83,14 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 
 		function onSubmit() {
 			console.log('submit');
+			console.log('vm.reg: '+JSON.stringify(vm.reg,'',4));
 			if (vm.form.$valid) {
 				console.log('..Ok!');
 			}
 		}
-		vm.patient = {
-			FirstName: '',
-			LastName:'',
-			Emeil: '',
-			Password:''
-		};
-		vm.doctor = {
-			FirstName: '',
-			LastName:'',
-			Emeil: '',
-			Password:''
-		};
-		vm.organization = {
-			FirstName: '',
-			LastName:'',
-			Emeil: '',
-			Password:'',
-			Website:'',
-			OrganizationName:'',
-			Address:''
-		};
+
+		vm.reg = {};
+
 		vm.tabs = [
 			{
 				title: 'Patient',
@@ -115,11 +98,11 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 				active: true,
 				form: {
 					options: {},
-					model: vm.patient,
+					model: vm.reg,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'FirstName',
+							key: 'patient.FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
@@ -129,7 +112,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'LastName',
+							key: 'patient.LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
@@ -139,7 +122,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Emeil',
+							key: 'patient.Emeil',
 							type:'input',
 							templateOptions: {
 								type: 'email',
@@ -150,7 +133,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Password',
+							key: 'patient.Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -166,11 +149,11 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 				title: 'Doctor',
 				type: 'Doctor',
 				form: {
-					model: vm.doctor,
+					model: vm.reg,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'FirstName',
+							key: 'doctor.FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
@@ -180,7 +163,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'LastName',
+							key: 'doctor.LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
@@ -190,7 +173,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Email',
+							key: 'doctor.Email',
 							type: 'input',
 							templateOptions: {
 								type: 'email',
@@ -201,7 +184,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Password',
+							key: 'doctor.Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -219,11 +202,11 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 				active: true,
 				form: {
 					options: {},
-					model: vm.organization,
+					model: vm.reg,
 					fields: [
 						{
 							className: 'col-md-12',
-							key: 'FirstName',
+							key: 'organization.FirstName',
 							type: 'input',
 							templateOptions: {
 								label: 'First Name',
@@ -233,7 +216,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'LastName',
+							key: 'organization.LastName',
 							type: 'input',
 							templateOptions: {
 								label: 'Last Name',
@@ -243,7 +226,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Email',
+							key: 'organization.Email',
 							type: 'input',
 							templateOptions: {
 								type: 'email',
@@ -254,7 +237,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Password',
+							key: 'organization.Password',
 							type: 'input',
 							templateOptions: {
 								type: 'password',
@@ -266,7 +249,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Website',
+							key: 'organization.Website',
 							type: 'input',
 							templateOptions: {
 								label: 'website',
@@ -277,7 +260,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'OrganizationName',
+							key: 'organization.OrganizationName',
 							type: 'input',
 							templateOptions: {
 								label: 'Organization name',
@@ -288,7 +271,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 						},
 						{
 							className: 'col-md-12',
-							key: 'Address',
+							key: 'organization.Address',
 							type: 'input',
 							templateOptions: {
 								label: 'Address',
@@ -311,6 +294,7 @@ angular.module('modules.public', ['ui.bootstrap','ngAnimate'])
 
 		function onSubmit() {
 			console.log('submit');
+
 			if (vm.form.$valid) {
 				console.log('..Ok!');
 			}
