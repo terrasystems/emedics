@@ -3,7 +3,7 @@
 <div class="container reg_form">
 	<div class="col-md6">
 		<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
-			<uib-tabset >
+			<uib-tabset active="vm.active">
 				<uib-tab  class="tab-animation"  ng-repeat="tab in vm.tabs"
 						 heading="{{tab.title}}"
 						 active="tab.active"
@@ -17,6 +17,7 @@
 			</uib-tabset>
 		</form>
 	</div>
+
 
 </div>
 <script type="text/ng-template" id="error-messages.html">

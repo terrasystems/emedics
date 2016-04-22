@@ -88,19 +88,21 @@ angular.module('modules.public', ['ui.bootstrap', 'ngAnimate'])
 		var vm = this;
 		vm.reg = {};
 		vm.tabs = [];
+		vm.regFields = angular.copy(reg_fields);
 
-		angular.forEach(reg_fields, function(item) {
+		angular.forEach(vm.regFields, function(item) {
 			if  (item && item.form) {
 				item.form.model = vm.reg;
 			}
 			vm.tabs.push(item);
 		});
 
+		vm.active = 0;
+
 		vm.onSubmit = onSubmit;
 		function onSubmit() {
 			console.log('submit');
-			console.log('vm.reg: '+JSON.stringify(vm.reg,'',4));
-			vm.originalTabs = angular.copy(vm.form);
+			console.log(vm.reg[vm.tabs[vm.active].type]);
 			if (vm.form.$valid) {
 				console.log('..Ok!');
 			}

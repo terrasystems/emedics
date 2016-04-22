@@ -6,7 +6,7 @@ angular.module('modules.core')
 		{
 			title: 'Patient',
 			active: true,
-			type: 'Patient',
+			type: 'patient',
 			form: {
 				options: {},
 				model: undefined,
@@ -59,7 +59,7 @@ angular.module('modules.core')
 		{
 			title: 'Doctor',
 			active: false,
-			type: 'Doctor',
+			type: 'doctor',
 			form: {
 				model: undefined,
 				fields: [
@@ -111,7 +111,7 @@ angular.module('modules.core')
 		{
 			title: 'Homecare Organization',
 			active: false,
-			type: 'Homecare Organization',
+			type: 'organization',
 			form: {
 				options: {},
 				model: undefined,
