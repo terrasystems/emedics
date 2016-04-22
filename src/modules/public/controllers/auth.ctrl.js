@@ -315,6 +315,7 @@ angular.module('modules.public', ['ui.bootstrap', 'ngAnimate'])
 		// function definition
 		function onSubmit() {
 			console.log(JSON.stringify(vm.forgotPass));
+
 		}
 
 
