@@ -2,9 +2,9 @@
 
 angular.module('modules.dashboard', [])
 
-	.controller('dashboardTabsCtrl', function($rootScope, $scope, $state)
+	.controller('DashboardTabsCtrl', function($rootScope, $scope, $state)
 	{
-		console.log('..DashboardTabsCtrl');
+		console.log('..dashboardTabsCtrl');
 		var vm = this;
 	}
 

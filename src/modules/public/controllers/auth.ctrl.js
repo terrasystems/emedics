@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.public', ['ui.bootstrap', 'ngAnimate', 'modules.core'])
+angular.module('modules.public', [])
 
 
 	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService) {
