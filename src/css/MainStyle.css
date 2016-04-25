@@ -1,5 +1,31 @@
+* {
+	margin:0;
+}
 body {
-	background: url(../images/background.jpg);
+	height: 100%;
+	min-width:900px;
+}
+html {
+	position:relative;
+	min-height:100%;
+
+}
+#container {
+	padding-bottom: 100px;/*Примерно 2 размера footer, чтобы он не наезжал на контент при узком окне браузера*/
+}
+#header{
+	background: #f7f7f7;
+	height: 50px;
+}
+#footer {
+	height: 50px;
+	background: #f7f7f7;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+body {
+	background: url(../images/bkgd_pattern.png);
 }
 
 .login-form {
@@ -10,6 +36,7 @@ body {
 	background: #E2E2E2;
 	border-radius: 10px;
 	margin-top: 20%;
+	border: black 1px solid;
 }
 
 .login-form-div {
@@ -24,11 +51,22 @@ body {
 
 ul.nav.nav-tabs {
 	background: rgb(82, 102, 128);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.nav-tabs > li > a:hover{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 .reg_form {
-	border: solid;
-	border-color: rgb(82, 102, 128);
+
+	border: black 1px solid;
+	border-radius: 10px;
 	border-radius: 10px;
 	padding: 0px;
 	background: #E2E2E2;

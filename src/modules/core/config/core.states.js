@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.core')
+angular.module('modules.core',['ui.router'])
 
 .constant('statesList', [
 		{
@@ -71,6 +71,19 @@ angular.module('modules.core')
 					controller: 'DashboardCtrl as vm'
 				}
 			}
+		},
+		{
+			name:'main.private.dashboard.dashboardTabs',
+			url:'tabs',
+			views:{
+				'content@main':{
+					templateUrl:'modules/dashboard/views/dashboardTabs.html',
+					controller:'dashboardTabsCtrl as vm'
+				}
+			}
 		}
 
+
 	]);
+
+
