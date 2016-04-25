@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.dashboard.dashboardTabs', [])
+angular.module('modules.dashboard', [])
 
 	.controller('dashboardTabsCtrl', function($rootScope, $scope, $state)
 	{

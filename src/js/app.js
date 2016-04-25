@@ -3,10 +3,11 @@
 /* App Module */
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
+	'blockUI', 'toastr',
 	//--
-	'modules.core', 'modules.public', 'modules.dashboard' ]);
+	'modules.core', 'modules.public', 'modules.dashboard']);
 
-eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider) {
+eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig) {
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
@@ -19,6 +20,15 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		templateUrl: 'error-messages.html'
 	});
 
+	blockUIConfig = {
+		delay: 100,
+		autoInjectBodyBlock: false,
+		autoBlock: false,
+		resetOnException: true
+	};
+
+	// Interceptors
+	$httpProvider.interceptors.push('responseErrorInterceptor');
 })
 
 

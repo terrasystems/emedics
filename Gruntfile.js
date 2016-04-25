@@ -9,14 +9,10 @@ module.exports = function(grunt) {
 		dist: 'dist',
 		bowercomp: 'lib',
 		oneSkyId: '103909',
-		proxi: {
-			context: '/web',
-			context2: '/query_services',
-			context3: '/actions',
-			context4: '/reports',
-			context5: '/change_pwd',
-			host: '198.199.75.87',
-			port: '81'
+		proxy: {
+			context: '/rest',
+			host: '192.168.20.137',
+			port: '8080'
 		}
 	};
 /*	var oneSkyoptions = function(lang) {
@@ -50,59 +46,15 @@ module.exports = function(grunt) {
 			},
 			proxies: [
 				{
-					context: '<%= yeoman.proxi.context %>',
-					host: '<%= yeoman.proxi.host %>',
-					port: '<%= yeoman.proxi.port %>',
+					context: '<%= yeoman.proxy.context %>',
+					host: '<%= yeoman.proxy.host %>',
+					port: '<%= yeoman.proxy.port %>',
 					https: false,
 					//xforward: false,
 					//changeOrigin: true,
-					rewrite: {
-						'^/web': '/web'
-					}
-				},
-				{
-					context: '<%= yeoman.proxi.context2 %>',
-					host: '<%= yeoman.proxi.host %>',
-					port: '<%= yeoman.proxi.port %>',
-					https: false,
-					//xforward: false,
-					//changeOrigin: true,
-					rewrite: {
-						'^/query_services': '/query_services'
-					}
-				},
-				{
-					context: '<%= yeoman.proxi.context3 %>',
-					host: '<%= yeoman.proxi.host %>',
-					port: '<%= yeoman.proxi.port %>',
-					https: false,
-					//xforward: false,
-					//changeOrigin: true,
-					rewrite: {
-						'^/actions': '/actions'
-					}
-				},
-				{
-					context: '<%= yeoman.proxi.context4 %>',
-					host: '<%= yeoman.proxi.host %>',
-					port: '<%= yeoman.proxi.port %>',
-					https: false,
-					//xforward: false,
-					//changeOrigin: true,
-					rewrite: {
-						'^/reports': '/reports'
-					}
-				},
-				{
-					context: '<%= yeoman.proxi.context5 %>',
-					host: '<%= yeoman.proxi.host %>',
-					port: '<%= yeoman.proxi.port %>',
-					https: false,
-					//xforward: false,
-					//changeOrigin: true,
-					rewrite: {
-						'^/change_pwd': '/change_pwd'
-					}
+/*					rewrite: {
+						'/rest': '/rest'
+					}*/
 				}
 			],
 			livereload: {

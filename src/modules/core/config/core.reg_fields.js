@@ -6,34 +6,25 @@ angular.module('modules.core')
 		{
 			title: 'Patient',
 			active: true,
-			type: 'patient',
+			index : 0,
+			type: 'pat',
 			form: {
 				options: {},
 				model: undefined,
 				fields: [
 					{
 						className: 'col-md-12',
-						key: 'patient.FirstName',
+						key: 'pat.user.username',
 						type: 'input',
 						templateOptions: {
-							label: 'First Name',
+							label: 'Name',
 							required: true,
-							placeholder: 'Enter your First Name'
+							placeholder: 'Enter your Name'
 						}
 					},
 					{
 						className: 'col-md-12',
-						key: 'patient.LastName',
-						type: 'input',
-						templateOptions: {
-							label: 'Last Name',
-							required: true,
-							placeholder: 'Enter your Last Name'
-						}
-					},
-					{
-						className: 'col-md-12',
-						key: 'patient.Emeil',
+						key: 'pat.user.email',
 						type:'input',
 						templateOptions: {
 							type: 'email',
@@ -44,7 +35,7 @@ angular.module('modules.core')
 					},
 					{
 						className: 'col-md-12',
-						key: 'patient.Password',
+						key: 'pat.user.password',
 						type: 'input',
 						templateOptions: {
 							type: 'password',
@@ -59,33 +50,24 @@ angular.module('modules.core')
 		{
 			title: 'Doctor',
 			active: false,
-			type: 'doctor',
+			index : 1,
+			type: 'doc',
 			form: {
 				model: undefined,
 				fields: [
 					{
 						className: 'col-md-12',
-						key: 'doctor.FirstName',
+						key: 'doc.user.username',
 						type: 'input',
 						templateOptions: {
-							label: 'First Name',
+							label: 'Name',
 							required: true,
-							placeholder: 'Enter your First Name'
+							placeholder: 'Enter your Name'
 						}
 					},
 					{
 						className: 'col-md-12',
-						key: 'doctor.LastName',
-						type: 'input',
-						templateOptions: {
-							label: 'Last Name',
-							required: true,
-							placeholder: 'Enter your Last Name'
-						}
-					},
-					{
-						className: 'col-md-12',
-						key: 'doctor.Email',
+						key: 'doc.user.email',
 						type: 'input',
 						templateOptions: {
 							type: 'email',
@@ -96,7 +78,7 @@ angular.module('modules.core')
 					},
 					{
 						className: 'col-md-12',
-						key: 'doctor.Password',
+						key: 'doc.user.password',
 						type: 'input',
 						templateOptions: {
 							type: 'password',
@@ -111,34 +93,25 @@ angular.module('modules.core')
 		{
 			title: 'Homecare Organization',
 			active: false,
-			type: 'organization',
+			index : 2,
+			type: 'org',
 			form: {
 				options: {},
 				model: undefined,
 				fields: [
 					{
 						className: 'col-md-12',
-						key: 'organization.FirstName',
+						key: 'org.user.username',
 						type: 'input',
 						templateOptions: {
-							label: 'First Name',
+							label: 'Name',
 							required: true,
-							placeholder: 'Enter your First Name'
+							placeholder: 'Enter your Name'
 						}
 					},
 					{
 						className: 'col-md-12',
-						key: 'organization.LastName',
-						type: 'input',
-						templateOptions: {
-							label: 'Last Name',
-							required: true,
-							placeholder: 'Enter your Last Name'
-						}
-					},
-					{
-						className: 'col-md-12',
-						key: 'organization.Email',
+						key: 'org.user.email',
 						type: 'input',
 						templateOptions: {
 							type: 'email',
@@ -149,7 +122,7 @@ angular.module('modules.core')
 					},
 					{
 						className: 'col-md-12',
-						key: 'organization.Password',
+						key: 'org.user.password',
 						type: 'input',
 						templateOptions: {
 							type: 'password',
@@ -157,33 +130,30 @@ angular.module('modules.core')
 							label: 'Password',
 							placeholder: 'Enter password'
 						}
-
 					},
 					{
 						className: 'col-md-12',
-						key: 'organization.Website',
+						key: 'org.org.www',
 						type: 'input',
 						templateOptions: {
 							label: 'website',
 							required: true,
 							placeholder: 'Enter your web-site'
 						}
-
 					},
 					{
 						className: 'col-md-12',
-						key: 'organization.OrganizationName',
+						key: 'org.org.fullname',
 						type: 'input',
 						templateOptions: {
 							label: 'Organization name',
 							required: true,
 							placeholder: 'Full organization name'
 						}
-
 					},
 					{
 						className: 'col-md-12',
-						key: 'organization.Address',
+						key: 'org.org.address',
 						type: 'input',
 						templateOptions: {
 							label: 'Address',
