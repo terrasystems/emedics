@@ -13,7 +13,7 @@ angular.module('modules.core')
 		{
 			name: 'main.public',
 			url: '/',
-			templateUrl: 'modules/core/views/main.public.html',
+			//templateUrl: 'modules/core/views/main.public.html',
 			abstract: true
 		},
 		{
@@ -58,73 +58,22 @@ angular.module('modules.core')
 		// private
 		{
 			name: 'main.private',
-			url: '/',
-			templateUrl: 'modules/dashboard/views/dashboard.html',
-			abstract: true
+			url:'',
+			abstract: true,
+			parent:'main'
 		},
-		//{
-		//	name: 'main.private.dashboard',
-		//	url: 'dashboard',
-		//	views: {
-		//		'content@main': {
-		//			templateUrl: 'modules/dashboard/views/dashboard.html',
-		//			controller: 'DashboardCtrl as vm'
-		//		}
-		//	}
-		//},
 		{
 			name:'main.private.dashboard',
-			url:'dashboard',
+			url:'/dashboard',
+			parent:'main.private',
 			views:{
 				'content@main':{
-					templateUrl:'modules/dashboard/views/dashboardTabs.html',
-					controller:'DashboardTabsCtrl as vm'
-				}
-			}
-		},
-		{
-			name:'main.private.dashboard.patforms',
-			url:'/forms',
-			views:{
-				'forms@dasboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patForms.html',
-					controller:'DashboardPatFormsCtrl as vm'
-				}
-			}
-		},
-
-
-
-		{
-			name:'main.private.dashboard.patrefs',
-			url:'/refs',
-			views:{
-				'content@main':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefs.html',
-					controller:'DashboardTabsCtrl as vm'
-				}
-			}
-		},
-		{
-			name:'main.private.dashboard.pattasks',
-			url:'/tasks',
-			views:{
-				'content@main':{
-					templateUrl:'modules/dashboard/views/dashboard.patTasks.html',
-					controller:'DashboardTabsCtrl as vm'
-				}
-			}
-		},
-		{
-			name:'main.private.dashboard.patnotif',
-			url:'/notif',
-			views:{
-				'content@main':{
-					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
-					controller:'DashboardTabsCtrl as vm'
+					templateUrl:'modules/dashboard/views/dashboard.html',
+					controller:'dashboardCtrl'
 				}
 			}
 		}
+
 
 	]);
 

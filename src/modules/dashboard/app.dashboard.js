@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('modules.dashboard', []);
+angular.module('modules.dash', []);

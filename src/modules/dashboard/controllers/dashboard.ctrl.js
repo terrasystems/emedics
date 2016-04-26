@@ -2,7 +2,7 @@
 
 angular.module('modules.dashboard', [])
 
-.controller('DashboardCtrl', function($rootScope, $scope, $state)
+.controller('DashCtrl', function()
 	{
 		console.log('..DashboardCtrl');
 		var vm = this;
