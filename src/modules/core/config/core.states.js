@@ -69,7 +69,7 @@ angular.module('modules.core')
 			views:{
 				'content@main':{
 					templateUrl:'modules/dashboard/views/dashboard.html',
-					controller:'dashboardCtrl'
+					controller:'DashCtrl'
 				}
 			}
 		}

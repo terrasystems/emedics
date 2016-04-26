@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.dashboard', [])
+angular.module('modules.dash', [])
 
 .controller('DashCtrl', function()
 	{
