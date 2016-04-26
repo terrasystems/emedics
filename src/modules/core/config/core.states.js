@@ -70,7 +70,7 @@ angular.module('modules.core')
 			views:{
 				'content@main':{
 					templateUrl:'modules/dashboard/views/dashboard.html',
-					controller:'DashCtrl'
+					controller:'DashCtrl as vm'
 				}
 			}
 		},
@@ -108,7 +108,7 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.taks',
+			name:'main.private.dashboard.tasks',
 			url:'/Tasks',
 			views:{
 				'forms@main.private.dashboard':{
