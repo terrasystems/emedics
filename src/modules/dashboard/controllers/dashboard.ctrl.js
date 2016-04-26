@@ -1,3 +1,4 @@
+(function(){
 'use strict';
 
 angular.module('modules.dash', [])
@@ -9,3 +10,5 @@ angular.module('modules.dash', [])
 	}
 
 );
+
+	}());

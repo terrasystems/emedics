@@ -2,20 +2,23 @@
 <div class="container">
 
 
-	<!-- Nav tabs -->
-	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation"><a ui-sref="main.private.dashboard.pattasks" aria-controls="tasks" role="tab" data-toggle="tab">MY TASKS</a></li>
-		<li role="presentation"><a ui-sref="main.private.dashboard.patrefs" aria-controls="refs" role="tab" data-toggle="tab">REFERENCES</a></li>
-		<li role="presentation"><a ui-sref="main.private.dashboard.patnotif" aria-controls="notif" role="tab" data-toggle="tab">NOTIFICATIONS</a></li>
-		<li role="presentation"><a ui-sref="main.private.dashboard.patforms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
-	</ul>
 
-	<!-- Tab panes -->
-	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane" id="forms" ui-view="forms">.2..</div>
-		<div role="tabpanel" class="tab-pane" id="refs">.3..</div>
-		<div role="tabpanel" class="tab-pane" id="notif">.4..</div>
-		<div role="tabpanel" class="tab-pane" id="tasks">.4..</div>
+	<div>
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs tabs_control" role="tablist">
+			<li role="presentation"><a ui-sref="main.private.dashboard.forms"  aria-controls="home" role="tab" data-toggle="tab">Forms</a></li>
+			<li role="presentation"><a ui-sref="main.private.dashboard.notifications" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Notifications</a></li>
+			<li role="presentation"><a ui-sref="main.private.dashboard.ref" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">References</a></li>
+			<li role="presentation"><a ui-sref="main.private.dashboard.taks"  aria-controls="settings" role="tab" data-toggle="tab">Tasks</a></li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="home" ui-view="forms"></div>
+
+		</div>
+
 	</div>
 
 </div>

@@ -56,6 +56,7 @@ angular.module('modules.core')
 			}
 		},
 		// private
+
 		{
 			name: 'main.private',
 			url:'',
@@ -70,6 +71,49 @@ angular.module('modules.core')
 				'content@main':{
 					templateUrl:'modules/dashboard/views/dashboard.html',
 					controller:'DashCtrl'
+				}
+			}
+		},
+		{
+			name:'main.private.dashboard.forms',
+			url:'/forms',
+			parent:'main.private.dashboard',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patForms.html'
+					//controller:'DashboardPatFormsCtrl'
+				},
+
+			}
+		},
+		{
+			name:'main.private.dashboard.notifications',
+			url:'/notifications',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patNotif.html'
+					//controller:'DashboardPatFormsCtrl'
+				}
+			},
+			parent: 'main.private.dashboard'
+		},
+		{
+			name:'main.private.dashboard.ref',
+			url:'/references',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patRefs.html'
+					//controller:'DashboardPatFormsCtrl'
+				}
+			}
+		},
+		{
+			name:'main.private.dashboard.taks',
+			url:'/Tasks',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patTasks.html'
+					//controller:'DashboardPatFormsCtrl'
 				}
 			}
 		}
