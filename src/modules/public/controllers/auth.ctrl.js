@@ -3,7 +3,7 @@
 angular.module('modules.public', [])
 
 
-	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService) {
+	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService, localStorageService) {
 		console.log('..LoginCtrl');
 		var vm = this;
 		vm.onSubmit = onSubmit;
@@ -55,37 +55,27 @@ angular.module('modules.public', [])
 				email: vm.user.email,
 				password: vm.user.password
 			}).then(function (res) {
-				alertService.add(0,'','Login Ok','');
-				console.log(res);
-				$timeout(function () {
-					$state.go('main.private.dashboard');
-				}, 0);
-				//blockUI.stop();
-				//if (res.data.result) {
-				//	localStorageService.set('userData', res.data);
-				//	$rootScope.userData = res.data;
-				//	$rootScope.currentuser = $rootScope.userData.user_name;
-				//	localStorageService.set('token', res.data.token);
-				//	$rootScope.token = res.data.token;
-				//	$timeout(function() {
-				//		$state.go('main.private.dashboard', {
-				//			reload: true
-				//		});
-				//	}, 0);
-				//} else {
-				//	blockUI.stop();
-				//	alertService.add(2, res.data.message);
-				//}
+				blockUI.stop();
+				if (res.data) {
+					localStorageService.set('userData', res.data);
+					localStorageService.set('token', res.data.token);
+					$rootScope.userData = res.data;
+					$rootScope.token = res.data.token;
+					alertService.add(0,'','Login Ok','');
+					console.log(res);
+					$timeout(function () {
+						$state.go('main.private.dashboard');
+					}, 0);
+				}
 			}, function (res) {
 				console.log('...error: '+res);
 				alertService.add(2,'','Login Failed!','');
 			});
 		}
-
 	})
 
 
-	.controller('Registration', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI) {
+	.controller('Registration', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService) {
 		console.log('..Registration');
 		var vm = this;
 		vm.reg = {};
@@ -102,10 +92,8 @@ angular.module('modules.public', [])
 		vm.active = 0;
 
 		vm.onSubmit = onSubmit;
-		function onSubmit() {
-			console.log('submit');
-			//console.log(vm.tabs[vm.active].type); console.log(vm.reg[vm.tabs[vm.active].type]);
 
+		function onSubmit() {
 			var  sendPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
@@ -115,45 +103,19 @@ angular.module('modules.public', [])
 				sendPOST.org = vm.reg[vm.tabs[vm.active].type].org;
 				sendPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username
 			}
-			console.log(JSON.stringify(sendPOST));
-
-
 			$http.post('/rest/public/registration', sendPOST)
-				.then(function () {
-					//console.log(res);
+				.then(function (res) {
+					if  (res.data && res.data.message) {
+						alertService.add(2,'',res.data.message,'');
+					}
+					console.log(res);
 					$timeout(function () {
-					$state.go('main.private.dashboard');
-				}, 0);
-
-				//blockUI.stop();
-				//if (res.data.result) {
-				//	localStorageService.set('userData', res.data);
-				//	$rootScope.userData = res.data;
-				//	$rootScope.currentuser = $rootScope.userData.user_name;
-				//	localStorageService.set('token', res.data.token);
-				//	$rootScope.token = res.data.token;
-				//	$timeout(function() {
-				//		$state.go('main.private.dashboard', {
-				//			reload: true
-				//		});
-				//	}, 0);
-				//} else {
-				//	blockUI.stop();
-				//	alertService.add(2, res.data.message);
-				//}
-			}, function () {
+						$state.go('main.public.login');
+					}, 0);
+			}, function (res) {
 				console.log('...error: ');
 			});
-			//if (vm.form.$valid) {
-			//	console.log('..Ok!');
-			//}
 		}
-
-		function selTab(index) {
-			console.log(index);
-		}
-
-		vm.selTab = selTab();
 
 	})
 
@@ -187,7 +149,7 @@ angular.module('modules.public', [])
 					blockUI.stop();
 					console.log('...reps:'+res);
 					$timeout(function () {
-						$state.go('main.private.dashboard');
+						$state.go('main.public.login');
 					}, 0);
 				}, function (res) {
 					blockUI.stop();
@@ -248,3 +210,33 @@ angular.module('modules.public', [])
 		}
 	};
 })
+
+
+.service('checkUserAuth', function ($location, localStorageService, $rootScope, alertService) {
+	var checkUserAuth = function () {
+		var originalPath = $location.path();
+		$location.path('/login');
+		var authToken = localStorageService.get('token');
+		if ((authToken !== undefined) && (authToken !== null)) {
+			$rootScope.token = authToken;
+			$rootScope.userData = localStorageService.get('userData');
+			$location.path(originalPath);
+			return;
+		}
+	};
+	return checkUserAuth;
+})
+
+
+//Сервис интерцептора запроса, вставляет токен в хедер
+.service('requestInterceptor', function ($rootScope, $q) {
+	return {
+		'request': function (config) {
+			if ($rootScope.token) {
+				var authToken = $rootScope.token;
+				config.headers['X-Auth-Token'] = authToken;
+			}
+			return config || $q.when(config);
+		}
+	};
+});
