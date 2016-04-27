@@ -95,6 +95,9 @@ angular.module( 'modules.core')
 					controller:'DashboardPatFormsCtrl as vm'
 				}
 
+			},
+			params:{
+				activeForms:[]
 			}
 		},
 		{
@@ -123,8 +126,8 @@ angular.module( 'modules.core')
 			url:'/tasks',
 			views:{
 				'forms@main.private.dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patTasks.html'
-					//controller:'DashboardPatFormsCtrl'
+					templateUrl:'modules/dashboard/views/dashboard.PatientForms.html',
+					controller:'patientFormsCtrl as vm'
 				}
 			}
 		}

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('modules.dash','modules.patforms','modules.patnotif', []);
+angular.module('modules.dash','modules.patforms','modules.patnotif','patient.forms' ,[]);

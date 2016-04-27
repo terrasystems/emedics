@@ -1,29 +1,36 @@
 * {
-	margin:0;
+	margin: 0;
 }
+
 html {
 	overflow-y: scroll;
 }
-h1,h2,h3,h4,h5,h6{
+
+h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
+
 body {
 	height: 100%;
-	min-width:900px;
+	min-width: 900px;
 }
+
 html {
-	position:relative;
-	min-height:100%;
+	position: relative;
+	min-height: 100%;
 
 }
+
 #container {
-	padding-bottom: 100px;/*Примерно 2 размера footer, чтобы он не наезжал на контент при узком окне браузера*/
+	padding-bottom: 100px; /*Примерно 2 размера footer, чтобы он не наезжал на контент при узком окне браузера*/
 }
-#header{
+
+#header {
 	background: #f7f7f7;
 	height: 50px;
 	background: cadetblue;
 }
+
 #footer {
 	height: 50px;
 	background: #f7f7f7;
@@ -32,10 +39,10 @@ html {
 	width: 100%;
 	background: cadetblue;
 }
+
 body {
 	background: url(../images/bkgd_pattern.png);
 }
-
 
 .login-form {
 	width: 350px;
@@ -56,23 +63,24 @@ body {
 	float: right;
 	margin-right: 15px;
 	background-color: rgb(16, 108, 200);
-	color:rgba(255, 255, 255, 0.87);
+	color: rgba(255, 255, 255, 0.87);
 }
-.login-button:hover{
-	background-color:rgb(16, 108, 200);
+
+.login-button:hover {
+	background-color: rgb(16, 108, 200);
 	text-decoration: underline;
 }
 
 ul.nav.nav-tabs {
-	background:rgb(16, 108, 200);
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover{
+	background: rgb(16, 108, 200);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
 
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
 
 .reg_form {
 
@@ -109,46 +117,61 @@ ul.nav.nav-tabs {
 	float: left;
 	padding-left: 20px;
 }
-.tabs_control{
+
+.tabs_control {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 1110px;
 	margin-left: auto;
 	margin-right: auto;
 }
-.tabs_control li a{
-	color:rgba(255, 255, 255, 0.87);;
+
+.tabs_control li a {
+	color: rgba(255, 255, 255, 0.87);;
 
 }
-.tabs_control li a:hover{
+
+.tabs_control li a:hover {
 	text-decoration: none;
-	background-color:transparent;
+	background-color: transparent;
 	border-radius: 10px;
 }
-div.ui-list-view-cell-content{
-	background: whitesmoke;
+
+div.ui-list-view-cell-content {
+	background: white;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+	box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
 
 }
-.ui-list-view-cell{
-	z-index: 0;
+
+.ui-list-view-cell {
+	top: 216px;
+	margin-left: 10px;
+
+	margin-right: 10px;
+	width: 98%;
 }
-div.ui-list-view-cell-content:hover{
+
+div.ui-list-view-cell-content:hover {
 	-webkit-transform: translateY(-3px);
 	transform: translateY(-3px);
 	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
-div.contact-list.ui-list-view.ng-isolate-scope{
+
+div.contact-list.ui-list-view.ng-isolate-scope {
 	border: solid 1px
 }
-.form-list p{
+
+.form-list p {
 	margin-left: 15px;
 }
-div.form-list.ui-list-view.ng-isolate-scope{
-	border-radius:10px;
+
+div.form-list.ui-list-view.ng-isolate-scope {
+	border-radius: 10px;
 }
-.ui-list-view{
+
+.ui-list-view {
 	width: 1100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -156,39 +179,51 @@ div.form-list.ui-list-view.ng-isolate-scope{
 	margin-top: 10px;
 	border: solid 1px;
 }
+
 .form-list h3 {
 	margin-left: 15px;
 	margin-top: 0px;
 }
-.form-list h4{
+
+.form-list h4 {
 	margin-left: 15px;
 }
-.tabs_control li a:focus{
+
+.tabs_control li a:focus {
 	text-decoration: none;
 	background-color: red;
 	border-radius: 10px;
 }
-.nav-tabs > li > a{
-color:rgba(255, 255, 255, 0.87);
+
+.nav-tabs > li > a {
+	color: rgba(255, 255, 255, 0.87);
 }
 
-.nav-tabs>li>a:focus{
+.nav-tabs > li > a:focus {
 	background-color: transparent;
 	border-radius: 10px;
 	text-decoration: underline;
 }
-.nav-tabs>li>a:hover{
-	background-color:#267ED5 ;
+
+.nav-tabs > li > a:hover {
+	background-color: #267ED5;
 	border-radius: 10px;
 }
-div.form-list.ui-list-view.ng-isolate-scope{
-	background: white;
+
+div.form-list.ui-list-view.ng-isolate-scope {
+	background: #d6d6d6;
 }
 
-
-.tabs_control li:focus{
+.tabs_control li:focus {
 	text-decoration: underline;
 }
-#msg{
-	margin-left: 0;
+
+.form-list span {
+	margin-left: 10px;
+}
+
+label.checkbox-inline.ng-scope {
+	float: right;
+
+	margin-top: 20px;
 }
