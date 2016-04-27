@@ -3,7 +3,7 @@
 
 angular.module('modules.dash', [])
 
-.controller('DashCtrl', function($http, blockUI, alertService)
+.controller('DashCtrl', function($http, alertService)
 	{
 		console.log('..DashboardCtrl');
 		var vm = this;

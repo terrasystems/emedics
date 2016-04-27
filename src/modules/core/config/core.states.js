@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('modules.core')
+angular.module( 'modules.core')
 
 .constant('statesList', [
 		{
@@ -55,8 +55,19 @@ angular.module('modules.core')
 				console.log('...befor newpassword state');
 			}
 		},
+		{
+			name: 'main.public.activation',
+			url: 'activation/:code',
+			onEnter: function($stateParams, http, $state, auth) {
+				http.get('activation/' + $stateParams.code).then(function(response) {
+					console.log(response.data);
+					auth.saveUserData(response.data);
+					$state.go('main.private.dashboard');
+				});
+				console.log($stateParams.code);
+			}
+		},
 		// private
-
 		{
 			name: 'main.private',
 			url:'',
@@ -117,7 +128,6 @@ angular.module('modules.core')
 				}
 			}
 		}
-
 
 	]);
 

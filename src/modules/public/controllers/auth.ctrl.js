@@ -3,7 +3,8 @@
 angular.module('modules.public', [])
 
 
-	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService, localStorageService) {
+	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService, localStorageService,
+									   auth, http) {
 		console.log('..LoginCtrl');
 		var vm = this;
 		vm.onSubmit = onSubmit;
@@ -51,31 +52,44 @@ angular.module('modules.public', [])
 		}
 
 		function doLogin() {
-			$http.post('/rest/public/login', {
+			var paramsPOST = {
 				email: vm.user.email,
 				password: vm.user.password
-			}).then(function (res) {
+			};
+			http.post('public/login', paramsPOST).then(function (res) {
 				blockUI.stop();
-				if (res.data) {
-					localStorageService.set('userData', res.data);
-					localStorageService.set('token', res.data.token);
-					$rootScope.userData = res.data;
-					$rootScope.token = res.data.token;
-					alertService.add(0,'','Login Ok','');
-					console.log(res);
-					$timeout(function () {
-						$state.go('main.private.dashboard');
-					}, 0);
-				}
-			}, function (res) {
-				console.log('...error: '+res);
-				alertService.add(2,'','Login Failed!','');
+				auth.saveUserData(res.data);
+				alertService.add(0,'','Login Ok','');
+				$timeout(function () {
+					$state.go('main.private.dashboard');
+				}, 0);
 			});
+			//$http.post('/rest/public/login', {
+			//	email: vm.user.email,
+			//	password: vm.user.password
+			//}).then(function (res) {
+			//	blockUI.stop();
+			//	if (res.data) {
+			//		localStorageService.set('userData', res.data);
+			//		localStorageService.set('token', res.data.token);
+			//		$rootScope.userData = res.data;
+			//		$rootScope.token = res.data.token;
+			//		alertService.add(0,'','Login Ok','');
+			//		console.log(res);
+			//		$timeout(function () {
+			//			$state.go('main.private.dashboard');
+			//		}, 0);
+			//	}
+			//}, function (res) {
+			//	console.log('...error: '+res);
+			//	alertService.add(2,'','Login Failed!','');
+			//});
 		}
 	})
 
 
-	.controller('Registration', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService) {
+	.controller('Registration', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService,
+										  auth, http) {
 		console.log('..Registration');
 		var vm = this;
 		vm.reg = {};
@@ -94,27 +108,35 @@ angular.module('modules.public', [])
 		vm.onSubmit = onSubmit;
 
 		function onSubmit() {
-			var  sendPOST= {
+			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
 				"org": {}
 			};
 			if  (vm.tabs[vm.active].type=='org') {
-				sendPOST.org = vm.reg[vm.tabs[vm.active].type].org;
-				sendPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username
+				paramsPOST.org = vm.reg[vm.tabs[vm.active].type].org;
+				paramsPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username
 			}
-			$http.post('/rest/public/registration', sendPOST)
-				.then(function (res) {
-					if  (res.data && res.data.message) {
-						alertService.add(2,'',res.data.message,'');
-					}
-					console.log(res);
-					$timeout(function () {
-						$state.go('main.public.login');
-					}, 0);
-			}, function (res) {
-				console.log('...error: ');
+			http.post('public/registration', paramsPOST).then(function (res) {
+				blockUI.stop();
+				auth.saveUserData(res.data);
+				alertService.add(0,'','Registration Ok!','');
+				$timeout(function () {
+					$state.go('main.public.login');
+				}, 0);
 			});
+			//$http.post('/rest/public/registration', paramsPOST)
+			//	.then(function (res) {
+			//		if  (res.data && res.data.message) {
+			//			alertService.add(2,'',res.data.message,'');
+			//		}
+			//		console.log(res);
+			//		$timeout(function () {
+			//			$state.go('main.public.login');
+			//		}, 0);
+			//}, function (res) {
+			//	console.log('...error: ');
+			//});
 		}
 
 	})
