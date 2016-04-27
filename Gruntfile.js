@@ -212,12 +212,12 @@ module.exports = function(grunt) {
 		},
 		// https://www.npmjs.com/package/grunt-angular-templates
 		ngtemplates: {
-			miniApp: {
+			eMedics: {
 				cwd: '<%= yeoman.src %>',
 				src: 'modules/**/{,*/}*.html',
 				dest: '<%= yeoman.dist %>/template.js',
 				options: {
-					module: 'miniApp',
+					module: 'eMedics',
 					append: '<%= yeoman.dist %>',
 					usemin: 'app.js',
 					htmlmin: {
@@ -353,4 +353,11 @@ module.exports = function(grunt) {
 		'configureProxies',
 		'connect:livereload',
 		'watch']);
+	grunt.registerTask('buildA', [
+		//'oneskyExport',
+		'clean:dist',
+		'includeSource:serve',
+		'wiredep:serve',
+		'copy:dist',
+		'copy:serve']);
 };
