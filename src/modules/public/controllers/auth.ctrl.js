@@ -88,9 +88,9 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('Registration', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService,
+	.controller('RegistrationCtrl', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService,
 										  auth, http) {
-		console.log('..Registration');
+		console.log('..RegistrationCtrl');
 		var vm = this;
 		vm.reg = {};
 		vm.tabs = [];
@@ -142,8 +142,8 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('NewPassword', function ($state, $timeout, $http, blockUI) {
-		console.log('..NewPassword');
+	.controller('NewPasswordCtrl', function ($state, $timeout, $http, blockUI) {
+		console.log('..NewPasswordCtrl');
 		var vm = this;
 		vm.forgotPass = '';
 
@@ -179,86 +179,3 @@ angular.module('modules.public', [])
 				});
 		}
 	})
-
-
-// Интерцептор для перехвата ошибок
-.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI) {
-	return {
-		'response': function (response) {
-			console.log('int.responce: '+response);
-			//if (response.data.alerts != null)  $injector.get('alertService').addAlerts(response.data.alerts);
-            //
-			//if  (response.data && response.data.result == 'false' && response.data.message == '401')
-			//{
-			//	blockUI.reset();
-			//	delete $rootScope.userData;
-			//	delete $rootScope.token;
-			//	localStorageService.remove('token');
-			//	localStorageService.remove('userData');
-			//	$rootScope.isMenuExists = false;
-			//	window.location.reload(true);
-			//}
-            //
-			//switch (response.data.status) {
-			//	case '400':
-			//	{
-			//		blockUI.reset();
-			//		return $q.reject(response);
-			//	}
-			//	default:
-			//		return response;
-			//}
-			return response;
-		},
-		'responseError': function (rejection) {
-			console.log('int.rejection: ' + rejection);
-
-			blockUI.reset();
-
-			switch (rejection.status) {
-				case 401:
-				{
-					$injector.get('$state').go('main.public.login',{reload: true});
-					window.location.reload(true);
-					break;
-				}
-				default:
-				{
-					console.log(rejection);
-					break;
-				}
-			}
-			return $q.reject(rejection);
-		}
-	};
-})
-
-
-.service('checkUserAuth', function ($location, localStorageService, $rootScope, alertService) {
-	var checkUserAuth = function () {
-		var originalPath = $location.path();
-		$location.path('/login');
-		var authToken = localStorageService.get('token');
-		if ((authToken !== undefined) && (authToken !== null)) {
-			$rootScope.token = authToken;
-			$rootScope.userData = localStorageService.get('userData');
-			$location.path(originalPath);
-			return;
-		}
-	};
-	return checkUserAuth;
-})
-
-
-//Сервис интерцептора запроса, вставляет токен в хедер
-.service('requestInterceptor', function ($rootScope, $q) {
-	return {
-		'request': function (config) {
-			if ($rootScope.token) {
-				var authToken = $rootScope.token;
-				config.headers['X-Auth-Token'] = authToken;
-			}
-			return config || $q.when(config);
-		}
-	};
-});

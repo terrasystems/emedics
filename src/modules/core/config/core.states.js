@@ -35,7 +35,7 @@ angular.module( 'modules.core')
 			views: {
 				'content@main': {
 					templateUrl: 'modules/public/views/registration.html',
-					controller: 'Registration as vm'
+					controller: 'RegistrationCtrl as vm'
 				}
 			},
 			onEnter: function($rootScope, $stateParams) {
@@ -48,7 +48,7 @@ angular.module( 'modules.core')
 			views: {
 				'content@main': {
 					templateUrl: 'modules/public/views/newpassword.html',
-					controller: 'NewPassword as vm'
+					controller: 'NewPasswordCtrl as vm'
 				}
 			},
 			onEnter: function($rootScope, $stateParams) {
@@ -130,5 +130,3 @@ angular.module( 'modules.core')
 		}
 
 	]);
-
-
