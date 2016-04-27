@@ -11,10 +11,10 @@ angular.module('modules.dash', [])
 		//$http.get('/rest/disc', '').success(function (res) {
 		//	console.log(JSON.stringify(res,'',4));
 		//});
-		vm.tabsLabel = [{label:'Forms', state:'forms'},
-			{label:'Notifications',state:'notifications'},
-			{label:'References',state:'ref'},
-			{label:'Tasks',state:'tasks'}
+		vm.tabsLabel = [{label:'Tasks', state:'forms'},
+			{label:'References',state:'notifications'},
+			{label:'Notifications',state:'ref'},
+			{label:'Patient Forms',state:'tasks'}
 		];
 	}
 

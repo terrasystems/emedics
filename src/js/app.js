@@ -5,7 +5,7 @@
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
 	'blockUI', 'toastr', 'LocalStorageModule',
 	//--
-	'modules.core', 'modules.public', 'modules.dash']);
+	'modules.core', 'modules.public', 'modules.dash','modules.patforms']);
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
