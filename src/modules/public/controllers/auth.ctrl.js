@@ -119,7 +119,7 @@ angular.module('modules.public', [])
 			}
 			http.post('public/registration', paramsPOST).then(function (res) {
 				blockUI.stop();
-				auth.saveUserData(res.data);
+				auth.saveUserData(res);
 				alertService.add(0,'','Registration Ok!','');
 				$timeout(function () {
 					$state.go('main.public.login');
