@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "description": "Web application SMT",
   "main": "app/app.js",
-  "postInstall": "./node_modules/.bin/bower install --allow-root --force-latest && grunt serve",
   "scripts": {
-    "build": "./node_modules/.bin/bower install --allow-root --force-latest && grunt build"
+    "build": "./node_modules/.bin/bower install --allow-root --force-latest && grunt build",
+	"buildA":"./node_modules/.bin/bower install --allow-root --force-latest && grunt buildA"
   },
   "keywords": [],
   "author": "* LTD, EU",
