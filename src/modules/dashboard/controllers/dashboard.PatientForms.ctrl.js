@@ -93,6 +93,10 @@ angular.module('patient.forms' ,[])
 			}];
 
 		vm.save = function () {
+			var v= [];
+/*			angular.forEach(vm.patientForms, function (curr) {
+				if (curr.active) v.push(curr);
+			});*/
 			$state.go('main.private.dashboard.forms',{activeForms:$filter('filter')(vm.patientForms, {active:true})})
 
 
