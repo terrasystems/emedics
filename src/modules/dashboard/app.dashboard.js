@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('modules.dash','modules.patforms', []);
+angular.module('modules.dash','modules.patforms','modules.patnotif', []);

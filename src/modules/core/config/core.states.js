@@ -98,17 +98,6 @@ angular.module( 'modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.notifications',
-			url:'/notifications',
-			views:{
-				'forms@main.private.dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patNotif.html'
-					//controller:'DashboardPatFormsCtrl'
-				}
-			},
-			parent: 'main.private.dashboard'
-		},
-		{
 			name:'main.private.dashboard.ref',
 			url:'/references',
 			views:{
@@ -119,8 +108,19 @@ angular.module( 'modules.core')
 			}
 		},
 		{
+			name:'main.private.dashboard.notifications',
+			url:'/notifications',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
+					controller:'NotificationsCtrl as vm'
+				}
+			},
+			parent: 'main.private.dashboard'
+		},
+		{
 			name:'main.private.dashboard.tasks',
-			url:'/Tasks',
+			url:'/tasks',
 			views:{
 				'forms@main.private.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasks.html'

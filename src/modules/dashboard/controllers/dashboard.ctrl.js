@@ -12,8 +12,8 @@ angular.module('modules.dash', [])
 		//	console.log(JSON.stringify(res,'',4));
 		//});
 		vm.tabsLabel = [{label:'Tasks', state:'forms'},
-			{label:'References',state:'notifications'},
-			{label:'Notifications',state:'ref'},
+			{label:'References',state:'ref'},
+			{label:'Notifications',state:'notifications'},
 			{label:'Patient Forms',state:'tasks'}
 		];
 	}
