@@ -17,20 +17,6 @@ angular.module('modules.patforms', ['ui-listView'])
 		//
 		//
 
-
-
-		//"list":[
-		//	{"id":long,
-		//		"body":string,
-		//		"name":string,
-		//		"type":string,
-		//		"descr":string,
-		//		"category":string
-		//	},
-		//],
-		//	"page":{"start":long,
-		//	"count":long,
-		//	"size":long}
 	}
 
 );

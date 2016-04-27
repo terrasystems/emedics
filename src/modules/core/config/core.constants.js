@@ -59,6 +59,28 @@ angular.module('modules.core')
 				"type": "pat",
 				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
 				"category": "Category 1"
+			},
+			{
+				"id": 6,
+				"body": "",
+				"name": "Mejia",
+				"type": "pat",
+				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
+				"category": "Category 1"
+			},{
+				"id": 6,
+				"body": "",
+				"name": "Mejia",
+				"type": "pat",
+				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
+				"category": "Category 1"
+			},{
+				"id": 6,
+				"body": "",
+				"name": "Mejia",
+				"type": "pat",
+				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
+				"category": "Category 1"
 			}]
 
 });

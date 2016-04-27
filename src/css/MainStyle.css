@@ -1,6 +1,12 @@
 * {
 	margin:0;
 }
+html {
+	overflow-y: scroll;
+}
+h1,h2,h3,h4,h5,h6{
+	margin: 0;
+}
 body {
 	height: 100%;
 	min-width:900px;
@@ -30,6 +36,7 @@ body {
 	background: url(../images/bkgd_pattern.png);
 }
 
+
 .login-form {
 	width: 350px;
 	min-height: 250px;
@@ -48,11 +55,16 @@ body {
 .login-button {
 	float: right;
 	margin-right: 15px;
-	background-color: #259ff3;
+	background-color: rgb(16, 108, 200);
+	color:rgba(255, 255, 255, 0.87);
+}
+.login-button:hover{
+	background-color:rgb(16, 108, 200);
+	text-decoration: underline;
 }
 
 ul.nav.nav-tabs {
-	background: rgb(82, 102, 128);
+	background:rgb(16, 108, 200);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -60,10 +72,7 @@ ul.nav.nav-tabs {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
-.nav-tabs > li > a:hover{
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
+
 
 .reg_form {
 
@@ -73,7 +82,7 @@ ul.nav.nav-tabs {
 	padding: 0px;
 	background: #E2E2E2;
 	width: 350px;
-	margin-top: 5%;
+	margin-top: 20%;
 }
 
 .btn_submit {
@@ -103,12 +112,13 @@ ul.nav.nav-tabs {
 .tabs_control{
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	width: 410px;
+	width: 1110px;
 	margin-left: auto;
 	margin-right: auto;
 }
 .tabs_control li a{
-	color:rgba(227, 78, 97, 0.84);;
+	color:rgba(255, 255, 255, 0.87);;
+
 }
 .tabs_control li a:hover{
 	text-decoration: none;
@@ -116,8 +126,18 @@ ul.nav.nav-tabs {
 	border-radius: 10px;
 }
 div.ui-list-view-cell-content{
-	background: white;
-	border-bottom: solid 1px;
+	background: whitesmoke;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+
+}
+.ui-list-view-cell{
+	z-index: 0;
+}
+div.ui-list-view-cell-content:hover{
+	-webkit-transform: translateY(-3px);
+	transform: translateY(-3px);
+	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
 div.contact-list.ui-list-view.ng-isolate-scope{
 	border: solid 1px
@@ -133,7 +153,39 @@ div.form-list.ui-list-view.ng-isolate-scope{
 	margin-left: auto;
 	margin-right: auto;
 	height: 500px;
+	margin-top: 10px;
+	border: solid 1px;
 }
-.form-list h3{
+.form-list h3 {
 	margin-left: 15px;
+	margin-top: 0px;
+}
+.form-list h4{
+	margin-left: 15px;
+}
+.tabs_control li a:focus{
+	text-decoration: none;
+	background-color: red;
+	border-radius: 10px;
+}
+.nav-tabs > li > a{
+color:rgba(255, 255, 255, 0.87);
+}
+
+.nav-tabs>li>a:focus{
+	background-color: transparent;
+	border-radius: 10px;
+	text-decoration: underline;
+}
+.nav-tabs>li>a:hover{
+	background-color:#267ED5 ;
+	border-radius: 10px;
+}
+div.form-list.ui-list-view.ng-isolate-scope{
+	background: white;
+}
+
+
+.tabs_control li:focus{
+	text-decoration: underline;
 }
