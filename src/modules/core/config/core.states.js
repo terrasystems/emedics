@@ -80,9 +80,9 @@ angular.module('modules.core')
 			parent:'main.private.dashboard',
 			views:{
 				'forms@main.private.dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patForms.html'
-					//controller:'DashboardPatFormsCtrl'
-				},
+					templateUrl:'modules/dashboard/views/dashboard.patForms.html',
+					controller:'DashboardPatFormsCtrl as vm'
+				}
 
 			}
 		},
