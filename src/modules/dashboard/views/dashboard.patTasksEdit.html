@@ -9,10 +9,10 @@
 
 
 <md-input-container class="md-block" flex-gt-sm="">
-	<label>State</label>
+	<label>Sex</label>
 	<md-select ng-model="user.state">
-		<md-option ng-repeat="sex in vm.sexes" value="{{sex.abbrev}}">
-			{{sex.abbrev}}
+		<md-option ng-repeat="sex in vm.sexes" value="{{sex.label}}">
+			{{sex.label}}
 		</md-option>
 	</md-select>
 </md-input-container>
