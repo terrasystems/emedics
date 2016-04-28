@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('modules.dash', ['ui-listView' ]);
+angular.module('modules.dash', ['ui-listView','ngMaterial', 'ngMessages' ]);

@@ -1,7 +1,29 @@
-<H1>dashboard.patTasksEdit</H1>
 
 
+<div class="container edit_form">
 <formly-form model="vm.users" fields="vm.userField" options="vm.option">
 
 
 </formly-form>
+<md-datepicker class="datepicker" ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+
+
+<md-input-container class="md-block" flex-gt-sm="">
+	<label>State</label>
+	<md-select ng-model="user.state">
+		<md-option ng-repeat="sex in vm.sexes" value="{{sex.abbrev}}">
+			{{sex.abbrev}}
+		</md-option>
+	</md-select>
+</md-input-container>
+<button class="btn btn-default"> Confirm </button>
+
+</div>
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages"
+			 class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}
+		</div>
+	</div>
+</script>
