@@ -1,26 +1,18 @@
-<div id="wrap">
-	<div class="header"><h3>Hello,{{}}</h3></div>
-
-
-	<div id="main" class="clearfix">
-
-
+<div id="header"><h3>Hello,{{}}</h3></div>
+<div class="container">
+	<div>
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs tabs_control" role="tablist">
 			<li role="presentation" ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel">
 				<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
 			</li>
 		</ul>
-
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="home" ui-view="forms"></div>
-
 		</div>
-
-
 	</div>
 </div>
-<div id="footer">
 
+<div id="footer">
 </div>
