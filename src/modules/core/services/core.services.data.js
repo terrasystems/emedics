@@ -103,28 +103,6 @@ angular.module('modules.core')
 		return {
 			'response': function (response) {
 				console.log('int.responce: '+response);
-				//if (response.data.alerts != null)  $injector.get('alertService').addAlerts(response.data.alerts);
-				//
-				//if  (response.data && response.data.result == 'false' && response.data.message == '401')
-				//{
-				//	blockUI.reset();
-				//	delete $rootScope.userData;
-				//	delete $rootScope.token;
-				//	localStorageService.remove('token');
-				//	localStorageService.remove('userData');
-				//	$rootScope.isMenuExists = false;
-				//	window.location.reload(true);
-				//}
-				//
-				//switch (response.data.status) {
-				//	case '400':
-				//	{
-				//		blockUI.reset();
-				//		return $q.reject(response);
-				//	}
-				//	default:
-				//		return response;
-				//}
 				return response;
 			},
 			'responseError': function (rejection) {
@@ -136,7 +114,7 @@ angular.module('modules.core')
 					case 401:
 					{
 						$injector.get('$state').go('main.public.login',{reload: true});
-						window.location.reload(true);
+					//	window.location.reload(true);
 						break;
 					}
 					default:
