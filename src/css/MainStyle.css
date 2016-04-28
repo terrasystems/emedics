@@ -5,6 +5,7 @@
 
 html, body, #wrap {
 	height: 100%;
+	background: none;
 }
 
 body > #wrap {
@@ -259,4 +260,6 @@ label.checkbox-inline.ng-scope {
 #select_2{
 	width: 30%;
 }
-
+.edit_form{
+	background: white;
+}

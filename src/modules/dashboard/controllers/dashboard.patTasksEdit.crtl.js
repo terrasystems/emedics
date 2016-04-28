@@ -25,15 +25,18 @@ angular.module('modules.dash')
 		};
 
 
+vm.sexes=[{
+	label:'Male'
 
+},{label:'Female'}];
 
-		vm.sexes = ('Male ' +
-		'Female '
-		).split(' ').map(function(sex) {
-				return {abbrev: sex};
-			});
-
-
+		//vm.sexes = ('Male'+
+		//'Female'
+		//).split(' ').map(function(sex) {
+		//		return {label: sex};
+		//	});
+		//
+		//
 
 
 
