@@ -1,23 +1,16 @@
-(function(){
 'use strict';
+/*jshint	-W117*/
 
 angular.module('modules.dash', [])
 
-.controller('DashCtrl', function($http, alertService)
-	{
-		console.log('..DashboardCtrl');
+	.controller('DashCtrl', function ($http, alertService) {
+		console.log('..DashCtrl');
 		var vm = this;
 
-		//$http.get('/rest/disc', '').success(function (res) {
-		//	console.log(JSON.stringify(res,'',4));
-		//});
-		vm.tabsLabel = [{label:'Tasks', state:'forms'},
-			{label:'References',state:'ref'},
-			{label:'Notifications',state:'notifications'},
-			{label:'Patient Forms',state:'tasks'}
+		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},
+			{label: 'References', state: 'ref'},
+			{label: 'Notifications', state: 'notifications'},
+			{label: 'Patient Forms', state: 'forms'}
 		];
 	}
-
 );
-
-	}());

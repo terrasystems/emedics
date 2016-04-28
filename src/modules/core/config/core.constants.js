@@ -2,16 +2,17 @@
 
 angular.module('modules.core')
 
-.constant('constants', {
-	restUrl : '/rest/',
-		listTasks : [  {
-			"id": 0,
-			"body": "",
-			"name": "CRANE",
-			"type": "org",
-			"descr": "Hello, Crane! You have \"org\" unread messages.",
-			"category": "Category 3"
-		},
+	.constant('constants', {
+		restUrl: '/rest/',
+		listTasks: [
+			{
+				"id": 0,
+				"body": "",
+				"name": "CRANE",
+				"type": "org",
+				"descr": "Hello, Crane! You have \"org\" unread messages.",
+				"category": "Category 3"
+			},
 			{
 				"id": 1,
 				"body": "",
@@ -67,14 +68,14 @@ angular.module('modules.core')
 				"type": "pat",
 				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
 				"category": "Category 1"
-			},{
+			}, {
 				"id": 6,
 				"body": "",
 				"name": "CRANE",
 				"type": "pat",
 				"descr": "Hello, Mejia! You have \"pat\" unread messages.",
 				"category": "Category 1"
-			},{
+			}, {
 				"id": 6,
 				"body": "",
 				"name": "CRANE",
@@ -83,4 +84,4 @@ angular.module('modules.core')
 				"category": "Category 1"
 			}]
 
-});
+	});

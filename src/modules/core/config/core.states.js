@@ -1,6 +1,7 @@
 'use strict';
+/*jshint	-W117*/
 
-angular.module( 'modules.core')
+angular.module('modules.core')
 
 .constant('statesList', [
 		{
@@ -92,12 +93,8 @@ angular.module( 'modules.core')
 			views:{
 				'forms@main.private.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patForms.html',
-					controller:'DashboardPatFormsCtrl as vm'
+					controller:'patientFormsCtrl as vm'
 				}
-
-			},
-			params:{
-				activeForms:[]
 			}
 		},
 		{
@@ -106,7 +103,7 @@ angular.module( 'modules.core')
 			views:{
 				'forms@main.private.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patRefs.html'
-					//controller:'DashboardPatFormsCtrl'
+					//controller:'patientRefsCtrl'
 				}
 			}
 		},
@@ -116,7 +113,7 @@ angular.module( 'modules.core')
 			views:{
 				'forms@main.private.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
-					controller:'NotificationsCtrl as vm'
+					controller:'patientNotifCtrl as vm'
 				}
 			},
 			parent: 'main.private.dashboard'
@@ -126,9 +123,12 @@ angular.module( 'modules.core')
 			url:'/tasks',
 			views:{
 				'forms@main.private.dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.PatientForms.html',
-					controller:'patientFormsCtrl as vm'
+					templateUrl:'modules/dashboard/views/dashboard.patTasks.html',
+					controller:'patientTasksCtrl as vm'
 				}
+			},
+			params:{
+				activeForms:[]
 			}
 		}
 
