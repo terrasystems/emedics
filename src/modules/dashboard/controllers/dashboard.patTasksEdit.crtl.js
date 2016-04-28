@@ -40,9 +40,8 @@ angular.module('modules.dash')
 
 		vm.users = {FullName:'',number:''};
 		vm.option = {};
-		vm.userField = [
+		vm.fields = [
 			{
-				className: 'col-md-12',
 				key: 'number',
 				type: 'input',
 				templateOptions: {
@@ -53,7 +52,6 @@ angular.module('modules.dash')
 				}
 			},
 			{
-				className: 'col-md-12',
 				key: 'FullName',
 				type: 'input',
 				templateOptions: {
@@ -62,7 +60,16 @@ angular.module('modules.dash')
 					placeholder: 'Enter Full name'
 
 				}
-			}
+			}/*,
+			{
+				"key": "date1",
+				"type": "datepicker",
+				"templateOptions": {
+					"label": "Bidth Date",
+					"type": "text",
+					"datepickerPopup": "dd-MMMM-yyyy"
+				}
+			},*/
 
 
 
