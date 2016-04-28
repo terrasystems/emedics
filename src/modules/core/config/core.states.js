@@ -130,6 +130,17 @@ angular.module('modules.core')
 			params:{
 				activeForms:[]
 			}
+		},
+
+		{
+			name:'main.private.dashboard.tasks.edit',
+			url:'/edit',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',
+					controller:'patientTasksEditCtrl as vm'
+				}
+			}
 		}
 
 	]);
