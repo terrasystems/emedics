@@ -1,4 +1,5 @@
 'use strict';
+/*jshint -W117, -W097*/
 
 angular.module('modules.public', [])
 
@@ -118,9 +119,9 @@ angular.module('modules.public', [])
 				"user": vm.reg[vm.tabs[vm.active].type].user,
 				"org": {}
 			};
-			if  (vm.tabs[vm.active].type=='org') {
+			if  (vm.tabs[vm.active].type==='org') {
 				paramsPOST.org = vm.reg[vm.tabs[vm.active].type].org;
-				paramsPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username
+				paramsPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username;
 			}
 			http.post('public/registration', paramsPOST).then(function (res) {
 				blockUI.stop();
@@ -150,7 +151,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('NewPasswordCtrl', function ($state, $timeout, $http, blockUI) {
+	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI) {
 		console.log('..NewPasswordCtrl');
 		var vm = this;
 		vm.forgotPass = '';
@@ -172,9 +173,9 @@ angular.module('modules.public', [])
 		];
 
 		function onSubmit() {
-			var sendPOST = vm.forgotPass;
+			var paramsPOST = vm.forgotPass;
 			blockUI.start();
-			$http.post('/rest/public/reset_pass', sendPOST)
+			http.post('public/reset_pass', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					console.log('...reps:'+res);
@@ -186,4 +187,4 @@ angular.module('modules.public', [])
 					console.log('...error: '+res);
 				});
 		}
-	})
+	});
