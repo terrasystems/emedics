@@ -16,15 +16,15 @@ body > #wrap {
 	padding-bottom: 150px;
 }
 
-/* must be same height as the footer */
 #footer {
 	position: relative;
 	clear: both;
 	height: 50px;
 	background: cadetblue;
+	margin-top: 150px ;
 }
 
-/* CLEAR FIX*/
+
 .clearfix:after {
 	content: ".";
 	display: block;
@@ -52,8 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 
-.header {
-	background: #f7f7f7;
+#header {
 	height: 50px;
 	background: cadetblue;
 	width: 100%;
@@ -194,7 +193,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	height: 500px;
+	min-height: 500px;
 	margin-top: 10px;
 	border: solid 1px;
 }

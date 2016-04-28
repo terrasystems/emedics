@@ -1,10 +1,10 @@
 'use strict';
 /*jshint	-W117*/
 
-angular.module('modules.patnotif', [])
+angular.module('modules.dash')
 
 	.controller('patientNotifCtrl', function ($state) {
-		console.log('..patientNotifCtrl');
+		//console.log('..patientNotifCtrl');
 		var vm = this;
 		vm.notifications = [{name: 'Vasia', secondName: 'Piatochkin', msg: 'a ja jebu sobak'},
 			{name: 'Vasia', secondName: 'Piatochkin', msg: 'a ja jebu sobak'},

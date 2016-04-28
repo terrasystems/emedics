@@ -1,10 +1,10 @@
 'use strict';
 /*jshint	-W117*/
 
-angular.module('modules.patforms', [])
+angular.module('modules.dash')
 
 	.controller('patientFormsCtrl', function ($state, $filter) {
-		console.log('..patientFormsCtrl');
+		//console.log('..patientFormsCtrl');
 		var vm = this;
 		vm.patientForms = [
 			{
@@ -97,7 +97,6 @@ angular.module('modules.patforms', [])
 			}];
 
 		vm.save = function () {
-			var v = [];
 			$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})})
 		};
 

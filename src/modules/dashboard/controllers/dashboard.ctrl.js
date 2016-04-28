@@ -1,10 +1,10 @@
 'use strict';
 /*jshint	-W117*/
 
-angular.module('modules.dash', [])
+angular.module('modules.dash')
 
 	.controller('DashCtrl', function ($http, alertService) {
-		console.log('..DashCtrl');
+		//console.log('..DashCtrl');
 		var vm = this;
 
 		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},

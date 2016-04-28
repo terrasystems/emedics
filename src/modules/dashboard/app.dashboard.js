@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('modules.dash', 'modules.patforms', 'modules.patnotif', 'modules.pattasks', []);
+angular.module('modules.dash', ['ui-listView' ]);
