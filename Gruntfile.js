@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 		oneSkyId: '103909',
 		proxy: {
 			context: '/rest',
-			host: 'ec2-52-28-6-207.eu-central-1.compute.amazonaws.com',
+			host: 'ec2-52-28-6-207.eu-central-1.compute.amazonaws.com',//'192.168.20.137',
 			port: '8080'
 		}
 	};
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 					//xforward: false,
 					//changeOrigin: true,
 					rewrite: {
-						'/rest': '/emedics-0.1.0/rest'
+						'/rest':  '/emedics-0.1.0/rest' //'/rest'
 					}
 				}
 			],

@@ -18,7 +18,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'Name',
-							required: true,
+							required: false,
 							placeholder: 'Enter your Name'
 						}
 					},
@@ -28,7 +28,7 @@ angular.module('modules.core')
 						type:'input',
 						templateOptions: {
 							type: 'email',
-							required: true,
+							required: false,
 							label: 'Email address',
 							placeholder: 'Enter email'
 						}
@@ -39,7 +39,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							type: 'password',
-							required: true,
+							required: false,
 							label: 'Password',
 							placeholder: 'Enter password'
 						}
@@ -61,7 +61,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'Name',
-							required: true,
+							required: false,
 							placeholder: 'Enter your Name'
 						}
 					},
@@ -71,7 +71,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							type: 'email',
-							required: true,
+							required: false,
 							label: 'Email address',
 							placeholder: 'Enter email'
 						}
@@ -82,7 +82,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							type: 'password',
-							required: true,
+							required: false,
 							label: 'Password',
 							placeholder: 'Enter password'
 						}
@@ -105,7 +105,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'Name',
-							required: true,
+							required: false,
 							placeholder: 'Enter your Name'
 						}
 					},
@@ -115,7 +115,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							type: 'email',
-							required: true,
+							required: false,
 							label: 'Email address',
 							placeholder: 'Enter email'
 						}
@@ -126,7 +126,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							type: 'password',
-							required: true,
+							required: false,
 							label: 'Password',
 							placeholder: 'Enter password'
 						}
@@ -137,7 +137,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'website',
-							required: true,
+							required: false,
 							placeholder: 'Enter your web-site'
 						}
 					},
@@ -147,7 +147,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'Organization name',
-							required: true,
+							required: false,
 							placeholder: 'Full organization name'
 						}
 					},
@@ -157,7 +157,7 @@ angular.module('modules.core')
 						type: 'input',
 						templateOptions: {
 							label: 'Address',
-							required: true,
+							required: false,
 							placeholder: 'Organization Address'
 						}
 					}

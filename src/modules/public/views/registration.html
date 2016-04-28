@@ -5,8 +5,7 @@
 		<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
 			<uib-tabset active="vm.active">
 
-				<uib-tab  class="tab-animation"  ng-repeat="tab in vm.tabs track by $index" heading="{{tab.title}}" disable="tab.disabled" active="tab.active"
-						  select="vm.selTab($index)" >
+				<uib-tab  class="tab-animation" ng-repeat="tab in vm.tabs track by $index" heading="{{tab.title}}" disable="tab.disabled" active="tab.active" select="vm.selTab($index)" >
 					<formly-form  model="tab.form.model" fields="tab.form.fields" form="vm.form" options="tab.form.options">
 						<button type="submit" class="btn btn_submit btn-default login-button submit-button">Submit</button>
 					</formly-form>

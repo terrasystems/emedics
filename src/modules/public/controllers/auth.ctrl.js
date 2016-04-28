@@ -58,7 +58,7 @@ angular.module('modules.public', [])
 			};
 			http.post('public/login', paramsPOST).then(function (res) {
 				blockUI.stop();
-				auth.saveUserData(res.data);
+				auth.saveUserData(res);
 				alertService.add(0,'','Login Ok','');
 				$timeout(function () {
 					$state.go('main.private.dashboard');
@@ -108,6 +108,11 @@ angular.module('modules.public', [])
 		vm.onSubmit = onSubmit;
 
 		function onSubmit() {
+			if (!vm.form.$valid) {
+				alertService.add(2,'','Need set requere fields!','');
+				return;
+			}
+
 			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
@@ -125,20 +130,23 @@ angular.module('modules.public', [])
 					$state.go('main.public.login');
 				}, 0);
 			});
-			//$http.post('/rest/public/registration', paramsPOST)
-			//	.then(function (res) {
-			//		if  (res.data && res.data.message) {
-			//			alertService.add(2,'',res.data.message,'');
-			//		}
-			//		console.log(res);
-			//		$timeout(function () {
-			//			$state.go('main.public.login');
-			//		}, 0);
-			//}, function (res) {
-			//	console.log('...error: ');
-			//});
 		}
 
+		function selTab(index) {
+			vm.active = index;
+			vm.tabs.forEach(function(tab, idt) {
+				tab.form.fields.forEach(function(field, idf) {
+						if  (idt===index) {
+							field.templateOptions.required = true;
+						} else {
+							field.templateOptions.required = false;
+						}
+					}
+				);
+			});
+		}
+
+		vm.selTab = selTab;
 	})
 
 
