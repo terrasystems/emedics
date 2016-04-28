@@ -1,4 +1,5 @@
 'use strict';
+/*jshint -W117, -W097*/
 
 angular.module('modules.core')
 
@@ -39,7 +40,7 @@ angular.module('modules.core')
 					localStorageService.set('userData', data.user);
 				}
 			}
-		}
+		};
 	})
 
 	.service('http', function($http, $q, constants, alertService) {
@@ -52,16 +53,16 @@ angular.module('modules.core')
 					}
 					else {
 						deferred.reject(false);
-						alertService.add(2, resp.data.state.message)
+						alertService.add(2, resp.data.state.message);
 					}
 				}
 				else {
 					deferred.reject(false);
-					alertService.add(2, "don't receive data from server")
+					alertService.add(2, "don't receive data from server");
 				}
 			}, function (error) {
 				deferred.reject(error);
-				alertService.add(2, error.status + ' '+error.statusText)
+				alertService.add(2, error.status + ' '+error.statusText);
 			});
 			return deferred.promise;
 		}
@@ -76,16 +77,16 @@ angular.module('modules.core')
 					}
 					else {
 						deferred.reject(false);
-						alertService.add(2, resp.data.state.message)
+						alertService.add(2, resp.data.state.message);
 					}
 				}
 				else {
 					deferred.reject(false);
-					alertService.add(2, "don't receive data from server")
+					alertService.add(2, "don't receive data from server");
 				}
 			}, function (error) {
 				deferred.reject(error);
-				alertService.add(2, error.status + ' '+error.statusText)
+				alertService.add(2, error.status + ' '+error.statusText);
 			});
 			return deferred.promise;
 		}
@@ -94,7 +95,7 @@ angular.module('modules.core')
 		return {
 			get: get,
 			post: post
-		}
+		};
 	})
 
 
