@@ -1,13 +1,13 @@
-<div id="header"><h3>Hello,{{}}</h3></div>
-<div class="container">
+<div id="wrap">
+	<div class="header"><h3>Hello,{{}}</h3></div>
 
 
+	<div id="main" class="clearfix">
 
-	<div>
 
 		<!-- Nav tabs -->
-		<ul class="nav nav-tabs tabs_control"  role="tablist">
-			<li role="presentation" ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel" >
+		<ul class="nav nav-tabs tabs_control" role="tablist">
+			<li role="presentation" ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel">
 				<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
 			</li>
 		</ul>
@@ -18,8 +18,8 @@
 
 		</div>
 
-	</div>
 
+	</div>
 </div>
 <div id="footer">
 

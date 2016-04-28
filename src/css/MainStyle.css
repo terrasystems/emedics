@@ -1,43 +1,62 @@
 * {
 	margin: 0;
+	padding: 0;
 }
 
-html {
-	overflow-y: scroll;
+html, body, #wrap {
+	height: 100%;
 }
+
+body > #wrap {
+	height: auto;
+	min-height: 100%;
+}
+
+#main {
+	padding-bottom: 150px;
+}
+
+/* must be same height as the footer */
+#footer {
+	position: relative;
+	clear: both;
+	height: 50px;
+	background: cadetblue;
+}
+
+/* CLEAR FIX*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+/* End hide from IE-mac */
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 
-body {
-	height: 100%;
-	min-width: 900px;
-}
-
-html {
-	position: relative;
-	min-height: 100%;
-
-}
-
-#container {
-	padding-bottom: 100px; /*Примерно 2 размера footer, чтобы он не наезжал на контент при узком окне браузера*/
-}
-
-#header {
+.header {
 	background: #f7f7f7;
 	height: 50px;
 	background: cadetblue;
-}
-
-#footer {
-	height: 50px;
-	background: #f7f7f7;
-	position: absolute;
-	bottom: 0;
 	width: 100%;
-	background: cadetblue;
 }
 
 body {
@@ -106,6 +125,7 @@ ul.nav.nav-tabs {
 	height: 100px;
 	padding-top: 10px;
 	border-radius: 10px;
+	border: solid 1px
 }
 
 .btn-forgot {
@@ -121,7 +141,7 @@ ul.nav.nav-tabs {
 .tabs_control {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	width: 1110px;
+	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -148,7 +168,6 @@ div.ui-list-view-cell-content {
 .ui-list-view-cell {
 	top: 216px;
 	margin-left: 10px;
-
 	margin-right: 10px;
 	width: 98%;
 }
@@ -172,7 +191,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 }
 
 .ui-list-view {
-	width: 1100px;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	height: 500px;
@@ -225,5 +244,10 @@ div.form-list.ui-list-view.ng-isolate-scope {
 label.checkbox-inline.ng-scope {
 	float: right;
 
+	margin-top: 20px;
+}
+
+.btn-danger {
+	float: right;
 	margin-top: 20px;
 }
