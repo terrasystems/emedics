@@ -1,22 +1,27 @@
-
-
 <div class="container edit_form">
-<formly-form model="vm.users" fields="vm.fields" options="vm.option">
+	<div class="pad"></div>
+
+	<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+		<formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form">
+			<button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
+			<button type="button" class="btn btn-default" ng-click="vm.options.resetModel()">Reset</button>
+		</formly-form>
+	</form>
+
+	<div class="pad"></div>
+	<!--<md-datepicker class="datepicker" ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
 
 
-</formly-form>
-<!--<md-datepicker class="datepicker" ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+    <md-input-container class="md-block" flex-gt-sm="">
+        <label>Sex</label>
+        <md-select ng-model="user.state">
+            <md-option ng-repeat="sex in vm.sexes" value="{{sex.label}}">
+                {{sex.label}}
+            </md-option>
+        </md-select>
+    </md-input-container>-->
 
-
-<md-input-container class="md-block" flex-gt-sm="">
-	<label>Sex</label>
-	<md-select ng-model="user.state">
-		<md-option ng-repeat="sex in vm.sexes" value="{{sex.label}}">
-			{{sex.label}}
-		</md-option>
-	</md-select>
-</md-input-container>-->
-<button class="btn btn-default"> Confirm </button>
+	<!--<button class="btn btn-default"> Confirm</button>-->
 
 </div>
 <script type="text/ng-template" id="error-messages.html">

@@ -1,47 +1,22 @@
 'use strict';
-
+/*jshint -W117, -W097*/
 
 angular.module('modules.dash')
 
-
-	.controller('patientTasksEditCtrl', function($rootScope, $state, $http, constants, $stateParams) {
+	.controller('patientTasksEditCtrl', function ($rootScope, $state, $http, constants, $stateParams) {
 		console.log('..patientTasksEditCtrl');
-
-
-
 		var vm = this;
-		vm.myDate = new Date();
-		vm.minDate = new Date(
-			vm.myDate.getFullYear(),
-			vm.myDate.getMonth() - 2,
-			vm.myDate.getDate());
-		vm.maxDate = new Date(
-			vm.myDate.getFullYear(),
-			vm.myDate.getMonth() + 2,
-			vm.myDate.getDate());
-		vm.onlyWeekendsPredicate = function(date) {
-			var day = date.getDay();
-			return day === 0 || day === 6;
-		};
+		vm.onSubmit = onSubmit;
 
-
-vm.sexes=[{
-	label:'Male'
-
-},{label:'Female'}];
+		vm.sexes = [{label: 'Male'}, {label: 'Female'}];
 
 		//vm.sexes = ('Male'+
 		//'Female'
 		//).split(' ').map(function(sex) {
 		//		return {label: sex};
 		//	});
-		//
-		//
 
-
-
-
-		vm.users = {FullName:'',number:''};
+		vm.model = {FullName: '', number: '', date1: null, sex: '-1'};
 		vm.option = {};
 		vm.fields = [
 			{
@@ -51,7 +26,6 @@ vm.sexes=[{
 					type: 'text',
 					label: 'number',
 					placeholder: '№'
-
 				}
 			},
 			{
@@ -61,22 +35,34 @@ vm.sexes=[{
 					type: 'text',
 					label: 'Full name',
 					placeholder: 'Enter Full name'
-
 				}
-			}/*,
+			},
 			{
-				"key": "date1",
-				"type": "datepicker",
-				"templateOptions": {
-					"label": "Bidth Date",
-					"type": "text",
-					"datepickerPopup": "dd-MMMM-yyyy"
+				key: 'date1',
+				type: 'datepicker',
+				templateOptions: {
+					label: 'Date 1',
+					type: 'text',
+					datepickerPopup: 'dd-MMMM-yyyy'
 				}
-			},*/
-
-
-
+			},
+			{
+				key: 'sex',
+				type: 'select',
+				templateOptions: {
+					label: 'Sex',
+					options: [
+						{name: 'Man', value: '1'},
+						{name: 'Woman', value: '0'},
+						{name: 'n/a', value: '-1'}
+					]
+				}
+			}
 		];
 
+		function onSubmit() {
+			vm.options.updateInitialValue();
+			alert(JSON.stringify(vm.model), null, 2);
+		}
 
-});
+	});

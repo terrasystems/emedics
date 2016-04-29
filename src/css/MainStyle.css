@@ -265,3 +265,7 @@ label.checkbox-inline.ng-scope {
 .edit_form{
 	background: white;
 }
+
+.pad {
+	padding: 10px;
+}

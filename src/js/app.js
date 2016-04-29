@@ -1,6 +1,5 @@
 'use strict';
-
-/* App Module */
+/*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
 	'blockUI', 'toastr', 'LocalStorageModule',
