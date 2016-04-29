@@ -62,7 +62,7 @@ angular.module('modules.public', [])
 				auth.saveUserData(res);
 				alertService.add(0,'','Login Ok','');
 				$timeout(function () {
-					$state.go('main.private.dashboard');
+					$state.go('main.private.dashboard.forms');
 				}, 0);
 			});
 			//$http.post('/rest/public/login', {

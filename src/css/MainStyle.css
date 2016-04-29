@@ -270,3 +270,9 @@ label.checkbox-inline.ng-scope {
 	padding: 10px;
 }
 
+.pull-rigth {
+	float: right !important;
+}
+.black-clr {
+	color: black;
+}

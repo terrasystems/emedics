@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function (localStorageService) {
+	.controller('DashCtrl', function ($rootScope, localStorageService, $state) {
 		var vm = this;
 
 		vm.user = localStorageService.get('userData');
@@ -13,5 +13,12 @@ angular.module('modules.dash')
 			{label: 'Notifications', state: 'notifications'},
 			{label: 'Patient Forms', state: 'forms'}
 		];
+
+		vm.logout = function () {
+			$rootScope.userData, $rootScope.token = null;
+			localStorageService.set('token', null);
+			localStorageService.set('userData', null);
+			$state.go('main.public.login');
+		};
 	}
 );
