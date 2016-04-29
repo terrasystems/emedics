@@ -1,11 +1,13 @@
 <div class="container">
+
 	<div class="form-list" ui-list-view="forms in vm.patientForms" options="listOptions">
+
 		<label class="checkbox-inline"><input type="checkbox" ng-model="forms.active" value=""></label>
+			<p><label class="control-label">ID: </label>{{forms.id}}</p>
+			<p><label class="control-label">Name: </label>{{forms.name}}</p>
+			<p><label class="control-label">Descr: </label>{{forms.descr}}</p>
+    </div>
 
-		<h3>{{ forms.id }}</h3>
-		<h4>{{forms.name}}</h4>
-
-		<p>{{forms.descr}}</p>
-	</div>
-	<button type="button" class="btn btn-danger" ng-click="vm.save()">Save</button>
+	<div class="pad"></div>
+	<button type="button" class="btn btn-primary submit-button" ng-click="vm.save()">Save</button>
 </div>
