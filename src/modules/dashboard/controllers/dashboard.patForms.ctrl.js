@@ -3,9 +3,9 @@
 
 angular.module('modules.dash')
 
-	.controller('patientFormsCtrl', function ($state, $filter) {
-		//console.log('..patientFormsCtrl');
+	.controller('patientFormsCtrl', function ($state, $filter, http, localStorageService, blockUI) {
 		var vm = this;
+		vm.user = localStorageService.get('userData');
 		vm.patientForms = [
 			{
 				"id": 0,
@@ -96,8 +96,25 @@ angular.module('modules.dash')
 				"category": "Category 1"
 			}];
 
+		var paramsPOST = {
+			"page": {
+				"start": 0,
+				"count": 20
+			},
+			"criteria": {}
+		};
+
+		http.post('private/dashboard/'+vm.user.type+'/forms', paramsPOST)
+			.then(function (res) {
+				blockUI.stop();
+				if  (res.list /* && res.page */) {
+					vm.patientForms = res.list;
+					vm.page = res.page;
+				}
+			});
+
 		vm.save = function () {
-			$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})})
+			$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})});
 		};
 
 	});

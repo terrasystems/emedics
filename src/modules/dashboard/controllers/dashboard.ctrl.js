@@ -3,9 +3,10 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($http, alertService) {
-		//console.log('..DashCtrl');
+	.controller('DashCtrl', function (localStorageService) {
 		var vm = this;
+
+		vm.user = localStorageService.get('userData');
 
 		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},
 			{label: 'References', state: 'ref'},

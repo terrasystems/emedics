@@ -8,8 +8,6 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.onSubmit = onSubmit;
 
-		vm.sexes = [{label: 'Male'}, {label: 'Female'}];
-
 		//vm.sexes = ('Male'+
 		//'Female'
 		//).split(' ').map(function(sex) {
@@ -52,8 +50,8 @@ angular.module('modules.dash')
 				templateOptions: {
 					label: 'Sex',
 					options: [
-						{name: 'Man', value: '1'},
-						{name: 'Woman', value: '0'},
+						{name: 'Male', value: '1'},
+						{name: 'Female', value: '0'},
 						{name: 'n/a', value: '-1'}
 					]
 				}

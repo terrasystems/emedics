@@ -19,7 +19,7 @@ angular.module('modules.dash')
 			"criteria": {}
 		};
 
-		http.post('dashboard/'+vm.user.type+'/forms/active', paramsPOST)
+		http.post('private/dashboard/'+vm.user.type+'/forms/active', paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
 				if  (res.list && res.page) {
