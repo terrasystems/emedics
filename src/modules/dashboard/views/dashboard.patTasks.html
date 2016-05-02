@@ -1,9 +1,11 @@
 <div class="container">
-	<div class="form-list" ui-list-view="form in vm.list" options="listOptions">
+	<div class="form-list" ui-list-view="form in vm.list track by $index" options="listOptions">
+		<div ng-click="vm.onClick(form.number)">
 
-		<p><label class="control-label">ID: </label>{{form.id}}</p>
-		<p><label class="control-label">Name: </label>{{form.name}}</p>
-		<p><label class="control-label">Descr: </label>{{form.descr}}</p>
+			<p><label class="control-label">Number: </label>{{form.number}}</p>
+			<p><label class="control-label">Name: </label>{{form.name}}</p>
+			<p><label class="control-label">Descr: </label>{{form.descr}}</p>
 
+		</div>
 	</div>
 </div>

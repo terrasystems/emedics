@@ -114,7 +114,23 @@ angular.module('modules.dash')
 			});
 
 		vm.save = function () {
-			$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})});
+			vm.result = $filter('filter')(vm.patientForms, {active: true});
+			paramsPOST.criteria.list = [];
+
+			vm.result.forEach(function(item, index) {
+				if (item.active && item.active===true && item.id)	{
+					paramsPOST.criteria.list.push(item.id);
+				}
+			})
+
+			http.post('private/dashboard/'+vm.user.type+'/forms/active/modify', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					console.log(res);
+					$state.go('main.private.dashboard.tasks');
+					//$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})});
+				});
+
 		};
 
 	});

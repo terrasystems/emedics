@@ -22,10 +22,16 @@ angular.module('modules.dash')
 		http.post('private/dashboard/'+vm.user.type+'/forms/active', paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if  (res.list && res.page) {
+				if  (res.list /*&& res.page*/) {
 					vm.list = res.list;
 					vm.page = res.page;
 				}
 			});
+
+		vm.onClick = function(index) {
+			console.log(index+' !!!!');
+			$state.go('main.private.dashboard.tasks.edit');
+		};
+
 	}
 );
