@@ -126,9 +126,6 @@ angular.module('modules.core')
 					templateUrl:'modules/dashboard/views/dashboard.patTasks.html',
 					controller:'patientTasksCtrl as vm'
 				}
-			},
-			params:{
-				activeForms:[]
 			}
 		},
 
@@ -140,6 +137,9 @@ angular.module('modules.core')
 					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',
 					controller:'patientTasksEditCtrl as vm'
 				}
+			},
+			params:{
+				id: ''
 			}
 		}
 

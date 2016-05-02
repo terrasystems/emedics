@@ -3,16 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function ($rootScope, $state, $http, constants, $stateParams) {
-		console.log('..patientTasksEditCtrl');
+	.controller('patientTasksEditCtrl', function ($rootScope, http, constants, $stateParams, $state, localStorageService) {
+		//console.log('..patientTasksEditCtrl');
 		var vm = this;
-		vm.onSubmit = onSubmit;
+		vm.id = $stateParams.id;
+		vm.user = localStorageService.get('userData');
 
-		//vm.sexes = ('Male'+
-		//'Female'
-		//).split(' ').map(function(sex) {
-		//		return {label: sex};
-		//	});
+		console.log(vm.id);
+		vm.onSubmit = onSubmit;
 
 		vm.model = {FullName: '', number: '', date1: null, sex: '-1'};
 		vm.option = {};
@@ -58,9 +56,28 @@ angular.module('modules.dash')
 			}
 		];
 
+		var paramsPOST = {};
+
+		http.post('private/dashboard/'+vm.user.type+'/getform/'+vm.id, paramsPOST)
+			.then(function (res) {
+				blockUI.stop();
+				if  (res.form && res.blank) {
+					vm.fields = res.form;
+					vm.model = res.blank;
+				}
+			});
+
 		function onSubmit() {
 			vm.options.updateInitialValue();
 			alert(JSON.stringify(vm.model), null, 2);
+			paramsPOST = {};
+			paramsPOST.id = vm.id;
+			paramsPOST.data = vm.model;
+
+			http.post('private/dashboard/'+vm.user.type+'/forms/edit', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+				});
 		}
 
 	});
