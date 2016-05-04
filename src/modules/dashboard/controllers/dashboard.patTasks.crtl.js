@@ -19,19 +19,18 @@ angular.module('modules.dash')
 			"criteria": {}
 		};
 
-		http.post('private/dashboard/'+vm.user.type+'/forms/active', paramsPOST)
+		http.post('private/dashboard/' + vm.user.type + '/forms/active', paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if  (res.list /*&& res.page*/) {
-					vm.list = res.list;
+				if (res.result /*&& res.page*/) {
+					vm.list = res.result;
 					vm.page = res.page;
 				}
 			});
 
-		vm.onClick = function(index) {
-			console.log(index+' !!!!');
-			//$state.go('main.private.dashboard.tasks.edit', {id: index});
+		vm.onClick = function (index) {
+			console.log(index + ' !!!!');
+			$state.go('main.private.dashboard.tasks.edit', {id: index});
 		};
-
 	}
 );

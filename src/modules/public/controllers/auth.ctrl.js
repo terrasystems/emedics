@@ -65,26 +65,6 @@ angular.module('modules.public', [])
 					$state.go('main.private.dashboard.forms');
 				}, 0);
 			});
-			//$http.post('/rest/public/login', {
-			//	email: vm.user.email,
-			//	password: vm.user.password
-			//}).then(function (res) {
-			//	blockUI.stop();
-			//	if (res.data) {
-			//		localStorageService.set('userData', res.data);
-			//		localStorageService.set('token', res.data.token);
-			//		$rootScope.userData = res.data;
-			//		$rootScope.token = res.data.token;
-			//		alertService.add(0,'','Login Ok','');
-			//		console.log(res);
-			//		$timeout(function () {
-			//			$state.go('main.private.dashboard');
-			//		}, 0);
-			//	}
-			//}, function (res) {
-			//	console.log('...error: '+res);
-			//	alertService.add(2,'','Login Failed!','');
-			//});
 		}
 	})
 

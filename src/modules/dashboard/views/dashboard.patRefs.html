@@ -1,3 +1,7 @@
-<div class="container" >
-<h1>REFERENCES</h1>
+<div class="container">
+	<div class="form-list" ui-list-view="ref in vm.references" options="listOptions">
+		<span>Name:<h4>{{ref.name }}</h4></span>
+		<span>Type:<h4>{{ref.type}}</h4></span>
+		<span><p id="msg">Phone: <strong>{{ref.phone}}</strong></p></span>
 	</div>
+</div>

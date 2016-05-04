@@ -56,16 +56,16 @@ angular.module('modules.core')
 				ngModelAttrs: ngModelAttrs,
 				templateOptions: {
 					datepickerOptions: {
-						format: 'MM.dd.yyyy',
+						format: 'yyyy-MMMM-dd',
 						initDate: new Date()
 					}
-				}
+				},
+				parsers: [toDateConv],
+				//formatters: [toStringConv]
 			},
 			controller: ['$scope', function ($scope) {
 				$scope.datepicker = {};
-
 				$scope.datepicker.opened = false;
-
 				$scope.datepicker.open = function ($event) {
 					$scope.datepicker.opened = !$scope.datepicker.opened;
 				};
@@ -80,5 +80,56 @@ angular.module('modules.core')
 			return string.replace(/^([A-Z])/, function (match, chr) {
 				return chr ? chr.toLowerCase() : '';
 			});
+		}
+
+		function toDateConv(value) {
+			//console.log(value.toISOString().slice(0,10));
+			if  (value && !(value === null)) {
+				value = value.toISOString().slice(0,10);
+			}
+			return (value);
+		}
+
+		function toStringConv(value) {
+			console.log('1) '+value);
+			if  (value) {
+				value = new Date(value);
+				console.log('2) '+value);
+			}
+			return (value);
+		}
+
+	})
+	.directive('kcdRecompile', function($compile, $parse) {
+
+		return {
+			scope: true, // required to be able to clear watchers safely
+			compile: function(el) {
+				var template = getElementAsHtml(el);
+				return function link(scope, $el, attrs) {
+					var stopWatching = scope.$parent.$watch(attrs.kcdRecompile, function(_new, _old) {
+						var useBoolean = attrs.hasOwnProperty('useBoolean');
+						if ((useBoolean && (!_new || _new === 'false')) || (!useBoolean && (!_new || _new === _old))) {
+							return;
+						}
+						// reset kcdRecompile to false if we're using a boolean
+						if (useBoolean) {
+							$parse(attrs.kcdRecompile).assign(scope.$parent, false);
+						}
+
+						// recompile
+						var newEl = $compile(template)(scope.$parent);
+						$el.replaceWith(newEl);
+
+						// Destroy old scope, reassign new scope.
+						stopWatching();
+						scope.$destroy();
+					}, true); // <-- that
+				};
+			}
+		};
+
+		function getElementAsHtml(el) {
+			return angular.element('<a></a>').append(el.clone()).html();
 		}
 	});

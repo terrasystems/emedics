@@ -102,8 +102,8 @@ angular.module('modules.core')
 			url:'/references',
 			views:{
 				'forms@main.private.dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefs.html'
-					//controller:'patientRefsCtrl'
+					templateUrl:'modules/dashboard/views/dashboard.patRefs.html',
+					controller:'patientReferencesCtrl as vm'
 				}
 			}
 		},
