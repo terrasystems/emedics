@@ -24,20 +24,21 @@ angular.module('modules.dash')
 			.then(function (res) {
 				console.log('get all..');
 				blockUI.stop();
-				if  (res.object) {
-					vm.references = res.object;
+				if  (res.result) {
+					vm.references = res.result;
 				}
 			});
 
 		//delete item
 		vm.remove = function(index, id) {
-			vm.references.splice(index, 1);
 			console.log('del ... index='+index+', id='+id);
+
 			paramsPOST = {};
 			http.get('private/dashboard/references/remove/' + id, paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					console.log(res);
+					vm.references.splice(index, 1);
 				});
 		};
 
@@ -51,13 +52,14 @@ angular.module('modules.dash')
 		};
 
 		//update or insert item
-		vm.update_or_insert = function (id, obj) {
+		vm.update_or_insert = function (obj, id) {
 			console.log('update_or_insert..'+id);
+
 			paramsPOST = {}
 			if (id && id !== '' && id !== null) {
 				paramsPOST.id = id;
 			}
-			paramsPOST.data = obj;
+			paramsPOST = obj;
 			http.post('private/dashboard/references/edit', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
@@ -65,6 +67,53 @@ angular.module('modules.dash')
 				});
 		};
 
+////////////////
+////
+//		vm.model = {};
+//		vm.option = {};
+//		vm.fields = [
+//			{
+//				key: 'number',
+//				type: 'input',
+//				templateOptions: {
+//					type: 'text',
+//					label: 'Number',
+//					placeholder: '№'
+//				}
+//			},
+//			{
+//				key: 'name',
+//				type: 'input',
+//				templateOptions: {
+//					type: 'text',
+//					label: 'Name',
+//					placeholder: 'Enter name'
+//				}
+//			},
+//			{
+//				key: 'second_name',
+//				type: 'input',
+//				templateOptions: {
+//					type: 'text',
+//					label: 'Second name',
+//					placeholder: 'Enter second name'
+//				}
+//			},
+//			{
+//				key: 'allergies',
+//				type: 'textarea',
+//				templateOptions: {
+//					label: 'Allergies to medicines',
+//					placeholder: 'Allergies to medicines',
+//					description: ''
+//				}
+//			},
+//			{
+//				key: 'hiv_positive',
+//				type: 'checkbox',
+//				templateOptions: { label: 'HIV positive' }
+//			}
+//		];
 
 	}
 );
