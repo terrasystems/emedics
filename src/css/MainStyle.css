@@ -176,8 +176,8 @@ div.ui-list-view-cell-content {
 }
 
 div.ui-list-view-cell-content:hover {
-	-webkit-transform: translateY(-3px);
-	transform: translateY(-3px);
+	-webkit-transform: translateY(-2px);
+	transform: translateY(-2px);
 	box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -280,17 +280,18 @@ label.checkbox-inline.ng-scope {
 	background: white;
 	min-height: 50px;
 	border-bottom:1px solid;
+	margin-top: 2px;
 	/*border-bottom: solid 1px !important;*/
 
 }
 div.ui-list-view-cell.ng-scope{
-	background: white;
+
 	/*border-bottom: solid 1px;*/
 	border-bottom:1px solid darkgray;
 
 }
-.ui-list-view-cell{
-	margin-top: 12px;
+.ui-list-view-cell {
+	margin-top: 20px;
 }
 .red{
 	margin: 0px;
@@ -298,3 +299,7 @@ div.ui-list-view-cell.ng-scope{
 .blue{
 	float: right;
 }
+.edit_btn{
+	float: right;
+}
+
