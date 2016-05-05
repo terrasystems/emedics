@@ -278,7 +278,7 @@ label.checkbox-inline.ng-scope {
 }
 .ui-list-view-cell-content{
 	background: white;
-	height: 50px;
+	min-height: 50px;
 	border-bottom:1px solid;
 	/*border-bottom: solid 1px !important;*/
 

@@ -8,7 +8,7 @@ angular.module('modules.dash')
 
 
 
-	.controller('patientReferencesCtrl', function ($state) {
+	.controller('patientReferencesCtrl', function ($state, $scope, $filter, $http) {
 		console.log('..patientReferencesCtrl');
 
 		var vm = this;
@@ -20,7 +20,18 @@ angular.module('modules.dash')
 			{name: 'Slay', type: 'Walkin3', phone: '8 544 896-45-51'},
 			{name: 'Koddy', type: 'Walkin4', phone: '8 566 896-45-50'}];
 
+		vm.addFormList = function() {
+			vm.inserted = {
+				name:'',
+				type: '',
+				phone: ''
+			};
+			vm.references.push(vm.inserted);
+		};
+
 
 	}
 
 );
+
+
