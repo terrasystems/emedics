@@ -6,6 +6,7 @@ angular.module('modules.dash')
 	.controller('patientTasksEditCtrl', function ($rootScope, http, constants, $stateParams, $state, localStorageService, blockUI) {
 		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go('main.private.dashboard.tasks');
+			return;
 		}
 
 		var vm = this;
