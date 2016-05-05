@@ -276,3 +276,19 @@ label.checkbox-inline.ng-scope {
 .black-clr {
 	color: black;
 }
+.ui-list-view-cell-content{
+	background: white;
+	height: 50px;
+	border-bottom:1px solid;
+	/*border-bottom: solid 1px !important;*/
+
+}
+div.ui-list-view-cell.ng-scope{
+	background: white;
+	/*border-bottom: solid 1px;*/
+	border-bottom:1px solid darkgray;
+
+}
+.ui-list-view-cell{
+	margin-top: 12px;
+}

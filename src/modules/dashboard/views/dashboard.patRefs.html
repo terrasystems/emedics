@@ -1,7 +1,19 @@
 <div class="container">
-	<div class="form-list" ui-list-view="ref in vm.references" options="listOptions">
-		<span>Name:<h4>{{ref.name }}</h4></span>
-		<span>Type:<h4>{{ref.type}}</h4></span>
-		<span><p id="msg">Phone: <strong>{{ref.phone}}</strong></p></span>
+	<div class="row form-list"  ui-list-view="ref in vm.references" options="listOptions">
+
+
+		<span e-form="textBtnForm" editable-text='ref.name'  class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name }}</h4></span>
+		<span e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4></span>
+		<span e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>{{ref.phone}}</h5></span>
+
+		<button ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="glyphicon glyphicon-pencil"></i></button>
+		<button ><i class="glyphicon glyphicon-trash"></i></button>
+
+
 	</div>
 </div>
+
+
+
+
+

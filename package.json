@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "build": "./node_modules/.bin/bower install --allow-root --force-latest && grunt build",
-	"buildA":"./node_modules/.bin/bower install --allow-root --force-latest && grunt buildA"
+    "buildA": "./node_modules/.bin/bower install --allow-root --force-latest && grunt buildA"
   },
   "keywords": [],
   "author": "* LTD, EU",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "angular-ui-bootstrap": "^1.3.2",
+    "angular-xeditable": "^0.1.12",
     "bower": "^1.5.2",
     "connect-livereload": "^0.5.3",
     "grunt": "^0.4.5",
