@@ -292,3 +292,9 @@ div.ui-list-view-cell.ng-scope{
 .ui-list-view-cell{
 	margin-top: 12px;
 }
+.red{
+	margin: 0px;
+}
+.blue{
+	float: right;
+}

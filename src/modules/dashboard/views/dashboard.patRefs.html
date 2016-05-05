@@ -1,21 +1,25 @@
 <div class="container">
 
 
-	<div class="row form-list"  ui-list-view="ref in vm.references" options="listOptions">
+	<div class="row form-list" ui-list-view="ref in vm.references" options="listOptions">
 
 
-		<span e-form="textBtnForm" editable-text='ref.name'  class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name }}</h4></span>
-		<span e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4></span>
-		<span e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>{{ref.phone}}</h5></span>
+		<span e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name
+			}}</h4></span>
+		<span e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>
+			{{ref.type}}</h4></span>
+		<span e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>
+			{{ref.phone}}</h5></span>
 
-		<button ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="glyphicon glyphicon-pencil"></i></button>
-		<button ><i class="glyphicon glyphicon-trash"></i></button>
+		<button class="btn btn-danger red" ng-click="vm.removeUser($index)"><i class="glyphicon glyphicon-trash"></i>
+		</button>
+		<button class="btn btn-primary blue" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i
+				class="glyphicon glyphicon-pencil"></i></button>
 
 
 	</div>
 	<button class="btn btn-primary" ng-click="vm.addFormList()">Add</button>
 </div>
-
 
 
 

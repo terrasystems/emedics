@@ -20,6 +20,10 @@ angular.module('modules.dash')
 			{name: 'Slay', type: 'Walkin3', phone: '8 544 896-45-51'},
 			{name: 'Koddy', type: 'Walkin4', phone: '8 566 896-45-50'}];
 
+		vm.removeUser = function(index) {
+			vm.references.splice(index, 1);
+		};
+
 		vm.addFormList = function() {
 			vm.inserted = {
 				name:'',
@@ -28,6 +32,7 @@ angular.module('modules.dash')
 			};
 			vm.references.push(vm.inserted);
 		};
+
 
 
 	}
