@@ -48,7 +48,7 @@ angular.module('modules.dash')
 				type: '',
 				phone: ''
 			};
-			vm.references.push(vm.inserted);
+			vm.references.unshift(vm.inserted);
 		};
 
 		//update or insert item
