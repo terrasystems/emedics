@@ -67,7 +67,7 @@ angular.module('modules.dash')
 				if (res.result && res.result.blank && res.result.id && res.result.data) {
 					vm.fields = res.result.blank.body;
 					vm.model = res.result.data ? res.result.data : {};
-					//vm.model.date_birth = new Date(vm.model.date_birth);
+
 					var mkey = Object.keys(vm.model);
 					if  (mkey.length>0) {
 						for (var i = 0; i < mkey.length; i++) {
@@ -82,7 +82,7 @@ angular.module('modules.dash')
 
 		function onSubmit() {
 			vm.options.updateInitialValue();
-			alert(JSON.stringify(vm.model), null, 2);
+			//alert(JSON.stringify(vm.model), null, 2);
 			paramsPOST = {};
 			paramsPOST.id = vm.id;
 			paramsPOST.data = vm.model;

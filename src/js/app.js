@@ -46,7 +46,6 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		if  ( (toState.name).indexOf('private')>-1 ) {
 			checkUserAuth();
 		}
-		//console.log('## change state to : '+toState.name);
 	});
 }
 

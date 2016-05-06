@@ -115,6 +115,7 @@ angular.module('modules.public', [])
 
 		function selTab(index) {
 			vm.active = index;
+			//console.log(index);
 			vm.tabs.forEach(function(tab, idt) {
 				tab.form.fields.forEach(function(field, idf) {
 						if  (idt===index) {
@@ -124,7 +125,10 @@ angular.module('modules.public', [])
 						}
 					}
 				);
+				//tab.form.fields.resetModel();
+				//tab.form.options.updateInitialValue();
 			});
+			//vm.options.updateInitialValue();
 		}
 
 		vm.selTab = selTab;
