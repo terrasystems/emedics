@@ -60,10 +60,10 @@ angular.module('modules.core')
 			name: 'main.public.activation',
 			url: 'activation/:code',
 			onEnter: function($stateParams, http, $state, auth) {
-				http.get('activation/' + $stateParams.code).then(function(response) {
-					console.log(response.data);
-					auth.saveUserData(response.data);
-					$state.go('main.private.dashboard');
+				http.get('public/activate/' + $stateParams.code).then(function(response) {
+					console.log(response);
+					auth.saveUserData(response);
+					$state.go('main.private.dashboard', {reload: true});
 				});
 				console.log($stateParams.code);
 			}
