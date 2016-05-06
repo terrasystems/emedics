@@ -1,17 +1,21 @@
 <div id="header">
-	<div class="pad"><span>Hello, {{vm.user.username}} !</span> <a class="black-clr pull-rigth" ng-click="vm.logout()">Logout</a></div>
+	<div class="pad"><span>Hello, {{vm.user.username}} !</span> <a class="black-clr pull-rigth" ng-click="vm.logout()">Logout</a>
+	</div>
 </div>
 <div class="container">
-	<div>
-		<!-- Nav tabs -->
-		<ul  class="nav nav-tabs tabs_control" role="tablist">
-			<li role="presentation" ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel">
-				<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
-			</li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="home" ui-view="forms"></div>
+	<div class="row">
+		<div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs tabs_control" role="tablist">
+				<li class="" role="presentation" ui-sref="main.private.dashboard.{{tab.state}}"
+					ng-repeat="tab in vm.tabsLabel">
+					<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
+				</li>
+			</ul>
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="home" ui-view="forms"></div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -25,9 +25,8 @@ body > #wrap {
 	clear: both;
 	height: 50px;
 	background: cadetblue;
-	margin-top: 40px ;
+	margin-top: 40px;
 }
-
 
 .clearfix:after {
 	content: ".";
@@ -144,7 +143,7 @@ ul.nav.nav-tabs {
 .tabs_control {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	width: 90%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -253,16 +252,22 @@ label.checkbox-inline.ng-scope {
 	float: right;
 	margin-top: 20px;
 }
+
 .datepicke md-content {
-	padding-bottom: 200px; }
+	padding-bottom: 200px;
+}
+
 .datepicker .validation-messages {
 	font-size: 12px;
 	color: #dd2c00;
-	margin: 10px 0 0 25px; }
-#select_2{
+	margin: 10px 0 0 25px;
+}
+
+#select_2 {
 	width: 30%;
 }
-.edit_form{
+
+.edit_form {
 	background: white;
 }
 
@@ -273,33 +278,58 @@ label.checkbox-inline.ng-scope {
 .pull-rigth {
 	float: right !important;
 }
+
 .black-clr {
 	color: black;
 }
-.ui-list-view-cell-content{
+
+.ui-list-view-cell-content {
 	background: white;
 	min-height: 50px;
-	border-bottom:1px solid;
+	border-bottom: 1px solid;
 	margin-top: 2px;
+	border-radius: 10px;
 	/*border-bottom: solid 1px !important;*/
 
 }
-div.ui-list-view-cell.ng-scope{
+.form-list li{
+	list-style: none;
+}
+div.ui-list-view-cell.ng-scope {
 
 	/*border-bottom: solid 1px;*/
-	border-bottom:1px solid darkgray;
+	border-bottom: 1px solid darkgray;
 
 }
+
 .ui-list-view-cell {
 	margin-top: 20px;
 }
-.red{
-	margin: 0px;
-}
-.blue{
-	float: right;
-}
-.edit_btn{
-	float: right;
+
+.red {
+	margin: 5px;
+	margin-top: 7px;
 }
 
+.blue {
+	float: right;
+	margin: 5px;
+	margin-top: 7px;
+}
+
+.edit_btn {
+	float: right;
+}
+.editable-wrap{
+	margin-top: 8px;
+}
+.lists{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.green{
+	float: right;
+}
+#check{
+	margin-top: -2px;
+}

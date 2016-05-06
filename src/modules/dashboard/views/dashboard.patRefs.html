@@ -3,43 +3,52 @@
 
 	<ul class="row form-list" ui-list-view="ref in vm.references" options="listOptions">
 
-		<li e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name}}</h4></li>
-		<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4></li>
-		<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>{{ref.phone}}</h5></li>
+		<li e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name}}</h4>
+		</li>
+		<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4>
+		</li>
+		<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>
+			{{ref.phone}}</h5></li>
 
 		<!-- form -->
-		<form editable-form name="textBtnForm" onaftersave="vm.update_or_insert(ref, ref.id)" ng-show="textBtnForm.$visible" class="form-buttons form-inline edit_btn" shown="inserted == ref">
-			<button type="submit" ng-disabled="textBtnForm.$waiting" class="btn btn-primary">Save</button>
-			<button type="button" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()" class="btn btn-default">Cancel</button>
+		<form editable-form name="textBtnForm" onaftersave="vm.update_or_insert(ref, ref.id)"
+			  ng-show="textBtnForm.$visible" class="form-buttons form-inline edit_btn" shown="inserted == ref">
+			<button type="button" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()"
+					class="btn btn-danger red"><i class="glyphicon glyphicon-remove"></i>
+			</button>
+			<button type="submit" ng-disabled="textBtnForm.$waiting" class="btn btn-primary blue"><i class="glyphicon glyphicon-ok"></i></button>
+
 		</form>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
-			<button class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i class="glyphicon glyphicon-trash"></i></button>
-			<button class="btn btn-primary blue" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="glyphicon glyphicon-pencil"></i></button>
+			<button class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
+					class="glyphicon glyphicon-trash"></i></button>
+			<button class="btn btn-primary blue" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i
+					class="glyphicon glyphicon-pencil"></i></button>
 		</div>
 
 
 	</ul>
-	<button class="btn btn-primary" ng-click="vm.addFormList()">Add</button>
+	<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>
 </div>
 
 
 <!--<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>-->
-	<!--&lt;!&ndash;<div kcd-recompile="vm.fields">&ndash;&gt;-->
-	<!--<formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form" track-by="$index">-->
-		<!--<button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>-->
-		<!--<button type="button" class="btn btn-default" ng-click="vm.options.resetModel()">Reset</button>-->
-	<!--</formly-form>-->
-	<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;<div kcd-recompile="vm.fields">&ndash;&gt;-->
+<!--<formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form" track-by="$index">-->
+<!--<button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>-->
+<!--<button type="button" class="btn btn-default" ng-click="vm.options.resetModel()">Reset</button>-->
+<!--</formly-form>-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 <!--</form>-->
 
 <!--<script type="text/ng-template" id="error-messages.html">-->
-	<!--<formly-transclude></formly-transclude>-->
-	<!--<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">-->
-		<!--<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages"-->
-			 <!--class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}-->
-		<!--</div>-->
-	<!--</div>-->
+<!--<formly-transclude></formly-transclude>-->
+<!--<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">-->
+<!--<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages"-->
+<!--class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}-->
+<!--</div>-->
+<!--</div>-->
 <!--</script>-->
 
 
