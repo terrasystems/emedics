@@ -108,6 +108,16 @@ angular.module('modules.core')
 			}
 		},
 		{
+			name:'main.private.dashboard.ref2',
+			url:'/references2',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patRefs2.html',
+					controller:'patientReferences2Ctrl as vm'
+				}
+			}
+		},
+		{
 			name:'main.private.dashboard.notifications',
 			url:'/notifications',
 			views:{

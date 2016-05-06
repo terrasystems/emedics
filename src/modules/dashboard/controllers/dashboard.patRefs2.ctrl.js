@@ -6,8 +6,8 @@ angular.module('modules.dash')
 		editableOptions.theme = 'bs3';
 	})
 
-	.controller('patientReferencesCtrl', function ($state, http, blockUI) {
-		console.log('..patientReferencesCtrl');
+	.controller('patientReferences2Ctrl', function ($state, http, blockUI) {
+		console.log('..patientReferences2Ctrl');
 
 		var vm = this;
 
