@@ -68,7 +68,7 @@ angular.module('modules.core')
 		}
 
 		function post (url, params) {
-			console.log('post: '+ url);
+			//console.log('post: '+ url);
 			var deferred = $q.defer();
 			$http.post(constants.restUrl + url, params).then(function (resp) {
 				if  (resp.data && resp.data.state) {
