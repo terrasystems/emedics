@@ -103,11 +103,11 @@ angular.module('modules.core')
 	.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI) {
 		return {
 			'response': function (response) {
-				console.log('int.responce: '+response);
+				//console.log('int.responce: '+response);
 				return response;
 			},
 			'responseError': function (rejection) {
-				console.log('int.rejection: ' + rejection);
+				//console.log('int.rejection: ' + rejection);
 
 				blockUI.reset();
 
@@ -120,7 +120,7 @@ angular.module('modules.core')
 					}
 					default:
 					{
-						console.log(rejection);
+						//console.log(rejection);
 						break;
 					}
 				}
