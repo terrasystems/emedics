@@ -15,11 +15,15 @@ angular.module('modules.dash')
 		var paramsPOST = {"page": {"start": 0,"count": 20},"criteria": {}};
 
 		vm.references = [
-			//{id: '10', name: 'Klod', type: 'Walkin0', phone: '8 555 896-45-55'},
-			//{id: '12', name: 'Klod', type: 'Walkin1', phone: '8 500 596-45-56'},
-			//{id: '13', name: 'Dod', type: 'Walkin2', phone: '8 545 896-45-53'},
-			//{id: '14', name: 'Slay', type: 'Walkin3', phone: '8 544 896-45-51'},
-			//{id: '15', name: 'Koddy', type: 'Walkin4', phone: '8 566 896-45-50'}
+			{id: '10', name: 'Klod', type: 'HOSPITAL', phone: '8 555 896-45-55', is_check: false},
+			{id: '12', name: 'Klod', type: 'PHARMACY', phone: '8 500 596-45-56', is_check: false},
+			{id: '13', name: 'Dod', type: 'HOMECARE', phone: '8 545 896-45-53', is_check: false},
+			{id: '14', name: 'Slay', type: 'MD', phone: '8 544 896-45-51', is_check: false},
+			{id: '15', name: 'Koddy', type: 'INSURANCE', phone: '8 566 896-45-50', is_check: false},
+			{id: '17', name: 'Don K.', type: 'Doctor', phone: '8 555 896-45-55', is_check: false},
+			{id: '18', name: 'Phil R.', type: 'Doctor', phone: '8 888 596-45-56', is_check: false},
+			{id: '19', name: 'Dimon G.', type: 'Organization', phone: '8 777 896-45-53', is_check: false},
+			{id: '20', name: 'Sool D.', type: 'Organization', phone: '8 111 896-45-51', is_check: false},
 		];
 
 		//get all items
@@ -46,12 +50,13 @@ angular.module('modules.dash')
 		};
 
 		vm.addFormList = function() {
-			vm.inserted = {
-				name:'',
-				type: '',
-				phone: ''
-			};
-			vm.references.unshift(vm.inserted);
+			//vm.inserted = {
+			//	name:'',
+			//	type: '',
+			//	phone: ''
+			//};
+			//vm.references.unshift(vm.inserted);
+			$state.go('main.private.dashboard.refadd');
 		};
 
 		//update or insert item

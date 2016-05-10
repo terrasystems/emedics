@@ -107,6 +107,18 @@ angular.module('modules.core')
 				}
 			}
 		},
+
+		{
+			name:'main.private.dashboard.refadd',
+			url:'/references/add',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patRefsAdd.html',
+					controller:'patientReferencesAddCtrl as vm'
+				}
+			}
+		},
+
 		{
 			name:'main.private.dashboard.ref2',
 			url:'/references2',
