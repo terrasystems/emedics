@@ -1,9 +1,18 @@
 <div class="container lists">
 
+	<form>
+		<div class="form-group">
+			<div class="input-group">
+				<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+				<input type="text" class="form-control" placeholder="" ng-model="vm.searchref">
+			</div>
+		</div>
+	</form>
 
-	<ul class="row form-list" ui-list-view="ref in vm.references" options="listOptions">
+	<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
-		<li e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name}}</h4>
+		<li placeholder="name" e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:
+			<h4>{{ref.name}}</h4>
 		</li>
 		<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4>
 		</li>
@@ -16,7 +25,8 @@
 			<button type="button" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()"
 					class="btn btn-danger red"><i class="glyphicon glyphicon-remove"></i>
 			</button>
-			<button type="submit" ng-disabled="textBtnForm.$waiting" class="btn btn-primary blue"><i class="glyphicon glyphicon-ok"></i></button>
+			<button type="submit" ng-disabled="textBtnForm.$waiting" class="btn btn-primary blue"><i
+					class="glyphicon glyphicon-ok"></i></button>
 
 		</form>
 

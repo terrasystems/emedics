@@ -11,7 +11,8 @@ angular.module('modules.dash')
 		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},
 			{label: 'References', state: 'ref'},
 			{label: 'Notifications', state: 'notifications'},
-			{label: 'Patient Forms', state: 'forms'}
+			{label: 'Patient Forms', state: 'forms'},
+			{label: 'Patients', state: 'forms'}
 		];
 
 		vm.logout = function () {

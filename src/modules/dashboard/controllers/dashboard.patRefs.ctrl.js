@@ -11,6 +11,7 @@ angular.module('modules.dash')
 
 		var vm = this;
 
+    vm.searchref='';
 		var paramsPOST = {"page": {"start": 0,"count": 20},"criteria": {}};
 
 		vm.references = [
