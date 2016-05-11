@@ -1,13 +1,16 @@
 <div class="container lists">
 
-	<form>
-		<div class="form-group">
-			<div class="input-group">
-				<div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-				<input type="text" class="form-control" placeholder="" ng-model="vm.searchref">
-			</div>
-		</div>
-	</form>
+	<ui-select ng-model="doctor.selected">
+		<ui-select-match placeholder="Select or search a doctors in the list...">{{$select.selected.name+' &nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel}}</ui-select-match>
+		<ui-select-choices repeat="doc in vm.getDoctors($select.search) | filter: $select.search">
+			<div ng-bind="doc.name"></div>
+			<div ng-bind="doc.city"></div>
+			<small ng-bind="doc.tel"></small>
+		</ui-select-choices>
+	</ui-select>
+</div>
+<label class="col-sm-3 control-label">{{ doctor.length}}</label>
+
 
 	<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
@@ -39,7 +42,9 @@
 
 
 	</ul>
-	<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>
+
+		<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>
+
 </div>
 
 

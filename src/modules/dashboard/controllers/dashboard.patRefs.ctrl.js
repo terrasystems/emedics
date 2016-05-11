@@ -6,7 +6,7 @@ angular.module('modules.dash')
 		editableOptions.theme = 'bs3';
 	})
 
-	.controller('patientReferencesCtrl', function ($state, http, blockUI) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI,$scope) {
 		console.log('..patientReferencesCtrl');
 
 		var vm = this;
@@ -75,6 +75,50 @@ angular.module('modules.dash')
 				});
 		};
 
+		//Search
+
+		$scope.$watch('doctor.selected', function(newVal, oldVal) {
+			if (newVal !== oldVal) {
+				if (vm.doctors.indexOf(newVal) === -1) {
+					vm.doctors.unshift(newVal);
+				}
+			}
+		});
+
+		vm.getDoctors = function(search) {
+			vm.newDocs = vm.doctors.slice();
+			if (search && vm.newDocs.indexOf(search) === -1) {
+				vm.newDocs.unshift(search);
+			}
+			return vm.newDocs;
+		};
+		vm.doctors = [
+			{
+				"name": "Petya",
+				'tel':89879879879,
+				"city": "Khmelnitsky"
+			},
+			{
+				"name": "Vitya",
+				"tel": 1456364,
+				"city": "Khmelnitsky"
+			},
+			{
+				"name": "Andrew",
+				"tel": 26576757,
+				"city": "Khmelnitsky"
+			},
+			{
+				"name": "Anton",
+				"tel": 233,
+				"city": "Khmelnitsky"
+			},
+			{
+				"name": "Misha",
+				"tel": 434435,
+				"city": "Khmelnitsky"
+			}
+		].sort();
 ////////////////
 ////
 //		vm.model = {};

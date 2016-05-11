@@ -23,7 +23,9 @@
     "angular-local-storage": "~0.2.7",
     "ui-listView": "^0.0.8",
     "angular-material": "^1.0.7",
-    "angular-xeditable": "0.1.8"
+    "angular-xeditable": "0.1.8",
+    "ui-select": "angular-ui-select#^0.16.1",
+    "angular-sanitize": "^1.5.5"
   },
   "appPath": "src/",
   "resolutions": {
