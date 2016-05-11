@@ -34,6 +34,7 @@ angular.module('modules.dash')
 					];
 
 		vm.onSubmit = function () {
+			console.log(vm.model);
 			$state.go('main.private.dashboard.ref');
 		};
 

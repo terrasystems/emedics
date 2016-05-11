@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
-	'blockUI', 'toastr', 'LocalStorageModule','xeditable',
+	'blockUI', 'toastr', 'LocalStorageModule','xeditable',// 'ngMockE2E',
 	//--
 	'modules.core', 'modules.public', 'modules.dash','ui.select','ngSanitize']);
 
@@ -44,7 +44,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, fromState) { //toParams, fromParams
 		if  ( (toState.name).indexOf('private')>-1 ) {
-				//checkUserAuth();
+				checkUserAuth();
 		}
 	});
 }

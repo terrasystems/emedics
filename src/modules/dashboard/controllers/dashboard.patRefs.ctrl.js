@@ -6,12 +6,26 @@ angular.module('modules.dash')
 		editableOptions.theme = 'bs3';
 	})
 
-	.controller('patientReferencesCtrl', function ($state, http, blockUI,$scope) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope) {
 		console.log('..patientReferencesCtrl');
 
 		var vm = this;
 
-    vm.searchref='';
+   		vm.searchref = '';
+
+
+		vm.onApply = function(obj) {
+			if  (vm.selectID && vm.selectID!==null){
+				console.log('!! '+vm.selectID);
+			}
+		};
+
+		vm.onSetSelect = function(obj) {
+			console.log('%% '+obj);
+			vm.selectID = obj.id;
+		};
+
+
 		var paramsPOST = {"page": {"start": 0,"count": 20},"criteria": {}};
 
 		vm.references = [
@@ -94,26 +108,27 @@ angular.module('modules.dash')
 		};
 		vm.doctors = [
 			{
+				'id': 12,
 				"name": "Petya",
 				'tel':89879879879,
 				"city": "Khmelnitsky"
 			},
-			{
+			{	'id': 130,
 				"name": "Vitya",
 				"tel": 1456364,
 				"city": "Khmelnitsky"
 			},
-			{
+			{	'id': 222,
 				"name": "Andrew",
 				"tel": 26576757,
 				"city": "Khmelnitsky"
 			},
-			{
+			{	'id': 602,
 				"name": "Anton",
 				"tel": 233,
 				"city": "Khmelnitsky"
 			},
-			{
+			{	'id': 1,
 				"name": "Misha",
 				"tel": 434435,
 				"city": "Khmelnitsky"
@@ -166,6 +181,30 @@ angular.module('modules.dash')
 //				templateOptions: { label: 'HIV positive' }
 //			}
 //		];
+
+		//// mock http
+
+		//$httpBackend.whenPOST('/dashboard/' + vm.user.type + '/references').respond(function(method, url, data, headers){
+		//	console.log('Received these data:', method, url, data, headers);
+		//	return [200, {}, {}];
+		//});
+
+		//$httpBackend.whenGET('/dashboard/' + vm.user.type + '/references').respond(function(method,url,data) {
+		//	console.log('Getting:', method, url, data);
+		//	return [200, vm.references, {}];
+		//});
+        //
+		//$http.get('/dashboard/' + vm.user.type + '/references', {}).then(function() {});
+
+
+		//http.post('/dashboard/' + vm.user.type + '/references', paramsPOST)
+		//	.then(function (res) {
+		//		console.log('get all..');
+		//		blockUI.stop();
+		//		if  (res.result) {
+		//			vm.references = res.result;
+		//		}
+		//	});
 
 	}
 );
