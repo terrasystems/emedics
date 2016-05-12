@@ -12,18 +12,18 @@ angular.module('modules.dash')
 		var vm = this;
 
    		vm.searchref = '';
+ vm.notification={};
 
-
-		vm.onApply = function(obj) {
-			if  (vm.selectID && vm.selectID!==null){
-				console.log('!! '+vm.selectID);
-			}
-		};
-
-		vm.onSetSelect = function(obj) {
-			console.log('%% '+obj);
-			vm.selectID = obj.id;
-		};
+		//vm.onApply = function(obj) {
+		//	if  (vm.selectID && vm.selectID!==null){
+		//		console.log('!! '+vm.selectID);
+		//	}
+		//};
+		//
+		//vm.onSetSelect = function(obj) {
+		//	console.log('%% '+obj);
+		//	vm.selectID = obj.id;
+		//};
 
 
 		var paramsPOST = {"page": {"start": 0,"count": 20},"criteria": {}};

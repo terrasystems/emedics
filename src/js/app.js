@@ -44,7 +44,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, fromState) { //toParams, fromParams
 		if  ( (toState.name).indexOf('private')>-1 ) {
-				checkUserAuth();
+				//checkUserAuth();
 		}
 	});
 }

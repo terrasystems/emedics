@@ -1,23 +1,22 @@
 <div class="container lists">
 
-	<ui-select ng-model="doctor.selected" ng-change="vm.onSetSelect(doctor.selected)">
+
+	<ui-select class="col-md-11" ng-model="doctor.selected" ng-change="vm.onSetSelect(doctor.selected)">
 		<ui-select-match placeholder="Select or search a doctors in the list...">{{$select.selected.name+' &nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel}}</ui-select-match>
-		<ui-select-choices repeat="doc in vm.getDoctors($select.search) | filter: $select.search">
+		<ui-select-choices class="col-md-11" repeat="doc in vm.getDoctors($select.search) | filter: $select.search">
 			<div ng-bind="doc.name"></div>
 			<div ng-bind="doc.city"></div>
 			<small ng-bind="doc.tel"></small>
 		</ui-select-choices>
-	</ui-select>
 
-	<button type="submit" class="btn btn-default" ng-click="vm.onApply()">Apply</button>
+	</ui-select>
+		<button type="submit" class="btn btn-success  col-sm-1 col-md-1" ng-click="vm.onApply()">Apply</button>
+
+
 
 </div>
 
-
-<label class="col-sm-3 control-label">{{ doctor.length}}</label>
-
-
-	<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
+<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
 		<li placeholder="name" e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:
 			<h4>{{ref.name}}</h4>

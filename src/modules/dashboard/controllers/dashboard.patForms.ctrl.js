@@ -27,7 +27,7 @@ angular.module('modules.dash')
 				if (item.active && item.active===true && item.id)	{
 					paramsPOST.criteria.list.push(item.id);
 				}
-			})
+			});
 
 			http.post('private/dashboard/'+vm.user.type+'/forms/active/modify', paramsPOST)
 				.then(function (res) {

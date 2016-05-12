@@ -153,7 +153,7 @@ angular.module('modules.core')
 
 		{
 			name:'main.private.dashboard.tasks.edit',
-			url:'/edit',
+		url:'/edit',
 			views:{
 				'forms@main.private.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',
@@ -162,6 +162,16 @@ angular.module('modules.core')
 			},
 			params:{
 				id: ''
+			}
+		},
+		{
+			name:'main.private.dashboard.notifications.addnotification',
+			url:'/add',
+			views:{
+				'forms@main.private.dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.NotifAdd.html',
+					controller:'addNotificationCtrl as vm'
+				}
 			}
 		}
 

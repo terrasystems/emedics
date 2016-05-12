@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+textarea {
+	resize: none;
+}
+
 html, body, #wrap {
 	height: 100%;
 	background: none;
@@ -18,7 +22,7 @@ body > #wrap {
 }
 
 #footer {
-	position: absolute;
+	/*position: absolute;*/
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -198,6 +202,8 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	margin-right: auto;
 	min-height: 500px;
 	margin-top: 10px;
+	background: #d6d6d6;
+	border-radius: 10px;
 }
 
 .form-list h3 {
@@ -292,9 +298,11 @@ label.checkbox-inline.ng-scope {
 	/*border-bottom: solid 1px !important;*/
 
 }
-.form-list li{
+
+.form-list li {
 	list-style: none;
 }
+
 div.ui-list-view-cell.ng-scope {
 
 	/*border-bottom: solid 1px;*/
@@ -320,16 +328,42 @@ div.ui-list-view-cell.ng-scope {
 .edit_btn {
 	float: right;
 }
-.editable-wrap{
+
+.editable-wrap {
 	margin-top: 8px;
 }
-.lists{
+
+.lists {
 	padding-left: 0px;
 	padding-right: 0px;
 }
-.green{
+
+.green {
 	float: right;
 }
-#check{
+
+#check {
 	margin-top: -2px;
+}
+
+.notif {
+
+	margin-top: 10px;
+}
+.notif>textarea{
+	margin-top: 10px;
+	width: 100%;
+}
+.msg_container{
+	background: #109AC8;
+	height: 200px;
+	border-radius: 10px;
+}
+.msg_form{
+	margin-top: 100px;
+	background: rgba(247, 84, 104, 0.87);
+	border-radius: 10px;
+}
+.form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched{
+	max-width: 275px;
 }
