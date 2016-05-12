@@ -130,7 +130,7 @@ angular.module('modules.core')
 	})
 
 
-	.service('checkUserAuth', function ($location, localStorageService, $rootScope, alertService) {
+	.service('checkUserAuth', function ($location, localStorageService, $rootScope) {
 		var checkUserAuth = function () {
 			var originalPath = $location.path();
 			$location.path('/login');
@@ -156,5 +156,23 @@ angular.module('modules.core')
 				}
 				return config || $q.when(config);
 			}
+		};
+	})
+
+//инициализация параметров для $http запроса
+	.service('initParamsPOST', function () {
+		var paramsPOST = {
+			"page": {
+				"start": 0,
+				"count": 20,
+				"size": 0
+			},
+			"criteria": {
+				"search": '',
+				"list": []
+			}
+		};
+		return {
+			'params' :  paramsPOST
 		};
 	});

@@ -3,16 +3,16 @@
 
 angular.module('modules.dash')
 
-	.controller('patientReferencesAddCtrl', function ($state) {
-		console.log('..patientReferencesAddCtrl');
+	.controller('patientReferencesAddCtrl', function ($state, localStorageService, initParamsPOST, http) {
+		//console.log('..patientReferencesAddCtrl');
 		var vm = this;
-
+		vm.user = localStorageService.get('userData');
+		vm.paramsPOST = initParamsPOST.params;
 		vm.model = {};
-
 		vm.fields = [
 					{
 						className: 'col-md-12',
-						key: 'username',
+						key: 'name',
 						type: 'input',
 						templateOptions: {
 							label: 'Name',
@@ -34,9 +34,19 @@ angular.module('modules.dash')
 					];
 
 		vm.onSubmit = function () {
+			vm.model.id = null;
+			vm.model.type = 'doc';
+
 			console.log(vm.model);
-			$state.go('main.private.dashboard.ref');
+
+			http.post('private/dashboard/'+vm.user.type+'/references/create', vm.model)
+					.then(function (res) {
+						blockUI.stop();
+						console.log(res);
+						$timeout(function () {
+							$state.go('main.private.dashboard.ref');
+						}, 500);
+					});
 		};
 
-	}
-);
+	});

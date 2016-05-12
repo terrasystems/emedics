@@ -6,28 +6,12 @@ angular.module('modules.dash')
 		editableOptions.theme = 'bs3';
 	})
 
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope) {
-		console.log('..patientReferencesCtrl');
-
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService) {
+		//console.log('..patientReferencesCtrl');
 		var vm = this;
-
+		vm.user = localStorageService.get('userData');
+		vm.paramsPOST = initParamsPOST.params;
    		vm.searchref = '';
- vm.notification={};
-
-		//vm.onApply = function(obj) {
-		//	if  (vm.selectID && vm.selectID!==null){
-		//		console.log('!! '+vm.selectID);
-		//	}
-		//};
-		//
-		//vm.onSetSelect = function(obj) {
-		//	console.log('%% '+obj);
-		//	vm.selectID = obj.id;
-		//};
-
-
-		var paramsPOST = {"page": {"start": 0,"count": 20},"criteria": {}};
-
 		vm.references = [
 			{id: '10', name: 'Klod', type: 'HOSPITAL', phone: '8 555 896-45-55', is_check: false},
 			{id: '12', name: 'Klod', type: 'PHARMACY', phone: '8 500 596-45-56', is_check: false},
@@ -40,22 +24,45 @@ angular.module('modules.dash')
 			{id: '20', name: 'Sool D.', type: 'Organization', phone: '8 111 896-45-51', is_check: false},
 		];
 
-		//get all items
-		http.post('private/dashboard/references', paramsPOST)
-			.then(function (res) {
-				//console.log('get all..');
-				blockUI.stop();
-				if  (res.result) {
-					vm.references = res.result;
-				}
-			});
+		vm.onSetSelect = function(obj) {
+			console.log('%% '+obj);
+			vm.selectID = obj.id;
+		};
 
-		//delete item
+		//*** add item in list
+		vm.onApply = function(obj) {
+			if  (vm.selectID && (vm.selectID !== null)){
+				console.log('!! '+vm.selectID);
+				vm.paramsPOST = initParamsPOST.params;
+				vm.paramsPOST.criteria.list.push({'id': vm.selectID});
+				http.post('private/dashboard/'+vm.user.type+'/references/add', vm.paramsPOST)
+					.then(function (res) {
+						blockUI.stop();
+						console.log(res);
+						alertService.add(0, res.state.message);
+					});
+			}
+		};
+
+		//*** get all items
+		vm.refresh = function() {
+			http.get('private/dashboard/' + vm.user.type + '/references', vm.paramsPOST)
+				.then(function (res) {
+					console.log('get all..');
+					blockUI.stop();
+					if (res.result) {
+						vm.references = res.result;
+					}
+				});
+		};
+		vm.refresh();
+
+		//*** delete item
 		vm.remove = function(index, id) {
-			//console.log('del ... index='+index+', id='+id);
-
-			paramsPOST = {};
-			http.get('private/dashboard/references/remove/' + id, paramsPOST)
+			console.log('del ... index='+index+', id='+id);
+			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST.criteria.list.push({'id': id});
+			http.post('private/dashboard/'+vm.user.type+'/references/remove', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					console.log(res);
@@ -63,30 +70,9 @@ angular.module('modules.dash')
 				});
 		};
 
+		//*** create item
 		vm.addFormList = function() {
-			//vm.inserted = {
-			//	name:'',
-			//	type: '',
-			//	phone: ''
-			//};
-			//vm.references.unshift(vm.inserted);
 			$state.go('main.private.dashboard.refadd');
-		};
-
-		//update or insert item
-		vm.update_or_insert = function (obj, id) {
-			//console.log('update_or_insert..'+id);
-
-			paramsPOST = {}
-			if (id && id !== '' && id !== null) {
-				paramsPOST.id = id;
-			}
-			paramsPOST = obj;
-			http.post('private/dashboard/references/edit', paramsPOST)
-				.then(function (res) {
-					blockUI.stop();
-					console.log(res);
-				});
 		};
 
 		//Search
@@ -100,6 +86,7 @@ angular.module('modules.dash')
 		});
 
 		vm.getDoctors = function(search) {
+			//console.log('$$ '+search);
 			vm.newDocs = vm.doctors.slice();
 			if (search && vm.newDocs.indexOf(search) === -1) {
 				vm.newDocs.unshift(search);
@@ -134,77 +121,6 @@ angular.module('modules.dash')
 				"city": "Khmelnitsky"
 			}
 		].sort();
-////////////////
-////
-//		vm.model = {};
-//		vm.option = {};
-//		vm.fields = [
-//			{
-//				key: 'number',
-//				type: 'input',
-//				templateOptions: {
-//					type: 'text',
-//					label: 'Number',
-//					placeholder: '№'
-//				}
-//			},
-//			{
-//				key: 'name',
-//				type: 'input',
-//				templateOptions: {
-//					type: 'text',
-//					label: 'Name',
-//					placeholder: 'Enter name'
-//				}
-//			},
-//			{
-//				key: 'second_name',
-//				type: 'input',
-//				templateOptions: {
-//					type: 'text',
-//					label: 'Second name',
-//					placeholder: 'Enter second name'
-//				}
-//			},
-//			{
-//				key: 'allergies',
-//				type: 'textarea',
-//				templateOptions: {
-//					label: 'Allergies to medicines',
-//					placeholder: 'Allergies to medicines',
-//					description: ''
-//				}
-//			},
-//			{
-//				key: 'hiv_positive',
-//				type: 'checkbox',
-//				templateOptions: { label: 'HIV positive' }
-//			}
-//		];
-
-		//// mock http
-
-		//$httpBackend.whenPOST('/dashboard/' + vm.user.type + '/references').respond(function(method, url, data, headers){
-		//	console.log('Received these data:', method, url, data, headers);
-		//	return [200, {}, {}];
-		//});
-
-		//$httpBackend.whenGET('/dashboard/' + vm.user.type + '/references').respond(function(method,url,data) {
-		//	console.log('Getting:', method, url, data);
-		//	return [200, vm.references, {}];
-		//});
-        //
-		//$http.get('/dashboard/' + vm.user.type + '/references', {}).then(function() {});
-
-
-		//http.post('/dashboard/' + vm.user.type + '/references', paramsPOST)
-		//	.then(function (res) {
-		//		console.log('get all..');
-		//		blockUI.stop();
-		//		if  (res.result) {
-		//			vm.references = res.result;
-		//		}
-		//	});
 
 	}
 );

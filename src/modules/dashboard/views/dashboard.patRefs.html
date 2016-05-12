@@ -1,85 +1,34 @@
 <div class="container lists">
 
-
-	<ui-select class="col-md-11" ng-model="doctor.selected" ng-change="vm.onSetSelect(doctor.selected)">
-		<ui-select-match placeholder="Select or search a doctors in the list...">{{$select.selected.name+' &nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel}}</ui-select-match>
-		<ui-select-choices class="col-md-11" repeat="doc in vm.getDoctors($select.search) | filter: $select.search">
+	<ui-select ng-model="doctor.selected" ng-change="vm.onSetSelect(doctor.selected)" search-enabled="true" reset-search-input="true" autofocus="true">
+		<ui-select-match placeholder="Select or search a doctors in the list..." >
+			<span ng-bind="$select.selected.name+' &nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel"></span>
+		</ui-select-match>
+		<ui-select-choices repeat="doc in vm.getDoctors($select.search)">
 			<div ng-bind="doc.name"></div>
 			<div ng-bind="doc.city"></div>
 			<small ng-bind="doc.tel"></small>
 		</ui-select-choices>
-
 	</ui-select>
-		<button type="submit" class="btn btn-success  col-sm-1 col-md-1" ng-click="vm.onApply()">Apply</button>
 
-
+	<button type="submit" class="btn btn-default" ng-click="vm.onApply()">Apply</button>
 
 </div>
 
-<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
-		<li placeholder="name" e-form="textBtnForm" editable-text='ref.name' class="col-md-3 col-sm-3 col-xs-3">Name:
-			<h4>{{ref.name}}</h4>
-		</li>
-		<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4>
-		</li>
-		<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>
-			{{ref.phone}}</h5></li>
+<label class="col-sm-3 control-label">{{ doctor.length}}</label>
 
-		<!-- form -->
-		<form editable-form name="textBtnForm" onaftersave="vm.update_or_insert(ref, ref.id)"
-			  ng-show="textBtnForm.$visible" class="form-buttons form-inline edit_btn" shown="inserted == ref">
-			<button type="button" ng-disabled="textBtnForm.$waiting" ng-click="textBtnForm.$cancel()"
-					class="btn btn-danger red"><i class="glyphicon glyphicon-remove"></i>
-			</button>
-			<button type="submit" ng-disabled="textBtnForm.$waiting" class="btn btn-primary blue"><i
-					class="glyphicon glyphicon-ok"></i></button>
+	<ul class="row form-list" ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
-		</form>
+		<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3">Name:<h4>{{ref.name}}</h4></li>
+		<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>{{ref.type}}</h4></li>
+		<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>{{ref.phone}}</h5></li>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
-			<button class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
-					class="glyphicon glyphicon-trash"></i></button>
-			<button class="btn btn-primary blue" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i
-					class="glyphicon glyphicon-pencil"></i></button>
+			<button class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i class="glyphicon glyphicon-trash"></i></button>
 		</div>
 
-
 	</ul>
-
-		<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>
+	<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>
 
 </div>
-
-
-<!--<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>-->
-<!--&lt;!&ndash;<div kcd-recompile="vm.fields">&ndash;&gt;-->
-<!--<formly-form model="vm.model" fields="vm.fields" options="vm.options" form="vm.form" track-by="$index">-->
-<!--<button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>-->
-<!--<button type="button" class="btn btn-default" ng-click="vm.options.resetModel()">Reset</button>-->
-<!--</formly-form>-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</form>-->
-
-<!--<script type="text/ng-template" id="error-messages.html">-->
-<!--<formly-transclude></formly-transclude>-->
-<!--<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">-->
-<!--<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages"-->
-<!--class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}-->
-<!--</div>-->
-<!--</div>-->
-<!--</script>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
