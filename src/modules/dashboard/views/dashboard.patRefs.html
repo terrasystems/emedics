@@ -1,18 +1,16 @@
 <div class="container lists">
 
-	<ui-select ng-model="doctor.selected" ng-change="vm.onSetSelect(doctor.selected)" search-enabled="true" reset-search-input="true" autofocus="true">
-		<ui-select-match placeholder="Select or search a doctors in the list..." >
-			<span ng-bind="$select.selected.name+' &nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel"></span>
-		</ui-select-match>
-		<ui-select-choices repeat="doc in vm.getDoctors($select.search)">
-			<div ng-bind="doc.name"></div>
-			<div ng-bind="doc.city"></div>
-			<small ng-bind="doc.tel"></small>
-		</ui-select-choices>
-	</ui-select>
+	<input type="text"
+		   ng-model="doctor"
+		   placeholder="Search a doctors in the database..."
+		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
+		   typeahead-loading="loadingLocations"
+		   typeahead-no-results="noResults"
+		   class="form-control">
+	<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+	<div ng-show="noResults"><i class="glyphicon glyphicon-remove"></i>No Results Found</div>
 
-	<button type="submit" class="btn btn-default" ng-click="vm.onApply()">Apply</button>
-
+	<button type="submit" class="btn btn-default" ng-click="onApply()">Apply</button>
 </div>
 
 
