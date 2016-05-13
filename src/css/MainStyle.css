@@ -358,12 +358,19 @@ div.ui-list-view-cell.ng-scope {
 	background: #109AC8;
 	height: 200px;
 	border-radius: 10px;
+	margin-top: 80px;
+}
+.msg_container h1{
+	text-align: center;
 }
 .msg_form{
-	margin-top: 100px;
-	/*background: rgba(247, 84, 104, 0.87);*/
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border-radius: 10px;
 }
 .form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched{
 	max-width: 275px;
+}
+.form_select{
+	margin-top: 5px;
 }

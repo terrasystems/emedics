@@ -1,9 +1,10 @@
 <div class="container">
 	<div class="row ui-list-view">
-
+		<div class="input-group msg_container col-md-6 col-md-offset-3">
+<h1>Massage</h1>
 		<div class="msg_form col-md-10 col-md-offset-1">
 
-		<ui-select class="col-md-4 col-md-offset-2"  ng-model="doctor.selected" ng-change="vm.doc=doctor.selected">
+		<ui-select class="col-md-10 col-md-offset-1"  ng-model="doctor.selected" ng-change="vm.doc=doctor.selected">
 			<ui-select-match placeholder="Select or search a doctors in the list...">{{$select.selected.name+'
 				&nbsp'+$select.selected.city+' &nbsp'+$select.selected.tel}}
 			</ui-select-match>
@@ -14,8 +15,8 @@
 			</ui-select-choices>
 		</ui-select>
 
-			<ui-select class= "col-md-4" ng-model="forms.selected" ng-change="vm.form = forms.selected">
-				<ui-select-match placeholder="Select or search a doctors in the list...">Number:{{$select.selected.id+ '&nbsp'}}
+			<ui-select class= "col-md-10 col-md-offset-1 form_select"  ng-model="forms.selected" ng-change="vm.form = forms.selected">
+				<ui-select-match placeholder="Select or search a form in the list...">Number:{{$select.selected.id+ '&nbsp'}}
 
 					 Name:{{$select.selected.name}}
 				</ui-select-match>
@@ -25,7 +26,7 @@
 				</ui-select-choices>
 			</ui-select>
 
-		<div class="input-group msg_container col-md-6 col-md-offset-3">
+
 
 			<form name="myform"  class="col-md-10 col-md-offset-1 notif" action="" >
 
