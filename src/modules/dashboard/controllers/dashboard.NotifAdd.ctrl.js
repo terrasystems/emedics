@@ -10,10 +10,11 @@ angular.module('modules.dash')
 
 		vm.send = function () {
 
-			vm.message.id = vm.title;
 			vm.message.form = vm.form;
-			vm.message.text = vm.text;
 			vm.message.doctor = vm.doc;
+			vm.message.title = vm.title;
+			vm.message.text = vm.text;
+
 
 
 			console.log('sent' + vm.message);
