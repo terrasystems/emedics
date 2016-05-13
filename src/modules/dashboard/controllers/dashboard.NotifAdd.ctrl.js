@@ -6,25 +6,22 @@ angular.module('modules.dash')
 		console.log('addNotificationCtrl is working');
 		var vm = this;
 
-		//vm.onApply = function(obj) {
-		//	if  (vm.selectID && vm.selectID!==null){
-		//		console.log('!! '+vm.selectID);
-		//	}
-		//};
-		//
-		//vm.onSetSelect = function(obj) {
-		//	console.log('%% '+obj);
-		//	vm.selectID = obj.id;
-		//};
-		vm.title='';
-		vm.send=function(){
-			vm.obj={'title':''};
-			vm.obj.push(vm.title);
-			console.log('sent' + vm.obj);
+		vm.message = {};
+
+		vm.send = function () {
+
+			vm.message.id = vm.title;
+			vm.message.form = vm.form;
+			vm.message.text = vm.text;
+			vm.message.doctor = vm.doc;
+
+
+			console.log('sent' + vm.message);
 		};
 
 
-		$scope.$watch('doctor.selected', function(newVal, oldVal) {
+		$scope.$watch('doctor.selected', function (newVal, oldVal) {
+			vm.doc = '';
 			if (newVal !== oldVal) {
 				if (vm.doctors.indexOf(newVal) === -1) {
 					vm.doctors.unshift(newVal);
@@ -32,7 +29,7 @@ angular.module('modules.dash')
 			}
 		});
 
-		vm.getDoctors = function(search) {
+		vm.getDoctors = function (search) {
 			vm.newDocs = vm.doctors.slice();
 			if (search && vm.newDocs.indexOf(search) === -1) {
 				vm.newDocs.unshift(search);
@@ -40,7 +37,8 @@ angular.module('modules.dash')
 			return vm.newDocs;
 		};
 
-		$scope.$watch('form.selected', function(newVal, oldVal) {
+		$scope.$watch('forms.selected', function (newVal, oldVal) {
+			vm.form = '';
 			if (newVal !== oldVal) {
 				if (vm.forms.indexOf(newVal) === -1) {
 					vm.forms.unshift(newVal);
@@ -48,7 +46,7 @@ angular.module('modules.dash')
 			}
 		});
 
-		vm.getForms = function(search) {
+		vm.getForms = function (search) {
 			vm.newForms = vm.forms.slice();
 			if (search && vm.newForms.indexOf(search) === -1) {
 				vm.newForms.unshift(search);
@@ -56,28 +54,34 @@ angular.module('modules.dash')
 			return vm.newForms;
 		};
 
+		vm.title = '';
+		vm.text = '';
 
 		vm.forms = [
 			{
-				'id':1,
-				'name':'Form First'
+				'id': 1,
+				'name': 'Form First'
 			},
-			{	'id': 2,
-				'name':'Form Second'
-
-
-			},
-			{	'id': 3,
-				'name':'Form Third'
-
-			},
-			{	'id': 4,
-				'name':'Form Fourth'
+			{
+				'id': 2,
+				'name': 'Form Second'
 
 
 			},
-			{	'id': 5,
-				'name':'Form Fifth'
+			{
+				'id': 3,
+				'name': 'Form Third'
+
+			},
+			{
+				'id': 4,
+				'name': 'Form Fourth'
+
+
+			},
+			{
+				'id': 5,
+				'name': 'Form Fifth'
 
 			}
 		].sort();
@@ -86,26 +90,30 @@ angular.module('modules.dash')
 			{
 				'id': 12,
 				"name": "Petya",
-				'tel':89879879879,
+				'tel': 89879879879,
 				"city": "Khmelnitsky"
 			},
-			{	'id': 130,
+			{
+				'id': 130,
 				"name": "Vitya",
 				"tel": 1456364,
 				"city": "Khmelnitsky"
 			},
-			{	'id': 222,
+			{
+				'id': 222,
 				"name": "Andrew",
 				"tel": 26576757,
 				"city": "Khmelnitsky"
 			},
-			{	'id': 602,
+			{
+				'id': 602,
 				"name": "Anton",
 				"tel": 233,
 				"city": "Khmelnitsky"
 
 			},
-			{	'id': 1,
+			{
+				'id': 1,
 				"name": "Misha",
 				"tel": 434435,
 				"city": "Khmelnitsky"
