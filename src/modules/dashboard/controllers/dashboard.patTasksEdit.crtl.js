@@ -12,11 +12,12 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.id = $stateParams.id;
 		vm.user = localStorageService.get('userData');
+		vm.sections = [];
+		vm.options = [];
+		vm.sectionsName = [];
 
 		vm.onSubmit = onSubmit;
 
-		//vm.model = {};
-		//vm.option = {};
 		//vm.fields = [
 		//	{
 		//		key: 'number',
@@ -64,20 +65,36 @@ angular.module('modules.dash')
 		http.get('private/dashboard/' + vm.user.type + '/forms/' + vm.id, paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if (res.result && res.result.blank && res.result.id && res.result.data) {
-					vm.fields = res.result.blank.body;
-					vm.model = res.result.data ? res.result.data : {};
+				if (res.result && res.result.blank && res.result.blank.body &&	res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id ) {
+					vm.model = (res.result.data && res.result.data.sections) ? res.result.data : {};
+					vm.sectionsName = [];
+					res.result.blank.body.sections.forEach(function(item){
 
-					var mkey = Object.keys(vm.model);
-					if  (mkey.length>0) {
-						for (var i = 0; i < mkey.length; i++) {
-							if (mkey[i].indexOf('date_') >= 0) {
-								var s = vm.model[mkey[i]];
-								vm.model[mkey[i]] = new Date(s);
-							}
-						}
+					});
+
+					vm.sectionsName = Object.keys(res.result.blank.body.sections);
+
+
+					if  (vm.sectionsName.length>0) {
+						vm.sections = res.result.blank.body.sections;
+
+						//if  (!angular.isArray(vm.fields)) { return; }
+						//vm.sectionsName = Object.keys(vm.fields);
+						//
+						//vm.model = (res.result.data && res.result.data.sections) ? res.result.data : {};
+						//
+						//var mkey = Object.keys(vm.model);
+						//if  (mkey.length>0) {
+						//	for (var i = 0; i < mkey.length; i++) {
+						//		if (mkey[i].indexOf('date_') >= 0) {
+						//			var s = vm.model[mkey[i]];
+						//			vm.model[mkey[i]] = new Date(s);
+						//		}
+						//	}
+						//}
+
 					}
-					}
+				}
 			});
 
 		function onSubmit() {

@@ -161,6 +161,21 @@ angular.module('modules.core')
 							required: false,
 							placeholder: 'Organization Address'
 						}
+					},
+					{
+						className: 'col-md-12',
+						key: 'org.org.type',
+						type: 'select',
+						templateOptions: {
+							label: 'Type organization',
+							required: false,
+							placeholder: 'Type organization',
+							options: [
+								{name: 'Type #1', value: 'Type #1'},
+								{name: 'Type #2', value: 'Type #2'},
+								{name: 'Type #3', value: 'Type #3'}
+								]
+						}
 					}
 				]
 			}
