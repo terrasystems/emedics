@@ -69,20 +69,12 @@ angular.module('modules.dash')
 					vm.model = (res.result.data && res.result.data.sections) ? res.result.data : {};
 					vm.sectionsName = [];
 					res.result.blank.body.sections.forEach(function(item){
-
+						vm.sectionsName.push(Object.keys(item)[0]);
 					});
-
-					vm.sectionsName = Object.keys(res.result.blank.body.sections);
-
-
+					//vm.sectionsName = Object.keys(res.result.blank.body.sections);
 					if  (vm.sectionsName.length>0) {
 						vm.sections = res.result.blank.body.sections;
 
-						//if  (!angular.isArray(vm.fields)) { return; }
-						//vm.sectionsName = Object.keys(vm.fields);
-						//
-						//vm.model = (res.result.data && res.result.data.sections) ? res.result.data : {};
-						//
 						//var mkey = Object.keys(vm.model);
 						//if  (mkey.length>0) {
 						//	for (var i = 0; i < mkey.length; i++) {
@@ -92,7 +84,6 @@ angular.module('modules.dash')
 						//		}
 						//	}
 						//}
-
 					}
 				}
 			});

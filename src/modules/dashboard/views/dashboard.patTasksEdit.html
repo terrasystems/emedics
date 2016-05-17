@@ -13,11 +13,11 @@
 	<form ng-submit="vm.onSubmit()" name="vm.form" novalidate >
 
 		<uib-tabset>
-			<uib-tab ng-repeat="(key, value) in vm.sectionsName track by $index" heading="{{key}}" active="tab.active" disable="tab.disabled">
+			<uib-tab ng-repeat="(key, value) in vm.sectionsName track by $index" heading="{{value}}" active="tab.active" disable="tab.disabled">
 				<div class="tab-content">
 					<div class="tab-pane active" id="#{{key}}">
 
-						<formly-form model="vm.model[key]" fields="vm.sections[key]" options=vm.options[key] form="vm.form" track-by="$index">
+						<formly-form model="vm.model[key][value]" fields="vm.sections[key][value]" options=vm.options[key][value] form="vm.form" track-by="$index">
 						</formly-form>
 
 					</div>
