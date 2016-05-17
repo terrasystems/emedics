@@ -66,34 +66,31 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				if (res.result && res.result.blank && res.result.blank.body &&	res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id ) {
-					vm.model = (res.result.data && res.result.data.sections) ? res.result.data : {};
+					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : {};
 					vm.sectionsName = [];
 					res.result.blank.body.sections.forEach(function(item){
 						vm.sectionsName.push(Object.keys(item)[0]);
 					});
-					//vm.sectionsName = Object.keys(res.result.blank.body.sections);
 					if  (vm.sectionsName.length>0) {
 						vm.sections = res.result.blank.body.sections;
 
-						//var mkey = Object.keys(vm.model);
-						//if  (mkey.length>0) {
-						//	for (var i = 0; i < mkey.length; i++) {
-						//		if (mkey[i].indexOf('date_') >= 0) {
-						//			var s = vm.model[mkey[i]];
-						//			vm.model[mkey[i]] = new Date(s);
-						//		}
-						//	}
-						//}
+						for (var key in  vm.model) {
+							var obj = vm.model[key][Object.keys(vm.model[key])[0]];
+							for (var prop in obj) {
+								if (obj.hasOwnProperty(prop) && prop.indexOf('date_')=== 0) { obj[prop] = new Date(obj[prop]); }
+							}
+						}
 					}
 				}
 			});
 
 		function onSubmit() {
-			vm.options.updateInitialValue();
+			//vm.options.updateInitialValue();
 			//alert(JSON.stringify(vm.model), null, 2);
 			paramsPOST = {};
 			paramsPOST.id = vm.id;
-			paramsPOST.data = vm.model;
+			paramsPOST.data = {};
+			paramsPOST.data.sections = vm.model;
 			paramsPOST.blank = null;
 
 			http.post('private/dashboard/'+vm.user.type+'/forms/edit', paramsPOST)
