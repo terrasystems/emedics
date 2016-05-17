@@ -153,7 +153,8 @@ ul.nav.nav-tabs {
 }
 
 .tabs_control li a {
-	color: rgba(255, 255, 255, 0.87);;
+	color: rgba(255, 255, 255, 0.87);
+	font-size: 25px;
 
 }
 
@@ -226,13 +227,14 @@ div.form-list.ui-list-view.ng-isolate-scope {
 }
 
 .nav-tabs > li > a:focus {
-	background-color: transparent;
+	background-color: gainsboro;
 	border-radius: 10px;
 	text-decoration: underline;
+
 }
 
 .nav-tabs > li > a:hover {
-	background-color: #267ED5;
+	background-color: gainsboro;
 	border-radius: 10px;
 }
 
@@ -374,3 +376,4 @@ div.ui-list-view-cell.ng-scope {
 .form_select{
 	margin-top: 5px;
 }
+

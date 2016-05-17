@@ -1,6 +1,6 @@
 <div class="container lists">
 
-	<input type="text"
+	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-11 col-xs-10" type="text"
 		   ng-model="doctor"
 		   placeholder="Search a doctors in the database..."
 		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
@@ -8,9 +8,11 @@
 		   typeahead-no-results="noResults"
 		   class="form-control">
 	<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-	<div ng-show="noResults"><i class="glyphicon glyphicon-remove"></i>No Results Found</div>
 
-	<button type="submit" class="btn btn-default" ng-click="onApply()">Apply</button>
+
+	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>
+
+	<div class="col-md-10" ng-show="noResults"><i class="glyphicon glyphicon-remove"></i>No Results Found</div>
 </div>
 
 

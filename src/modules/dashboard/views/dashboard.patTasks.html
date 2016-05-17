@@ -1,11 +1,40 @@
 <div class="container">
+	<v-accordion class="vAccordion--default" multiple>
+
+		<v-pane ng-repeat="form in vm.list track by $index">
+
+			<v-pane-header>
+				<p><label class="control-label">Number: </label>{{form.blank.number}}</p>
+
+				<p><label class="control-label">Name: </label>{{form.blank.name}}</p>
+
+				<p><label class="control-label">Descr: </label>{{form.blank.descr}}</p>
+			</v-pane-header>
+
+
+			<v-pane-content>
+				Pane content #1
+			</v-pane-content>
+
+		</v-pane>
+
+	</v-accordion>
+
+
+
+
 	<div class="form-list" ui-list-view="form in vm.list track by $index" options="listOptions">
 		<div ng-click="vm.onClick(form.id)">
 
 			<p><label class="control-label">Number: </label>{{form.blank.number}}</p>
+
 			<p><label class="control-label">Name: </label>{{form.blank.name}}</p>
+
 			<p><label class="control-label">Descr: </label>{{form.blank.descr}}</p>
 
 		</div>
 	</div>
+
+
+
 </div>

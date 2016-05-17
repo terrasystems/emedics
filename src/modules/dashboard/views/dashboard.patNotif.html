@@ -1,7 +1,8 @@
 <div class="container">
-	<div class="form-list" ui-list-view="notification in vm.notifications" options="listOptions">
-		<span>Name:<h4>{{ notification.name+' &nbsp'+notification.secondName}}</h4></span>
+	<div class="form-list"  ui-list-view="notification in vm.UnreadNotifications" options="listOptions">
+		<span>Name:<h4>{{ notification[0].name+' &nbsp'+notification[0].secondName}}</h4></span>
 		<span><p id="msg">Message: <strong>{{ notification.msg}}</strong></p></span>
 	</div>
+
 	<button class="btn btn-primary" ui-sref="main.private.dashboard.notifications.addnotification"> Add </button>
 </div>

@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 		proxy: {
 			context: '/rest',
 			//host: 'ec2-52-28-6-207.eu-central-1.compute.amazonaws.com',
-			host: '192.168.20.137',
+			host: 'testweb.ts-dns.eu',
 			port: '8080'
 		}
 	};

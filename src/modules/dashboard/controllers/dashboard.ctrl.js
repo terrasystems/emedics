@@ -6,6 +6,7 @@ angular.module('modules.dash')
 	.controller('DashCtrl', function ($rootScope, localStorageService, $state) {
 		var vm = this;
 
+
 		vm.user = localStorageService.get('userData');
 
 		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},
