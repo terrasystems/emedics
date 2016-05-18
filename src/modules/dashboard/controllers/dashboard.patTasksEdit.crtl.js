@@ -14,6 +14,7 @@ angular.module('modules.dash')
 		vm.user = localStorageService.get('userData');
 		vm.sections = [];
 		vm.options = [];
+		vm.model = [];
 		vm.sectionsName = [];
 		vm.selectedSection = '';
 		vm.selectedKey = '';
@@ -68,7 +69,8 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				if (res.result && res.result.blank && res.result.blank.body &&	res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id ) {
-					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : {};
+
+					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
 					vm.formInfo = {};
 					vm.formInfo.category = res.result.blank.category;
 					vm.formInfo.name = res.result.blank.name;
@@ -79,6 +81,14 @@ angular.module('modules.dash')
 					res.result.blank.body.sections.forEach(function(item){
 						vm.sectionsName.push(Object.keys(item)[0]);
 					});
+					if  (! vm.model) {
+						vm.model = [];
+						vm.sectionsName.forEach(function(item){
+							var it = {};
+							it[item] = {};
+							vm.model.push(it);
+						});
+					}
 					vm.selectedSection = vm.sectionsName[0];
 					if  (vm.sectionsName.length>0) {
 						vm.sections = res.result.blank.body.sections;
