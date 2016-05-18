@@ -3,20 +3,16 @@
 
 
 
-	<div class="form-list ui-list-view"  options="listOptions">
+	<div class="form-list" ui-list-view="form in vm.list track by $index" options="listOptions">
+		<div ng-click="vm.onClick(form.id)">
 
+			<p><label class="control-label">Number: </label>{{form.blank.number}}</p>
 
+			<p><label class="control-label">Name: </label>{{form.blank.name}}</p>
 
-		<uib-accordion close-others="oneAtATime" ng-repeat="form in vm.list track by $index">
-			<uib-accordion-group heading="Number:{{form.blank.number}} Name:{{form.blank.name}} Descr:{{form.blank.descr}} " is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-				<div ng-click="vm.onClick(form.id)">
-					This content is straight in the template.
-				</div>
-			</uib-accordion-group>
+			<p><label class="control-label">Descr: </label>{{form.blank.descr}}</p>
 
-		</uib-accordion>
-
-
+		</div>
 	</div>
 
 
