@@ -1,24 +1,15 @@
 <div class="container">
-
-
-
-
 	<div class="form-list ui-list-view"  options="listOptions">
 
-
-
-		<uib-accordion close-others="oneAtATime" ng-repeat="form in vm.list track by $index">
+		<uib-accordion close-others="oneAtATime" ng-repeat="form in vm.list track by $index" ng-click="vm.onClick(form.id)">
 			<uib-accordion-group heading="Number:{{form.blank.number}} Name:{{form.blank.name}} Descr:{{form.blank.descr}} " is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
-				<div ng-click="vm.onClick(form.id)">
-					This content is straight in the template.
-				</div>
-			</uib-accordion-group>
 
+				<div ng-repeat="tab in vm.sectionsName" ng-click="vm.onGo(form.id, tab)">
+					<p>{{tab}}</p>
+				</div>
+
+			</uib-accordion-group>
 		</uib-accordion>
 
-
 	</div>
-
-
-
 </div>
