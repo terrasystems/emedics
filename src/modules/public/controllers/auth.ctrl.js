@@ -69,31 +69,55 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('RegistrationCtrl', function ($rootScope, $scope, $state, reg_fields, $http, $timeout, blockUI, alertService,
-										  auth, http) {
-		console.log('..RegistrationCtrl');
+	.controller('RegistrationCtrl', function ($rootScope, $scope, $state, pat_fields, doc_fields, org_fields, $http, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
-		vm.reg = {};
-		vm.tabs = [];
-		vm.regFields = angular.copy(reg_fields);
+		vm.pat_fields = angular.copy(pat_fields);
+		vm.doc_fields = angular.copy(doc_fields);
+		vm.org_fields = angular.copy(org_fields);
 
-		angular.forEach(vm.regFields, function(item) {
-			if  (item && item.form) {
-				item.form.model = vm.reg;
+		vm.reg = {pat:{}, doc:{}, org: {}};
+
+		vm.tabs = [
+			{
+				title: 'Patient',
+				active: true,
+				index : 0,
+				type: 'pat',
+				form: {
+					options: {},
+					model: vm.reg.pat,
+					fields: vm.pat_fields
+				}
+			},
+			{
+				title: 'Doctor',
+				active: false,
+				index : 1,
+				type: 'doc',
+				form: {
+					options: {},
+					model: vm.reg.doc,
+					fields: vm.doc_fields
+				}
+			},
+			{
+				title: 'Homecare Organization',
+				active: false,
+				index : 2,
+				type: 'org',
+				form: {
+					options: {},
+					model: vm.reg.org,
+					fields: vm.org_fields
+				}
 			}
-			vm.tabs.push(item);
-		});
+		];
 
 		vm.active = 0;
 
 		vm.onSubmit = onSubmit;
 
 		function onSubmit() {
-			if (!vm.form.$valid) {
-				alertService.add(2,'','Need set requere fields!','');
-				return;
-			}
-
 			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
@@ -115,20 +139,7 @@ angular.module('modules.public', [])
 
 		function selTab(index) {
 			vm.active = index;
-			//console.log(index);
-			vm.tabs.forEach(function(tab, idt) {
-				tab.form.fields.forEach(function(field, idf) {
-						if  (idt===index) {
-							field.templateOptions.required = true;
-						} else {
-							field.templateOptions.required = false;
-						}
-					}
-				);
-				//tab.form.fields.resetModel();
-				//tab.form.options.updateInitialValue();
-			});
-			//vm.options.updateInitialValue();
+			console.log('set <Tab ID>: = '+index);
 		}
 
 		vm.selTab = selTab;
