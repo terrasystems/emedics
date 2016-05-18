@@ -54,8 +54,8 @@ module.exports = function(grunt) {
 					//xforward: false,
 					//changeOrigin: true,
 					rewrite: {
-						//'/rest':  '/emedics-0.1.0/rest'
-						'/rest':  '/rest'
+						'/rest':  '/emedics-0.1.0/rest'
+						//'/rest':  '/rest'
 					}
 				}
 			],
