@@ -23,8 +23,21 @@ angular.module('modules.core')
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
+			},
+			validators:{
+				emailVal: function($viewValue,$modelValue,scope){
+					var value= $viewValue || $modelValue;
+					if(value){
+						return validatePattern(value);
+					}else{
+						return true;
+					}
+
+				}
+
 			}
 		},
+
 		{
 			className: 'col-md-12',
 			key: 'user.password',
@@ -58,6 +71,18 @@ angular.module('modules.core')
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
+			},
+			validators:{
+				emailVal: function($viewValue,$modelValue,scope){
+					var value= $viewValue || $modelValue;
+					if(value){
+						return validatePattern(value);
+					}else{
+						return true;
+					}
+
+				}
+
 			}
 		},
 		{
@@ -92,6 +117,18 @@ angular.module('modules.core')
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
+			},
+			validators:{
+				emailVal: function($viewValue,$modelValue,scope){
+					var value= $viewValue || $modelValue;
+					if(value){
+						return validatePattern(value);
+					}else{
+						return true;
+					}
+
+				}
+
 			}
 		},
 		{
@@ -151,3 +188,7 @@ angular.module('modules.core')
 			}
 		}
 	]);
+function validatePattern (value){
+	return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+
+}

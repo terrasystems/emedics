@@ -19,6 +19,8 @@
 		<formly-form model="vm.model[vm.selectedKey][vm.selectedSection]" fields="vm.sections[vm.selectedKey][vm.selectedSection]" options=vm.options[vm.selectedKey][vm.selectedSection] form="vm.form" track-by="$index">
 		</formly-form>
 
+						<!--<pre>Model: {{vm.model | json}}</pre>-->
+						<!--<pre>Fields: {{vm.sections[key][value] | json}}</pre>-->
 
 		<!--<uib-tabset>-->
 			<!--<uib-tab ng-repeat="(key, value) in vm.sectionsName track by $index" heading="{{value}}" active="tab.active" disable="tab.disabled">-->
