@@ -376,4 +376,6 @@ div.ui-list-view-cell.ng-scope {
 .form_select{
 	margin-top: 5px;
 }
-
+div.panel-group{
+	margin-bottom: 0px;
+}

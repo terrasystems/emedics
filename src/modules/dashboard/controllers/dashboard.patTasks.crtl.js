@@ -3,7 +3,8 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ( $state, blockUI, http, localStorageService) {
+	.controller('patientTasksCtrl', function ($scope, $rootScope,constants,$stateParams,$state, blockUI, http, localStorageService) {
+
 		console.log('..patientTasksCtrl');
 		var vm = this;
 		vm.page = {};
@@ -27,7 +28,6 @@ angular.module('modules.dash')
 			console.log(index + ' !!!!');
 			$state.go('main.private.dashboard.tasks.edit', {id: index});
 		};
-
 
 	}
 );

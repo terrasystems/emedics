@@ -1,38 +1,22 @@
 <div class="container">
-	<v-accordion class="vAccordion--default" multiple>
-
-		<v-pane ng-repeat="form in vm.list track by $index">
-
-			<v-pane-header>
-				<p><label class="control-label">Number: </label>{{form.blank.number}}</p>
-
-				<p><label class="control-label">Name: </label>{{form.blank.name}}</p>
-
-				<p><label class="control-label">Descr: </label>{{form.blank.descr}}</p>
-			</v-pane-header>
-
-
-			<v-pane-content>
-				Pane content #1
-			</v-pane-content>
-
-		</v-pane>
-
-	</v-accordion>
 
 
 
 
-	<div class="form-list" ui-list-view="form in vm.list track by $index" options="listOptions">
-		<div ng-click="vm.onClick(form.id)">
+	<div class="form-list ui-list-view"  options="listOptions">
 
-			<p><label class="control-label">Number: </label>{{form.blank.number}}</p>
 
-			<p><label class="control-label">Name: </label>{{form.blank.name}}</p>
 
-			<p><label class="control-label">Descr: </label>{{form.blank.descr}}</p>
+		<uib-accordion close-others="oneAtATime" ng-repeat="form in vm.list track by $index">
+			<uib-accordion-group heading="Number:{{form.blank.number}} Name:{{form.blank.name}} Descr:{{form.blank.descr}} " is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+				<div ng-click="vm.onClick(form.id)">
+					This content is straight in the template.
+				</div>
+			</uib-accordion-group>
 
-		</div>
+		</uib-accordion>
+
+
 	</div>
 
 

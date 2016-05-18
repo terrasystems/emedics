@@ -93,7 +93,7 @@ angular.module('modules.dash')
 			paramsPOST.data.sections = vm.model;
 			paramsPOST.blank = null;
 
-			http.post('private/dashboard/'+vm.user.type+'/forms/edit', paramsPOST)
+			http.post('private/dashboard/' + vm.user.type + '/forms/edit', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 				});
