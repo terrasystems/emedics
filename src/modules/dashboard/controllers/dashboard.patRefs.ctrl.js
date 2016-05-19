@@ -6,7 +6,7 @@ angular.module('modules.dash')
 		editableOptions.theme = 'bs3';
 	})
 
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService, $http) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.searchref = '';

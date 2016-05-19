@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientFormsCtrl', function ($state, $filter, http, localStorageService, blockUI) {
+	.controller('patientFormsCtrl', function ($state, $filter, http, localStorageService, blockUI, alertService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.patientForms = [];
@@ -32,7 +32,9 @@ angular.module('modules.dash')
 			http.post('private/dashboard/'+vm.user.type+'/forms/active/modify', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					console.log(res);
+					if (res.state) {
+						alertService.add(0, res.state.message);
+					}
 					$state.go('main.private.dashboard.tasks');
 					//$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})});
 				});
