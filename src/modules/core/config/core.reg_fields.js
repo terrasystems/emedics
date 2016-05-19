@@ -3,61 +3,7 @@
 
 angular.module('modules.core')
 
-	.constant('reg_fields', [
-		{
-			className: 'col-md-12',
-			key: 'user.username',
-			type: 'input',
-			templateOptions: {
-				label: 'Name',
-				required: true,
-				placeholder: 'Enter your Name'
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.email',
-			type:'input',
-			validators: {
-				EmailAddress: {
-					expression: function($viewValue, $modelValue) {
-						var value = $modelValue || $viewValue;
-						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-					},
-					message: '$viewValue + " is not a valid e-mail address"'
-				}
-			},
-			templateOptions: {
-				type: 'text',
-				required: true,
-				label: 'Email address',
-				placeholder: 'Enter email'
-			},
-			validation: {
-			messages: {
-				required: function($viewValue, $modelValue, scope) {
-					return scope.to.label + ' is required'
-				}
-			}
-		}
-
-		},
-
-
-		{
-			className: 'col-md-12',
-			key: 'user.password',
-			type: 'input',
-			templateOptions: {
-				type: 'password',
-				required: true,
-				label: 'Password',
-				placeholder: 'Enter password'
-			}
-		}
-	])
-
-.constant('doc_fields', [
+	.constant('pat_fields', [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
@@ -74,7 +20,7 @@ angular.module('modules.core')
 			type: 'input',
 			validators: {
 				EmailAddress: {
-					expression: function($viewValue, $modelValue) {
+					expression: function ($viewValue, $modelValue) {
 						var value = $modelValue || $viewValue;
 						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 					},
@@ -89,13 +35,11 @@ angular.module('modules.core')
 			},
 			validation: {
 				messages: {
-					required: function($viewValue, $modelValue, scope) {
+					required: function ($viewValue, $modelValue, scope) {
 						return scope.to.label + ' is required'
 					}
 				}
 			}
-
-
 		},
 		{
 			className: 'col-md-12',
@@ -109,7 +53,8 @@ angular.module('modules.core')
 			}
 		}
 	])
-.constant('org_fields', [
+
+	.constant('doc_fields', [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
@@ -126,7 +71,7 @@ angular.module('modules.core')
 			type: 'input',
 			validators: {
 				EmailAddress: {
-					expression: function($viewValue, $modelValue) {
+					expression: function ($viewValue, $modelValue) {
 						var value = $modelValue || $viewValue;
 						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 					},
@@ -141,7 +86,58 @@ angular.module('modules.core')
 			},
 			validation: {
 				messages: {
-					required: function($viewValue, $modelValue, scope) {
+					required: function ($viewValue, $modelValue, scope) {
+						return scope.to.label + ' is required'
+					}
+				}
+			}
+		},
+		{
+			className: 'col-md-12',
+			key: 'user.password',
+			type: 'input',
+			templateOptions: {
+				type: 'password',
+				required: true,
+				label: 'Password',
+				placeholder: 'Enter password'
+			}
+		}
+	])
+
+	.constant('org_fields', [
+		{
+			className: 'col-md-12',
+			key: 'user.username',
+			type: 'input',
+			templateOptions: {
+				label: 'Name',
+				required: true,
+				placeholder: 'Enter your Name'
+			}
+		},
+		{
+			className: 'col-md-12',
+			key: 'user.email',
+			type: 'input',
+			validators: {
+				EmailAddress: {
+					expression: function ($viewValue, $modelValue) {
+						var value = $modelValue || $viewValue;
+						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+					},
+					message: '$viewValue + " is not a valid e-mail address"'
+				}
+			},
+			templateOptions: {
+				type: 'text',
+				required: true,
+				label: 'Email address',
+				placeholder: 'Enter email'
+			},
+			validation: {
+				messages: {
+					required: function ($viewValue, $modelValue, scope) {
 						return scope.to.label + ' is required'
 					}
 				}
@@ -203,7 +199,5 @@ angular.module('modules.core')
 				]
 			}
 		}
-
 	]
-
 );
