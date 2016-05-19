@@ -136,7 +136,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI) {
+	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService) {
 		var vm = this;
 		vm.forgotPass = '';
 
@@ -155,11 +155,12 @@ angular.module('modules.public', [])
 		];
 
 		vm.onSubmit = function () {
-			var paramsPOST = vm.forgotPass;
+			var paramsPOST = vm.forgotPass.email;
 			blockUI.start();
 			http.post('public/reset_pass', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
+					alertService.add(0, '', res.state.message, '');
 					$timeout(function () {
 						$state.go('main.public.login');
 					}, 0);
