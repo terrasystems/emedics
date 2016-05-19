@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function ($rootScope, http, constants, $stateParams, $state, localStorageService, blockUI, $scope) {
+	.controller('patientTasksEditCtrl', function (http, $stateParams, $state, localStorageService, blockUI, $scope) {
 		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go('main.private.dashboard.tasks');
 			return;
@@ -20,48 +20,6 @@ angular.module('modules.dash')
 		vm.selectedKey = '';
 
 		vm.onSubmit = onSubmit;
-
-		//vm.fields = [
-		//	{
-		//		key: 'number',
-		//		type: 'input',
-		//		templateOptions: {
-		//			type: 'text',
-		//			label: 'Number',
-		//			placeholder: '№'
-		//		}
-		//	},
-		//	{
-		//		key: 'full_name',
-		//		type: 'input',
-		//		templateOptions: {
-		//			type: 'text',
-		//			label: 'Full name',
-		//			placeholder: 'Enter Full name'
-		//		}
-		//	},
-		//	{
-		//		key: 'date_birth',
-		//		type: 'datepicker',
-		//		templateOptions: {
-		//			label: 'Date birth',
-		//			type: 'text',
-		//			datepickerPopup: 'yyyy-MMMM-dd'
-		//		}
-		//	},
-		//	{
-		//		key: 'sex',
-		//		type: 'select',
-		//		templateOptions: {
-		//			label: 'Sex',
-		//			options: [
-		//				{name: 'Male', value: '1'},
-		//				{name: 'Female', value: '0'},
-		//				{name: 'n/a', value: '-1'}
-		//			]
-		//		}
-		//	}
-		//];
 
 		var paramsPOST = {};
 
@@ -81,7 +39,7 @@ angular.module('modules.dash')
 					res.result.blank.body.sections.forEach(function(item){
 						vm.sectionsName.push(Object.keys(item)[0]);
 					});
-					if  (! vm.model) {
+					if  (!vm.model) {
 						vm.model = [];
 						vm.sectionsName.forEach(function(item){
 							var it = {};
@@ -102,22 +60,16 @@ angular.module('modules.dash')
 					}
 
 					$scope.$watch('vm.selectedSection', function(newValue) {
-						console.log('newValue: '+newValue);
-
 						for (var key in vm.model) {
 							if  (newValue == Object.keys(vm.model[key])[0])
 							{ vm.selectedKey = key; }
-							//var obj = vm.model[key][Object.keys(vm.model[key])[0]];
 						}
-
 					});
 
 				}
 			});
 
 		function onSubmit() {
-			//vm.options.updateInitialValue();
-			//alert(JSON.stringify(vm.model), null, 2);
 			paramsPOST = {};
 			paramsPOST.id = vm.id;
 			paramsPOST.data = {};

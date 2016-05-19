@@ -9,11 +9,11 @@ angular.module('modules.dash')
 
 		vm.user = localStorageService.get('userData');
 
-		vm.tabsLabel = [{label: 'Tasks', state: 'tasks'},
-			{label: 'References', state: 'ref'},
-			{label: 'Notifications', state: 'notifications'},
-			{label: 'Patient Forms', state: 'forms'},
-			{label: 'Patients', state: 'forms'}
+		vm.tabsLabel = [{label: 'Tasks', state: 'tasks', show: true },
+			{label: 'References', state: 'ref', show: true },
+			{label: 'Notifications', state: 'notifications', show: true },
+			{label: 'Patient Forms', state: 'forms', show: true },
+			{label: 'Patients', state: 'forms', show: (vm.user.type !== 'patient') }
 		];
 
 		vm.logout = function () {

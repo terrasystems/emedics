@@ -13,7 +13,7 @@ angular.module('modules.dash')
 		http.post('private/dashboard/'+vm.user.type+'/forms', paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if  (res.result /* && res.page */) {
+				if  (res.result) {
 					vm.patientForms = res.result;
 					vm.page = res.page;
 				}

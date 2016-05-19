@@ -115,7 +115,11 @@ angular.module('modules.core')
 					case 401:
 					{
 						$injector.get('$state').go('main.public.login',{reload: true});
-					//	window.location.reload(true);
+						break;
+					}
+					case 404:
+					{
+						$injector.get('$state').go('main.public.login',{reload: true});
 						break;
 					}
 					default:

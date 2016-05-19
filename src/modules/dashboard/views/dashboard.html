@@ -5,10 +5,9 @@
 <div class="container">
 	<div class="row">
 
-		<!-- Nav tabs -->
+		<!-- Nav tabs  -->
 		<ul class="nav nav-tabs tabs_control tab-pane fade in active" role="tablist">
-			<li class="" role="presentation"  ui-sref="main.private.dashboard.{{tab.state}}"
-				ng-repeat="tab in vm.tabsLabel">
+			<li class="" role="presentation"  ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel" ng-show="tab.show">
 				<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
 			</li>
 		</ul>
