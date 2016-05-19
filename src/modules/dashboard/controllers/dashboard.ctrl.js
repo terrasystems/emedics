@@ -1,12 +1,10 @@
 'use strict';
-/*jshint	-W117*/
+/*jshint -W117, -W097*/
 
 angular.module('modules.dash')
 
 	.controller('DashCtrl', function ($rootScope, localStorageService, $state) {
 		var vm = this;
-
-
 		vm.user = localStorageService.get('userData');
 
 		vm.tabsLabel = [{label: 'Tasks', state: 'tasks', show: true },
@@ -22,5 +20,5 @@ angular.module('modules.dash')
 			localStorageService.set('userData', null);
 			$state.go('main.public.login');
 		};
-	}
-);
+
+	});

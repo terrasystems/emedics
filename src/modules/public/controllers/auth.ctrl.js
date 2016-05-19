@@ -3,13 +3,8 @@
 
 angular.module('modules.public', [])
 
-
-	.controller('LoginCtrl', function ($rootScope, $scope, $state, $http, $timeout, blockUI, alertService, localStorageService,
-									   auth, http) {
-		console.log('..LoginCtrl');
+	.controller('LoginCtrl', function ($state, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
-		vm.onSubmit = onSubmit;
-
 		vm.user = {};
 		vm.options = {};
 		vm.userFields = [
@@ -39,18 +34,15 @@ angular.module('modules.public', [])
 					addonRight: {
 						class: 'glyphicon glyphicon-lock'
 					}
-
 				}
 			}
 		];
 
-		function onSubmit() {
-			console.log('submit');
+		vm.onSubmit = function() {
 			if (vm.form.$valid) {
-				console.log('..Ok!');
 				doLogin();
 			}
-		}
+		};
 
 		function doLogin() {
 			var paramsPOST = {
@@ -60,16 +52,17 @@ angular.module('modules.public', [])
 			http.post('public/login', paramsPOST).then(function (res) {
 				blockUI.stop();
 				auth.saveUserData(res);
-				alertService.add(0,'','Login Ok','');
+				alertService.add(0, '', res.state.message, '');
 				$timeout(function () {
 					$state.go('main.private.dashboard.forms');
 				}, 0);
 			});
 		}
+
 	})
 
 
-	.controller('RegistrationCtrl', function ($rootScope, $scope, $state, pat_fields, doc_fields, org_fields, $http, $timeout, blockUI, alertService, auth, http) {
+	.controller('RegistrationCtrl', function ($state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
 		vm.pat_fields = angular.copy(pat_fields);
 		vm.doc_fields = angular.copy(doc_fields);
@@ -115,9 +108,7 @@ angular.module('modules.public', [])
 
 		vm.active = 0;
 
-		vm.onSubmit = onSubmit;
-
-		function onSubmit() {
+		vm.onSubmit = function () {
 			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
@@ -130,16 +121,15 @@ angular.module('modules.public', [])
 			http.post('public/registration', paramsPOST).then(function (res) {
 				blockUI.stop();
 				auth.saveUserData(res);
-				alertService.add(0,'','Registration Ok!','');
+				alertService.add(0, '', res.state.message, '');
 				$timeout(function () {
 					$state.go('main.public.login');
 				}, 0);
 			});
-		}
+		};
 
 		function selTab(index) {
 			vm.active = index;
-			console.log('set <Tab ID>: = '+index);
 		}
 
 		vm.selTab = selTab;
@@ -147,11 +137,8 @@ angular.module('modules.public', [])
 
 
 	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI) {
-		console.log('..NewPasswordCtrl');
 		var vm = this;
 		vm.forgotPass = '';
-
-		vm.onSubmit = onSubmit;
 
 		vm.fieldforemail = [
 			{
@@ -167,19 +154,18 @@ angular.module('modules.public', [])
 			}
 		];
 
-		function onSubmit() {
+		vm.onSubmit = function () {
 			var paramsPOST = vm.forgotPass;
 			blockUI.start();
 			http.post('public/reset_pass', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					console.log('...reps:'+res);
 					$timeout(function () {
 						$state.go('main.public.login');
 					}, 0);
 				}, function (res) {
 					blockUI.stop();
-					console.log('...error: '+res);
 				});
-		}
+		};
+
 	});
