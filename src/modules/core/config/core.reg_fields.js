@@ -18,25 +18,31 @@ angular.module('modules.core')
 			className: 'col-md-12',
 			key: 'user.email',
 			type:'input',
+			validators: {
+				EmailAddress: {
+					expression: function($viewValue, $modelValue) {
+						var value = $modelValue || $viewValue;
+						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+					},
+					message: '$viewValue + " is not a valid e-mail address"'
+				}
+			},
 			templateOptions: {
-				type: 'email',
+				type: 'text',
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
 			},
-			validators:{
-				emailVal: function($viewValue,$modelValue,scope){
-					var value= $viewValue || $modelValue;
-					if(value){
-						return validatePattern(value);
-					}else{
-						return true;
-					}
-
+			validation: {
+			messages: {
+				required: function($viewValue, $modelValue, scope) {
+					return scope.to.label + ' is required'
 				}
-
 			}
+		}
+
 		},
+
 
 		{
 			className: 'col-md-12',
@@ -66,24 +72,30 @@ angular.module('modules.core')
 			className: 'col-md-12',
 			key: 'user.email',
 			type: 'input',
+			validators: {
+				EmailAddress: {
+					expression: function($viewValue, $modelValue) {
+						var value = $modelValue || $viewValue;
+						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+					},
+					message: '$viewValue + " is not a valid e-mail address"'
+				}
+			},
 			templateOptions: {
-				type: 'email',
+				type: 'text',
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
 			},
-			validators:{
-				emailVal: function($viewValue,$modelValue,scope){
-					var value= $viewValue || $modelValue;
-					if(value){
-						return validatePattern(value);
-					}else{
-						return true;
+			validation: {
+				messages: {
+					required: function($viewValue, $modelValue, scope) {
+						return scope.to.label + ' is required'
 					}
-
 				}
-
 			}
+
+
 		},
 		{
 			className: 'col-md-12',
@@ -112,23 +124,27 @@ angular.module('modules.core')
 			className: 'col-md-12',
 			key: 'user.email',
 			type: 'input',
+			validators: {
+				EmailAddress: {
+					expression: function($viewValue, $modelValue) {
+						var value = $modelValue || $viewValue;
+						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+					},
+					message: '$viewValue + " is not a valid e-mail address"'
+				}
+			},
 			templateOptions: {
-				type: 'email',
+				type: 'text',
 				required: true,
 				label: 'Email address',
 				placeholder: 'Enter email'
 			},
-			validators:{
-				emailVal: function($viewValue,$modelValue,scope){
-					var value= $viewValue || $modelValue;
-					if(value){
-						return validatePattern(value);
-					}else{
-						return true;
+			validation: {
+				messages: {
+					required: function($viewValue, $modelValue, scope) {
+						return scope.to.label + ' is required'
 					}
-
 				}
-
 			}
 		},
 		{
@@ -187,8 +203,8 @@ angular.module('modules.core')
 				]
 			}
 		}
-	]);
-function validatePattern (value){
-	return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 
-}
+	]
+
+);
+

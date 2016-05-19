@@ -2,19 +2,21 @@
 	<div class="pad"></div>
 
 	<form ng-submit="vm.onSubmit()" name="vm.form" novalidate >
-
-		<!--<pre>Model: {{vm.selectedSection}}</pre>-->
-		<div>
-			<p>Caregory: {{vm.formInfo.category}}</p>
-			<p>Name: {{vm.formInfo.name}}</p>
-			<p>#: {{vm.formInfo.number}}</p>
-			<p>Descr: {{vm.formInfo.descr}}</p>
-		</div>
-
-		<div class="form-group">
+		<div class="row">
+		<div class="form-group col-md-2 col-sm-2">
 			<label>Select section</label>
 			<select class="form-control"  ng-model="vm.selectedSection" ng-options="o for o in vm.sectionsName" ></select>
+           </div>
+
+		<!--<pre>Model: {{vm.selectedSection}}</pre>-->
+
+			<p class="col-md-2 col-sm-2">Caregory: {{vm.formInfo.category}}</p>
+			<p class="col-md-2 col-sm-2">Name: {{vm.formInfo.name}}</p>
+			<p class="col-md-2 col-sm-2">#: {{vm.formInfo.number}}</p>
+			<p class="col-md-2 col-sm-2">Descr: {{vm.formInfo.descr}}</p>
 		</div>
+
+
 
 		<formly-form model="vm.model[vm.selectedKey][vm.selectedSection]" fields="vm.sections[vm.selectedKey][vm.selectedSection]" options=vm.options[vm.selectedKey][vm.selectedSection] form="vm.form" track-by="$index">
 		</formly-form>

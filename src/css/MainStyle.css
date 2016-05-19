@@ -22,14 +22,14 @@ body > #wrap {
 }
 
 #footer {
-	/*position: absolute;*/
+	position: absolute;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	clear: both;
 	height: 50px;
 	background: cadetblue;
-	margin-top: 65px;
+	margin-bottom: -40px;
 }
 
 .clearfix:after {
