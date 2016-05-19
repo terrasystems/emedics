@@ -121,11 +121,11 @@ angular.module('modules.public', [])
 			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
-				"org": {}
+				"organisation": {}
 			};
 			if  (vm.tabs[vm.active].type==='org') {
-				paramsPOST.org = vm.reg[vm.tabs[vm.active].type].org;
-				paramsPOST.org.name = vm.reg[vm.tabs[vm.active].type].user.username;
+				paramsPOST.organisation = vm.reg[vm.tabs[vm.active].type].org;
+				paramsPOST.organisation.name = vm.reg[vm.tabs[vm.active].type].user.username;
 			}
 			http.post('public/registration', paramsPOST).then(function (res) {
 				blockUI.stop();
