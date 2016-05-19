@@ -3,7 +3,7 @@
 
 angular.module('modules.core')
 
-.constant('pat_fields', [
+	.constant('reg_fields', [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
@@ -207,4 +207,3 @@ angular.module('modules.core')
 	]
 
 );
-
