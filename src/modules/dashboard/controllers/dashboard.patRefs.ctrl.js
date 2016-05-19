@@ -10,7 +10,6 @@ angular.module('modules.dash')
 		//console.log('..patientReferencesCtrl');
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.paramsPOST = initParamsPOST.params;
 		vm.searchref = '';
 		vm.references = [];
 
