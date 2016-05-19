@@ -1,8 +1,18 @@
 <div class="container">
-	<div class="form-list"  ui-list-view="notification in vm.UnreadNotifications" options="listOptions">
-		<span>Name:<h4>{{ notification[0].name+' &nbsp'+notification[0].secondName}}</h4></span>
-		<span><p id="msg">Message: <strong>{{ notification.msg}}</strong></p></span>
-	</div>
 
-	<button style="float: right" class="btn btn-primary" ui-sref="main.private.dashboard.notifications.addnotification"> Add </button>
+	<ul class="row form-list" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
+
+		<div class="container row">
+			<span><strong>From: </strong>{{notification.fromId}}</span>
+			<span><strong>Title: </strong>{{notification.title}}</span>
+		</div>
+		<span><strong>Message: </strong>{{notification.text}}</span>
+
+		<div class="buttons" ng-show="!textBtnForm.$visible">
+			<button class="btn btn-danger red" ng-click="vm.onDecline(notification.id)"><i class="glyphicon glyphicon-trash"></i></button>
+			<button class="btn btn-primary blue" ng-click="vm.onAccept(notification.id)"><i class="glyphicon glyphicon-ok"></i></button>
+		</div>
+
+	</ul>
+	<button style="float: right" class="btn btn-primary" ui-sref="main.private.dashboard.notifications.addnotification">Add</button>
 </div>
