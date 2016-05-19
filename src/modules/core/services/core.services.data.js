@@ -86,7 +86,12 @@ angular.module('modules.core')
 				}
 			}, function (error) {
 				deferred.reject(error);
-				alertService.add(2, error.status + ' '+error.statusText);
+				if  (error.status == '401') {
+					alertService.add(2, error.data.state.message);
+				}
+				else {
+					alertService.add(2, error.status + ' ' + error.statusText);
+				}
 			});
 			return deferred.promise;
 		}
