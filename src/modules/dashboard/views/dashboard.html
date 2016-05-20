@@ -1,23 +1,24 @@
-<div id="header">
-	<div class="pad"><span>Hello, {{vm.user.username}} !</span> <a class="black-clr pull-rigth" ng-click="vm.logout()">Logout</a>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
 
-		<!-- Nav tabs  -->
-		<ul class="nav nav-tabs tabs_control tab-pane fade in active" role="tablist">
-			<li class="" role="presentation"  ui-sref="main.private.dashboard.{{tab.state}}" ng-repeat="tab in vm.tabsLabel" ng-show="tab.show">
-				<a aria-controls="home" role="tab" data-toggle="tab" href="">{{tab.label}}</a>
-			</li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<div role="tabpanel" class="tab-pane active" id="home" ui-view="forms">	</div>
+
+
+	<div id="header">
+		<div class="pad"><span>Hello, {{vm.user.username}} !</span> <a class="black-clr pull-rigth"
+																	   ng-click="vm.logout()">Logout</a>
+		</div>
+
+	</div>
+	<div class="container">
+		<div class="row">
+			<uib-tabset active="active">
+
+				<uib-tab  ui-sref="main.private.dashboard.{{tab.state}}" index="$index + 1" ng-repeat="tab in vm.tabsLabel" ng-show="tab.show" heading="{{tab.label}}" active="tab.active">
+					<div ui-view="forms"></div>
+				</uib-tab>
+
+
+		</div>
+		<div class="navbar-fixed-bottom" id="footer">
 		</div>
 	</div>
 
-</div>
 
-<div id="footer">
-</div>
