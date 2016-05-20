@@ -2,8 +2,6 @@
 
 	<ul class="row form-list" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
-		<span><strong>Message: </strong>{{notification.text}}</span>
-
 			<p class="col-md-2 col-sm-2"><strong>From: </strong>{{notification.fromUser.username}}</p>
 			<p class="col-md-2 col-sm-2"><strong>Title: </strong>{{notification.title}}</p>
 
