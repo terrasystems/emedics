@@ -7,29 +7,23 @@ textarea {
 	resize: none;
 }
 
-html, body, #wrap {
-	height: 100%;
-	background: none;
+ body {
+height: 100%;
+	background: url(../images/bkgd_pattern.png);
 }
 
-body > #wrap {
-	height: auto;
-	min-height: 100%;
-}
 
 #main {
 	padding-bottom: 150px;
 }
 
 #footer {
-	position: absolute;
 	right: 0;
 	bottom: 0;
 	left: 0;
 	clear: both;
-	height: 50px;
+	height: 40px;
 	background: cadetblue;
-	margin-bottom: -40px;
 }
 
 .clearfix:after {
@@ -60,13 +54,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header {
-	height: 50px;
+	height: 40px;
 	background: cadetblue;
 	width: 100%;
 }
 
 body {
-	background: url(../images/bkgd_pattern.png);
+
 }
 
 .login-form {
@@ -201,8 +195,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	min-height: 500px;
-	margin-top: 10px;
+	min-height: 480px;
 	background: #d6d6d6;
 	border-radius: 10px;
 }
@@ -216,11 +209,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	margin-left: 15px;
 }
 
-.tabs_control li a:focus {
-	text-decoration: none;
-	background-color: red;
-	border-radius: 10px;
-}
+
 
 .nav-tabs > li > a {
 	color: rgba(255, 255, 255, 0.87);
@@ -253,11 +242,6 @@ div.form-list.ui-list-view.ng-isolate-scope {
 label.checkbox-inline.ng-scope {
 	float: right;
 
-	margin-top: 20px;
-}
-
-.btn-danger {
-	float: right;
 	margin-top: 20px;
 }
 

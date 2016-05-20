@@ -2,16 +2,17 @@
 
 	<ul class="row form-list" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
-		<div class="container row">
-			<span><strong>From: </strong>{{notification.fromId}}</span>
-			<span><strong>Title: </strong>{{notification.title}}</span>
-		</div>
-		<span><strong>Message: </strong>{{notification.text}}</span>
+
+			<p class="col-md-2 col-sm-2"><strong>From: </strong>{{notification.fromId}}</p>
+			<p class="col-md-2 col-sm-2"><strong>Title: </strong>{{notification.title}}</p>
+
+		<p class="col-md-2 col-sm-2"><strong>Message: </strong>{{notification.text}}</p>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
-			<button class="btn btn-danger red" ng-click="vm.onDecline(notification.id)"><i class="glyphicon glyphicon-trash"></i></button>
-			<button class="btn btn-primary blue" ng-click="vm.onAccept(notification.id)"><i class="glyphicon glyphicon-ok"></i></button>
+			<button style="float: right" class="btn btn-danger red" ng-click="vm.onDecline(notification.id)">Decline</button>
+			<button style="float: right" class="btn btn-success blue" ng-click="vm.onAccept(notification.id)">Accept</button>
 		</div>
+
 
 	</ul>
 	<button style="float: right" class="btn btn-primary" ui-sref="main.private.dashboard.notifications.addnotification">Add</button>
