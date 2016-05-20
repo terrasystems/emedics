@@ -73,7 +73,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if  (angular.isArray(res.result) && res.result.length>0) {
 						res.result.map(function (item) {
-							item.all = item.name + ', ' + item.email + ', ' + item.type;
+							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
 							return item;
 						});
 					} else {

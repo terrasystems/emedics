@@ -156,7 +156,7 @@ angular.module('modules.public', [])
 				validation: {
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
-							return scope.to.label + ' is required'
+							return scope.to.label + ' is required';
 						}
 					}
 				},
