@@ -1,6 +1,6 @@
 <div class="container form-lists">
 <div class="search_content">
-	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-10" type="text"
+	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 		   ng-model="doctor"
 		   placeholder="Search a doctors in the database..."
 		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
@@ -22,7 +22,7 @@
 		<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>{{ref.phone}}</h5></li>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
-			<button class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i class="glyphicon glyphicon-trash"></i></button>
+			<button style="float: right" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i class="glyphicon glyphicon-trash"></i></button>
 		</div>
 
 	</ul>

@@ -19,9 +19,9 @@
 
 		<label class=" control-label">Send form:</label>
 		<div class="">
-		<ui-select ng-model="form.selected" ng-change="vm.message.userForm = form.selected.id" theme="bootstrap">
+		<ui-select  ng-model="form.selected" ng-change="vm.message.userForm = form.selected.id" theme="bootstrap">
 			<ui-select-match placeholder="Select or search a form in the list...">Name: {{$select.selected.blank.name}} Num: {{$select.selected.blank.number}}</ui-select-match>
-			<ui-select-choices repeat="forma in (vm.getForms($select.search) | filter: $select.search) track by forma.id">
+			<ui-select-choices class="msg_select" repeat="forma in (vm.getForms($select.search) | filter: $select.search) track by forma.id">
 				<div ng-bind="forma.blank.name"></div>
 				<small ng-bind="forma.blank.number"></small>
 			</ui-select-choices>
