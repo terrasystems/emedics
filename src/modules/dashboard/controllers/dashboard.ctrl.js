@@ -6,12 +6,11 @@ angular.module('modules.dash')
 	.controller('DashCtrl', function ($rootScope, localStorageService, $state) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-
-		vm.tabsLabel = [{label: 'Tasks', state: 'tasks', show: true },
+		vm.tabsLabel = [{label: 'Tasks', state: 'tasks', show: true},
 			{label: 'References', state: 'ref', show: true },
 			{label: 'Notifications', state: 'notifications', show: true },
 			{label: 'Patient Forms', state: 'forms', show: true },
-			{label: 'Patients', state: 'forms', show: (vm.user.type !== 'patient') }
+			{label: 'Patients', state: 'forms', show: (vm.user.type !== 'patient')}
 		];
 
 		vm.logout = function () {

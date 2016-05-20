@@ -54,7 +54,7 @@ angular.module('modules.public', [])
 				auth.saveUserData(res);
 				alertService.add(0, '', res.state.message, '');
 				$timeout(function () {
-					$state.go('main.private.dashboard.forms');
+					$state.go('main.private.dashboard.tasks');
 				}, 0);
 			});
 		}
