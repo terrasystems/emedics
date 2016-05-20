@@ -14,6 +14,11 @@ angular.module('modules.dash')
 
 		//*** add item in list
 		$scope.onApply = function (obj) {
+			if  ($scope.doctor && $scope.doctor.id && $scope.doctor.id == 'add') {
+				vm.addFormList();
+				return;
+			}
+
 			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
 				vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
@@ -66,10 +71,14 @@ angular.module('modules.dash')
 			return http.post('private/dashboard/' + vm.user.type + '/references/search', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					res.result.map(function (item) {
-						item.all = item.name + ', ' + item.email + ', ' + item.type;
-						return item;
-					});
+					if  (angular.isArray(res.result) && res.result.length>0) {
+						res.result.map(function (item) {
+							item.all = item.name + ', ' + item.email + ', ' + item.type;
+							return item;
+						});
+					} else {
+						res.result.push( { all: 'Add new reference...', id: 'add' } );
+					}
 					return res.result;
 				});
 		};
