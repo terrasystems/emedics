@@ -12,10 +12,11 @@ angular.module('modules.dash')
 			'type': null,
 			'title': '',
 			'text': '',
-			'fromId': null,
-			'toId': null,
+			'fromUser': {id: null},
+			'toUser': {id: null},
 			'userForm': null
 		};
+
 		vm.forms = [];
 		vm.doctors = [];
 
@@ -32,7 +33,6 @@ angular.module('modules.dash')
 
 		http.get('private/dashboard/' + vm.user.type + '/references', initParamsPOST.params)
 			.then(function (res) {
-				blockUI.stop();
 				blockUI.stop();
 				if (res.result) {
 					vm.doctors = res.result;

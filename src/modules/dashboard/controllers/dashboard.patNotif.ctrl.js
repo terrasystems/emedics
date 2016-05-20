@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http, blockUI, initParamsPOST) {
+	.controller('patientNotifCtrl', function (http, blockUI, initParamsPOST, alertService) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 		vm.searchnotif = '';
@@ -16,8 +16,8 @@ angular.module('modules.dash')
 			'type': '1',
 			'title': 'Test Title',
 			'text': 'Test Text',
-			'fromId': '4444',
-			'toId': '333',
+			'fromUser': {id: '4444', username: 'Test #1'},
+			'toUser': {id: '333'},
 			'userForm': '2222'
 		},
 		{
@@ -27,8 +27,8 @@ angular.module('modules.dash')
 			'type': '1',
 			'title': 'Test Title #2',
 			'text': 'Test Text #2',
-			'fromId': '5555',
-			'toId': '333',
+			'fromUser': {id: '333', username: 'Test #2'},
+			'toUser': {id: '4444'},
 			'userForm': '2222'
 		}
 		];

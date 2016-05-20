@@ -8,7 +8,7 @@
 
 		<label class="control-label">To doctor:</label>
 		<div class="">
-		<ui-select ng-model="doctor.selected" ng-change="vm.message.toId = doctor.selected.id" theme="bootstrap">
+		<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id" theme="bootstrap">
 			<ui-select-match  placeholder="Select or search a doctors in the list...">{{$select.selected.name + '&nbsp (' + $select.selected.email + ')'}}</ui-select-match>
 			<ui-select-choices repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">
 				<div ng-bind="doc.name"></div>
@@ -33,7 +33,7 @@
 			<input type="text" ng-model="vm.message.title" placeholder="Notification title..." class="form-control" aria-describedby="basic-addon2">
 
 			<textarea ng-model="vm.message.text" placeholder="Message text..." class="" name="" id="" rows="5"></textarea>
-   			<button style="float: right" class="btn btn-default" type="button" ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toId && !!vm.message.toId)" ng-click="vm.send()">Send</button>
+   			<button style="float: right" class="btn btn-default" type="button" ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id && !!vm.message.userForm)" ng-click="vm.send()">Send</button>
 		</form>
 
 		</div>
