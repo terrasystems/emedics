@@ -1,31 +1,36 @@
+
+body {
+	background: url(../images/bkgd_pattern.png);
+}
+
 * {
 	margin: 0;
 	padding: 0;
 }
 
-textarea {
-	resize: none;
+html, body, #wrap {
+	height: 100%;
 }
 
- body {
-height: 100%;
-	background: url(../images/bkgd_pattern.png);
+body > #wrap {
+	height: auto;
+	min-height: 100%;
 }
-
 
 #main {
-	padding-bottom: 150px;
+	padding-bottom: 50px;
 }
 
+/* must be same height as the footer */
 #footer {
-	right: 0;
-	bottom: 0;
-	left: 0;
+	position: relative;
+	margin-top: -50px; /* negative value of footer height */
+	height: 50px;
 	clear: both;
-	height: 40px;
 	background: cadetblue;
 }
 
+/* CLEAR FIX*/
 .clearfix:after {
 	content: ".";
 	display: block;
@@ -59,10 +64,6 @@ h1, h2, h3, h4, h5, h6 {
 	width: 100%;
 }
 
-body {
-
-}
-
 .login-form {
 	width: 350px;
 	min-height: 250px;
@@ -70,7 +71,7 @@ body {
 	margin-right: auto;
 	background: #E2E2E2;
 	border-radius: 10px;
-	margin-top: 20%;
+	margin-top: 15%;
 	border: black 1px solid;
 }
 
@@ -209,8 +210,6 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	margin-left: 15px;
 }
 
-
-
 .nav-tabs > li > a {
 	color: rgba(255, 255, 255, 0.87);
 }
@@ -336,11 +335,13 @@ div.ui-list-view-cell.ng-scope {
 
 	margin-top: 10px;
 }
-.notif>textarea{
+
+.notif > textarea {
 	margin-top: 10px;
 	width: 100%;
 }
-.msg_container{
+
+.msg_container {
 	background: #109AC8;
 	height: 200px;
 	border-radius: 10px;
@@ -348,118 +349,114 @@ div.ui-list-view-cell.ng-scope {
 	margin-left: auto;
 	margin-right: auto;
 }
-.msg_container h1{
+
+.msg_container h1 {
 	text-align: center;
 }
-.msg_form{
+
+.msg_form {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border-radius: 10px;
 }
-.form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched{
+
+.form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched {
 	max-width: 275px;
 }
-.form_select{
+
+.form_select {
 	margin-top: 5px;
 }
-div.panel-group{
+
+div.panel-group {
 	margin-bottom: 0px;
 }
-.tasks p{
+
+.tasks p {
 	margin-top: 15px;
 	outline: none;
 }
 
-
-
-
-
 /*---------media--------*/
-
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-	.tasks p{
+and (min-device-width: 320px)
+and (max-device-width: 480px) {
+	.tasks p {
 		margin-top: 0px;
 	}
-	.tabs_control li a{
+
+	.tabs_control li a {
 		font-size: 15px;
 	}
 }
 
 /* Smartphones (landscape) ----------- */
 @media only screen
-and (min-width : 321px) {
+and (min-width: 321px) {
 	/* Styles */
 }
 
 /* Smartphones (portrait) ----------- */
 @media only screen
-and (max-width : 320px) {
-	.tasks p{
+and (max-width: 320px) {
+	.tasks p {
 		margin-top: 0px;
 	}
-	.tabs_control li a{
+
+	.tabs_control li a {
 		font-size: 15px;
 	}
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px) {
 	/* Styles */
 }
 
 /* iPads (landscape) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape) {
 	/* Styles */
 }
 
 /* iPads (portrait) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : portrait) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait) {
 	/* Styles */
 }
 
 /* Desktops and laptops ----------- */
 @media only screen
-and (min-width : 1224px) {
+and (min-width: 1224px) {
 	/* Styles */
 }
 
 /* Large screens ----------- */
 @media only screen
-and (min-width : 1824px) {
+and (min-width: 1824px) {
 	/* Styles */
 }
 
 /* iPhone 4 - 5s ----------- */
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
 	/* Styles */
 }
 
 /* iPhone 6 ----------- */
-@media
-only screen and (max-width: 667px),
-only screen and (-webkit-device-pixel-ratio: 2) {
-
+@media only screen and (max-width: 667px), only screen and (-webkit-device-pixel-ratio: 2) {
 
 }
 
 /* iPhone 6+ ----------- */
-@media
-only screen and (min-device-width : 414px),
-only screen and (-webkit-device-pixel-ratio: 3) {
+@media only screen and (min-device-width: 414px), only screen and (-webkit-device-pixel-ratio: 3) {
 
 	/*** You've spent way too much on a phone ***/
 }
