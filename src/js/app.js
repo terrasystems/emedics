@@ -8,7 +8,7 @@ var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
-						 localStorageServiceProvider) {
+						 localStorageServiceProvider, $provide) {
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
@@ -37,7 +37,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 })
 
 
-.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth) {
+.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, $httpBackend, constants) {
 
 	formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
 	formlyValidationMessages.addStringMessage('required', 'This field is required');
@@ -49,5 +49,19 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 	});
 }
 
+	//$httpBackend.whenGET(/^modules\//).passThrough();
+    //
+	//if (constants.isDEBUG === '1') {
+	//	$httpBackend.whenGET('private/dashboard/references').respond(function () {
+	//		console.log("Getting phones");
+	//		return [200, {id: 'eeeee'}, {}];
+	//	});
+	//	$httpBackend.whenPOST(/.*/).passThrough();
+	//	$httpBackend.whenGET(/.*/).passThrough();
+	//}
+	//else {
+	//	//$httpBackend.whenGET(/.*/).passThrough();
+	//	//$httpBackend.whenPOST(/.*/).passThrough();
+	//}
 
 );
