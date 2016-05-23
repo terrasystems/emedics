@@ -2,7 +2,7 @@
 	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 		   ng-model="doctor"
 		   placeholder="Search a patients in the database..."
-		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
+		   uib-typeahead="item as item.all for item in getFindPatients($viewValue)"
 		   typeahead-loading="loadingLocations"
 		   class="form-control">
 	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>
