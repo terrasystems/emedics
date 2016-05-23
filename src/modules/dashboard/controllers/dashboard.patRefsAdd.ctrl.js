@@ -41,7 +41,7 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.ref');
+						$state.go('main.private.dashboard.abstract.ref');
 					}, 500);
 				});
 		};

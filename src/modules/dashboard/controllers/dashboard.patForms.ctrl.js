@@ -35,7 +35,7 @@ angular.module('modules.dash')
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}
-					$state.go('main.private.dashboard.tasks');
+					$state.go('main.private.dashboard.abstract.tasks');
 					//$state.go('main.private.dashboard.tasks', {activeForms: $filter('filter')(vm.patientForms, {active: true})});
 				});
 

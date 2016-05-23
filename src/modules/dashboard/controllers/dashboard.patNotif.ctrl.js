@@ -33,7 +33,9 @@ angular.module('modules.dash')
 		//}
 		//];
 
-		vm.onRefreshNotif = function() {
+		vm.onRefreshNotif = onRefreshNotif;
+
+		function onRefreshNotif() {
 			http.post('private/dashboard/notifications', initParamsPOST.params)
 				.then(function (res) {
 					blockUI.stop();
@@ -43,7 +45,8 @@ angular.module('modules.dash')
 						//}
 					}
 				});
-		};
+		}
+
 		vm.onRefreshNotif();
 
 		vm.onAccept = function (id) {

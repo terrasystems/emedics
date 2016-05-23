@@ -83,7 +83,7 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.notifications');
+						$state.go('main.private.dashboard.abstract.notifications');
 					}, 500);
 				});
 		};

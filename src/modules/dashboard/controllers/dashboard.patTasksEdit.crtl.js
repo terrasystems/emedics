@@ -5,7 +5,7 @@ angular.module('modules.dash')
 
 	.controller('patientTasksEditCtrl', function (http, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout) {
 		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.tasks');
+			$state.go('main.private.dashboard.abstract.tasks');
 			return;
 		}
 
@@ -83,7 +83,7 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.tasks');
+						$state.go('main.private.dashboard.abstract.tasks');
 					}, 500);
 				});
 		}

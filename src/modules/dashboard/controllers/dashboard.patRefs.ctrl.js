@@ -8,6 +8,8 @@ angular.module('modules.dash')
 
 	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService) {
 		var vm = this;
+		console.log('...patientReferencesCtrl');
+
 		vm.user = localStorageService.get('userData');
 		vm.searchref = '';
 		vm.references = [];
@@ -61,7 +63,7 @@ angular.module('modules.dash')
 
 		//*** create item
 		vm.addFormList = function () {
-			$state.go('main.private.dashboard.refadd');
+			$state.go('main.private.dashboard.abstract.refadd');
 		};
 
 		// Any function returning a promise object can be used to load values asynchronously
