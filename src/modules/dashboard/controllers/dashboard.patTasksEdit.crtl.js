@@ -1,18 +1,40 @@
 'use strict';
-/*jshint -W117, -W097*/
+/*jshint -W117, -W097, -W116*/
 
 angular.module('modules.dash')
 
 	.controller('patientTasksEditCtrl', function (http, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout) {
-		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.abstract.tasks');
+		console.log('Type: ' + $stateParams.type + ' id: ' +$stateParams.id + ' patId: '+$stateParams.patId);
+
+		if   (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
+			$state.go('main.private.dashboard');
 			return;
 		}
 
 		var vm = this;
+		if  ($stateParams.type == 'tasks') {
+			vm.mainState = 'main.private.dashboard.abstract.tasks';
+		} else {
+			vm.mainState = 'main.private.dashboard.abstract.patients';
+		}
 
-		vm.id = $stateParams.id;
+		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
+			$state.go(vm.mainState);
+			return;
+		} else
+		{
+			vm.id = $stateParams.id;
+		}
+
 		vm.user = localStorageService.get('userData');
+		if  ($stateParams.type == 'tasks') {
+			vm.getUrl = 'private/dashboard/' + vm.user.type + '/forms/' + vm.id;
+			vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
+		} else {
+			vm.getUrl = 'private/dashboard/docpatients/edit';
+			vm.setUrl = '';
+		}
+
 		vm.sections = [];
 		vm.options = [];
 		vm.model = [];
@@ -24,7 +46,7 @@ angular.module('modules.dash')
 
 		var paramsPOST = {};
 
-		http.get('private/dashboard/' + vm.user.type + '/forms/' + vm.id, paramsPOST)
+		http.get(vm.getUrl, paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
 				if (res.result && res.result.blank && res.result.blank.body &&	res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id ) {
@@ -77,14 +99,14 @@ angular.module('modules.dash')
 			paramsPOST.data.sections = vm.model;
 			paramsPOST.blank = null;
 
-			http.post('private/dashboard/' + vm.user.type + '/forms/edit', paramsPOST)
+			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.abstract.tasks');
+						$state.go(vm.mainState);
 					}, 500);
 				});
 		}

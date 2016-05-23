@@ -4,20 +4,17 @@
 angular.module('modules.dash')
 
 	.controller('patientTasksCtrl', function ($scope, $rootScope,constants,$stateParams,$state, blockUI, http, localStorageService) {
-
-		console.log('..patientTasksCtrl');
 		var vm = this;
+		vm.user = localStorageService.get('userData');
 		vm.page = {};
 		vm.list = [];
-		vm.user = localStorageService.get('userData');
-		//vm.list = $stateParams.activeForms;
 
 		var paramsPOST = {"page": {"start": 0, "count": 20}, "criteria": {}};
 
 		http.post('private/dashboard/' + vm.user.type + '/forms/active', paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if (res.result /*&& res.page*/) {
+				if (res.result) {
 					vm.list = res.result;
 					vm.page = res.page;
 				}
@@ -25,8 +22,7 @@ angular.module('modules.dash')
 
 
 		vm.onClick = function (index) {
-			console.log(index + ' !!!!');
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index});
+			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
 		};
 
 });

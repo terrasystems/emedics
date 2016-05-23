@@ -1,3 +1,13 @@
+<div class="search_content">
+	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
+		   ng-model="doctor"
+		   placeholder="Search a patients in the database..."
+		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
+		   typeahead-loading="loadingLocations"
+		   class="form-control">
+	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>
+</div>
+
 <div class=" ui-list-view container">
 	<div class="row ">
 		<div class="container">
@@ -5,13 +15,18 @@
 
 				<uib-accordion-group heading="Name:{{patient.name}}   /   Email:{{patient.email}}   /   Phone:{{patient.phone}}"
 									 ng-repeat="patient in vm.patients">
-					<div ng-repeat="form in patient.forms">
+					<div ng-repeat="form in patient.forms" ng-click="vm.onEdit(form.id, patient.id)">
 						<p> Name:{{form.blank.name}} </p>
 						<p> Description:{{form.blank.descr}}</p>
 						<p> Category:{{form.blank.category}}</p>
 						<p> Number:{{form.blank.number}} </p>
 					</div>
+					<div ng-if="patient.forms.length==0" class="text-center">
+						<span><h4>No data to load</h4>{{form | json}}</span>
+					</div>
+
 				</uib-accordion-group>
+
 			</uib-accordion>
 		</div>
 		<p></p>

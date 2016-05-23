@@ -2,21 +2,8 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientsCtrl', function(http,blockUI,initParamsPOST){
-		 var vm = this;
-		console.log('patientsCtrl !!!!!');
-		vm.refresh = function () {
-      vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.list = [];
-			//http.get('private/dashboard/docpatients', vm.paramsPOST)
-			//	.then(function (res) {
-			//		blockUI.stop();
-			//		if (res.result) {
-			//			vm.patients = res.result;
-			//		}
-			//	});
-		};
-		vm.refresh();
+	.controller('patientsCtrl', function(http, blockUI, initParamsPOST, $state){
+		var vm = this;
 
 		vm.patients = [
 		{
@@ -88,5 +75,23 @@ angular.module('modules.dash')
 			]
 		}
 		];
+
+		vm.refresh = function () {
+			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST.criteria.list = [];
+			http.get('private/dashboard/docpatients', vm.paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result) && res.result.length>0) {
+						vm.patients = res.result;
+					}
+				});
+		};
+		vm.refresh();
+
+		vm.onEdit = function(formID, patientId) {
+			console.log('formID: '+ formID +', patID: ' + patientId );
+			$state.go('main.private.dashboard.abstract.tasks.edit', {id: formID, type: 'patientss', patId: patientId});
+		};
 
 	});
