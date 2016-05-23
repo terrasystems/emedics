@@ -78,6 +78,7 @@ angular.module('modules.core')
 		{
 			name:'main.private.dashboard',
 			url:'/dashboard',
+			abstract:true,
 			parent:'main.private',
 			views:{
 				'content@main':{
@@ -87,21 +88,33 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.forms',
-			url:'/forms',
-			parent:'main.private.dashboard',
+			name:'main.private.dashboard.abstract',
+			abstract:true,
+			//parent:'main.private.abstract',
 			views:{
-				'forms@main.private.dashboard':{
+				'dashboard@content':{
+					templateUrl:'modules/core/views/tabs.html',
+					//controller:'DashCtrl as vm'
+				}
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.forms',
+			url:'/forms',
+			//parent:'main.private.dashboard',
+			views:{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patForms.html',
 					controller:'patientFormsCtrl as vm'
 				}
 			}
 		},
 		{
-			name:'main.private.dashboard.ref',
+			name:'main.private.dashboard.abstract.ref',
 			url:'/references',
+			//parent:'main.private.dashboard',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@.dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patRefs.html',
 					controller:'patientReferencesCtrl as vm'
 				}
@@ -109,10 +122,11 @@ angular.module('modules.core')
 		},
 
 		{
-			name:'main.private.dashboard.refadd',
+			name:'main.private.dashboard.abstract.refadd',
 			url:'/references/add',
+			//parent:'main.private.dashboard',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patRefsAdd.html',
 					controller:'patientReferencesAddCtrl as vm'
 				}
@@ -120,31 +134,32 @@ angular.module('modules.core')
 		},
 
 		{
-			name:'main.private.dashboard.ref2',
+			name:'main.private.dashboard.abstract.ref2',
 			url:'/references2',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patRefs2.html',
 					controller:'patientReferences2Ctrl as vm'
 				}
 			}
 		},
 		{
-			name:'main.private.dashboard.notifications',
+			name:'main.private.dashboard.abstract.notifications',
 			url:'/notifications',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
 					controller:'patientNotifCtrl as vm'
 				}
 			},
-			parent: 'main.private.dashboard'
+			//parent: 'main.private.dashboard'
 		},
 		{
-			name:'main.private.dashboard.tasks',
+			name:'main.private.dashboard.abstract.tasks',
 			url:'/tasks',
+			//parent: 'main.private.dashboard',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasks.html',
 					controller:'patientTasksCtrl as vm'
 				}
@@ -152,10 +167,10 @@ angular.module('modules.core')
 		},
 
 		{
-			name:'main.private.dashboard.tasks.edit',
+			name:'main.private.dashboard.abstract.tasks.edit',
 		url:'/edit',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',
 					controller:'patientTasksEditCtrl as vm'
 				}
@@ -165,10 +180,10 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.notifications.addnotification',
+			name:'main.private.dashboard.abstract.notifications.addnotification',
 			url:'/add',
 			views:{
-				'forms@main.private.dashboard':{
+				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.NotifAdd.html',
 					controller:'addNotificationCtrl as vm'
 				}

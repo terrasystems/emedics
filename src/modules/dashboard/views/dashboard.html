@@ -8,12 +8,15 @@
 <div class="container">
 	<div class="row">
 
-		<uib-tabset active="active"  >
+		<!--<uib-tabset active="active">-->
 
-			<uib-tab ui-sref="main.private.dashboard.{{tab.state}}" index="$index + 1" ng-repeat="tab in vm.tabsLabel"
-					 ng-show="tab.show" heading="{{tab.label}}" active="tab.active">
-				<div ui-view="forms"></div>
-			</uib-tab>
-			</uib-tabset>
+			<!--<uib-tab ng-init="vm.tabsLabel[0].active=true" ui-sref="main.private.dashboard.{{tab.state}}" index="$index + 1" ng-repeat="tab in vm.tabsLabel"-->
+					 <!--ng-show="tab.show" heading="{{tab.label}}" active="tab.active">-->
+				<!--<div></div>-->
+<ui-view name="dashboard@content"></ui-view>
+
+
+			<!--</uib-tab>-->
+			<!--</uib-tabset>-->
 	</div>
 </div>
