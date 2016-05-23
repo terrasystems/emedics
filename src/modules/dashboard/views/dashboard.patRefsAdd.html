@@ -4,7 +4,7 @@
 
 		<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
 			<formly-form model="vm.model" fields="vm.fields" form="vm.form" options="vm.options">
-				<button type="submit" class="btn btn_submit btn-default login-button submit-button">Registration</button>
+				<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.form.$invalid">Registration</button>
 			</formly-form>
 		</form>
 

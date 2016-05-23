@@ -24,9 +24,25 @@ angular.module('modules.dash')
 						className: 'col-md-12',
 						key: 'email',
 						type: 'input',
+						validators: {
+							EmailAddress: {
+								expression: function ($viewValue, $modelValue) {
+									var value = $modelValue || $viewValue;
+									return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+								},
+								message: '$viewValue + " is not a valid e-mail address"'
+							}
+						},
+						validation: {
+							messages: {
+								required: function ($viewValue, $modelValue, scope) {
+									return scope.to.label + ' is required';
+								}
+							}
+						},
 						templateOptions: {
 							type: 'email',
-							required: false,
+							required: true,
 							label: 'Email address',
 							placeholder: 'Enter email'
 						}
