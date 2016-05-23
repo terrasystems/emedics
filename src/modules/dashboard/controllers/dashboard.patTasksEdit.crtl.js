@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function (http, $stateParams, $state, localStorageService, blockUI, $scope) {
+	.controller('patientTasksEditCtrl', function (http, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout) {
 		if  (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go('main.private.dashboard.tasks');
 			return;
@@ -79,6 +79,12 @@ angular.module('modules.dash')
 			http.post('private/dashboard/' + vm.user.type + '/forms/edit', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+					}
+					$timeout(function () {
+						$state.go('main.private.dashboard.tasks');
+					}, 500);
 				});
 		}
 

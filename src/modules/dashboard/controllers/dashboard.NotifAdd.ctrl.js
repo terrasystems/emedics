@@ -2,7 +2,7 @@
 /*jshint	-W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('addNotificationCtrl', function ($scope, http, blockUI, initParamsPOST, localStorageService, alertService) {
+	.controller('addNotificationCtrl', function ($scope, http, blockUI, initParamsPOST, localStorageService, alertService, $timeout, $state) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.message = {
@@ -82,6 +82,9 @@ angular.module('modules.dash')
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}
+					$timeout(function () {
+						$state.go('main.private.dashboard.notifications');
+					}, 500);
 				});
 		};
 

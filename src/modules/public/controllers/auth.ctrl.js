@@ -144,15 +144,33 @@ angular.module('modules.public', [])
 			{
 				key: 'email',
 				type: 'input',
+				validators: {
+					EmailAddress: {
+						expression: function ($viewValue, $modelValue) {
+							var value = $modelValue || $viewValue;
+							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+						},
+						message: '$viewValue + " is not a valid e-mail address"'
+					}
+				},
+				validation: {
+					messages: {
+						required: function ($viewValue, $modelValue, scope) {
+							return scope.to.label + ' is required';
+						}
+					}
+				},
 				templateOptions: {
 					placeholder: 'Write your email for reset password',
-					type: 'email',
+					type: 'text',
+					required: true,
 					addonRight: {
 						class: 'glyphicon glyphicon-envelope'
 					}
 				}
 			}
 		];
+
 
 		vm.onSubmit = function () {
 			var paramsPOST = vm.forgotPass.email;
@@ -163,9 +181,12 @@ angular.module('modules.public', [])
 					alertService.add(0, '', res.state.message, '');
 					$timeout(function () {
 						$state.go('main.public.login');
-					}, 0);
+					}, 500);
 				}, function (res) {
 					blockUI.stop();
+					$timeout(function () {
+						$state.go('main.public.login');
+					}, 500);
 				});
 		};
 
