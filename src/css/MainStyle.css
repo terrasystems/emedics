@@ -361,7 +361,10 @@ div.ui-list-view-cell.ng-scope {
 }
 
 .form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched {
-	max-width: 275px;
+	max-width: 331px;
+}
+input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{
+	max-width: 310px;
 }
 
 .form_select {
