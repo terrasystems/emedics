@@ -22,5 +22,23 @@ angular.module('modules.dash')
 				 id:'!!!',
 				 name:'Vasya',
 				 number:'1'
+			 },
+			 {
+				 FormName:'F1',
+				 id:'!!!',
+				 name:'Vasya',
+				 number:'1'
+			 },
+			 {
+				 FormName:'F1',
+				 id:'!!!',
+				 name:'Vasya',
+				 number:'1'
+			 },
+			 {
+				 FormName:'F1',
+				 id:'!!!',
+				 name:'Vasya',
+				 number:'1'
 			 }];
 	});

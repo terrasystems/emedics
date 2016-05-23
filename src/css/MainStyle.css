@@ -379,6 +379,9 @@ div.panel-group {
 .ui-select-choices{
 	top:35px;
 }
+div.panel-group{
+	margin-top: 30px;
+}
 
 /*---------media--------*/
 
