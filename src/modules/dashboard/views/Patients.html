@@ -3,6 +3,7 @@
 		   ng-model="doctor"
 		   placeholder="Search a patients in the database..."
 		   uib-typeahead="item as item.all for item in getFindPatients($viewValue)"
+		   typeahead-on-select="onSelect($item)"
 		   typeahead-loading="loadingLocations"
 		   class="form-control">
 	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>

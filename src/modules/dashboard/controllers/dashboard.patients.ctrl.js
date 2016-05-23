@@ -126,4 +126,10 @@ angular.module('modules.dash')
 			}
 		};
 
+		$scope.onSelect = function (item) {
+			if  (item.id && item.id == 'add') {
+				//vm.addFormList();
+			}
+		};
+
 	});

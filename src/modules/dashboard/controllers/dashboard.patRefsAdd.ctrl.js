@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientReferencesAddCtrl', function ($state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService) {
+	.controller('patientReferencesAddCtrl', function ($state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService, $scope) {
 		//console.log('..patientReferencesAddCtrl');
 		var vm = this;
 		vm.user = localStorageService.get('userData');
