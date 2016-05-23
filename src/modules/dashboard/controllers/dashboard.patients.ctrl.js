@@ -2,20 +2,19 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientsCtrl', function(){
+	.controller('patientsCtrl', function(http,blockUI,initParamsPOST){
 		 var vm = this;
 		console.log('patientsCtrl !!!!!');
-
 		vm.refresh = function () {
-			vm.paramsPOST = initParamsPOST.params;
+      vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
-			http.get('private/dashboard/docpatients', vm.paramsPOST)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result) {
-						vm.patients = res.result;
-					}
-				});
+			//http.get('private/dashboard/docpatients', vm.paramsPOST)
+			//	.then(function (res) {
+			//		blockUI.stop();
+			//		if (res.result) {
+			//			vm.patients = res.result;
+			//		}
+			//	});
 		};
 		vm.refresh();
 

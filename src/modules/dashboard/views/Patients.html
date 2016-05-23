@@ -1,12 +1,19 @@
 <div class=" ui-list-view container">
 	<div class="row ">
 		<div class="container">
-		<uib-accordion>
+			<uib-accordion>
 
-			<uib-accordion-group heading="{{patient.FormName}}" ng-repeat="patient in vm.patients">
-				{{patient.name}}
-			</uib-accordion-group>
-		</uib-accordion>
-	</div>
+				<uib-accordion-group heading="Name:{{patient.name}}   /   Email:{{patient.email}}   /   Phone:{{patient.phone}}"
+									 ng-repeat="patient in vm.patients">
+					<div ng-repeat="form in patient.forms">
+						<p> Name:{{form.blank.name}} </p>
+						<p> Description:{{form.blank.descr}}</p>
+						<p> Category:{{form.blank.category}}</p>
+						<p> Number:{{form.blank.number}} </p>
+					</div>
+				</uib-accordion-group>
+			</uib-accordion>
+		</div>
+		<p></p>
 	</div>
 </div>
