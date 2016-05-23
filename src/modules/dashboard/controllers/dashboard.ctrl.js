@@ -14,7 +14,8 @@ angular.module('modules.dash')
 		];
 
 		vm.logout = function () {
-			$rootScope.userData, $rootScope.token = null;
+			$rootScope.userData = null;
+			$rootScope.token = null;
 			localStorageService.set('token', null);
 			localStorageService.set('userData', null);
 			$state.go('main.public.login');
