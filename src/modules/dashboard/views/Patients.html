@@ -1,1 +1,6 @@
-<h2>Patients</h2>
+<uib-accordion>
+
+	<uib-accordion-group heading="{{patient.FormName}}" ng-repeat="patient in vm.patients">
+		{{patient.name}}
+	</uib-accordion-group>
+</uib-accordion>
