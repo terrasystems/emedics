@@ -110,6 +110,26 @@ angular.module('modules.core')
 			}
 		},
 		{
+		name:'main.private.dashboard.abstract.patients',
+			url:'/patients',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/Patients.html',
+					controller:'patientsCtrl as vm'
+				}
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.patientsEdit',
+			url:'/forms',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/PatientsEdit.html',
+					controller:'patientsEditCtrl as vm'
+				}
+			}
+		},
+		{
 			name:'main.private.dashboard.abstract.ref',
 			url:'/references',
 			//parent:'main.private.dashboard',
@@ -133,16 +153,16 @@ angular.module('modules.core')
 			}
 		},
 
-		{
-			name:'main.private.dashboard.abstract.ref2',
-			url:'/references2',
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefs2.html',
-					controller:'patientReferences2Ctrl as vm'
-				}
-			}
-		},
+		//{
+		//	name:'main.private.dashboard.abstract.ref2',
+		//	url:'/references2',
+		//	views:{
+		//		'forms@dashboard':{
+		//			templateUrl:'modules/dashboard/views/dashboard.patRefs2.html',
+		//			controller:'patientReferences2Ctrl as vm'
+		//		}
+		//	}
+		//},
 		{
 			name:'main.private.dashboard.abstract.notifications',
 			url:'/notifications',

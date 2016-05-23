@@ -10,7 +10,7 @@ angular.module('modules.dash')
 			{heading: 'References', route: 'main.private.dashboard.abstract.ref', disable: false },
 			{heading: 'Notifications', route: 'main.private.dashboard.abstract.notifications', disable: false },
 			{heading: 'Patient Forms', route: 'main.private.dashboard.abstract.forms', disable: false},
-			{heading: 'Patients', route: 'main.private.dashboard.abstract.forms', disable: (vm.user.type !== 'patient')}
+			{heading: 'Patients', route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
 		];
 
 		vm.logout = function () {
