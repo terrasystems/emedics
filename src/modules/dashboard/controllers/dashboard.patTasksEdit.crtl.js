@@ -10,6 +10,7 @@ angular.module('modules.dash')
 		}
 
 		var vm = this;
+
 		vm.id = $stateParams.id;
 		vm.user = localStorageService.get('userData');
 		vm.sections = [];

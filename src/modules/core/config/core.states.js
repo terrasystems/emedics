@@ -25,9 +25,6 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/login.html',
 					controller: 'LoginCtrl as vm'
 				}
-			},
-			onEnter: function($rootScope, $stateParams) {
-					console.log('...befor login state');
 			}
 		},
 		{
@@ -38,9 +35,6 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/registration.html',
 					controller: 'RegistrationCtrl as vm'
 				}
-			},
-			onEnter: function($rootScope, $stateParams) {
-				console.log('...befor registration state');
 			}
 		},
 		{
@@ -51,9 +45,6 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/newpassword.html',
 					controller: 'NewPasswordCtrl as vm'
 				}
-			},
-			onEnter: function($rootScope, $stateParams) {
-				console.log('...befor newpassword state');
 			}
 		},
 		{
@@ -93,7 +84,7 @@ angular.module('modules.core')
 			//parent:'main.private.abstract',
 			views:{
 				'dashboard@content':{
-					templateUrl:'modules/core/views/tabs.html',
+					templateUrl:'modules/core/views/tabs.html'
 					//controller:'DashCtrl as vm'
 				}
 			}
@@ -121,7 +112,7 @@ angular.module('modules.core')
 		},
 		{
 			name:'main.private.dashboard.abstract.patientsEdit',
-			url:'/forms',
+			url:'/patients/edit',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/PatientsEdit.html',
@@ -152,7 +143,6 @@ angular.module('modules.core')
 				}
 			}
 		},
-
 		//{
 		//	name:'main.private.dashboard.abstract.ref2',
 		//	url:'/references2',
@@ -171,7 +161,7 @@ angular.module('modules.core')
 					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
 					controller:'patientNotifCtrl as vm'
 				}
-			},
+			}
 			//parent: 'main.private.dashboard'
 		},
 		{
@@ -188,7 +178,7 @@ angular.module('modules.core')
 
 		{
 			name:'main.private.dashboard.abstract.tasks.edit',
-		url:'/edit',
+			url:'/edit',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',

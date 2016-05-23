@@ -2,25 +2,92 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientsCtrl', function(){
-		 var vm = this;
+	.controller('patientsCtrl', function (http, initParamsPOST, blockUI) {
+		var vm = this;
 		console.log('patientsCtrl !!!!!');
 
-		 vm.patients=[{
-			  FormName:'F1',
-			 id:'!!!',
-			 name:'Petya',
-			 number:'1'
-		 },{
-			 FormName:'F1',
-			 id:'!!!',
-			 name:'Igor',
-			 number:'1'
-		 },
-			 {
-				 FormName:'F1',
-				 id:'!!!',
-				 name:'Vasya',
-				 number:'1'
-			 }];
+		vm.refresh = function () {
+			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST.criteria.list = [];
+			http.get('private/dashboard/docpatients', vm.paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result) {
+						vm.patients = res.result;
+					}
+				});
+		};
+		vm.refresh();
+
+		vm.patients = [
+		{
+			'id': '32',
+			'email': 'tggg1@testmail.com',
+			'phone': '555-55-55',
+			'name': 'Patient #100',
+			'forms': [
+				{
+				'id': '32',
+				'data': null,
+				'blank': {
+					'body': null,
+					'name': 'Blank Name',
+					'type': '1',
+					'descr': 'Descr1',
+					'category': 'main Categ',
+					'number': 'F1'
+				},
+				'active': 'true'
+				},
+				{
+					'id': '33',
+					'data': null,
+					'blank': {
+						'body': null,
+						'name': 'Blank Name #2',
+						'type': '2',
+						'descr': 'Descr2',
+						'category': 'main Categ',
+						'number': 'F2'
+					},
+					'active': 'true'
+				}
+			]
+		},
+		{
+			'id': '3002',
+			'email': 'aaaaa2@testmail.com',
+			'phone': '555-55-55',
+			'name': 'Patient #2000',
+			'forms': [
+			{
+				'id': '320',
+				'data': null,
+				'blank': {
+					'body': null,
+					'name': 'Blank Name',
+					'type': '1',
+					'descr': 'Descr1',
+					'category': 'main Categ',
+					'number': 'F1'
+				},
+				'active': 'true'
+			},
+			{
+				'id': '33',
+ 				'data': null,
+				'blank': {
+					'body': null,
+					'name': 'Blank Name #2',
+					'type': '2',
+					'descr': 'Descr2',
+					'category': 'main Categ',
+					'number': 'F2'
+				},
+				'active': 'true'
+			}
+			]
+		}
+		];
+
 	});
