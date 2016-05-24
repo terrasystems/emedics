@@ -1,5 +1,5 @@
 'use strict';
-/*jshint -W117, -W097*/
+/*jshint -W117, -W097, -W116*/
 
 angular.module('modules.dash')
 	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService){
@@ -123,6 +123,13 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 						vm.refresh();
 					});
+			}
+		};
+
+		$scope.onSelect = function (item) {
+			if  (item.id && item.id == 'add') {
+				//vm.addFormList();
+				return;
 			}
 		};
 

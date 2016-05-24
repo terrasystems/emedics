@@ -8,19 +8,12 @@ angular.module('modules.dash')
 
 	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService) {
 		var vm = this;
-		console.log('...patientReferencesCtrl');
-
 		vm.user = localStorageService.get('userData');
 		vm.searchref = '';
 		vm.references = [];
 
 		//*** add item in list
 		$scope.onApply = function (obj) {
-			if  ($scope.doctor && $scope.doctor.id && $scope.doctor.id == 'add') {
-				vm.addFormList();
-				return;
-			}
-
 			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
 				vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
@@ -83,6 +76,12 @@ angular.module('modules.dash')
 					}
 					return res.result;
 				});
+		};
+
+		$scope.onSelect = function (item) {
+			if  (item.id && item.id == 'add') {
+				vm.addFormList();
+			}
 		};
 
 });
