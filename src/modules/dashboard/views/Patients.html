@@ -20,7 +20,9 @@
 						<p> Description:{{form.blank.descr}}</p>
 						<p> Category:{{form.blank.category}}</p>
 						<p> Number:{{form.blank.number}} </p>
+
 					</div>
+					<button style="float: right" class="btn btn-danger">Remove</button>
 					<div ng-if="patient.forms.length==0" class="text-center">
 						<span><h4>No data to load</h4>{{form | json}}</span>
 					</div>
