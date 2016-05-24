@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientReferencesAddCtrl', function ($state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService, $scope) {
+	.controller('patientReferencesAddCtrl', function ($state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService, scope) {
 		//console.log('..patientReferencesAddCtrl');
 		var vm = this;
 		vm.user = localStorageService.get('userData');
@@ -36,9 +36,10 @@ angular.module('modules.dash')
 						validation: {
 							messages: {
 								required: function ($viewValue, $modelValue, scope) {
-									return scope.to.label + ' is required';
+									return scope.to.label + ' is required'
 								}
 							}
+
 						},
 						templateOptions: {
 							type: 'email',

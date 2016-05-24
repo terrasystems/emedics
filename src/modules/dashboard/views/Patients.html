@@ -14,8 +14,16 @@
 		<div class="container">
 			<uib-accordion>
 
-				<uib-accordion-group heading="Name:{{patient.name}}   /   Email:{{patient.email}}   /   Phone:{{patient.phone}}"
-									 ng-repeat="patient in vm.patients">
+
+				<uib-accordion-group ng-repeat="patient in vm.patients">
+					<uib-accordion-heading>
+						Name:{{patient.name}}
+						Email:{{patient.email}}
+						Phone:{{patient.phone}}
+						<button style="float: right" class="btn btn-small" >x</button>
+
+					</uib-accordion-heading>
+
 					<div ng-repeat="form in patient.forms" ng-click="vm.onEdit(form.id, patient.id)">
 						<p> Name:{{form.blank.name}} </p>
 						<p> Description:{{form.blank.descr}}</p>
@@ -23,7 +31,7 @@
 						<p> Number:{{form.blank.number}} </p>
 
 					</div>
-					<button style="float: right" class="btn btn-danger">Remove</button>
+
 					<div ng-if="patient.forms.length==0" class="text-center">
 						<span><h4>No data to load</h4>{{form | json}}</span>
 					</div>
