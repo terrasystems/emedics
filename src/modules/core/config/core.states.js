@@ -111,15 +111,25 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.abstract.patientsEdit',
-			url:'/patients/edit',
+			name:'main.private.dashboard.abstract.patients.create',
+			url:'/create',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/PatientsEdit.html',
-					controller:'patientsEditCtrl as vm'
+					templateUrl:'modules/dashboard/views/PatientsAdd.html',
+					controller:'patientsAddCtrl as vm'
 				}
 			}
 		},
+		//{
+		//	name:'main.private.dashboard.abstract.patientsEdit',
+		//	url:'/patients/edit',
+		//	views:{
+		//		'forms@dashboard':{
+		//			templateUrl:'modules/dashboard/views/PatientsEdit.html',
+		//			controller:'patientsEditCtrl as vm'
+		//		}
+		//	}
+		//},
 		{
 			name:'main.private.dashboard.abstract.ref',
 			url:'/references',

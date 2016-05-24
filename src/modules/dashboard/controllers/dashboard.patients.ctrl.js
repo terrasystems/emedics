@@ -106,6 +106,8 @@ angular.module('modules.dash')
 							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
 							return item;
 						});
+					} else {
+						res.result.push( { all: 'Add new reference...', id: 'add' } );
 					}
 					return res.result;
 				});
@@ -128,9 +130,25 @@ angular.module('modules.dash')
 
 		$scope.onSelect = function (item) {
 			if  (item.id && item.id == 'add') {
-				//vm.addFormList();
+				vm.addItemList();
 				return;
 			}
+		};
+
+		vm.addItemList = function () {
+			$state.go('main.private.dashboard.abstract.patients.create');
+		};
+
+		vm.onRemove = function (id) {
+			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST.criteria.list = [];
+			vm.paramsPOST.criteria.list.push(id);
+			http.post('private/dashboard/docpatients/remove', vm.paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+					vm.refresh();
+				});
 		};
 
 	});

@@ -24,7 +24,7 @@
 
 					</uib-accordion-heading>
 
-					<div ng-repeat="form in patient.forms" ng-click="vm.onEdit(form.id, patient.id)">
+					<div ng-repeat="form in patient.forms" ng-click="vm.onRemove(patient.id)">
 						<p> Name:{{form.blank.name}} </p>
 						<p> Description:{{form.blank.descr}}</p>
 						<p> Category:{{form.blank.category}}</p>
