@@ -139,10 +139,11 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.patients.create');
 		};
 
-		vm.Remove = function (id) {
+		vm.onRemove = function (id_) {
+			console.log(id_);
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
-			vm.paramsPOST.criteria.list.push(id);
+			vm.paramsPOST.criteria.list.push({id: id_});
 			http.post('private/dashboard/docpatients/remove', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();

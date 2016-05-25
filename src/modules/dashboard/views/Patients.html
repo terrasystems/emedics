@@ -20,10 +20,11 @@
 						Name:{{patient.name}}
 						Email:{{patient.email}}
 						Phone:{{patient.phone}}
+						<button ng-click="vm.onRemove(patient.id)" style="float: right" class="btn btn-small" >x</button>
 					</uib-accordion-heading>
 
 					<div ng-repeat="item in patient.history">
-						<button style="float: right" class="btn btn-small" ng-click="vm.onRemove(patient.id)">X</button>
+						<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)">Edit</button>
 						<p> Name: {{item.form.blank.name}} </p>
 						<p> Description: {{item.form.blank.descr}}</p>
 						<p> Category: {{item.form.blank.category}}</p>
