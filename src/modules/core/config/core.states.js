@@ -120,6 +120,22 @@ angular.module('modules.core')
 				}
 			}
 		},
+		{
+			name:'main.private.dashboard.abstract.patients.edit',
+			url:'/edit',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patTasksEdit.html',
+					controller:'patientTasksEditCtrl as vm'
+				}
+			},
+			params:{
+				id: '',
+				type: '',
+				patId: null
+			}
+		},
+
 		//{
 		//	name:'main.private.dashboard.abstract.patientsEdit',
 		//	url:'/patients/edit',
