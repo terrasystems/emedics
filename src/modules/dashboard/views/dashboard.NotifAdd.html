@@ -4,48 +4,28 @@
 		<h1>Massage</h1>
 
 		<div class="msg_form col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1 ">
-
+			<div><strong>Form:</strong>{{vm.name}}</div>
 			<label class="control-label">To doctor:</label>
 
-			<div class="">
-				<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id"
-						   theme="bootstrap">
-					<ui-select-match style="max-width: 310px" placeholder="Select or search a doctors in the list...">{{$select.selected.name +
-						'&nbsp (' + $select.selected.email + ')'}}
-					</ui-select-match>
 
-					<ui-select-choices repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">
+			<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id"
+					   theme="bootstrap">
+				<ui-select-match style="max-width: 310px" placeholder="Select or search a doctors in the list...">
+					{{$select.selected.name +
+					'&nbsp (' + $select.selected.email + ')'}}
+				</ui-select-match>
 
-						<div ng-bind="doc.name"></div>
-						<small ng-bind="doc.email"></small>
+				<ui-select-choices
+						repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">
 
-
-					</ui-select-choices>
-
+					<div ng-bind="doc.name"></div>
+					<small ng-bind="doc.email"></small>
 
 
-
-				</ui-select>
-
+				</ui-select-choices>
 
 
-			</div>
-
-			<label class=" control-label">Send form:</label>
-
-			<div class="">
-				<ui-select ng-model="form.selected" ng-change="vm.message.userForm = form.selected.id"
-						   theme="bootstrap">
-					<ui-select-match placeholder="Select or search a form in the list...">Name:
-						{{$select.selected.blank.name}} Num: {{$select.selected.blank.number}}
-					</ui-select-match>
-					<ui-select-choices class="msg_select"
-									   repeat="forma in (vm.getForms($select.search) | filter: $select.search) track by forma.id">
-						<div ng-bind="forma.blank.name"></div>
-						<small ng-bind="forma.blank.number"></small>
-					</ui-select-choices>
-				</ui-select>
-			</div>
+			</ui-select>
 
 			<form name="myform" class="notif" action="">
 				<label class=" control-label">Title:</label>
@@ -55,7 +35,7 @@
 				<textarea ng-model="vm.message.text" placeholder="Message text..." class="" name="" id=""
 						  rows="5"></textarea>
 				<button style="float: right" class="btn btn-default" type="button"
-						ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id && !!vm.message.userForm)"
+						ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id )"
 						ng-click="vm.send()">Send
 				</button>
 			</form>

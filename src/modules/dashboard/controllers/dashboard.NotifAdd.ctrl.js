@@ -2,8 +2,11 @@
 /*jshint	-W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('addNotificationCtrl', function ($scope, http, blockUI, initParamsPOST, localStorageService, alertService, $timeout, $state) {
+	.controller('addNotificationCtrl', function ($stateParams,$scope, http, blockUI, initParamsPOST, localStorageService, alertService, $timeout, $state) {
 		var vm = this;
+
+		vm.name=$stateParams.name;
+
 		vm.user = localStorageService.get('userData');
 		vm.message = {
 			'id': null,
@@ -14,7 +17,7 @@ angular.module('modules.dash')
 			'text': '',
 			'fromUser': {id: null},
 			'toUser': {id: null},
-			'userForm': null
+			'userForm': $stateParams.id
 		};
 
 		vm.forms = [];
@@ -39,7 +42,7 @@ angular.module('modules.dash')
 				}
 			});
 
-		//////////////////////////////////////////
+
 
 		vm.getDoctors = function (search) {
 			vm.newDocs = vm.doctors.slice();
@@ -75,18 +78,26 @@ angular.module('modules.dash')
 			return vm.newForms;
 		};
 
+		if (!$stateParams.id) {
+			$state.go('main.private.dashboard.abstract.tasks');
+		}
+
 		vm.send = function () {
-			http.post('private/dashboard/notifications/send', vm.message)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-					}
-					$timeout(function () {
-						$state.go('main.private.dashboard.abstract.notifications');
-					}, 500);
-				});
+			if (!$stateParams.id) {
+				$state.go('main.private.dashboard.abstract.tasks');
+			} else {
+				http.post('private/dashboard/notifications/send', vm.message)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							alertService.add(0, res.state.message);
+						}
+						$timeout(function () {
+							$state.go('main.private.dashboard.abstract.tasks');
+						}, 0);
+					});
+			}
+
+
 		};
-
-
 	});

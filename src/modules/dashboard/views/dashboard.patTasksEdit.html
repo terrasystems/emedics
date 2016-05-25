@@ -1,7 +1,7 @@
 <div class="container edit_form">
 	<div class="pad"></div>
 
-	<form ng-submit="vm.onSubmit()" name="vm.form" novalidate >
+	<form name="vm.form" novalidate >
 		<div class="row">
 		<div class="form-group col-md-2 col-sm-2">
 			<label>Select section</label>
@@ -21,25 +21,9 @@
 		<formly-form model="vm.model[vm.selectedKey][vm.selectedSection]" fields="vm.sections[vm.selectedKey][vm.selectedSection]" options=vm.options[vm.selectedKey][vm.selectedSection] form="vm.form" track-by="$index">
 		</formly-form>
 
-						<!--<pre>Model: {{vm.model | json}}</pre>-->
-						<!--<pre>Fields: {{vm.sections[key][value] | json}}</pre>-->
 
-		<!--<uib-tabset>-->
-			<!--<uib-tab ng-repeat="(key, value) in vm.sectionsName track by $index" heading="{{value}}" active="tab.active" disable="tab.disabled">-->
-				<!--<div class="tab-content">-->
-					<!--<div class="tab-pane active" id="#{{key}}">-->
-
-						<!--&lt;!&ndash;<pre>Model: {{vm.model | json}}</pre>&ndash;&gt;-->
-						<!--&lt;!&ndash;<pre>Fields: {{vm.sections[key][value] | json}}</pre>&ndash;&gt;-->
-
-						<!--<formly-form model="vm.model[key][value]" fields="vm.sections[key][value]" options=vm.options[key][value] form="vm.form" track-by="$index">-->
-						<!--</formly-form>-->
-
-					<!--</div>-->
-				<!--</div>-->
-			<!--</uib-tab>-->
-		<!--</uib-tabset>-->
-		<button type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
+		<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
+		<button style="float: right" class="btn btn-primary" ng-click="vm.s()">Add notification</button>
 	</form>
 
 

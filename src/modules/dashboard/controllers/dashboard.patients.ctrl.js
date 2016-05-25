@@ -139,7 +139,7 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.patients.create');
 		};
 
-		vm.onRemove = function (id) {
+		vm.Remove = function (id) {
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
 			vm.paramsPOST.criteria.list.push(id);

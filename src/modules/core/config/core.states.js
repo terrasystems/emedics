@@ -204,10 +204,15 @@ angular.module('modules.core')
 		{
 			name:'main.private.dashboard.abstract.notifications.addnotification',
 			url:'/add',
+			params:{
+				name:null,
+				id:null
+			},
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.NotifAdd.html',
 					controller:'addNotificationCtrl as vm'
+
 				}
 			}
 		}
