@@ -31,7 +31,7 @@ angular.module('modules.dash')
 			vm.getUrl = 'private/dashboard/' + vm.user.type + '/forms/' + vm.id;
 			vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
 		} else {
-			vm.getUrl = '';
+			vm.getUrl = 'private/dashboard/docpatients/forms/'+vm.id;
 			vm.setUrl = 'private/dashboard/docpatients/edit';
 		}
 
@@ -49,20 +49,32 @@ angular.module('modules.dash')
 		http.get(vm.getUrl, paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
-				if (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id) {
+				if ($stateParams.type == 'tasks') {
+					vm.checkArr = (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id);
+				} else {
+					vm.checkArr = (res.result && res.result.form && res.result.form.blank && res.result.form.blank.body && res.result.form.blank.body.sections && angular.isArray(res.result.form.blank.body.sections) && res.result.form.id);
+				}
 
+				if (vm.checkArr) {
 					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
 					vm.formInfo = {};
-					vm.formInfo.id = res.result.id;
-					vm.formInfo.category = res.result.blank.category;
-					vm.formInfo.name = res.result.blank.name;
-					vm.formInfo.number = res.result.blank.number;
-					vm.formInfo.descr = res.result.blank.descr;
+					vm.formInfo.id = ($stateParams.type == 'tasks') ?  res.result.id : res.result.form.id;
+					vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.blank.category : res.result.form.blank.category;
+					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.blank.name : res.result.form.blank.name;
+					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.blank.number : res.result.form.blank.number;
+					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descrb : res.result.form.blank.descrb;
 
 					vm.sectionsName = [];
-					res.result.blank.body.sections.forEach(function (item) {
-						vm.sectionsName.push(Object.keys(item)[0]);
-					});
+					if ($stateParams.type == 'tasks') {
+						res.result.blank.body.sections.forEach(function (item) {
+							vm.sectionsName.push(Object.keys(item)[0]);
+						});
+					} else {
+						res.result.form.blank.body.sections.forEach(function (item) {
+							vm.sectionsName.push(Object.keys(item)[0]);
+						});
+					}
+
 					if (!vm.model) {
 						vm.model = [];
 						vm.sectionsName.forEach(function (item) {
@@ -73,8 +85,7 @@ angular.module('modules.dash')
 					}
 					vm.selectedSection = vm.sectionsName[0];
 					if (vm.sectionsName.length > 0) {
-						vm.sections = res.result.blank.body.sections;
-
+						vm.sections = ($stateParams.type == 'tasks') ? res.result.blank.body.sections : res.result.form.blank.body.sections;
 						for (var key in  vm.model) {
 							var obj = vm.model[key][Object.keys(vm.model[key])[0]];
 							for (var prop in obj) {
