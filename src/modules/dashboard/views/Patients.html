@@ -20,7 +20,10 @@
 						Name:{{patient.name}}
 						Email:{{patient.email}}
 						Phone:{{patient.phone}}
-						<button ng-click="vm.onRemove(patient.id)" style="float: right" class="btn btn-small" >x</button>
+						<div  class="pull-right btn-group btn-group-xs" >
+
+						<button  ng-click="vm.onRemove(patient.id,$event); "  class="btn btn-danger" >x</button>
+						</div>
 					</uib-accordion-heading>
 
 					<div ng-repeat="item in patient.history">
