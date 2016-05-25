@@ -14,7 +14,7 @@
 <div class="container ui-list-view">
 
 
-		<button style="margin-top: 10px;" class="btn btn-info">Invite</button>
+
 		<!--<label class="col-sm-3 control-label">{{ doctor.length}}</label>-->
 
 		<ul ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
@@ -26,9 +26,11 @@
 			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>
 				{{ref.phone}}</h5></li>
 
-			<div class="buttons" ng-show="!textBtnForm.$visible">
-				<button style="float: right" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
+			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
+				<button style="margin-top: 10px;"  class="btn btn-info">Invite</button>
+				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
 						class="glyphicon glyphicon-trash"></i></button>
+
 			</div>
 
 		</ul>

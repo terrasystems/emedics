@@ -10,7 +10,7 @@
 </div>
 
 <div class=" ui-list-view container">
-	<button style="margin-top: 10px;" class="btn btn-info">Invite</button>
+
 	<div class="row ">
 		<div class="container">
 			<uib-accordion>
@@ -22,8 +22,9 @@
 						Email:{{patient.email}}
 						Phone:{{patient.phone}}
 						<div  class="pull-right btn-group btn-group-xs" >
-
+							<button class="btn btn-info">Invite</button>
 						<button  ng-click="vm.onRemove(patient.id,$event); "  class="btn btn-danger" >x</button>
+
 						</div>
 					</uib-accordion-heading>
 
