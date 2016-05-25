@@ -18,7 +18,7 @@ angular.module('modules.dash')
 		} else {
 			vm.mainState = 'main.private.dashboard.abstract.patients';
 		}
-
+     vm.hideButton = $stateParams.type;
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go(vm.mainState);
 			return;
