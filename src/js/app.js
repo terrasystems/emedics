@@ -2,13 +2,13 @@
 /*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
-	'blockUI', 'toastr', 'LocalStorageModule','xeditable',// 'ngMockE2E',
+	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', // 'ngMockE2E',
 	//--
 	'modules.core', 'modules.public', 'modules.dash','ui.select','ngSanitize','ui.router.tabs']);
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
-						 localStorageServiceProvider, $provide) {
+						 localStorageServiceProvider, $translateProvider, $provide) {
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
@@ -34,10 +34,16 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 
 	// Local storage Prefix
 	localStorageServiceProvider.setPrefix('emed');
+
+	// Translations
+	$translateProvider.useStaticFilesLoader({
+		prefix: 'i18n/translation_',
+		suffix: '.json'
+	});
 })
 
 
-.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, $httpBackend, constants) {
+.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, $httpBackend, constants, $translate) {
 
 	formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
 	formlyValidationMessages.addStringMessage('required', 'This field is required');
@@ -47,6 +53,8 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 			checkUserAuth();
 		}
 	});
+
+	$translate.use('en');
 }
 
 	//$httpBackend.whenGET(/^modules\//).passThrough();

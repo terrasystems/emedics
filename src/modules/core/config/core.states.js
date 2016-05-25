@@ -135,17 +135,6 @@ angular.module('modules.core')
 				patId: null
 			}
 		},
-
-		//{
-		//	name:'main.private.dashboard.abstract.patientsEdit',
-		//	url:'/patients/edit',
-		//	views:{
-		//		'forms@dashboard':{
-		//			templateUrl:'modules/dashboard/views/PatientsEdit.html',
-		//			controller:'patientsEditCtrl as vm'
-		//		}
-		//	}
-		//},
 		{
 			name:'main.private.dashboard.abstract.ref',
 			url:'/references',

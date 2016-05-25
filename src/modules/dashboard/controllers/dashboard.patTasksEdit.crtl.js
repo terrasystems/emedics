@@ -49,6 +49,7 @@ angular.module('modules.dash')
 		http.get(vm.getUrl, paramsPOST)
 			.then(function (res) {
 				blockUI.stop();
+
 				if ($stateParams.type == 'tasks') {
 					vm.checkArr = (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id);
 				} else {
@@ -63,7 +64,7 @@ angular.module('modules.dash')
 					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.blank.name : res.result.form.blank.name;
 					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.blank.number : res.result.form.blank.number;
 					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descrb : res.result.form.blank.descrb;
-
+// $translate.instant('QCTYPE0');
 					vm.sectionsName = [];
 					if ($stateParams.type == 'tasks') {
 						res.result.blank.body.sections.forEach(function (item) {

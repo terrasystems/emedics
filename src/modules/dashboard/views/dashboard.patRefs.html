@@ -27,7 +27,7 @@
 				{{ref.phone}}</h5></li>
 
 			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-				<button style="margin-top: 10px;"  class="btn btn-info">Invite</button>
+				<button style="margin-top: 10px;"  class="btn btn-info" ng-click="vm.onInvite(ref.email, $event)">Invite</button>
 				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
 						class="glyphicon glyphicon-trash"></i></button>
 

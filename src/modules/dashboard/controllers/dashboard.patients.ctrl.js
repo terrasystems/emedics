@@ -159,4 +159,18 @@ angular.module('modules.dash')
 				});
 		};
 
+		vm.onInvite = function (email, $event) {
+			if($event){
+				$event.stopPropagation();
+				$event.preventDefault();
+			}
+			console.log(email);
+			http.post('private/dashboard/docpatients/invite', email)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+					vm.refresh();
+				});
+		};
+
 	});
