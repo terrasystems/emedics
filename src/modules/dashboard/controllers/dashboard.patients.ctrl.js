@@ -84,7 +84,7 @@ angular.module('modules.dash')
 			http.get('private/dashboard/docpatients', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.result && angular.isArray(res.result) && res.result.length>0) {
+					if (res.result && angular.isArray(res.result) ) {
 						vm.patients = res.result;
 					}
 				});
@@ -115,6 +115,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.onApply = function (obj) {
+
 			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
 				vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
@@ -124,6 +125,7 @@ angular.module('modules.dash')
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
+						$scope.doctor='';
 						vm.refresh();
 					});
 			}
