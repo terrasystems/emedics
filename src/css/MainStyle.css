@@ -403,8 +403,8 @@ div.panel-group{
 .form-list{
 	background: #d6d6d6;
 }
-.info_background{
-	background: #109AC8;
+.info{
+	margin-top: 20px;
 }
 /*---------media--------*/
 
