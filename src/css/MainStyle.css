@@ -388,7 +388,19 @@ div.panel-group {
 div.panel-group{
 	margin-top: 30px;
 }
-
+.header_settings{
+	margin-right: 70px;
+	margin-top: 3px;
+}
+.email_header{
+	border-bottom: solid 1px;
+}
+.email_name{
+	text-align: center;
+}
+.settings{
+	width: 150px;
+}
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */

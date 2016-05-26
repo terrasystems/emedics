@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($rootScope, localStorageService, $state) {
+	.controller('DashCtrl', function ($scope,$rootScope, localStorageService, $state) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.tabData = [{heading: 'Tasks', route: 'main.private.dashboard.abstract.tasks', disable: false},
@@ -12,7 +12,8 @@ angular.module('modules.dash')
 			{heading: 'Patient Forms', route: 'main.private.dashboard.abstract.forms', disable: false},
 			{heading: 'Patients', route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
 		];
-
+		$scope.$state=$state;
+		console.log('I am settings ctrl');
 		vm.logout = function () {
 			$rootScope.userData = null;
 			$rootScope.token = null;

@@ -220,6 +220,18 @@ angular.module('modules.core')
 
 				}
 			}
+		},
+		{
+			name:'main.private.dashboard.settings',
+			url:'/settings',
+			//parent: 'main.private.dashboard',
+			views:{
+				'dashboard@content':{
+					templateUrl:'modules/dashboard/views/settings.html',
+					controller:'settingsCtrl as vm'
+				}
+			}
 		}
 
 	]);
+
