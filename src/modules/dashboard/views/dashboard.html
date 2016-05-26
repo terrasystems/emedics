@@ -5,10 +5,11 @@
 	<div class="btn-group pull-rigth header_settings" uib-dropdown is-open="status.isopen">
 		<button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
 			Hello,{{vm.user.type.toUpperCase()}}
+			({{vm.user.username}})
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-			<div class="email_header"><p>{{vm.user.username}}</p></div>
+
 			<li><a ui-sref="main.private.dashboard.settings">Settings</a></li>
 			<li><a class="black-clr " ng-click="vm.logout()">Logout</a></li>
 

@@ -389,7 +389,6 @@ div.panel-group{
 	margin-top: 30px;
 }
 .header_settings{
-	margin-right: 70px;
 	margin-top: 3px;
 }
 .email_header{
@@ -400,6 +399,12 @@ div.panel-group{
 }
 .settings{
 	width: 150px;
+}
+.form-list{
+	background: #d6d6d6;
+}
+.info_background{
+	background: #109AC8;
 }
 /*---------media--------*/
 
