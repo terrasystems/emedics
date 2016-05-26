@@ -3,7 +3,7 @@
 
 angular.module('modules.public', [])
 
-	.controller('LoginCtrl', function ($state, $timeout, blockUI, alertService, auth, http) {
+	.controller('LoginCtrl', function ($translate, $state, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
 		vm.user = {};
 		vm.options = {};
@@ -15,8 +15,8 @@ angular.module('modules.public', [])
 				templateOptions: {
 					type: 'email',
 					required: true,
-					label: 'Email address',
-					placeholder: 'Enter email',
+					label: $translate.instant('EMAIL'),
+					placeholder: $translate.instant('EMAIL_1'),
 					addonRight: {
 						class: 'glyphicon glyphicon-user'
 					}
@@ -29,8 +29,8 @@ angular.module('modules.public', [])
 				templateOptions: {
 					type: 'password',
 					required: true,
-					label: 'Password',
-					placeholder: 'Password',
+					label: $translate.instant('PASSWORD'),
+					placeholder: $translate.instant('PASSWORD_1'),
 					addonRight: {
 						class: 'glyphicon glyphicon-lock'
 					}
@@ -62,17 +62,17 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('RegistrationCtrl', function ($state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
+	.controller('RegistrationCtrl', function ($translate, $state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
-		vm.pat_fields = angular.copy(pat_fields);
-		vm.doc_fields = angular.copy(doc_fields);
-		vm.org_fields = angular.copy(org_fields);
+		vm.pat_fields = pat_fields;
+		vm.doc_fields = doc_fields;
+		vm.org_fields = org_fields;
 
 		vm.reg = {pat:{}, doc:{}, org: {}};
 
 		vm.tabs = [
 			{
-				title: 'Patient',
+				title: $translate.instant('PATIENT'),
 				active: true,
 				index : 0,
 				type: 'pat',
@@ -83,7 +83,7 @@ angular.module('modules.public', [])
 				}
 			},
 			{
-				title: 'Doctor',
+				title: $translate.instant('DOCTOR'),
 				active: false,
 				index : 1,
 				type: 'doc',
@@ -94,7 +94,7 @@ angular.module('modules.public', [])
 				}
 			},
 			{
-				title: 'Homecare Organization',
+				title: $translate.instant('ORGANIZATION'),
 				active: false,
 				index : 2,
 				type: 'org',
@@ -136,7 +136,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService) {
+	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService, $translate) {
 		var vm = this;
 		vm.forgotPass = '';
 
@@ -150,7 +150,7 @@ angular.module('modules.public', [])
 							var value = $modelValue || $viewValue;
 							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 						},
-						message: '$viewValue + " is not a valid e-mail address"'
+						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
 					}
 				},
 				validation: {
@@ -161,7 +161,7 @@ angular.module('modules.public', [])
 					}
 				},
 				templateOptions: {
-					placeholder: 'Write your email for reset password',
+					placeholder: $translate.instant('RESET_PASS'),
 					type: 'text',
 					required: true,
 					addonRight: {
@@ -182,7 +182,7 @@ angular.module('modules.public', [])
 					$timeout(function () {
 						$state.go('main.public.login');
 					}, 500);
-				}, function (res) {
+				}, function () {
 					blockUI.stop();
 					$timeout(function () {
 						$state.go('main.public.login');

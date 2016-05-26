@@ -44,6 +44,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 
 
 .run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, $httpBackend, constants, $translate) {
+	$translate.use('en');
 
 	formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
 	formlyValidationMessages.addStringMessage('required', 'This field is required');
@@ -54,7 +55,6 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		}
 	});
 
-	$translate.use('en');
 }
 
 	//$httpBackend.whenGET(/^modules\//).passThrough();

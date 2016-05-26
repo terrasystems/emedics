@@ -1,5 +1,5 @@
 'use strict';
-/*jshint -W117, -W097, -W116*/
+/*jshint -W117, -W097, -W116, -W089*/
 
 angular.module('modules.dash')
 
@@ -63,8 +63,8 @@ angular.module('modules.dash')
 					vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.blank.category : res.result.form.blank.category;
 					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.blank.name : res.result.form.blank.name;
 					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.blank.number : res.result.form.blank.number;
-					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descrb : res.result.form.blank.descrb;
-// $translate.instant('QCTYPE0');
+					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descr : res.result.form.blank.descr;
+
 					vm.sectionsName = [];
 					if ($stateParams.type == 'tasks') {
 						res.result.blank.body.sections.forEach(function (item) {
@@ -104,21 +104,17 @@ angular.module('modules.dash')
 							}
 						}
 					});
-
 				}
 			});
 
 		vm.s = function () {
 			save().then(function () {
-
 						$state.go('main.private.dashboard.abstract.notifications.addnotification', {
 							id: vm.formInfo.id,
 							name: vm.formInfo.name
 						});
-
 				}
 			);
-
 		};
 
 		function save() {
@@ -136,13 +132,11 @@ angular.module('modules.dash')
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}
-
 				}, function (error) {
 					deferred.reject(error);
 				});
 			return deferred.promise;
 		}
-
 
 		function onSubmit() {
 			save().then(function () {
@@ -151,4 +145,5 @@ angular.module('modules.dash')
 				}, 0);
 			});
 		}
+
 	});

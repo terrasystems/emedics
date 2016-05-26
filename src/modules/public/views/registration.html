@@ -10,7 +10,7 @@
 						 select="vm.selTab(0);vm.tabs[0].form.options.resetModel()" ng-click="">
 					<form ng-submit="vm.onSubmit()" name="vm.formPat" novalidate>
 						<formly-form  model="vm.tabs[0].form.model" fields="vm.tabs[0].form.fields" form="vm.formPat" options="vm.tabs[0].form.options">
-						<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formPat.$invalid">Submit</button>
+						<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formPat.$invalid"><span translate="SUBMIT"></span></button>
 						</formly-form>
 					</form>
 				</uib-tab>
@@ -19,7 +19,7 @@
 						 select="vm.selTab(1);vm.tabs[1].form.options.resetModel()" ng-click="">
 					<form ng-submit="vm.onSubmit()" name="vm.formDoc" novalidate>
 						<formly-form model="vm.tabs[1].form.model" fields="vm.tabs[1].form.fields" form="vm.formDoc" options="vm.tabs[1].form.options">
-							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formDoc.$invalid">Submit</button>
+							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formDoc.$invalid"><span translate="SUBMIT"></span></button>
 						</formly-form>
 					</form>
 				</uib-tab>
@@ -28,14 +28,14 @@
 						 select="vm.selTab(2);vm.tabs[2].form.options.resetModel()" ng-click="">
 					<form ng-submit="vm.onSubmit()" name="vm.formOrg" novalidate>
 						<formly-form model="vm.tabs[2].form.model" fields="vm.tabs[2].form.fields" form="vm.formOrg" options="vm.tabs[2].form.options">
-							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formOrg.$invalid">Submit</button>
+							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formOrg.$invalid"><span translate="SUBMIT"></span></button>
 						</formly-form>
 					</form>
 				</uib-tab>
 
 		</uib-tabset>
 	</div>
-	<a class="login-page-form" ui-sref="main.public.login"> <i class="glyphicon glyphicon-arrow-left"></i>Back to login</a>
+	<a class="login-page-form" ui-sref="main.public.login"> <i class="glyphicon glyphicon-arrow-left"></i><span translate="BACK_LOGIN"></span></a>
 </div>
 
 <script type="text/ng-template" id="error-messages.html">

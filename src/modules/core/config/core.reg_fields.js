@@ -3,15 +3,16 @@
 
 angular.module('modules.core')
 
-	.constant('pat_fields', [
+	.service('pat_fields', function($translate) {
+		var arr = [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
 			type: 'input',
 			templateOptions: {
-				label: 'Name',
-				required: true,
-				placeholder: 'Enter your Name'
+				label: $translate.instant('NAME'),
+				placeholder: $translate.instant('USER_NAME'),
+				required: true
 			}
 		},
 		{
@@ -24,19 +25,19 @@ angular.module('modules.core')
 						var value = $modelValue || $viewValue;
 						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 					},
-					message: '$viewValue + " is not a valid e-mail address"'
+					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
 				}
 			},
 			templateOptions: {
 				type: 'text',
 				required: true,
-				label: 'Email address',
-				placeholder: 'Enter email'
+				label: $translate.instant('EMAIL'),
+				placeholder: $translate.instant('EMAIL_1')
 			},
 			validation: {
 				messages: {
 					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required'
+						return scope.to.label + ' is required';
 					}
 				}
 			}
@@ -48,21 +49,24 @@ angular.module('modules.core')
 			templateOptions: {
 				type: 'password',
 				required: true,
-				label: 'Password',
-				placeholder: 'Enter password'
+				label: $translate.instant('PASSWORD'),
+				placeholder: $translate.instant('PASSWORD_1')
 			}
 		}
-	])
+		];
+		return arr;
+	})
 
-	.constant('doc_fields', [
+	.service('doc_fields', function($translate) {
+		var arr = [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
 			type: 'input',
 			templateOptions: {
-				label: 'Name',
 				required: true,
-				placeholder: 'Enter your Name'
+				label: $translate.instant('NAME'),
+				placeholder: $translate.instant('USER_NAME')
 			}
 		},
 		{
@@ -75,19 +79,19 @@ angular.module('modules.core')
 						var value = $modelValue || $viewValue;
 						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 					},
-					message: '$viewValue + " is not a valid e-mail address"'
+					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
 				}
 			},
 			templateOptions: {
 				type: 'text',
 				required: true,
-				label: 'Email address',
-				placeholder: 'Enter email'
+				label: $translate.instant('EMAIL'),
+				placeholder: $translate.instant('EMAIL_1')
 			},
 			validation: {
 				messages: {
 					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required'
+						return scope.to.label + ' is required';
 					}
 				}
 			}
@@ -99,21 +103,24 @@ angular.module('modules.core')
 			templateOptions: {
 				type: 'password',
 				required: true,
-				label: 'Password',
-				placeholder: 'Enter password'
+				label: $translate.instant('PASSWORD'),
+				placeholder: $translate.instant('PASSWORD_1')
 			}
 		}
-	])
+		];
+		return arr;
+	})
 
-	.constant('org_fields', [
+	.service('org_fields', function($translate) {
+		var arr = [
 		{
 			className: 'col-md-12',
 			key: 'user.username',
 			type: 'input',
 			templateOptions: {
-				label: 'Name',
 				required: true,
-				placeholder: 'Enter your Name'
+				label: $translate.instant('NAME'),
+				placeholder: $translate.instant('USER_NAME')
 			}
 		},
 		{
@@ -126,19 +133,19 @@ angular.module('modules.core')
 						var value = $modelValue || $viewValue;
 						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 					},
-					message: '$viewValue + " is not a valid e-mail address"'
+					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
 				}
 			},
 			templateOptions: {
 				type: 'text',
 				required: true,
-				label: 'Email address',
-				placeholder: 'Enter email'
+				label: $translate.instant('EMAIL'),
+				placeholder: $translate.instant('EMAIL_1')
 			},
 			validation: {
 				messages: {
 					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required'
+						return scope.to.label + ' is required';
 					}
 				}
 			}
@@ -150,8 +157,8 @@ angular.module('modules.core')
 			templateOptions: {
 				type: 'password',
 				required: true,
-				label: 'Password',
-				placeholder: 'Enter password'
+				label: $translate.instant('PASSWORD'),
+				placeholder: $translate.instant('PASSWORD_1')
 			}
 		},
 		{
@@ -159,9 +166,9 @@ angular.module('modules.core')
 			key: 'org.www',
 			type: 'input',
 			templateOptions: {
-				label: 'website',
 				required: true,
-				placeholder: 'Enter your web-site'
+				label:  $translate.instant('WEBSITE'),
+				placeholder:  $translate.instant('WEBSITE_1')
 			}
 		},
 		{
@@ -169,9 +176,9 @@ angular.module('modules.core')
 			key: 'org.fullname',
 			type: 'input',
 			templateOptions: {
-				label: 'Organization name',
 				required: true,
-				placeholder: 'Full organization name'
+				label:  $translate.instant('ORG_NAME'),
+				placeholder:  $translate.instant('ORG_NAME_FULL')
 			}
 		},
 		{
@@ -179,9 +186,9 @@ angular.module('modules.core')
 			key: 'org.address',
 			type: 'input',
 			templateOptions: {
-				label: 'Address',
 				required: true,
-				placeholder: 'Organization Address'
+				label: $translate.instant('ADDRESS'),
+				placeholder: $translate.instant('ORG_ADDRESS')
 			}
 		},
 		{
@@ -189,15 +196,16 @@ angular.module('modules.core')
 			key: 'org.type',
 			type: 'select',
 			templateOptions: {
-				label: 'Type organization',
 				required: true,
-				placeholder: 'Type organization',
+				label: $translate.instant('ORG_TYPE'),
+				placeholder: $translate.instant('ORG_TYPE'),
 				options: [
-					{name: 'Type #1', value: 'Type #1'},
-					{name: 'Type #2', value: 'Type #2'},
-					{name: 'Type #3', value: 'Type #3'}
+					{name: $translate.instant('ORG_TYPE_1'), value: 'type_1'},
+					{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
+					{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
 				]
 			}
 		}
-	]
-);
+		];
+		return arr;
+	});
