@@ -3,18 +3,28 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl',function($scope,$state){
-		var vm=this;
-		vm.InfoChange={
-			id:null,
-			email:'',
-			typeExp:null
+	.controller('settingsCtrl', function ($rootScope, http) {
+		var vm = this;
+
+		vm.paramsPOST = {
+			id: null,
+			password: '',
+			username: angular.copy($rootScope.userData.name),
+			email: angular.copy($rootScope.userData.email),
+			typeExp: angular.copy($rootScope.userData.typeExp),
+			type: null
 		};
-vm.onSave=function(){
-	vm.InfoChanged={};
-	vm.InfoChanged.id=vm.InfoChange.id;
-	vm.InfoChanged.email=vm.InfoChange.email;
-	vm.InfoChanged.typeExp=vm.InfoChange.typeExp;
-	console.log(vm.InfoChanged);
-};
+
+		vm.onSave = function () {
+			console.log(vm.InfoChange);
+			http.post('private/user_edit', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result) {
+						vm.list = res.result;
+						vm.page = res.page;
+					}
+				});
+		};
+
 	});
