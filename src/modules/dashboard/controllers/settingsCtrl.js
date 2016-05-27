@@ -3,9 +3,9 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http,auth) {
+	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, auth) {
 		var vm = this;
-console.log('settingsCTRL');
+		console.log('settingsCTRL');
 		vm.paramsPOST = {
 			id: null,
 			password: '',
@@ -15,24 +15,17 @@ console.log('settingsCTRL');
 			type: null
 		};
 
-		vm.changedPass={
-			'oldPass':'',
-			'newPass':''
+		vm.changedPass = {
+			'oldPass': '',
+			'newPass': ''
 
 		};
-		vm.PassConfirm={
-			'confirm':''
+		vm.PassConfirm = {
+			'confirm': ''
 		};
 
-		//vm.disSave=function(){
-		//	if(vm.changePass.newPass === vm.PassConfirm.confirm){
-		//		return false;
-		//	}else{
-		//		return true;
-		//	}
-		//		};
 
-		vm.onChangePass=function(){
+		vm.onChangePass = function () {
 			console.log(vm.changedPass);
 			http.post('private/change_pass', vm.changedPass)
 				.then(function (res) {
@@ -42,22 +35,23 @@ console.log('settingsCTRL');
 						alertService.add(0, res.state.message);
 					}
 				});
-			vm.changedPass={
-				'oldPass':'',
-				'newPass':''
+			vm.changedPass = {
+				'oldPass': '',
+				'newPass': ''
 			};
-			vm.PassConfirm={
-				'confirm':''
+			vm.PassConfirm = {
+				'confirm': ''
 			};
 		};
+		vm.possibleChoices = [{type: 'Doctor'}, {type: 'Patient'}, {type: 'Homecare Organization'}];
 
-			vm.onSave = function () {
+		vm.onSave = function () {
 			console.log(vm.paramsPOST);
 			http.post('private/user_edit', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-           alertService.add(0, res.state.message);
+						alertService.add(0, res.state.message);
 						auth.saveUserData(res);
 					}
 				});
