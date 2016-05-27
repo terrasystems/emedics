@@ -23,6 +23,11 @@ angular.module('modules.dash')
 		vm.PassConfirm = {
 			'confirm': ''
 		};
+//vm.disableChange= function(){
+//	if( vm.changedPass.newPass !== vm.PassConfirm.confirm  ){
+//		return true;
+//	}
+//};
 
 
 		vm.onChangePass = function () {

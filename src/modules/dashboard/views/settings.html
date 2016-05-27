@@ -37,7 +37,8 @@
 	<uib-tab index="2" heading="Change Password">
 		<div class="container form-list">
 			<div class="row ">
-				<div class="col-md-12 form-group ">
+				<div class="col-md-12 form-group  ">
+					<form name="infoForm">
 					<div class="input-group input-group-md info">
 						<span class="input-group-addon" id="sizing-addon1">Old Password</span>
 						<input type="password" ng-model="vm.changedPass.oldPass" type="text" class="form-control"
@@ -54,11 +55,12 @@
 							   placeholder="Confirm password" aria-describedby="sizing-addon3" required>
 					</div>
 					<button ng-click="vm.onChangePass();"
-							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm" type="submit"
+							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm; infoForm.$invalid " type="submit"
 							class="btn btn-success pull-right">change
 					</button>
 					<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm">Confirm your password, please</span>
-				</div>
+				</form>
+
 			</div>
 			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i> Back to
 				Dashboard</a>
