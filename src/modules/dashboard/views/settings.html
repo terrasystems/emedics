@@ -55,7 +55,7 @@
 							   placeholder="Confirm password" aria-describedby="sizing-addon3" required>
 					</div>
 					<button ng-click="vm.onChangePass();"
-							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm; infoForm.$invalid " type="submit"
+							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid " type="submit"
 							class="btn btn-success pull-right">change
 					</button>
 					<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm">Confirm your password, please</span>
