@@ -222,7 +222,7 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.settings',
+			name:'main.private.dashboard.abstract.settings',
 			url:'/settings',
 			//parent: 'main.private.dashboard',
 			views:{

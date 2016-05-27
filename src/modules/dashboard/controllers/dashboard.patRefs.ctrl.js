@@ -25,6 +25,7 @@ angular.module('modules.dash')
 						vm.refresh();
 					});
 			}
+			$scope.doctor='';
 		};
 
 		//*** get all items

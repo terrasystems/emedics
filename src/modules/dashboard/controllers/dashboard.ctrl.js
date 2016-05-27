@@ -13,7 +13,6 @@ angular.module('modules.dash')
 			{heading: 'Patients', route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
 		];
 		$scope.$state=$state;
-		console.log('I am settings ctrl');
 		vm.logout = function () {
 			$rootScope.userData = null;
 			$rootScope.token = null;

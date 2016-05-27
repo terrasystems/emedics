@@ -3,9 +3,9 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, auth) {
+	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http,auth) {
 		var vm = this;
-
+console.log('settingsCTRL');
 		vm.paramsPOST = {
 			id: null,
 			password: '',
@@ -42,6 +42,13 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 					}
 				});
+			vm.changedPass={
+				'oldPass':'',
+				'newPass':''
+			};
+			vm.PassConfirm={
+				'confirm':''
+			};
 		};
 
 			vm.onSave = function () {
@@ -50,7 +57,7 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-						alertService.add(0, res.state.message);
+           alertService.add(0, res.state.message);
 						auth.saveUserData(res);
 					}
 				});
