@@ -82,7 +82,7 @@ angular.module('modules.core')
 				}
 				else {
 					deferred.reject(false);
-					alertService.add(2, "don't receive data from server");
+					alertService.add(2, "Don't receive data from server");
 				}
 			}, function (error) {
 				deferred.reject(error);

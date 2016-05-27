@@ -17,13 +17,12 @@ angular.module('modules.dash')
 
 		vm.onSave = function () {
 			console.log(vm.paramsPOST);
-			http.post('public/user_edit', vm.paramsPOST)
+			http.post('private/user_edit', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.result) {
+					if (res.state) {
+
 						alertService.add(0, res.state.message);
-						vm.list = res.result;
-						vm.page = res.page;
 					}
 				});
 		};

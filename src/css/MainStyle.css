@@ -489,3 +489,9 @@ and (min-width: 1824px) {
 
 	/*** You've spent way too much on a phone ***/
 }
+.fieldgroup{
+	background: #ccc;
+}
+.field{
+	margin-left: 20px;
+}
