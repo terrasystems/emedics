@@ -3,16 +3,16 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function (alertService,blockUI,$rootScope, http) {
+	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, auth) {
 		var vm = this;
 
 		vm.paramsPOST = {
-			'id': null,
-			'password': '',
-			'username': angular.copy($rootScope.userData.name),
-			'email': angular.copy($rootScope.userData.email),
-			'typeExp': angular.copy($rootScope.userData.typeExp),
-			'type': null
+			id: null,
+			password: '',
+			username: angular.copy($rootScope.userData.username),
+			email: angular.copy($rootScope.userData.email),
+			typeExp: angular.copy($rootScope.userData.typeExp),
+			type: null
 		};
 
 		vm.changedPass={
@@ -50,8 +50,8 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-
 						alertService.add(0, res.state.message);
+						auth.saveUserData(res);
 					}
 				});
 		};
