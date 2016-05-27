@@ -15,7 +15,36 @@ angular.module('modules.dash')
 			'type': null
 		};
 
-		vm.onSave = function () {
+		vm.changedPass={
+			'oldPass':'',
+			'newPass':''
+
+		};
+		vm.PassConfirm={
+			'confirm':''
+		};
+
+		//vm.disSave=function(){
+		//	if(vm.changePass.newPass === vm.PassConfirm.confirm){
+		//		return false;
+		//	}else{
+		//		return true;
+		//	}
+		//		};
+
+		vm.onChangePass=function(){
+			console.log(vm.changedPass);
+			http.post('private/change_pass', vm.changedPass)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+
+						alertService.add(0, res.state.message);
+					}
+				});
+		};
+
+			vm.onSave = function () {
 			console.log(vm.paramsPOST);
 			http.post('private/user_edit', vm.paramsPOST)
 				.then(function (res) {
