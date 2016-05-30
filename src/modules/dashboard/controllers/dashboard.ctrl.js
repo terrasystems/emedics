@@ -3,16 +3,18 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($scope,$rootScope, localStorageService, $state) {
+	.controller('DashCtrl', function ($scope, $rootScope, localStorageService, $state, $translate) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.tabData = [{heading: 'Tasks', route: 'main.private.dashboard.abstract.tasks', disable: false},
-			{heading: 'References', route: 'main.private.dashboard.abstract.ref', disable: false },
-			{heading: 'Notifications', route: 'main.private.dashboard.abstract.notifications', disable: false },
-			{heading: 'Patient Forms', route: 'main.private.dashboard.abstract.forms', disable: false},
-			{heading: 'Patients', route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
+
+		vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.abstract.tasks', disable: false},
+			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.abstract.ref', disable: false },
+			{heading: $translate.instant('NOTIFICATIONS'), route: 'main.private.dashboard.abstract.notifications', disable: false },
+			{heading: $translate.instant('PATIENT_FORMS'), route: 'main.private.dashboard.abstract.forms', disable: false},
+			{heading: $translate.instant('PATIENTS'), route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
 		];
-		$scope.$state=$state;
+		$scope.$state = $state;
+
 		vm.logout = function () {
 			$rootScope.userData = null;
 			$rootScope.token = null;
