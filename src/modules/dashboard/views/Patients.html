@@ -2,43 +2,41 @@
 <div class="search_content">
 	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 		   ng-model="doctor"
-		   placeholder="Search a patients in the database..."
+		   placeholder="{{'SEARCH_PATS' | translate}}"
 		   uib-typeahead="item as item.all for item in getFindPatients($viewValue)"
 		   typeahead-on-select="onSelect($item)"
 		   typeahead-loading="loadingLocations"
 		   class="form-control">
-	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>
+	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span translate="APPLY"></span></button>
 </div>
 
 <div class=" ui-list-view container">
-
 	<div class="row ">
 		<div class="container">
 			<uib-accordion>
 
-
 				<uib-accordion-group ng-repeat="patient in vm.patients">
-					<uib-accordion-heading>
-						Name:{{patient.name}}
-						Email:{{patient.email}}
-						Phone:{{patient.phone}}
-						<div  class="pull-right btn-group btn-group-xs" >
-							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info">Invite</button>
-							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger" >x</button>
 
+					<uib-accordion-heading>
+						<span translate="NAME"></span>: {{patient.name}}
+						<span translate="EMAIL"></span>: {{patient.email}}
+						<span translate="PHONE"></span>: {{patient.phone}}
+						<div  class="pull-right btn-group btn-group-xs" >
+							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
+							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger" >x</button>
 						</div>
 					</uib-accordion-heading>
 
 					<div ng-repeat="item in patient.history">
-						<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)">Edit</button>
-						<p> Name: {{item.form.blank.name}} </p>
-						<p> Description: {{item.form.blank.descr}}</p>
-						<p> Category: {{item.form.blank.category}}</p>
-						<p> Number: {{item.form.blank.number}} </p>
+						<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)"><span translate="EDIT"></span></button>
+						<p><span translate="NAME"></span>: {{item.form.blank.name}} </p>
+						<p><span translate="DESCR"></span>: {{item.form.blank.descr}}</p>
+						<p><span translate="CATEGORY"></span>: {{item.form.blank.category}}</p>
+						<p><span translate="NUMBER"></span>: {{item.form.blank.number}} </p>
 					</div>
 
 					<div ng-if="patient.history.length==0" class="text-center">
-						<span><h4>No data to load</h4>{{form | json}}</span>
+						<span><h4><span translate="NO_DATA"></span></h4></span>
 					</div>
 
 				</uib-accordion-group>

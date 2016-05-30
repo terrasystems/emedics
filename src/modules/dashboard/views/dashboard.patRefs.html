@@ -1,41 +1,34 @@
 <div class="search_content">
 	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 		   ng-model="doctor"
-		   placeholder="Search a doctors in the database..."
+		   placeholder="{{'SEARCH_REFS2' | translate}}"
 		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
 		   typeahead-on-select="onSelect($item);"
 		   typeahead-loading="loadingLocations"
 		   typeahead-editable="true"
 		   class="form-control">
 
-	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()">Apply</button>
+	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span translate="APPLY"></span></button>
 </div>
 
 <div class="container ui-list-view">
-
-
-
-		<!--<label class="col-sm-3 control-label">{{ doctor.length}}</label>-->
-
 		<ul ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
-			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3">Name:<h4>
-				{{ref.name}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3">Type:<h4>
-				{{ref.type}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3">Phone:<h5>
-				{{ref.phone}}</h5></li>
+			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span translate="NAME"></span>:
+				<h4>{{ref.name}}</h4></li>
+			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span translate="TYPE"></span>:
+				<h4>{{ref.type}}</h4></li>
+			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span translate="PHONE"></span>:
+				<h5>{{ref.phone}}</h5></li>
 
 			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-				<button style="margin-top: 10px;"  class="btn btn-info" ng-click="vm.onInvite(ref.email, $event)">Invite</button>
-				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)"><i
-						class="glyphicon glyphicon-trash"></i></button>
-
+				<button style="margin-top: 10px;"  class="btn btn-info" ng-click="vm.onInvite(ref.email, $event)">
+					<span translate="INVITE"></span>
+				</button>
+				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)">
+					<i class="glyphicon glyphicon-trash"></i>
+				</button>
 			</div>
 
 		</ul>
-		<div class="pad"></div>
-		<!--<button class="btn btn-info green" ng-click="vm.addFormList()">Add</button>-->
-
-
 </div>

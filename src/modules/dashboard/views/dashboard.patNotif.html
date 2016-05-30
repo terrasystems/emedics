@@ -1,21 +1,15 @@
 <div class="container">
-
 	<ul class="row form-list" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
-
-
-			<p class="col-lg-2 col-md-2 col-sm-2"><strong>From: </strong>{{notification.fromUser.username}}</p>
-			<p class="col-lg-2 col-md-2 col-sm-2"><strong>Title: </strong>{{notification.title}}</p>
-
-		<p class="col-md-2 col-sm-2"><strong>Message: </strong>{{notification.text}}</p>
-		<p class="col-md-2 col-sm-2"><strong>Form </strong></p>
+		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="FROM"></span>: </strong>{{notification.fromUser.username}}</p>
+		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="TITLE"></span>: </strong>{{notification.title}}</p>
+		<p class="col-md-2 col-sm-2"><strong><span translate="MESSAGE"></span>: </strong>{{notification.text}}</p>
+		<p class="col-md-2 col-sm-2"><strong><span translate="FORM"></span>: </strong></p>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
-			<button style="float: right" class="btn btn-danger red" ng-click="vm.onDecline(notification.id)">Decline</button>
-			<button style="float: right" class="btn btn-success blue" ng-click="vm.onAccept(notification.id)">Accept</button>
+			<button style="float: right" class="btn btn-danger red" ng-click="vm.onDecline(notification.id)"><span translate="DECLINE"></span></button>
+			<button style="float: right" class="btn btn-success blue" ng-click="vm.onAccept(notification.id)"><span translate="ACCEPT"></span></button>
 		</div>
 
 	</ul>
-	<div class="pad"></div>
-	<!--<button style="float: right" class="btn btn-primary" ui-sref="main.private.dashboard.abstract.notifications.addnotification">Add</button>-->
 </div>

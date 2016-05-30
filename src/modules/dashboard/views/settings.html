@@ -1,69 +1,88 @@
 <uib-tabset active="activeForm">
 
-	<uib-tab index="0" heading="Change Info">
+	<uib-tab index="0" heading="{{'CHANGE_INFO' | translate}}">
 		<div class="container form-list">
 			<div class="row ">
 				<div class="col-md-12 form-group ">
 					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon1">Name</span>
-						<input ng-model="vm.paramsPOST.username" type="text" class="form-control"
-							   placeholder="Type new name" aria-describedby="sizing-addon3" required>
-					</div>
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon1">Email</span>
-						<input ng-model="vm.paramsPOST.email"
-							   ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" type="text"
-							   class="form-control" placeholder="Type new email" aria-describedby="sizing-addon3"
+						<span class="input-group-addon" id="sizing-addon1" translate="NAME"></span>
+						<input ng-model="vm.paramsPOST.username"
+							   type="text"
+							   class="form-control"
+							   placeholder="{{'NEW_NAME' | translate}}"
+							   aria-describedby="sizing-addon3"
 							   required>
 					</div>
 					<div class="input-group input-group-md info">
-						<lebel>Type Export:</lebel>
+						<span class="input-group-addon" id="sizing-addon1" translate="EMAIL"></span>
+						<input ng-model="vm.paramsPOST.email"
+							   ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/"
+							   type="text"
+							   class="form-control"
+							   placeholder="{{'NEW_EMAIL' | translate}}"
+							   aria-describedby="sizing-addon3"
+							   required>
+					</div>
+					<div class="input-group input-group-md info">
+						<lebel><span translate="TYPE_EXPORT"></span>:</lebel>
 						<select ng-model="vm.paramsPOST.typeExp" ng-change="update()">
 							<option ng-repeat="item in vm.possibleChoices" ng-selected="selectedItem == item.type"
 									value="{{item.type}}">{{item.type}}
 							</option>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-success pull-right" ng-click="vm.onSave();"> save</button>
+					<button type="submit" class="btn btn-success pull-right" ng-click="vm.onSave();"><span translate="SAVE"></span></button>
 				</div>
 			</div>
-			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i> Back to
-				Dashboard</a>
+			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span translate="BACK_DASH"></span></a>
 		</div>
 
 	</uib-tab>
 
 
-	<uib-tab index="2" heading="Change Password">
+
+	<uib-tab index="2" heading="{{'CHANGE_PASS' | translate}}">
 		<div class="container form-list">
 			<div class="row ">
 				<div class="col-md-12 form-group  ">
 					<form name="infoForm">
 					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon1">Old Password</span>
-						<input type="password" ng-model="vm.changedPass.oldPass" type="text" class="form-control"
-							   placeholder="Type old password" aria-describedby="sizing-addon3" required>
+						<span class="input-group-addon" id="sizing-addon1" translate="OLD_PASS"></span>
+						<input ng-model="vm.changedPass.oldPass"
+							   type="text"
+							   class="form-control"
+							   placeholder="{{'OLD_PASS2' | translate}}"
+							   aria-describedby="sizing-addon3"
+							   required>
 					</div>
 					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon1">New Password</span>
-						<input ng-model="vm.changedPass.newPass" type="password" class="form-control"
-							   placeholder="Type new password" aria-describedby="sizing-addon3" required>
+						<span class="input-group-addon" id="sizing-addon1" translate="NEW_PASS"></span>
+						<input ng-model="vm.changedPass.newPass"
+							   type="password"
+							   class="form-control"
+							   placeholder="{{'NEW_PASS2' | translate}}"
+							   aria-describedby="sizing-addon3"
+							   required>
 					</div>
 					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon1">Confirm</span>
-						<input ng-model="vm.PassConfirm.confirm" type="password" class="form-control"
-							   placeholder="Confirm password" aria-describedby="sizing-addon3" required>
+						<span class="input-group-addon" id="sizing-addon1" translate="CONFIRM"></span>
+						<input ng-model="vm.PassConfirm.confirm"
+							   type="password"
+							   class="form-control"
+							   placeholder="{{'CONFIRM_PASS' | translate}}"
+							   aria-describedby="sizing-addon3"
+							   required>
 					</div>
 					<button ng-click="vm.onChangePass();"
-							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid " type="submit"
-							class="btn btn-success pull-right">change
+							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid"
+							type="submit"
+							class="btn btn-success pull-right"><span translate="CHANGE"></span>
 					</button>
-					<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm">Confirm your password, please</span>
-				</form>
-
+					<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm" translate="CONFIRM_PASS2"></span>
+					</form>
+				</div>
 			</div>
-			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i> Back to
-				Dashboard</a>
+			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span translate="BACK_DASH"></span></a>
 		</div>
 
 	</uib-tab>

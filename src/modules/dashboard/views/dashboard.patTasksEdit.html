@@ -2,40 +2,39 @@
 	<div class="pad"></div>
 
 	<form name="vm.form" novalidate >
+
 		<div class="row">
-		<div class="form-group col-md-2 col-sm-2">
-			<label>Select section</label>
-			<select class="form-control"  ng-model="vm.selectedSection" ng-options="o for o in vm.sectionsName" ></select>
-           </div>
 
-		<!--<pre>Model: {{vm.selectedSection}}</pre>-->
+			<div class="form-group col-md-2 col-sm-2">
+				<label><span translate="SELECT_SECTION"></span></label>
+				<select class="form-control"  ng-model="vm.selectedSection" ng-options="o for o in vm.sectionsName"></select>
+	        </div>
 
-			<p class="col-md-2 col-sm-2">Caregory: {{vm.formInfo.category}}</p>
-			<p class="col-md-2 col-sm-2">Name: {{vm.formInfo.name}}</p>
+			<p class="col-md-2 col-sm-2"><span translate="CATEGORY"></span>: {{vm.formInfo.category}}</p>
+			<p class="col-md-2 col-sm-2"><span translate="NAME"></span>: {{vm.formInfo.name}}</p>
 			<p class="col-md-2 col-sm-2">#: {{vm.formInfo.number}}</p>
-			<p class="col-md-2 col-sm-2">Descr: {{vm.formInfo.descr}}</p>
+			<p class="col-md-2 col-sm-2"><span translate="DESCR"></span>: {{vm.formInfo.descr}}</p>
+
 		</div>
-
-
 
 		<formly-form model="vm.model[vm.selectedKey][vm.selectedSection]" fields="vm.sections[vm.selectedKey][vm.selectedSection]" options=vm.options[vm.selectedKey][vm.selectedSection] form="vm.form" track-by="$index">
 		</formly-form>
 
-
-		<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid">Submit</button>
-		<button ng-hide="vm.hideButton !== 'tasks'" style="float: right" class="btn btn-primary" ng-click="vm.s()">Add notification</button>
+		<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid"><span translate="SUBMIT"></span></button>
+ 		<button ng-hide="vm.hideButton !== 'tasks'" style="float: right" class="btn btn-primary" ng-click="vm.s()"><span translate="ADDNOTIF"></span></button>
 	</form>
 
-
 	<div class="pad"></div>
-
-
 </div>
+
+
 <script type="text/ng-template" id="error-messages.html">
 	<formly-transclude></formly-transclude>
 	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
-		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages"
-			 class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}
+		<div ng-message="{{ ::name }}"
+			 ng-repeat="(name, message) in ::options.validation.messages"
+			 class="message">
+			{{ message(fc.$viewValue, fc.$modelValue, this)}}
 		</div>
 	</div>
 </script>
