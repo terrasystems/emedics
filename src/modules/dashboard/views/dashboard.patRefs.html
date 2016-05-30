@@ -12,6 +12,7 @@
 </div>
 
 <div class="container ui-list-view">
+	<h3 class="noData_msg" ng-show="vm.references.length == 0">You don't have any references</h3>
 		<ul ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
 			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span translate="NAME"></span>:

@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="form-list ui-list-view" options="listOptions">
+		<h3 ng-show="vm.list.length == 0" class="noData_msg">You dont have any tasks</h3>
 		<div class="form-list" ui-list-view="form in vm.list track by $index" options="listOptions">
 
 			<div class="tasks" ng-click="vm.onClick(form.id)">

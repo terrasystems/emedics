@@ -411,7 +411,10 @@ div.panel-group{
 	text-align:left;
 }
 
-
+.noData_msg{
+	text-align: center;
+	
+}
 
 
 

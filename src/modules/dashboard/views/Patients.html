@@ -10,8 +10,9 @@
 	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span translate="APPLY"></span></button>
 </div>
 
-<div class=" ui-list-view container">
+<div class="ui-list-view container">
 	<div class="row ">
+		<h3 ng-show="vm.patients.length == 0">You don't have any patients</h3>
 		<div class="container">
 			<uib-accordion>
 

@@ -1,5 +1,7 @@
 <div class="container">
-	<ul class="row form-list" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
+<div class=" row form-list">
+	<h3 class="noData_msg" ng-show="vm.UnreadNotifications.length == 0">You don't have any messages</h3>
+	<ul class="" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
 		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="FROM"></span>: </strong>{{notification.fromUser.username}}</p>
 		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="TITLE"></span>: </strong>{{notification.title}}</p>
@@ -10,6 +12,6 @@
 			<button style="float: right" class="btn btn-danger red" ng-click="vm.onDecline(notification.id)"><span translate="DECLINE"></span></button>
 			<button style="float: right" class="btn btn-success blue" ng-click="vm.onAccept(notification.id)"><span translate="ACCEPT"></span></button>
 		</div>
-
 	</ul>
+</div>
 </div>
