@@ -406,6 +406,15 @@ div.panel-group{
 .info{
 	margin-top: 20px;
 }
+.input-group-addon {
+	min-width:120px;
+	text-align:left;
+}
+
+
+
+
+
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */
