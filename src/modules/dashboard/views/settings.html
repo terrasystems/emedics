@@ -4,25 +4,16 @@
 		<div class="container form-list">
 			<div class="row ">
 				<div class="col-md-12 form-group ">
+					<form name="emailChange">
 					<div class="input-group input-group-md info">
 						<span class="input-group-addon" id="sizing-addon11" translate="NAME"></span>
-						<input aria-describedby="sizing-addon2" ng-model="vm.paramsPOST.username"
-							   type="text"
-							   class="form-control"
-							   placeholder="{{'NEW_NAME' | translate}}"
-							   aria-describedby="sizing-addon3"
-							   required>
+						<input aria-describedby="sizing-addon2" ng-model="vm.paramsPOST.username" type="text" class="form-control" placeholder="{{'NEW_NAME' | translate}}">
 					</div>
 					<div class="input-group input-group-md info">
 						<span class="input-group-addon" id="sizing-addon11" translate="EMAIL"></span>
-						<input ng-model="vm.paramsPOST.email"
-							   ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/"
-							   type="text"
-							   class="form-control"
-							   placeholder="{{'NEW_EMAIL' | translate}}"
-							   aria-describedby="sizing-addon3"
-							   required>
+						<input  ng-model="vm.paramsPOST.email" type="text" class="form-control" placeholder="{{'NEW_EMAIL' | translate}}" aria-describedby="sizing-addon3" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" required>
 					</div>
+						<span ng-show="emailChange.$invalid">Please,type correct email</span>
 					<!--<div class="input-group input-group-md info">-->
 						<!--<lebel><span translate="TYPE_EXPORT"></span>:</lebel>-->
 						<!--<select ng-model="vm.paramsPOST.typeExp" ng-change="update()">-->
@@ -42,11 +33,8 @@
 
 						</select>
 					</div>
-
-
-
-
-					<button type="submit" class="btn btn-success pull-right" ng-click="vm.onSave();"><span translate="SAVE"></span></button>
+						<button ng-disabled="emailChange.$invalid" type="submit" class="btn btn-success pull-right" ng-click="vm.onSave();"><span translate="SAVE"></span></button>
+						</form>
 				</div>
 			</div>
 			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
