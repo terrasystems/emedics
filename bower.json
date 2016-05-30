@@ -29,7 +29,8 @@
     "angular-ui-router-tabs": "^2.0.0",
     "angular-ui-select": "^0.17.1",
     "angular-translate": "~2.11.0",
-    "angular-translate-loader-static-files": "~2.11.0"
+    "angular-translate-loader-static-files": "~2.11.0",
+    "angular-base64": "~2.0.5"
   },
   "appPath": "src/",
   "resolutions": {

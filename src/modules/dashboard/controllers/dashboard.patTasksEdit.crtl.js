@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function (http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate) {
+	.controller('patientTasksEditCtrl', function (http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate, $base64) {
 		//console.log('Type: ' + $stateParams.type + ' id: ' + $stateParams.id + ' patId: ' + $stateParams.patId);
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -50,9 +50,9 @@ angular.module('modules.dash')
 				blockUI.stop();
 
 				if ($stateParams.type == 'tasks') {
-					vm.checkArr = (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && angular.isArray(res.result.blank.body.sections) && res.result.id);
+					vm.checkArr = (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && res.result.id);
 				} else {
-					vm.checkArr = (res.result && res.result.form && res.result.form.blank && res.result.form.blank.body && res.result.form.blank.body.sections && angular.isArray(res.result.form.blank.body.sections) && res.result.form.id);
+					vm.checkArr = (res.result && res.result.form && res.result.form.blank && res.result.form.blank.body && res.result.form.blank.body.sections && res.result.form.id);
 				}
 
 				if (vm.checkArr) {
@@ -65,12 +65,15 @@ angular.module('modules.dash')
 					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descr : res.result.form.blank.descr;
 
 					vm.sectionsName = [];
+					vm.sections = [];
 					if ($stateParams.type == 'tasks') {
-						res.result.blank.body.sections.forEach(function (item) {
+						vm.sections = eval($base64.decode(res.result.blank.body.sections));
+						vm.sections.forEach(function (item) {
 							vm.sectionsName.push(Object.keys(item)[0]);
 						});
 					} else {
-						res.result.form.blank.body.sections.forEach(function (item) {
+						vm.sections = eval($base64.decode(res.result.form.blank.body.sections));
+						vm.sections.forEach(function (item) {
 							vm.sectionsName.push(Object.keys(item)[0]);
 						});
 					}
@@ -85,271 +88,6 @@ angular.module('modules.dash')
 					}
 					vm.selectedSection = vm.sectionsName[0];
 					if (vm.sectionsName.length > 0) {
-						vm.sections = ($stateParams.type == 'tasks') ? res.result.blank.body.sections : res.result.form.blank.body.sections;
-						//*******
-
-						vm.sections_ = [
-							{
-								sectionA: [
-									{
-										template: '<div><H4><span translate="F1_SAA"></span></H4></div>'
-									},
-									{
-										template: '<hr /><div><strong> 1.</strong></div>',
-										className: 'fieldgroup'
-									},
-									{
-										key: 'F1_SAA_1DATE',
-										className: 'field',
-										type: 'datepicker',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1DATE'),
-											datepickerPopup: 'yyyy-MMMM-dd'
-										}
-									},
-									{
-										key: 'F1_SAA_1CLIENT',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1CLIENT'),
-											placeholder: $translate.instant('F1_SAA_1CLIENT')
-										}
-									},
-									{
-										key: 'F1_SAA_1FUNCTION',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1FUNCTION'),
-											placeholder: $translate.instant('F1_SAA_1FUNCTION')
-										}
-									},
-									{
-										key: 'F1_SAA_1INSTITUTION',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1INSTITUTION'),
-											placeholder: $translate.instant('F1_SAA_1INSTITUTION')
-										}
-									},
-									{
-										key: 'F1_SAA_1ADDRESS',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1ADDRESS'),
-											placeholder: $translate.instant('F1_SAA_1ADDRESS')
-										}
-									},
-									{
-										key: 'F1_SAA_1PHONE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SAA_1PHONE'),
-											placeholder: $translate.instant('F1_SAA_1PHONE')
-										}
-									}
-								]
-							},
-							{
-								sectionB: [
-									{
-										template: '<div><H4><span translate="F1_SBB"></span></H4></div>'
-									},
-									{
-										template: '<hr /><div><strong>1.</strong></div>',
-										className: 'fieldgroup'
-									},
-									{
-										key: 'F1_SBB_1CLIENT',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT'),
-											placeholder: $translate.instant('F1_1SBB_CLIENT')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_FIRSTNAME',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_FIRSTNAME'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_FIRSTNAME')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_NUM',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_NUM'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_NUM')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_FILE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_FILE'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_FILE')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_STREET',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_STREET'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_STREET')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_NUM2',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_NUM2'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_NUM2')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_NUM3',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_NUM3'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_NUM3')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_POSTALCODE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_POSTALCODE'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_POSTALCODE')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_PLACE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_PLACE'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_PLACE')
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_EMAIL',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_EMAIL'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_EMAIL')
-										},
-										validators: {
-											EmailAddress: {
-												expression: function ($viewValue, $modelValue) {
-													var value = $modelValue || $viewValue;
-													return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-												},
-												message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
-											}
-										},
-										validation: {
-											messages: {
-												required: function ($viewValue, $modelValue, scope) {
-													return scope.to.label + ' is required';
-												}
-											}
-										}
-									},
-									{
-										key: 'F1_SBB_1CLIENT_PHONE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_1CLIENT_PHONE'),
-											placeholder: $translate.instant('F1_SBB_1CLIENT_PHONE')
-										}
-									},
-									{
-										template: '<hr /><div><strong>2.</strong></div>',
-										className: 'fieldgroup'
-									},
-									{
-										key: 'F1_SBB_2CLIENT_Q2',
-										className: 'field',
-										type: 'select',
-										templateOptions: {
-											label: $translate.instant('F1_SBB_2CLIENT_Q2'),
-											options: [
-												{
-													name: $translate.instant('F1_SBB_2CLIENT_Q2_A1'),
-													value: '0'
-												},
-												{
-													name: $translate.instant('F1_SBB_2CLIENT_Q2_A2'),
-													value: '1'
-												},
-												{
-													name: $translate.instant('F1_SBB_2CLIENT_Q2_A3'),
-													value: '2'
-												}
-											]
-										}
-									},
-									{
-										template: '<hr /><div><strong>3.</strong></div>',
-										className: 'fieldgroup'
-									},
-									{
-										key: 'F1_SBB_3CLIENT_HEALTH_INSURANCE',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_3CLIENT_HEALTH_INSURANCE'),
-											placeholder: $translate.instant('F1_SBB_3CLIENT_HEALTH_INSURANCE')
-										}
-									},
-									{
-										key: 'F1_SBB_3CLIENT_NAME_FUND',
-										className: 'field',
-										type: 'input',
-										templateOptions: {
-											type: 'text',
-											label: $translate.instant('F1_SBB_3CLIENT_NAME_FUND'),
-											placeholder: $translate.instant('F1_SBB_3CLIENT_NAME_FUND')
-										}
-									}
-								]
-							}
-						];
-
-						//*******
 						for (var key in  vm.model) {
 							var obj = vm.model[key][Object.keys(vm.model[key])[0]];
 							for (var prop in obj) {
