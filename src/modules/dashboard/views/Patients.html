@@ -1,19 +1,23 @@
-
-<div class="search_content">
-	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
-		   ng-model="doctor"
-		   placeholder="{{'SEARCH_PATS' | translate}}"
-		   uib-typeahead="item as item.all for item in getFindPatients($viewValue)"
-		   typeahead-on-select="onSelect($item)"
-		   typeahead-loading="loadingLocations"
-		   class="form-control">
-	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span translate="APPLY"></span></button>
+<div class="container">
+	<div class="row">
+		<div class="search_content">
+			<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
+				   ng-model="doctor"
+				   placeholder="{{'SEARCH_PATS' | translate}}"
+				   uib-typeahead="item as item.all for item in getFindPatients($viewValue)"
+				   typeahead-on-select="onSelect($item)"
+				   typeahead-loading="loadingLocations"
+				   class="form-control">
+			<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span
+					translate="APPLY"></span></button>
+		</div>
+	</div>
 </div>
+<div class="container">
+	<div class="row ui-list-view ">
+		<div ng-show="vm.patients.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't
+			have any patients</h5></div>
 
-<div class="ui-list-view container">
-	<div class="row ">
-		<h3 ng-show="vm.patients.length == 0">You don't have any patients</h3>
-		<div class="container">
 			<uib-accordion>
 
 				<uib-accordion-group ng-repeat="patient in vm.patients">
@@ -22,17 +26,22 @@
 						<span translate="NAME"></span>: {{patient.name}}
 						<span translate="EMAIL"></span>: {{patient.email}}
 						<span translate="PHONE"></span>: {{patient.phone}}
-						<div  class="pull-right btn-group btn-group-xs" >
-							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
-							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger" >x</button>
+						<div class="pull-right btn-group btn-group-xs">
+							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span
+									translate="INVITE"></span></button>
+							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
 						</div>
 					</uib-accordion-heading>
 
 					<div ng-repeat="item in patient.history">
-						<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)"><span translate="EDIT"></span></button>
+						<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)">
+							<span translate="EDIT"></span></button>
 						<p><span translate="NAME"></span>: {{item.form.blank.name}} </p>
+
 						<p><span translate="DESCR"></span>: {{item.form.blank.descr}}</p>
+
 						<p><span translate="CATEGORY"></span>: {{item.form.blank.category}}</p>
+
 						<p><span translate="NUMBER"></span>: {{item.form.blank.number}} </p>
 					</div>
 
@@ -43,7 +52,7 @@
 				</uib-accordion-group>
 
 			</uib-accordion>
-		</div>
+
 		<p></p>
 	</div>
 </div>

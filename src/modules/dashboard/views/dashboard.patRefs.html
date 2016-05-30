@@ -1,29 +1,40 @@
-<div class="search_content">
-	<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
-		   ng-model="doctor"
-		   placeholder="{{'SEARCH_REFS2' | translate}}"
-		   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
-		   typeahead-on-select="onSelect($item);"
-		   typeahead-loading="loadingLocations"
-		   typeahead-editable="true"
-		   class="form-control">
+<div class="container">
 
-	<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span translate="APPLY"></span></button>
+	<div class="row">
+	<div class="search_content">
+		<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
+			   ng-model="doctor"
+			   placeholder="{{'SEARCH_REFS2' | translate}}"
+			   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
+			   typeahead-on-select="onSelect($item);"
+			   typeahead-loading="loadingLocations"
+			   typeahead-editable="true"
+			   class="form-control">
+
+		<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span
+				translate="APPLY"></span></button>
+	</div>
 </div>
+</div>
+<div class="container">
+	<div class="row form-list">
+		<div ng-show="vm.references.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't
+			have any references</h5></div>
 
-<div class="container ui-list-view">
-	<h3 class="noData_msg" ng-show="vm.references.length == 0">You don't have any references</h3>
 		<ul ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
 
-			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span translate="NAME"></span>:
+			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="NAME"></span>:
 				<h4>{{ref.name}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span translate="TYPE"></span>:
+			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="TYPE"></span>:
 				<h4>{{ref.type}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span translate="PHONE"></span>:
+			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="PHONE"></span>:
 				<h5>{{ref.phone}}</h5></li>
 
 			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-				<button style="margin-top: 10px;"  class="btn btn-info" ng-click="vm.onInvite(ref.email, $event)">
+				<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onInvite(ref.email, $event)">
 					<span translate="INVITE"></span>
 				</button>
 				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.remove($index, ref.id)">
@@ -32,4 +43,5 @@
 			</div>
 
 		</ul>
+	</div>
 </div>

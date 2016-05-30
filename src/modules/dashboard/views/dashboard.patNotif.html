@@ -1,6 +1,6 @@
 <div class="container">
 <div class=" row form-list">
-	<h3 class="noData_msg" ng-show="vm.UnreadNotifications.length == 0">You don't have any messages</h3>
+	<div ng-show="vm.UnreadNotifications.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any messages</h5></div>
 	<ul class="" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
 		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="FROM"></span>: </strong>{{notification.fromUser.username}}</p>
