@@ -2,7 +2,7 @@
     "F1_NAME": "ADMINISTRATIVE DATA AND DESCRIPTION OF THE REQUEST",
 	"F1_VERSION": "Version novembre 2009",
 	"F1_SAA": "SECTION AA: DATE NAME OF PERSON WHO SENT THE REQUEST (if other than the client)",
-	"F1_SAA_1DATE": "Application date (day, month, year)",
+	"F1_SAA_1_DATE": "Application date (day, month, year)",
 	"F1_SAA_1CLIENT": "Last name / First Name",
 	"F1_SAA_1FUNCTION": "Function / Relationship with the client",
 	"F1_SAA_1INSTITUTION": "Institution (If applicant = Professional)",
