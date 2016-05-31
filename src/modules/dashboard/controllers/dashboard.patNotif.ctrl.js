@@ -3,36 +3,10 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http, blockUI, initParamsPOST, alertService) {
+	.controller('patientNotifCtrl', function (http,$scope,blockUI, initParamsPOST, alertService) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 		vm.searchnotif = '';
-        //
-		//vm.UnreadNotifications = [
-		//{
-		//	'id': '1212',
-		//	'date': new Date(),
-		//	'readtype': 'true',
-		//	'type': '1',
-		//	'title': 'Test Title',
-		//	'text': 'Test Text',
-		//	'fromUser': {id: '4444', username: 'Test #1'},
-		//	'toUser': {id: '333'},
-		//	'userForm': '2222'
-		//},
-		//{
-		//	'id': '1818',
-		//	'date': new Date(),
-		//	'readtype': 'true',
-		//	'type': '1',
-		//	'title': 'Test Title #2',
-		//	'text': 'Test Text #2',
-		//	'fromUser': {id: '333', username: 'Test #2'},
-		//	'toUser': {id: '4444'},
-		//	'userForm': '2222'
-		//}
-		//];
-
 		vm.onRefreshNotif = onRefreshNotif;
 
 		function onRefreshNotif() {
@@ -43,6 +17,7 @@ angular.module('modules.dash')
 						//if (angular.isArray(res.result) && res.result.length > 0) {
 							vm.UnreadNotifications = res.result;
 						//}
+						$scope.$emit('NotifCount', 	vm.UnreadNotifications);
 					}
 				});
 		}
