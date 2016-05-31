@@ -3,21 +3,19 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http,$scope,blockUI, initParamsPOST, alertService) {
+	.controller('patientNotifCtrl', function (http,$scope,blockUI, initParamsPOST, alertService, $rootScope) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 		vm.searchnotif = '';
 		vm.onRefreshNotif = onRefreshNotif;
+
 
 		function onRefreshNotif() {
 			http.post('private/dashboard/notifications', initParamsPOST.params)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
-						//if (angular.isArray(res.result) && res.result.length > 0) {
-							vm.UnreadNotifications = res.result;
-						//}
-						$scope.$emit('NotifCount', 	vm.UnreadNotifications);
+						vm.UnreadNotifications = res.result;
 					}
 				});
 		}
@@ -35,6 +33,8 @@ angular.module('modules.dash')
 					vm.onRefreshNotif();
 				});
 		};
+
+		$rootScope.$broadcast('calc.notif');
 
 		vm.onDecline = function (id) {
 			console.log('decline id: '+id);
