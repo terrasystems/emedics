@@ -43,10 +43,11 @@ angular.module('modules.core')
 		};
 	})
 
-	.service('http', function($http, $q, constants, alertService) {
+	.service('http', function($http, $q, constants, alertService, $translate) {
 		function get (url, filter){
 			var deferred = $q.defer();
 			$http.get(constants.restUrl + url, filter).then(function (resp) {
+				resp.data.state.message = $translate.instant(resp.data.state.message);
 				if  (resp.data && resp.data.state) {
 					if  (resp.data.state.value===true) {
 						deferred.resolve(resp.data);
@@ -58,11 +59,16 @@ angular.module('modules.core')
 				}
 				else {
 					deferred.reject(false);
-					alertService.add(2, "don't receive data from server");
+					alertService.add(2, $translate.instant(MSG_NO_DATA));
 				}
 			}, function (error) {
 				deferred.reject(error);
-				alertService.add(2, error.status + ' '+error.statusText);
+				if  (error.status == '401') {
+					alertService.add(2, $translate.instant(error.data.state.message));
+				}
+				else {
+					alertService.add(2, error.status + ' ' + error.statusText);
+				}
 			});
 			return deferred.promise;
 		}
@@ -71,6 +77,7 @@ angular.module('modules.core')
 			//console.log('post: '+ url);
 			var deferred = $q.defer();
 			$http.post(constants.restUrl + url, params).then(function (resp) {
+				resp.data.state.message = $translate.instant(resp.data.state.message);
 				if  (resp.data && resp.data.state) {
 					if  (resp.data.state.value===true) {
 						deferred.resolve(resp.data);
@@ -82,12 +89,12 @@ angular.module('modules.core')
 				}
 				else {
 					deferred.reject(false);
-					alertService.add(2, "Don't receive data from server");
+					alertService.add(2, $translate.instant(MSG_NO_DATA));
 				}
 			}, function (error) {
 				deferred.reject(error);
 				if  (error.status == '401') {
-					alertService.add(2, error.data.state.message);
+					alertService.add(2, $translate.instant(error.data.state.message));
 				}
 				else {
 					alertService.add(2, error.status + ' ' + error.statusText);
