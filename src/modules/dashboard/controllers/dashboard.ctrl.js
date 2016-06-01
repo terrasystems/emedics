@@ -40,7 +40,7 @@ angular.module('modules.dash')
 	})	.run(["$templateCache", function($templateCache) {
 		$templateCache.put("uib/template/tabs/tab.html",
 			"<li ng-class=\"[{active: active, disabled: disabled}, classes]\" class=\"uib-tab nav-item\">\n" +
-			" <a href ng-click=\"select($event)\" class=\"nav-link\" uib-tab-heading-transclude>{{heading}}</a>\n" +
-			"<div ng-show='$parent.tab.badge > 0'>{{$parent.tab.badge}}</div></li>\n" +
+			"<a href ng-click=\"select($event)\" class=\"nav-link\" uib-tab-heading-transclude>{{heading}}<div ng-show='$parent.tab.badge > 0'>{{$parent.tab.badge}}</div></a>\n" +
+			"<div class='notif_counter' ng-show='$parent.tab.badge > 0'>{{$parent.tab.badge}}</div></li>\n" +
 			"");
 	}]);

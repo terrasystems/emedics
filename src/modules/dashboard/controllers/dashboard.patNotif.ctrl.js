@@ -21,12 +21,14 @@ angular.module('modules.dash')
 		}
 
 		vm.onRefreshNotif();
+		$scope.$emit('refresh',vm.onRefreshNotif());
 
 		vm.onAccept = function (id) {
 			console.log('accept id: '+id);
 			http.get('private/dashboard/notifications/accept/'+id)
 				.then(function (res) {
 					blockUI.stop();
+					$rootScope.$broadcast('calc.notif');
 					if (res.state) {
 
 					}
@@ -41,6 +43,7 @@ angular.module('modules.dash')
 			http.get('private/dashboard/notifications/decline/'+id)
 				.then(function (res) {
 					blockUI.stop();
+					$rootScope.$broadcast('calc.notif');
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}

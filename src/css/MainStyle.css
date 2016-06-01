@@ -416,7 +416,16 @@ div.panel-group{
 
 }
 
-
+.notif_counter{
+	position: absolute;
+	margin-top: -39px;
+	margin-left: 94px;
+	background: #B6B4B4;
+	width: 11px;
+	padding-left: 2px;
+	border-radius: 6px;
+	font-size: 12px;
+}
 
 /*---------media--------*/
 
