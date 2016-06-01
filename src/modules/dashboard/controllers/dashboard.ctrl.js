@@ -11,7 +11,8 @@ angular.module('modules.dash')
 			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.abstract.ref', disable: false },
 			{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.abstract.notifications', disable: false },
 			{heading: $translate.instant('PATIENT_FORMS'), route: 'main.private.dashboard.abstract.forms', disable: false},
-			{heading: $translate.instant('PATIENTS'), route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')}
+			{heading: $translate.instant('PATIENTS'), route: 'main.private.dashboard.abstract.patients', disable: (vm.user.type === 'patient')},
+			{heading: 'MyForm', route:'main.private.dashboard.abstract.myforms', disable: false}
 		];
 		$scope.$state = $state;
 

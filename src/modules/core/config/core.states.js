@@ -190,7 +190,16 @@ angular.module('modules.core')
 				}
 			}
 		},
-
+		{
+			name:'main.private.dashboard.abstract.myforms',
+			url:'/myforms',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/myForms.html',
+					controller:'MyFormCtrl as vm'
+				}
+			}
+		},
 		{
 			name:'main.private.dashboard.abstract.tasks.edit',
 			url:'/edit',
