@@ -2,11 +2,13 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-.controller('FormTemplateCtrl',function(){
-		var vm = this;
-console.log('FormTemplateCtrl');
-		vm.FormTemplate=[
-			{
+
+.controller('FormTemplateCtrl', function (http, blockUI, alertService) {
+	var vm = this;
+	console.log('FormTemplateCtrl');
+
+	vm.FormTemplate = [
+		{
 				name:'Form 1',
 				number:'1',
 				descr:'Admin Form',
@@ -56,6 +58,5 @@ console.log('FormTemplateCtrl');
 				type: 'myForms'
 			}
 		];
-
 
 	});

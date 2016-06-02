@@ -30,7 +30,7 @@ angular.module('modules.dash')
 						blockUI.stop();
 						if (res.result) {
 							vm.tabData[2].badge = res.result.length;
-							console.log('size = '+vm.tabData[2].badge);
+							//console.log('size = '+vm.tabData[2].badge);
 						}
 					});
 			}
