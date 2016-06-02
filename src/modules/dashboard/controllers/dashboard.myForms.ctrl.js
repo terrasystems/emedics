@@ -8,7 +8,7 @@ angular.module('modules.dash')
 		vm.myForms = [];
 
 		vm.onRefresh = function () {
-			http.get('template_user.list')
+			http.get('private/dashboard/user/template')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
@@ -21,7 +21,7 @@ angular.module('modules.dash')
 
 		vm.onRemove = function(id) {
 			console.log('id='+id);
-			http.get('template_user.delete/'+id)
+			http.get('private/dashboard/template/delete/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
