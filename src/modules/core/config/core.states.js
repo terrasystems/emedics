@@ -201,6 +201,16 @@ angular.module('modules.core')
 			}
 		},
 		{
+			name:'main.private.dashboard.abstract.myforms.template',
+			url:'/template',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/FormsTemplate.html',
+					controller:''
+				}
+			}
+		},
+		{
 			name:'main.private.dashboard.abstract.tasks.edit',
 			url:'/edit',
 			views:{
