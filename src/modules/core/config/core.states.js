@@ -206,7 +206,7 @@ angular.module('modules.core')
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/FormsTemplate.html',
-					controller:''
+					controller:'FormTemplateCtrl as vm'
 				}
 			}
 		},

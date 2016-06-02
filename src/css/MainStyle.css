@@ -430,6 +430,10 @@ div.panel-group{
 	margin-top: 12px;
 	margin-right: 10px;
 }
+.template_button{
+	margin-top: 15px;
+	margin-right: 5px;
+}
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */
