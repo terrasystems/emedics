@@ -3,38 +3,46 @@
 
 angular.module('modules.dash')
 
-	.controller('MyFormCtrl', function () {
+	.controller('MyFormCtrl', function ($state) {
 		var vm = this;
 		vm.myForms = [
 			{name:'Valik',
 				number:'1',
 				descr:'Doctor Form',
-				status:'paid'
+				status:'paid',
+				type: 'myForms'
 			},
 			{name:'Valik',
 				number:'2',
 				descr:'Patient Form',
-				status:'free'
+				status:'free',
+				type: 'myForms'
 			},
 			{name:'Valik',
 				number:'3',
 				descr:'Doctor Form',
-				status:'paid'
+				status:'paid',
+				type: 'myForms'
 			},
 			{name:'Valik',
 				number:'4',
 				descr:'Patient Form',
-				status:'free'
+				status:'free',
+				type: 'myForms'
 			},
 			{name:'Valik',
 				number:'5',
 				descr:'Doctor Form',
-				status:'paid'
+				status:'paid',
+				type: 'myForms'
 			},
 			{name:'Valik',
 				number:'6',
 				descr:'Patient Form',
-				status:'free'
+				status:'free',
+				type: 'myForms'
 			}
 		];
+
+
 	});

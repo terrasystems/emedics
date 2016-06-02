@@ -2,9 +2,10 @@
 	<div class="row form-list">
 		<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have
 			any forms</h5></div>
-		<div ui-sref="main.private.dashboard.abstract.myforms.template" ui-list-view="forms in vm.myForms" options="listOptions">
+		<div   ui-list-view="forms in vm.myForms" options="listOptions">
 
 			<div class=" pull-right btn-group btn-group-xs delete_myForm">
+				<button class="btn btn-success" ui-sref="main.private.dashboard.abstract.myforms.template"><i class="glyphicon glyphicon-plus"></i></button>
 				<button class="btn btn-danger  btn-small"><i class="glyphicon glyphicon-trash"></i></button>
 			</div>
 

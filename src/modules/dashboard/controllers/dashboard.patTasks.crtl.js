@@ -22,7 +22,7 @@ angular.module('modules.dash')
 
 
 		vm.onClick = function (index) {
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
+			$state.go('main.private.dashboard.abstract.tasks.edit', {number: index, type: 'tasks', patId: null});
 		};
 
 });
