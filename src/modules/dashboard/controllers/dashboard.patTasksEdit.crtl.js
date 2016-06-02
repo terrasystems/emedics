@@ -31,7 +31,7 @@ angular.module('modules.dash')
 			vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
 		} else {
 			vm.getUrl = 'private/dashboard/docpatients/forms/'+vm.id;
-			vm.setUrl = 'private/dashboard/docpatients/edit';
+			vm.setUrl = 'private/dashboard/docpatients/forms/edit';
 		}
 
 		vm.sections = [];
