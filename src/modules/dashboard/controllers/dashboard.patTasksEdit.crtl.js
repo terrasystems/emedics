@@ -91,7 +91,7 @@ angular.module('modules.dash')
 						for (var key in  vm.model) {
 							var obj = vm.model[key][Object.keys(vm.model[key])[0]];
 							for (var prop in obj) {
-								if (obj.hasOwnProperty(prop) && prop.indexOf('_DATE') > 0) {
+								if (obj.hasOwnProperty(prop) && prop.indexOf('_DATE') > 0 && obj[prop] !== null) {
 									obj[prop] = new Date(obj[prop]);
 								}
 							}

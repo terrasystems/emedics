@@ -67,6 +67,12 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		return [200, {state: {value: true, message: 'MSG_'}, result: constants.myForms }, {}];
 	});
 
+	$httpBackend.whenGET(/template_user\/delete\//).respond(function () {
+		console.log('... mock "template_user/delete"');
+		return [200, {state: {value: true, message: 'MSG_'}, result: constants.myForms }, {}];
+	});
+
+
 	//$httpBackend.whenGET(/.*/).passThrough();
 	//$httpBackend.whenPOST(/.*/).passThrough();
 
