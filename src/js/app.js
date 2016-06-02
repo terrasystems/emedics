@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
-	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', // 'ngMockE2E',
+	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', 'ngMockE2E',
 	//--
 	'modules.core', 'modules.public', 'modules.dash','ui.select','ngSanitize','ui.router.tabs']);
 
@@ -55,21 +55,19 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		}
 	});
 
-}
+	$httpBackend.whenGET(/^modules\//).passThrough();
+	$httpBackend.whenGET(/^i18n\//).passThrough();
+	$httpBackend.whenGET(/rest\/public\/.*/).passThrough();
+	$httpBackend.whenPOST(/rest\/public\/.*/).passThrough();
+	$httpBackend.whenGET(/rest\/private\/.*/).passThrough();
+	$httpBackend.whenPOST(/rest\/private\/.*/).passThrough();
 
-	//$httpBackend.whenGET(/^modules\//).passThrough();
-    //
-	//if (constants.isDEBUG === '1') {
-	//	$httpBackend.whenGET('private/dashboard/references').respond(function () {
-	//		console.log("Getting phones");
-	//		return [200, {id: 'eeeee'}, {}];
-	//	});
-	//	$httpBackend.whenPOST(/.*/).passThrough();
-	//	$httpBackend.whenGET(/.*/).passThrough();
-	//}
-	//else {
-	//	//$httpBackend.whenGET(/.*/).passThrough();
-	//	//$httpBackend.whenPOST(/.*/).passThrough();
-	//}
+	$httpBackend.whenGET(/template_user/).respond(function () {
+		console.log('... mock "template_user"');
+		return [200, {state: {value: true, message: 'MSG_'}, result: constants.myForms }, {}];
+	});
 
-);
+	//$httpBackend.whenGET(/.*/).passThrough();
+	//$httpBackend.whenPOST(/.*/).passThrough();
+
+});

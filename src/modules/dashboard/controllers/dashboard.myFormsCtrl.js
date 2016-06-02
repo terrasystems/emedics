@@ -3,46 +3,18 @@
 
 angular.module('modules.dash')
 
-	.controller('MyFormCtrl', function ($state) {
+	.controller('MyFormCtrl', function (http, blockUI, alertService) {
 		var vm = this;
-		vm.myForms = [
-			{name:'Valik',
-				number:'1',
-				descr:'Doctor Form',
-				status:'paid',
-				type: 'myForms'
-			},
-			{name:'Valik',
-				number:'2',
-				descr:'Patient Form',
-				status:'free',
-				type: 'myForms'
-			},
-			{name:'Valik',
-				number:'3',
-				descr:'Doctor Form',
-				status:'paid',
-				type: 'myForms'
-			},
-			{name:'Valik',
-				number:'4',
-				descr:'Patient Form',
-				status:'free',
-				type: 'myForms'
-			},
-			{name:'Valik',
-				number:'5',
-				descr:'Doctor Form',
-				status:'paid',
-				type: 'myForms'
-			},
-			{name:'Valik',
-				number:'6',
-				descr:'Patient Form',
-				status:'free',
-				type: 'myForms'
-			}
-		];
 
+		vm.myForms = [];
+
+		http.get('template_user')
+			.then(function (res) {
+				blockUI.stop();
+				if (res.state) {
+					alertService.add(0, res.state.message);
+					vm.myForms = res.result;
+				}
+			});
 
 	});
