@@ -3,12 +3,12 @@
 
 angular.module('modules.dash')
 
-.controller('FormTemplateCtrl', function (http, blockUI, alertService, $stateParams, $state) {
+.controller('CatalogTemplateCtrl', function (http, blockUI, alertService, $stateParams, $state) {
 	var vm = this;
 	vm.FormTemplate = [];
 
 	if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
-		$state.go('main.private.dashboard.abstract.myforms');
+		$state.go('main.private.dashboard.abstract.catalog');
 		return;
 	}
 

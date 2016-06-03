@@ -190,22 +190,22 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.abstract.myforms',
-			url:'/myforms',
+			name:'main.private.dashboard.abstract.catalog',
+			url:'/catalog',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/myForms.html',
-					controller:'MyFormCtrl as vm'
+					templateUrl:'modules/dashboard/views/Catalog.html',
+					controller:'CatalogCtrl as vm'
 				}
 			}
 		},
 		{
-			name:'main.private.dashboard.abstract.myforms.template',
-			url:'/template',
+			name:'main.private.dashboard.abstract.catalog.catalogtemplate',
+			url:'/catalogTemplates',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/FormsTemplate.html',
-					controller:'FormTemplateCtrl as vm'
+					templateUrl:'modules/dashboard/views/CatalogTemplates.html',
+					controller:'CatalogTemplateCtrl as vm'
 				}
 			},
 			params:{

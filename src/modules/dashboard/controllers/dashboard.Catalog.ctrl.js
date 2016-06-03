@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('MyFormCtrl', function (http, blockUI, alertService, $state) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state) {
 		var vm = this;
 		vm.myForms = [];
 
@@ -37,7 +37,7 @@ angular.module('modules.dash')
 				vm.arr.push(item);
 			});
 
-			$state.go('main.private.dashboard.abstract.myforms.template', { arr: vm.arr, onCheck: true });
+			$state.go('main.private.dashboard.abstract.catalog.catalogtemplate', { arr: vm.arr, onCheck: true });
 		};
 
 	});
