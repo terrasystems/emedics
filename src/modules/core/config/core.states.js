@@ -146,7 +146,6 @@ angular.module('modules.core')
 				}
 			}
 		},
-
 		{
 			name:'main.private.dashboard.abstract.refadd',
 			url:'/references/add',
@@ -208,6 +207,9 @@ angular.module('modules.core')
 					templateUrl:'modules/dashboard/views/FormsTemplate.html',
 					controller:'FormTemplateCtrl as vm'
 				}
+			},
+			params:{
+				arr: null
 			}
 		},
 		{

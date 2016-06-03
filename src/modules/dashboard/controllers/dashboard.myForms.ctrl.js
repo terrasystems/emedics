@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('MyFormCtrl', function (http, blockUI, alertService) {
+	.controller('MyFormCtrl', function (http, blockUI, alertService, $state) {
 		var vm = this;
 		vm.myForms = [];
 
@@ -12,7 +12,6 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-						alertService.add(0, res.state.message);
 						vm.myForms = res.result;
 					}
 				});
@@ -27,6 +26,18 @@ angular.module('modules.dash')
 					alertService.add(0, res.state.message);
 					vm.onRefresh();
 				});
+		};
+
+		vm.onGoTemplates = function() {
+			vm.arr = [];
+			vm.myForms.forEach(function(e) {
+				var item = {};
+				item.id = e.templateDto.id;
+				item.type = e.type;
+				vm.arr.push(item);
+			});
+
+			$state.go('main.private.dashboard.abstract.myforms.template', { arr: vm.arr, onCheck: true });
 		};
 
 	});
