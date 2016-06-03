@@ -54,7 +54,7 @@ angular.module('modules.core')
 				http.get('public/activate/' + $stateParams.code).then(function(response) {
 					console.log(response);
 					auth.saveUserData(response);
-					$state.go('main.private.dashboard', {reload: true});
+					$state.go('main.private.dashboard.abstract', {reload: true});
 				});
 				console.log($stateParams.code);
 			}
