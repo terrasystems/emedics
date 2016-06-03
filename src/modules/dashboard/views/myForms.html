@@ -6,7 +6,7 @@
 		<div   ui-list-view="forms in vm.myForms" options="listOptions">
 
 			<div class=" pull-right btn-group btn-group-xs delete_myForm">
-				<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)"><i class="glyphicon glyphicon-trash"></i></button>
+				<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)" ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
 			</div>
 
 			<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}

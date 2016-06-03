@@ -23,11 +23,17 @@ angular.module('modules.dash')
 			console.dir(e);
 			arr.map(function(item){
 				if  (item.id == e.id) {
-					item.isPay = true;
-					item.isLoad = true;
+					if (e.type == 'PAID') {
+						item.isPay = true;
+						item.isLoad = true;
+					}
+					else {
+						item.isPay = false;
+						item.isLoad = true;
+					}
 				}
 				return item;
-			});
+				});
 		});
 		return arr;
 	};
@@ -48,7 +54,7 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				vm.onRefresh();
+				//vm.onRefresh();
 			});
 	};
 
@@ -57,7 +63,7 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				vm.onRefresh();
+				//vm.onRefresh();
 			});
 	};
 
@@ -66,7 +72,7 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				vm.onRefresh();
+				//vm.onRefresh();
 			});
 	};
 
