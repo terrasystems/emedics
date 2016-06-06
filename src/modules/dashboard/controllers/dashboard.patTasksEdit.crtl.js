@@ -17,7 +17,8 @@ angular.module('modules.dash')
 		} else {
 			vm.mainState = 'main.private.dashboard.abstract.patients';
 		}
-     vm.hideButton = $stateParams.type;
+
+	    vm.hideButton = $stateParams.type;
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go(vm.mainState);
 			return;
@@ -27,8 +28,10 @@ angular.module('modules.dash')
 
 		vm.user = localStorageService.get('userData');
 		if ($stateParams.type == 'tasks') {
-			vm.getUrl = 'private/dashboard/' + vm.user.type + '/forms/' + vm.id;
-			vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
+			//vm.getUrl = 'private/dashboard/' + vm.user.type + '/forms/' + vm.id;
+			//vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
+			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
+			vm.setUrl = 'private/dashboard/tasks/edit';
 		} else {
 			vm.getUrl = 'private/dashboard/docpatients/forms/'+vm.id;
 			vm.setUrl = 'private/dashboard/docpatients/forms/edit';
@@ -50,29 +53,29 @@ angular.module('modules.dash')
 				blockUI.stop();
 
 				if ($stateParams.type == 'tasks') {
-					vm.checkArr = (res.result && res.result.blank && res.result.blank.body && res.result.blank.body.sections && res.result.id);
+					vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
 				} else {
-					vm.checkArr = (res.result && res.result.form && res.result.form.blank && res.result.form.blank.body && res.result.form.blank.body.sections && res.result.form.id);
+					vm.checkArr = (res.result && res.result.form && res.result.form.template && res.result.form.template.body && res.result.form.template.body.sections && res.result.form.id);
 				}
 
 				if (vm.checkArr) {
 					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
 					vm.formInfo = {};
 					vm.formInfo.id = ($stateParams.type == 'tasks') ?  res.result.id : res.result.form.id;
-					vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.blank.category : res.result.form.blank.category;
-					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.blank.name : res.result.form.blank.name;
-					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.blank.number : res.result.form.blank.number;
-					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.blank.descr : res.result.form.blank.descr;
+					vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.template.category : res.result.form.template.category;
+					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.template.name : res.result.form.template.name;
+					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.template.number : res.result.form.template.number;
+					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.template.descr : res.result.form.template.descr;
 
 					vm.sectionsName = [];
 					vm.sections = [];
 					if ($stateParams.type == 'tasks') {
-						vm.sections = eval($base64.decode(res.result.blank.body.sections));
+						vm.sections = eval($base64.decode(res.result.template.body.sections));
 						vm.sections.forEach(function (item) {
 							vm.sectionsName.push(Object.keys(item)[0]);
 						});
 					} else {
-						vm.sections = eval($base64.decode(res.result.form.blank.body.sections));
+						vm.sections = eval($base64.decode(res.result.form.template.body.sections));
 						vm.sections.forEach(function (item) {
 							vm.sectionsName.push(Object.keys(item)[0]);
 						});
@@ -120,11 +123,13 @@ angular.module('modules.dash')
 
 		function save() {
 			var deferred = $q.defer();
-			paramsPOST = {};
-			paramsPOST.id = vm.id;
-			paramsPOST.data = {};
-			paramsPOST.data.sections = vm.model;
-			paramsPOST.blank = null;
+			paramsPOST = {page: {start: 0, count: 20},criteria: {edit: {data:{}}, create: null}};
+			paramsPOST.criteria.edit.id = vm.id;
+			paramsPOST.criteria.edit.data.sections = vm.model;
+			//paramsPOST.id = vm.id;
+			//paramsPOST.data = {};
+			//paramsPOST.data.sections = vm.model;
+			//paramsPOST.blank = null;
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {

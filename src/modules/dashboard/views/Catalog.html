@@ -7,6 +7,7 @@
 
 			<div class=" pull-right btn-group btn-group-xs delete_myForm">
 				<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)" ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
+				<button style="float: right" class="btn btn-small" ng-click="vm.onAddTask(forms.id)"><span translate="+TASK"></span></button>
 			</div>
 
 			<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}

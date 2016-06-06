@@ -4,9 +4,10 @@
 		<div ui-list-view="form in vm.list track by $index" options="listOptions">
 
 			<div class="tasks" ng-click="vm.onClick(form.id)">
-				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="NUMBER"></span>: </label>{{form.blank.number}}</p>
-				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="NAME"></span>: </label>{{form.blank.name}}</p>
-				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="DESCR"></span>: </label>{{form.blank.descr}}</p>
+				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="DATE"></span>: </label>{{vm.convertDate(form.date)}}</p>
+				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="NUMBER"></span>: </label>{{form.template.number}}</p>
+				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="NAME"></span>: </label>{{form.template.name}}</p>
+				<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="DESCR"></span>: </label>{{form.template.descr}}</p>
 			</div>
 
 		</div>

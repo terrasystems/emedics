@@ -252,6 +252,16 @@ angular.module('modules.core')
 					controller:'settingsCtrl as vm'
 				}
 			}
+		},
+		{
+			name:'main.private.dashboard.abstract.drafts',
+			url:'/drafts',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.Drafts.html',
+					controller:'draftsCtrl as vm'
+				}
+			}
 		}
 
 	]);

@@ -3,15 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ($scope, $rootScope,constants,$stateParams,$state, blockUI, http, localStorageService) {
+	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.page = {};
 		vm.list = [];
 
-		var paramsPOST = {"page": {"start": 0, "count": 20}, "criteria": {}};
-
-		http.post('private/dashboard/' + vm.user.type + '/forms/active', paramsPOST)
+		//http.post('private/dashboard/' + vm.user.type + '/forms/active', paramsPOST)
+		http.get('private/dashboard/tasks/all')
 			.then(function (res) {
 				blockUI.stop();
 				if (res.result) {
@@ -20,11 +19,14 @@ angular.module('modules.dash')
 				}
 			});
 
-
 		vm.onClick = function (index) {
 			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
 		};
 
+		vm.convertDate = function (d) {
+			var x = new Date(d);
+			return x.toISOString().slice(0,19);
+		};
 });
 
 

@@ -40,4 +40,15 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.catalog.catalogtemplate', { arr: vm.arr, onCheck: true });
 		};
 
+		vm.onAddTask = function(id_) {
+			var paramsPOST = {page: {start: 0, count: 20},criteria: {edit: null, create:{id: id_}}};
+			http.post('private/dashboard/tasks/create', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if  (res.result) {
+						alertService.add(0, res.state.message);
+					}
+				});
+		};
+
 	});

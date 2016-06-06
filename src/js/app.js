@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages', 'ngAnimate',
-	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', 'ngMockE2E',
+	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', 'ngMockE2E', 'pouchdb',
 	//--
 	'modules.core', 'modules.public', 'modules.dash','ui.select','ngSanitize','ui.router.tabs']);
 
