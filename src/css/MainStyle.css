@@ -360,15 +360,16 @@ div.ui-list-view-cell.ng-scope {
 	border-radius: 10px;
 }
 
-.form-control.ui-select-search.ng-pristine.ng-valid.ng-empty.ng-touched {
-	width: 100%;
-}
-input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{
-	width: 100%;
-}
-span.btn.btn-default.form-control.ui-select-toggle{
-	width: 100%;
-}
+
+/*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{*/
+	 /*width: 100%;*/
+ /*}*/
+/*.form-control.ui-select-search.ng-valid.ng-dirty.ng-valid-parse.ng-empty.ng-touched{*/
+	/*width: 40px;*/
+/*}*/
+/*span.btn.btn-default.form-control.ui-select-toggle{*/
+	/*width: 100%;*/
+/*}*/
 
 .form_select {
 	margin-top: 5px;
@@ -433,6 +434,24 @@ div.panel-group{
 .template_button{
 	margin-top: 15px;
 	margin-right: 5px;
+}
+.tasks_head{
+	list-style: none;
+}
+/*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-empty{*/
+	/*min-width: 350px !important;*/
+/*}*/
+/*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{*/
+	/*min-width: 350px !important;*/
+/*}*/
+.ui-select-bootstrap[search-enabled=false] .ui-select-match.ng-hide {
+	display: inline-block !important;
+}
+.ui-select-bootstrap[search-enabled=false] .ui-select-match .text-muted.ng-hide {
+	display: inline !important;
+}
+.ui-select-bootstrap[search-enabled=false].ng-dirty .ui-select-match .text-muted.ng-hide {
+	display: none !important;
 }
 /*---------media--------*/
 

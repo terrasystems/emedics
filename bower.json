@@ -16,7 +16,6 @@
     "api-check": "^7.5.5",
     "angular-formly-templates-bootstrap": "^6.2.0",
     "angular-formly": "7.3.9",
-    "angular-animate": "1.4.8",
     "angular-messages": "1.4.8",
     "angular-block-ui": "~0.2.2",
     "angular-toastr": "~1.7.0",

@@ -1,41 +1,46 @@
-<div class="row ui-list-view">
-	<div class="input-group msg_container ">
+<div class="conrainer">
+	<div class="row ui-list-view">
+		<div class="input-group msg_container ">
 
-		<h1>Massage</h1>
+			<h3 style="text-align: center"><span translate="FORM"></span> {{vm.name}}</h3>
 
-		<div class="msg_form col-md-10 col-sm-8 col-md-offset-1 col-sm-offset-1 ">
-			<div>
-				<strong><span translate="FROM"></span></strong>{{vm.name}}
-			</div>
-			<label class="control-label"><span translate="TO_DOCTOR"></span></label>
 
-			<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id" theme="bootstrap">
+			<div class="msg_form col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1 ">
 
-				<ui-select-match style="max-width: 310px" placeholder="{{'SEARCH_REFS' | translate}}">
-					{{$select.selected.name + '&nbsp (' + $select.selected.email + ')'}}
-				</ui-select-match>
 
-				<ui-select-choices repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">
-					<div ng-bind="doc.name"></div>
-					<small ng-bind="doc.email"></small>
-				</ui-select-choices>
+				<label class="control-label"><span translate="TO_DOCTOR"></span></label>
+					<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id"
+							   theme="bootstrap">
 
-			</ui-select>
+						<ui-select-match placeholder="{{'SEARCH_REFS' | translate}}">
+							{{$select.selected.name + '&nbsp (' + $select.selected.email + ')'}}
 
-			<form name="myform" class="notif" action="">
-				<label class="control-label"><span translate="TITLE"></span></label>
-				<input type="text" ng-model="vm.message.title" placeholder="{{'TITLE_NOTIF' | translate}}" class="form-control"
-					   aria-describedby="basic-addon2">
+						</ui-select-match>
 
-				<textarea ng-model="vm.message.text" placeholder="{{'MESSAGE_TEXT' | translate}}" class="" name="" id=""
+						<ui-select-choices
+								repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">
+							<div ng-bind="doc.name"></div>
+							<small ng-bind="doc.email"></small>
+						</ui-select-choices>
+
+					</ui-select>
+
+				<form name="myform" class="notif" action="">
+					<label class="control-label"><span translate="TITLE"></span></label>
+					<input type="text" ng-model="vm.message.title" placeholder="{{'TITLE_NOTIF' | translate}}"
+						   class="form-control"
+						   aria-describedby="basic-addon2">
+
+				<textarea ng-model="vm.message.text" placeholder="{{'MESSAGE_TEXT' | translate}}"
 						  rows="5"></textarea>
-				<button style="float: right" class="btn btn-default" type="button"
-						ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id )"
-						ng-click="vm.send()"><span translate="SEND"></span>
-				</button>
-			</form>
+					<button style="float: right" class="btn btn-default" type="button"
+							ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id )"
+							ng-click="vm.send()"><span translate="SEND"></span>
+					</button>
+				</form>
+
+			</div>
 
 		</div>
-
 	</div>
 </div>
