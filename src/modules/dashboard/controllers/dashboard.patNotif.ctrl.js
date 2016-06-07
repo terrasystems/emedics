@@ -20,7 +20,7 @@ angular.module('modules.dash')
 		vm.onRefreshNotif();
 
 		vm.onAccept = function (id) {
-			http.get('private/dashboard/notifications/accept/'+id)
+			http.get('private/dashboard/events/notifications/accept/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
@@ -34,7 +34,7 @@ angular.module('modules.dash')
 		$rootScope.$broadcast('calc.notif');
 
 		vm.onDecline = function (id) {
-			http.get('private/dashboard/notifications/decline/'+id)
+			http.get('private/dashboard/events/notifications/decline/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
