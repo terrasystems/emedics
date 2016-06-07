@@ -17,6 +17,7 @@ angular.module('modules.dash')
 					}
 				});
 		};
+		vm.onRefresh();
 
 		vm.onRemove = function(id) {
 			console.log('id='+id);
@@ -41,7 +42,27 @@ angular.module('modules.dash')
 		};
 
 		vm.onAddTask = function(id_) {
-			var paramsPOST = {page: {start: 0, count: 20},criteria: {edit: null, create:{id: id_}}};
+			var paramsPOST = //{page: {start: 0, count: 20},criteria: {edit: null, create:{id: id_}}};
+
+			{
+				template:{
+				id:id_,
+					type:'',
+					description:'',
+					templateDto:{
+					id:null,
+					body: {
+						sections:[],
+						name:'',
+						type:'',
+						descr:'',
+						category:'',
+						number:''
+					}
+				}
+			}
+			};
+
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();

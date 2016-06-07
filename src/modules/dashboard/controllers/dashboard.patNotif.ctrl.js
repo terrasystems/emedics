@@ -7,10 +7,8 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.UnreadNotifications = [];
 		vm.searchnotif = '';
-		vm.onRefreshNotif = onRefreshNotif;
 
-
-		function onRefreshNotif() {
+		vm.onRefreshNotif = function() {
 			http.post('private/dashboard/notifications', initParamsPOST.params)
 				.then(function (res) {
 					blockUI.stop();
@@ -18,10 +16,8 @@ angular.module('modules.dash')
 						vm.UnreadNotifications = res.result;
 					}
 				});
-		}
-
+		};
 		vm.onRefreshNotif();
-		$scope.$emit('refresh',vm.onRefreshNotif());
 
 		vm.onAccept = function (id) {
 			console.log('accept id: '+id);

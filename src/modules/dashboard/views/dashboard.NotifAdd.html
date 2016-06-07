@@ -9,7 +9,7 @@
 
 
 				<label class="control-label"><span translate="TO_DOCTOR"></span></label>
-					<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser.id = doctor.selected.id"
+					<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser = doctor.selected.id"
 							   theme="bootstrap">
 
 						<ui-select-match placeholder="{{'SEARCH_REFS' | translate}}">
@@ -26,15 +26,15 @@
 					</ui-select>
 
 				<form name="myform" class="notif" action="">
-					<label class="control-label"><span translate="TITLE"></span></label>
-					<input type="text" ng-model="vm.message.title" placeholder="{{'TITLE_NOTIF' | translate}}"
-						   class="form-control"
-						   aria-describedby="basic-addon2">
+					<!--<label class="control-label"><span translate="TITLE"></span></label>-->
+					<!--<input type="text" ng-model="vm.message.title" placeholder="{{'TITLE_NOTIF' | translate}}"-->
+						   <!--class="form-control"-->
+						   <!--aria-describedby="basic-addon2">-->
 
-				<textarea ng-model="vm.message.text" placeholder="{{'MESSAGE_TEXT' | translate}}"
+				<textarea ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}"
 						  rows="5"></textarea>
 					<button style="float: right" class="btn btn-default" type="button"
-							ng-disabled="!(!!vm.message.title && !!vm.message.text && !!vm.message.toUser.id )"
+							ng-disabled="!(!!vm.message.message && !!vm.message.toUser)"
 							ng-click="vm.send()"><span translate="SEND"></span>
 					</button>
 				</form>

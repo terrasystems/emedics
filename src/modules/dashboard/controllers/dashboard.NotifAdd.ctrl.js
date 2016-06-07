@@ -11,17 +11,18 @@ angular.module('modules.dash')
 		vm.name = $stateParams.name;
 		vm.user = localStorageService.get('userData');
 		vm.message = {
-			page: {
-				start: 0,
-				count: 20,
-				size: null
-			},
-			criteria: {
-				edit: null,
-				create: null,
+			//page: {
+			//	start: 0,
+			//	count: 20,
+			//	size: null
+			//},
+			//criteria: {
+			//	edit: null,
+			//	create: null,
 				toUser: null,
-				event: $stateParams.id
-			}
+				event: $stateParams.id,
+				message: ''
+			///}
 		};
 
 		vm.forms = [];
@@ -81,7 +82,6 @@ angular.module('modules.dash')
 		};
 
 		vm.send = function () {
-			vm.message.toUser =
 			http.post('private/dashboard/tasks/send', vm.message)
 				.then(function (res) {
 					blockUI.stop();
