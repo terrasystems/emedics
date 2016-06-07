@@ -15,10 +15,12 @@ html, body, #wrap {
 body > #wrap {
 	height: auto;
 	min-height: 100%;
+
 }
 
 #main {
 	padding-bottom: 50px;
+	min-height: 100%;
 }
 
 /* must be same height as the footer */
@@ -196,7 +198,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 	/*width: 100%;*/
 	/*margin-left: auto;*/
 	/*margin-right: auto;*/
-	min-height: 450px;
+	min-height: 550px;
 	background: #d6d6d6;
 	/*border-radius: 10px;*/
 }
