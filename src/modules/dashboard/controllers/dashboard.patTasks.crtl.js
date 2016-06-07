@@ -9,7 +9,6 @@ angular.module('modules.dash')
 		vm.page = {};
 		vm.list = [];
 
-		//http.post('private/dashboard/' + vm.user.type + '/forms/active', paramsPOST)
 		http.get('private/dashboard/tasks/all')
 			.then(function (res) {
 				blockUI.stop();
@@ -25,7 +24,7 @@ angular.module('modules.dash')
 
 		vm.convertDate = function (d) {
 			var x = new Date(d);
-			return x.toISOString().slice(0,19);
+			return x.toISOString().slice(0,19).replace('T', ' ');
 		};
 });
 

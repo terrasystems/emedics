@@ -7,7 +7,7 @@ angular.module('modules.dash')
 	var vm = this;
 	vm.FormTemplate = [];
 	vm.user = localStorageService.get('userData');
-	vm.isPatient = ( (vm.user.type).toUpperCase() !== 'DOCTOR') ? true: false;
+	vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
 
 	if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
 		$state.go('main.private.dashboard.abstract.catalog');
@@ -22,7 +22,6 @@ angular.module('modules.dash')
 			return item;
 		});
 		$stateParams.arr.forEach(function(e) {
-			console.dir(e);
 			arr.map(function(item){
 				if  (item.id == e.id) {
 					if (e.type == 'PAID') {
@@ -56,7 +55,6 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				//vm.onRefresh();
 			});
 	};
 
@@ -65,7 +63,6 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				//vm.onRefresh();
 			});
 	};
 
@@ -74,7 +71,6 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				alertService.add(0, res.state.message);
-				//vm.onRefresh();
 			});
 	};
 

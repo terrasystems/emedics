@@ -33,12 +33,11 @@ angular.module('modules.dash')
 		};
 
 		$scope.$on('calc.notif', function () {
-				http.post('private/dashboard/notifications', initParamsPOST.params)
+				http.get('private/dashboard/events/notifications/all')
 					.then(function (res) {
 						blockUI.stop();
 						if (res.result) {
 							vm.tabData[2].badge = res.result.length;
-							//console.log('size = '+vm.tabData[2].badge);
 						}
 					});
 			}

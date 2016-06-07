@@ -4,9 +4,9 @@
 	<ul class="" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
 		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="FROM"></span>: </strong>{{notification.fromUser.username}}</p>
-		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="TITLE"></span>: </strong>{{notification.title}}</p>
-		<p class="col-md-2 col-sm-2"><strong><span translate="MESSAGE"></span>: </strong>{{notification.text}}</p>
-		<p class="col-md-2 col-sm-2"><strong><span translate="FORM"></span>: </strong></p>
+		<p class="col-lg-2 col-md-2 col-sm-2"><strong><span translate="DATE"></span>: </strong>{{vm.convertDate(notification.date)}}</p>
+		<p class="col-md-2 col-sm-2"><strong><span translate="MESSAGE"></span>: </strong>{{notification.descr}}</p>
+		<p class="col-md-2 col-sm-2"><strong><span translate="FORM"></span>: </strong>{{notification.template.name}}</p>
 
 		<div class="buttons" ng-show="!textBtnForm.$visible">
 			<button style="float: right" class="btn btn-danger red" ng-click="vm.onDecline(notification.id)"><span translate="DECLINE"></span></button>

@@ -3,13 +3,13 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http,$scope,blockUI, initParamsPOST, alertService, $rootScope) {
+	.controller('patientNotifCtrl', function (http,$scope,blockUI, alertService, $rootScope) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 		vm.searchnotif = '';
 
 		vm.onRefreshNotif = function() {
-			http.post('private/dashboard/notifications', initParamsPOST.params)
+			http.get('private/dashboard/events/notifications/all')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -20,7 +20,6 @@ angular.module('modules.dash')
 		vm.onRefreshNotif();
 
 		vm.onAccept = function (id) {
-			console.log('accept id: '+id);
 			http.get('private/dashboard/notifications/accept/'+id)
 				.then(function (res) {
 					blockUI.stop();
@@ -35,7 +34,6 @@ angular.module('modules.dash')
 		$rootScope.$broadcast('calc.notif');
 
 		vm.onDecline = function (id) {
-			console.log('decline id: '+id);
 			http.get('private/dashboard/notifications/decline/'+id)
 				.then(function (res) {
 					blockUI.stop();
@@ -45,6 +43,11 @@ angular.module('modules.dash')
 					}
 					vm.onRefreshNotif();
 				});
+		};
+
+		vm.convertDate = function (d) {
+			var x = new Date(d);
+			return x.toISOString().slice(0,19).replace('T', ' ');
 		};
 
 	});
