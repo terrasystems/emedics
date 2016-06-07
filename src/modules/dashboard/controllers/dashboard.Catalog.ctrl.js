@@ -6,7 +6,6 @@ angular.module('modules.dash')
 	.controller('CatalogCtrl', function (http, blockUI, alertService, $state) {
 		var vm = this;
 		vm.myForms = [];
-		var t= '';
 
 		vm.onRefresh = function () {
 			http.get('private/dashboard/user/template')
@@ -20,7 +19,6 @@ angular.module('modules.dash')
 		vm.onRefresh();
 
 		vm.onRemove = function(id) {
-			console.log('id='+id);
 			http.get('private/dashboard/template/delete/'+id)
 				.then(function (res) {
 					blockUI.stop();
@@ -42,27 +40,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onAddTask = function(id_) {
-			var paramsPOST = //{page: {start: 0, count: 20},criteria: {edit: null, create:{id: id_}}};
-
-			{
-				template:{
-				id:id_,
-					type:'',
-					description:'',
-					templateDto:{
-					id:null,
-					body: {
-						sections:[],
-						name:'',
-						type:'',
-						descr:'',
-						category:'',
-						number:''
-					}
-				}
-			}
-			};
-
+			var paramsPOST = {template: {id: id_, templateDto: {id: null, body: {sections:[], name: ''}}}};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();

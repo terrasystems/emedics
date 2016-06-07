@@ -3,9 +3,11 @@
 
 angular.module('modules.dash')
 
-.controller('CatalogTemplateCtrl', function (http, blockUI, alertService, $stateParams, $state) {
+.controller('CatalogTemplateCtrl', function (http, blockUI, alertService, $stateParams, $state, localStorageService) {
 	var vm = this;
 	vm.FormTemplate = [];
+	vm.user = localStorageService.get('userData');
+	vm.isPatient = ( (vm.user.type).toUpperCase() !== 'DOCTOR') ? true: false;
 
 	if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
 		$state.go('main.private.dashboard.abstract.catalog');

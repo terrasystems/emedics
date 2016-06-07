@@ -10,20 +10,7 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.name = $stateParams.name;
 		vm.user = localStorageService.get('userData');
-		vm.message = {
-			//page: {
-			//	start: 0,
-			//	count: 20,
-			//	size: null
-			//},
-			//criteria: {
-			//	edit: null,
-			//	create: null,
-				toUser: null,
-				event: $stateParams.id,
-				message: ''
-			///}
-		};
+		vm.message = {toUser: null, event: $stateParams.id, message: ''	};
 
 		vm.forms = [];
 		vm.doctors = [];
