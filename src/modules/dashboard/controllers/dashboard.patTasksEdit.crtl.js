@@ -123,13 +123,10 @@ angular.module('modules.dash')
 
 		function save() {
 			var deferred = $q.defer();
-			paramsPOST = {page: {start: 0, count: 20},criteria: {edit: {data:{}}, create: null}};
-			paramsPOST.criteria.edit.id = vm.id;
-			paramsPOST.criteria.edit.data.sections = vm.model;
-			//paramsPOST.id = vm.id;
-			//paramsPOST.data = {};
-			//paramsPOST.data.sections = vm.model;
-			//paramsPOST.blank = null;
+			//paramsPOST = {page: {start: 0, count: 20},criteria: {edit: {data:{}}, create: null}};
+			//paramsPOST.criteria.edit.id = vm.id;
+			//paramsPOST.criteria.edit.data.sections = vm.model;
+			paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {

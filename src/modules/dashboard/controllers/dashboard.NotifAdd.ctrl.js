@@ -3,21 +3,25 @@
 
 angular.module('modules.dash')
 	.controller('addNotificationCtrl', function ($stateParams,$scope, http, blockUI, initParamsPOST, localStorageService, alertService, $timeout, $state) {
+		if (!$stateParams.id) {
+			$state.go('main.private.dashboard.abstract.tasks');
+		}
+
 		var vm = this;
-
-		vm.name=$stateParams.name;
-
+		vm.name = $stateParams.name;
 		vm.user = localStorageService.get('userData');
 		vm.message = {
-			'id': null,
-			'date': null,
-			'readtype': null,
-			'type': null,
-			'title': '',
-			'text': '',
-			'fromUser': {id: null},
-			'toUser': {id: null},
-			'userForm': $stateParams.id
+			page: {
+				start: 0,
+				count: 20,
+				size: null
+			},
+			criteria: {
+				edit: null,
+				create: null,
+				toUser: null,
+				event: $stateParams.id
+			}
 		};
 
 		vm.forms = [];
@@ -41,8 +45,6 @@ angular.module('modules.dash')
 					vm.doctors = res.result;
 				}
 			});
-
-
 
 		vm.getDoctors = function (search) {
 			vm.newDocs = vm.doctors.slice();
@@ -78,26 +80,18 @@ angular.module('modules.dash')
 			return vm.newForms;
 		};
 
-		if (!$stateParams.id) {
-			$state.go('main.private.dashboard.abstract.tasks');
-		}
-
 		vm.send = function () {
-			if (!$stateParams.id) {
-				$state.go('main.private.dashboard.abstract.tasks');
-			} else {
-				http.post('private/dashboard/notifications/send', vm.message)
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							alertService.add(0, res.state.message);
-						}
-						$timeout(function () {
-							$state.go('main.private.dashboard.abstract.tasks');
-						}, 0);
-					});
-			}
-
-
+			vm.message.toUser =
+			http.post('private/dashboard/tasks/send', vm.message)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+					}
+					$timeout(function () {
+						$state.go('main.private.dashboard.abstract.tasks');
+					}, 0);
+				});
 		};
+
 	});
