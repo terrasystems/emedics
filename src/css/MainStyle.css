@@ -342,7 +342,7 @@ div.ui-list-view-cell.ng-scope {
 }
 
 .msg_container {
-	background: #109AC8;
+	border:1px solid;
 	height: 200px;
 	border-radius: 10px;
 	margin-top: 45px;
