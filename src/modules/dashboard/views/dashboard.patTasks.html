@@ -1,31 +1,34 @@
-<div class="container">
+<section>
+	<div class="container">
 
-	<div class=" row form-list " options="listOptions">
-		<div class="container">
-			<div class="row tasks_head_board">
-				<ul class="tasks_head">
-					<li><p class="col-md-3 col-sm-3 col-xs-3" translate="DATE"></p></li>
-					<li><p class="col-md-3 col-sm-3 col-xs-3" translate="NUMBER"></p></li>
-					<li><p class="col-md-3 col-sm-3 col-xs-3" translate="NAME"></p></li>
-					<li></li>
-				</ul>
+		<div class=" row form-list " options="listOptions">
+			<div class="container">
+				<div class="row tasks_head_board">
+					<ul class="tasks_head">
+						<li><p class="col-md-3 col-sm-3 col-xs-3" translate="DATE"></p></li>
+						<li><p class="col-md-3 col-sm-3 col-xs-3" translate="NUMBER"></p></li>
+						<li><p class="col-md-3 col-sm-3 col-xs-3" translate="NAME"></p></li>
+						<li></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have
-			any tasks</h5></div>
-		<div class="" ui-list-view="form in vm.list track by $index" options="listOptions">
+			<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont
+				have
+				any tasks</h5></div>
+			<div class="" ui-list-view="form in vm.list track by $index" options="listOptions">
 
-			<div class="tasks" ng-click="vm.onClick(form.id)">
-				<p class="col-md-3 col-sm-3 col-xs-3">{{vm.convertDate(form.date)}}</p>
+				<div class="tasks" ng-click="vm.onClick(form.id)">
+					<p class="col-md-3 col-sm-3 col-xs-3">{{vm.convertDate(form.date)}}</p>
 
-				<p class="col-md-3 col-sm-3 col-xs-3">{{form.template.number}}</p>
+					<p class="col-md-3 col-sm-3 col-xs-3">{{form.template.number}}</p>
 
-				<p class="col-md-3 col-sm-3 col-xs-3">{{form.template.name}}</p>
+					<p class="col-md-3 col-sm-3 col-xs-3">{{form.template.name}}</p>
 
-				<p class="col-md-2 col-sm-2 col-xs-2" style=" font-size: 10px;">{{form.template.descr}}</p>
+					<p class="col-md-2 col-sm-2 col-xs-2" style=" font-size: 10px;">{{form.template.descr}}</p>
+				</div>
+
+
 			</div>
-
-
 		</div>
 	</div>
-</div>
+</section>

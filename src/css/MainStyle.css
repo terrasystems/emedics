@@ -195,10 +195,10 @@ div.form-list.ui-list-view.ng-isolate-scope {
 }
 
 .ui-list-view {
-	/*width: 100%;*/
-	/*margin-left: auto;*/
-	/*margin-right: auto;*/
-	min-height: 550px;
+	position: relative;
+	height: 100vh;
+	width: 100%;
+	/*min-height: 550px;*/
 	background: #d6d6d6;
 	/*border-radius: 10px;*/
 }
@@ -455,6 +455,7 @@ div.panel-group{
 .ui-select-bootstrap[search-enabled=false].ng-dirty .ui-select-match .text-muted.ng-hide {
 	display: none !important;
 }
+
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */
