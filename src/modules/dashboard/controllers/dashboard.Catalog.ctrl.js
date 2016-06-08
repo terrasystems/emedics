@@ -65,14 +65,34 @@ angular.module('modules.dash')
 	})
 
 
-	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI) {
+	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI, $scope, http, localStorageService) {
 		var vm = this;
 		vm.model = model;
+
+		$scope.patient = '';
+		$scope.sendTo = '';
+
+		vm.user = localStorageService.get('userData');
+
+		$scope.getFind = function (val, type) {
+			return http.post('private/dashboard/' + vm.user.type + '/references/refs', {search: val, type: type} )
+				.then(function (res) {
+					blockUI.stop();
+					if  (angular.isArray(res.result) && res.result.length>0) {
+						res.result.map(function (item) {
+							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
+							return item;
+						});
+					}
+					return res.result;
+				});
+		};
 
 		blockUI.stop();
 
 		vm.ok = function () {
-			$uibModalInstance.close(vm.model);
+			console.log($scope.patient +' '+ $scope.sendTo);
+			$uibModalInstance.close();
 		};
 
 		vm.cancel = function cancel() {
