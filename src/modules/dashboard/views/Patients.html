@@ -1,5 +1,7 @@
 <div class="container">
 	<div class="row">
+
+
 		<div class="search_content">
 			<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 				   ng-model="doctor"
@@ -11,10 +13,10 @@
 			<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span
 					translate="APPLY"></span></button>
 		</div>
-	</div>
-</div>
-<div class="container">
-	<div class="row ui-list-view ">
+
+
+
+	<div class="ui-list-view ">
 		<div ng-show="vm.patients.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't
 			have any patients</h5></div>
 
@@ -53,6 +55,6 @@
 
 			</uib-accordion>
 
-		<p></p>
+	</div>
 	</div>
 </div>

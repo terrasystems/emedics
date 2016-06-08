@@ -1,4 +1,4 @@
-<div class="conrainer">
+<div class="container">
 	<div class="row ui-list-view">
 		<div class="input-group msg_container col-md-6  col-xs-6 col-lg-6">
 
@@ -26,12 +26,7 @@
 					</ui-select>
 
 				<form name="myform" class="notif" action="">
-					<!--<label class="control-label"><span translate="TITLE"></span></label>-->
-					<!--<input type="text" ng-model="vm.message.title" placeholder="{{'TITLE_NOTIF' | translate}}"-->
-						   <!--class="form-control"-->
-						   <!--aria-describedby="basic-addon2">-->
-
-				<textarea ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}"
+					<textarea ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}"
 						  rows="5"></textarea>
 					<button style="float: right" class="btn btn-default" type="button"
 							ng-disabled="!(!!vm.message.message && !!vm.message.toUser)"

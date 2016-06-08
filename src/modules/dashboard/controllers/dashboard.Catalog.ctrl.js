@@ -40,14 +40,6 @@ angular.module('modules.dash')
 
 		vm.onAddTask = function(model) {
 			blockUI.start();
-			//var paramsPOST = {template: {id: id_, templateDto: {id: null, body: {sections:[], name: ''}}}};
-			//http.post('private/dashboard/tasks/create', paramsPOST)
-			//	.then(function (res) {
-			//		blockUI.stop();
-			//		if  (res.result) {
-			//			alertService.add(0, res.state.message);
-			//		}
-			//	});
 			var result = $uibModal.open({
 				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
 				controller: 'modalAddNotifCtrl',
@@ -65,12 +57,11 @@ angular.module('modules.dash')
 	})
 
 
-	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI, $scope, http, localStorageService) {
+	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI,alertService,$timeout,http,localStorageService,$scope) {
 		var vm = this;
 		vm.model = model;
+		$scope.message = {toUser: null, event: vm.model.id, message: '',patient:''};
 
-		$scope.patient = '';
-		$scope.sendTo = '';
 
 		vm.user = localStorageService.get('userData');
 
@@ -90,13 +81,27 @@ angular.module('modules.dash')
 
 		blockUI.stop();
 
-		vm.ok = function () {
-			console.log($scope.patient +' '+ $scope.sendTo);
+		vm.save = function () {
 			$uibModalInstance.close();
-		};
 
-		vm.cancel = function cancel() {
+			};
+
+
+
+		vm.send = function () {
+
+			http.post('private/dashboard/tasks/send',$scope.message)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+					}
+
+				});
+
 			$uibModalInstance.dismiss('cancel');
 		};
+
+
 
 	});

@@ -6,7 +6,7 @@
 		<label class="control-label"><span translate="TO_DOCTOR"></span></label>
 
 		<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
-			   ng-model="patient"
+			   ng-model="message.patient"
 			   placeholder="{{'SEARCH_REFS2' | translate}}"
 			   uib-typeahead="item as item.all for item in getFind($viewValue,'pat')"
 			   typeahead-loading="loadingLocations"
@@ -16,30 +16,24 @@
 		<label class="control-label"><span translate="ToUser"></span></label>
 
 		<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
-			   ng-model="sendTo"
+			   ng-model="message.toUser"
 			   placeholder="{{'SEARCH_REFS2' | translate}}"
 			   uib-typeahead="item as item.all for item in getFind($viewValue,'all')"
 			   typeahead-loading="loadingLocations"
 			   typeahead-editable="true"
 			   class="form-control">
 
-		<!--<ui-select ng-model="doctor.selected" ng-change="vm.message.toUser = doctor.selected.id" theme="bootstrap">-->
-			<!--<ui-select-match placeholder="{{'SEARCH_REFS' | translate}}">{{$select.selected.name + '&nbsp (' +-->
-				<!--$select.selected.email + ')'}}-->
-			<!--</ui-select-match>-->
-
-			<!--<ui-select-choices repeat="doc in (vm.getDoctors($select.search) | filter: $select.search) track by doc.id">-->
-				<!--<div ng-bind="doc.name"></div>-->
-				<!--<small ng-bind="doc.email"></small>-->
-			<!--</ui-select-choices>-->
-		<!--</ui-select>-->
 
 		<form name="myform" class="notif" action="">
-			<textarea rows="6" cols="6" ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}" rows="5"></textarea>
+			<textarea rows="6" cols="6" ng-model="message.message" placeholder="{{'MESSAGE_TEXT' | translate}}"
+					  rows="5"></textarea>
 		</form>
 
-		<button class="pull-right btn btn-primary" ng-click="vm.ok()">Save</button>
-		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-warning" ng-click="vm.cancel()">Send</button>
+
+		<button class="pull-right btn btn-primary" ng-click="vm.save()">Save</button>
+		<button style="margin-right:10px ;
+margin-bottom: 10px;" class="pull-right btn btn-warning" ng-click="vm.send()">Send
+		</button>
 	</div>
 </div>
 

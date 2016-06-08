@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function (http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate, $base64) {
+	.controller('patientTasksEditCtrl', function ($uibModal,http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate, $base64) {
 		//console.log('Type: ' + $stateParams.type + ' id: ' + $stateParams.id + ' patId: ' + $stateParams.patId);
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -148,5 +148,21 @@ angular.module('modules.dash')
 				}, 0);
 			});
 		}
+
+		vm.onAddTask = function(model) {
+			blockUI.start();
+			var result = $uibModal.open({
+				templateUrl: 'modules/dashboard/views/modal.addTasksNotif.html',
+				controller: 'modalAddNotifCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function($q) {
+						var deferred = $q.defer();
+						deferred.resolve({data: model});
+						return deferred.promise;
+					}
+				}
+			}).result;
+		};
 
 	});
