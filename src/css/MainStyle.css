@@ -2,7 +2,9 @@
 body {
 	background: url(../images/bkgd_pattern.png);
 }
-
+textarea {
+	resize: none; /* Запрещаем изменять размер */
+}
 * {
 	margin: 0;
 	padding: 0;
@@ -455,7 +457,27 @@ div.panel-group{
 .ui-select-bootstrap[search-enabled=false].ng-dirty .ui-select-match .text-muted.ng-hide {
 	display: none !important;
 }
-
+div.modal-dialog{
+	width: 400px;
+}
+.msg_modal{
+	border: 1px solid;
+	height: 200px;
+	width: 350px;
+	border-radius: 10px;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+div.content_modal{
+	width: 350px;
+	margin-left: auto;
+	margin-right: auto;
+}
+input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty{
+	width: 350px;
+}
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */

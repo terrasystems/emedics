@@ -26,6 +26,9 @@ angular.module('modules.dash')
 			var x = new Date(d);
 			return x.toISOString().slice(0,19).replace('T', ' ');
 		};
+
+
+
 });
 
 
