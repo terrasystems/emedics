@@ -48,7 +48,7 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont
+			<div ng-if="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont
 				have
 				any tasks</h5></div>
 			<div class="" ui-list-view="form in vm.list track by $index" options="listOptions">

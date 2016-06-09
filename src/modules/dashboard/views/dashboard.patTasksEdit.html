@@ -20,11 +20,13 @@
 		<formly-form model="vm.model[vm.selectedKey][vm.selectedSection]" fields="vm.sections[vm.selectedKey][vm.selectedSection]" options=vm.options[vm.selectedKey][vm.selectedSection] form="vm.form" track-by="$index">
 		</formly-form>
 
-		<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid"><span translate="SUBMIT"></span></button>
- 		<button ng-hide="vm.hideButton !== 'tasks'" style="float: right" class="btn btn-primary" ng-click="vm.onAddTask()"><span translate="ADDNOTIF"></span></button>
-		<button class="btn btn-primary"><span translate="SAVEASDRAFT"></span></button>
 	</form>
 
+	<div>
+		<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid"><span translate="SUBMIT"></span></button>
+	    <button ng-hide="vm.hideButton !== 'tasks'" style="float: right" class="btn btn-primary" ng-click="vm.onAddTask()"><span translate="ADDNOTIF"></span></button>
+	    <button class="btn btn-primary"><span translate="SAVEASDRAFT"></span></button>
+	</div>
 </div>
 
 

@@ -3,11 +3,22 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal,localStorageService,$stateParams) {
 		var vm = this;
+		vm.FormTemplate = [];
+		vm.user = localStorageService.get('userData');
+		vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
+
+		//if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
+		//	$state.go('main.private.dashboard.abstract.catalog');
+		//	return;
+		//}
+
+		vm.arr = [];
+
 		vm.myForms = [];
 
-		vm.onRefresh = function () {
+		vm.Refresh = function () {
 			http.get('private/dashboard/user/template')
 				.then(function (res) {
 					blockUI.stop();
@@ -16,6 +27,82 @@ angular.module('modules.dash')
 					}
 				});
 		};
+		vm.Refresh();
+
+
+		vm.myForms.forEach(function(e) {
+			var item = {};
+			item.id = e.templateDto.id;
+			item.type = e.type;
+			vm.arr.push(item);
+		});
+
+
+		vm.convertFormTemplate = function(arr) {
+			arr.map(function(item){
+				item.isPay = false;
+				item.isLoad = false;
+				item.isPreview = false;
+				return item;
+			});
+			vm.arr.forEach(function(e) {
+				arr.map(function(item){
+					if  (item.id == e.id) {
+						if (e.type == 'PAID') {
+							item.isPay = true;
+							item.isLoad = true;
+						}
+						else {
+							item.isPay = false;
+							item.isLoad = true;
+						}
+					}
+					return item;
+				});
+			});
+			return arr;
+		};
+
+		vm.onRefresh = function () {
+			http.get('private/dashboard/template')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						vm.FormTemplate = vm.convertFormTemplate(res.result);
+					}
+				});
+		};
+		vm.onRefresh();
+
+		vm.onBuy = function (id) {
+			http.get('private/dashboard/template/pay/'+id)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+				});
+		};
+
+		vm.onLoad = function (id) {
+			http.get('private/dashboard/template/load/'+id)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+				});
+		};
+
+		vm.onView = function (id) {
+			http.get('private/dashboard/template/preview/'+id)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+				});
+		};
+
+
+
+
+
+
 		vm.onRefresh();
 
 		vm.onRemove = function(id) {
@@ -27,16 +114,6 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onGoTemplates = function() {
-			vm.arr = [];
-			vm.myForms.forEach(function(e) {
-				var item = {};
-				item.id = e.templateDto.id;
-				item.type = e.type;
-				vm.arr.push(item);
-			});
-			$state.go('main.private.dashboard.abstract.catalog.catalogtemplate', { arr: vm.arr, onCheck: true });
-		};
 
 		vm.onAddTask = function(obj) {
 			var model = { userTempl_id: obj.id, obj: obj};

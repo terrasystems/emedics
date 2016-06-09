@@ -197,6 +197,9 @@ angular.module('modules.core')
 					templateUrl:'modules/dashboard/views/Catalog.html',
 					controller:'CatalogCtrl as vm'
 				}
+			},
+			params:{
+				arr: null
 			}
 		},
 		{
