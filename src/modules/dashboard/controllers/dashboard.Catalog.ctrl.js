@@ -38,8 +38,10 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.catalog.catalogtemplate', { arr: vm.arr, onCheck: true });
 		};
 
-		vm.onAddTask = function(model) {
+		vm.onAddTask = function(obj) {
+			var model = { userTempl_id: obj.id, obj: obj};
 			blockUI.start();
+
 			var result = $uibModal.open({
 				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
 				controller: 'modalAddNotifCtrl',
@@ -57,13 +59,15 @@ angular.module('modules.dash')
 	})
 
 
-	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI,alertService,$timeout,http,localStorageService,$scope) {
+	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI, alertService, $timeout, http, localStorageService, $scope, $q) {
 		var vm = this;
 		vm.model = model;
-		$scope.message = {toUser: null, event: vm.model.id, message: '',patient:''};
-
-
 		vm.user = localStorageService.get('userData');
+		blockUI.stop();
+
+		$scope.patient = '';
+		$scope.toUser = '';
+		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 
 		$scope.getFind = function (val, type) {
 			return http.post('private/dashboard/' + vm.user.type + '/references/refs', {search: val, type: type} )
@@ -79,29 +83,70 @@ angular.module('modules.dash')
 				});
 		};
 
-		blockUI.stop();
-
-		vm.save = function () {
-			$uibModalInstance.close();
-
-			};
-
-
-
 		vm.send = function () {
-
-			http.post('private/dashboard/tasks/send',$scope.message)
+			vm.message.toUser = $scope.toUser.id;
+			vm.message.patient = $scope.patient.id;
+			vm.message.event = vm.model.data.task_id;
+			http.post('private/dashboard/tasks/send', vm.message)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
 						alertService.add(0, res.state.message);
 					}
-
 				});
-
 			$uibModalInstance.dismiss('cancel');
 		};
 
+		//function create() {
+		//	var deferred = $q.defer();
+        //
+		//	http.post(vm.setUrl, paramsPOST)
+		//		.then(function (res) {
+		//			blockUI.stop();
+		//			if (res.state) {
+		//				alertService.add(0, res.state.message);
+		//			}
+		//			deferred.resolve(res);
+		//		}, function (error) {
+		//			deferred.reject(error);
+		//		});
+		//	return deferred.promise;
+		//}
+
+		vm.save = function () {
+			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: $scope.patient.id};
+
+			if  (!vm.model.data.task_id || vm.model.data.task_id==null) {
+				http.post('private/dashboard/tasks/create', paramsPOST)
+					.then(function (res) {
+						blockUI.stop();
+						if  (res.result) {
+							alertService.add(0, res.state.message);
+							vm.model.data.task_id = res.result.id;
+						}
+					});
+			}
+			paramsPOST = {event: {
+								id: vm.model.data.task_id,
+								date: null,
+								status: '',
+								patient: {id: $scope.patient.id},
+								template: null,
+								data: {},
+								fromUser: {id: null},
+								toUser: {id: $scope.toUser.id},
+								descr: ''
+								}
+						};
+			http.post('private/dashboard/tasks/edit', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if  (res.result) {
+						alertService.add(0, res.state.message);
+					}
+				});
+			$uibModalInstance.close();
+		};
 
 
 	});

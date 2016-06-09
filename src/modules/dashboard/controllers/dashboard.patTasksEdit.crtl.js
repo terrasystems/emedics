@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksEditCtrl', function ($uibModal,http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate, $base64) {
+	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI, $scope, alertService, $timeout, $translate, $base64) {
 		//console.log('Type: ' + $stateParams.type + ' id: ' + $stateParams.id + ' patId: ' + $stateParams.patId);
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -149,10 +149,11 @@ angular.module('modules.dash')
 			});
 		}
 
-		vm.onAddTask = function(model) {
+		vm.onAddTask = function() {
+			var model = {task_id: vm.id, obj: vm.formInfo};
 			blockUI.start();
 			var result = $uibModal.open({
-				templateUrl: 'modules/dashboard/views/modal.addTasksNotif.html',
+				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
 				controller: 'modalAddNotifCtrl',
 				controllerAs: 'vm',
 				resolve: {

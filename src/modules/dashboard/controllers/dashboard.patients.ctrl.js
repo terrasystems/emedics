@@ -120,7 +120,7 @@ angular.module('modules.dash')
 				vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
 				vm.paramsPOST.criteria.search = '';
-				vm.paramsPOST.criteria.list.push({id: $scope.doctor.id});
+				vm.paramsPOST.criteria.list.push({id: $scope.doctor.id, email: null, phone: null, name: null, history:[]});
 				http.post('private/dashboard/docpatients/add', vm.paramsPOST)
 					.then(function (res) {
 						blockUI.stop();
