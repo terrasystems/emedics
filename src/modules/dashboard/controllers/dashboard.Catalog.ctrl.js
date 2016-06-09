@@ -80,6 +80,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				});
+			window.location.reload();
 		};
 
 		vm.onLoad = function (id) {
@@ -88,6 +89,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				});
+			window.location.reload();
 		};
 
 		vm.onView = function (id) {
@@ -110,8 +112,8 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
-					vm.onRefresh();
 				});
+			window.location.reload();
 		};
 
 
