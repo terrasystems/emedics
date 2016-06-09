@@ -145,14 +145,29 @@ angular.module('modules.dash')
 		blockUI.stop();
 
 		if (vm.user.type === 'patient') {
-			$scope.patient = {id: vm.user.id};
+			vm.patient2 = {};
+			vm.patient2.id = vm.user.id;
 		} else {
-			$scope.patient = '';
+			vm.patient2 = '';
 		}
-		$scope.toUser = '';
+		vm.toUser = '';
 		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 
-		$scope.getFind = function (val, type) {
+		vm.getFind = function (val, type) {
+			return http.post('private/dashboard/' + vm.user.type + '/references/refs', {search: val, type: type} )
+				.then(function (res) {
+					blockUI.stop();
+					if  (angular.isArray(res.result) && res.result.length>0) {
+						res.result.map(function (item) {
+							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
+							return item;
+						});
+					}
+					return res.result;
+				});
+		};
+
+		vm.getFind2 = function (val, type) {
 			return http.post('private/dashboard/' + vm.user.type + '/references/refs', {search: val, type: type} )
 				.then(function (res) {
 					blockUI.stop();
@@ -167,8 +182,8 @@ angular.module('modules.dash')
 		};
 
 		vm.send = function () {
-			vm.message.toUser = $scope.toUser.id;
-			vm.message.patient = $scope.patient.id;
+			vm.message.toUser = vm.toUser.id;
+			vm.message.patient = vm.patient2.id;
 			vm.message.event = vm.model.data.task_id;
 			http.post('private/dashboard/tasks/send', vm.message)
 				.then(function (res) {
@@ -197,10 +212,8 @@ angular.module('modules.dash')
 		//}
 
 		vm.save = function () {
-
 			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: $scope.patient.id};
-
-			if  (!vm.model.data.task_id || vm.model.data.task_id==null) {
+			if  (!vm.model.data.task_id) {
 				http.post('private/dashboard/tasks/create', paramsPOST)
 					.then(function (res) {
 						blockUI.stop();
@@ -214,7 +227,7 @@ angular.module('modules.dash')
 								id: vm.model.data.task_id,
 								date: null,
 								status: '',
-								patient: {id: $scope.patient.id},
+								patient: {id: $scope.patient2.id},
 								template: null,
 								data: {},
 								fromUser: {id: null},
