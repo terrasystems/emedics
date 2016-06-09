@@ -142,7 +142,11 @@ angular.module('modules.dash')
 		vm.user = localStorageService.get('userData');
 		blockUI.stop();
 
-		$scope.patient = '';
+		if (vm.user.type === 'patient') {
+			$scope.patient = {id: vm.user.id};
+		} else {
+			$scope.patient = '';
+		}
 		$scope.toUser = '';
 		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 
@@ -191,6 +195,7 @@ angular.module('modules.dash')
 		//}
 
 		vm.save = function () {
+
 			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: $scope.patient.id};
 
 			if  (!vm.model.data.task_id || vm.model.data.task_id==null) {

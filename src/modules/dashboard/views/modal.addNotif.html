@@ -3,21 +3,18 @@
 	<div class="content_modal">
 		<h3 style="text-align: center"><span translate="FORM"></span>{{vm.name}}</h3>
 
-		<label class="control-label"><span translate="TO_DOCTOR"></span></label>
-
 		<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 			   ng-model="patient"
-			   placeholder="{{'SEARCH_REFS2' | translate}}"
+			   placeholder="{{'Search patient ...' | translate}}"
 			   uib-typeahead="item as item.all for item in getFind($viewValue,'pat')"
 			   typeahead-loading="loadingLocations"
 			   typeahead-editable="true"
-			   class="form-control">
-
-		<label class="control-label"><span translate="ToUser"></span></label>
+			   class="form-control"
+			   ng-if="!(vm.user.type === 'patient')">
 
 		<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
 			   ng-model="toUser"
-			   placeholder="{{'SEARCH_REFS2' | translate}}"
+			   placeholder="{{'Search references ...' | translate}}"
 			   uib-typeahead="item as item.all for item in getFind($viewValue,'all')"
 			   typeahead-loading="loadingLocations"
 			   typeahead-editable="true"
@@ -27,8 +24,8 @@
 			<textarea rows="6" cols="6" ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}" rows="5"></textarea>
 		</form>
 
-		<button class="pull-right btn btn-primary" ng-click="vm.save()">Save</button>
-		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-warning" ng-click="vm.send()" ng-disabled="!(!!patient.id && !!toUser.id)">Send</button>
+		<button class="pull-right btn btn-primary" ng-click="vm.save()" ng-if="!(!!vm.model.data.task_id)">Save</button>
+		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-warning" ng-click="vm.send()" ng-disabled="(!patient.id && !toUser.id)">Send</button>
 	</div>
 </div>
 
