@@ -180,67 +180,86 @@ angular.module('modules.dash')
 		};
 
 		vm.send = function () {
-			vm.message.toUser = vm.toUser.id;
-			vm.message.patient = vm.patient2.id;
-			vm.message.event = vm.model.data.task_id;
-			http.post('private/dashboard/tasks/send', vm.message)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-					}
+			vm.save()
+				.then(function(res) {
+					vm.message.toUser = vm.toUser.id;
+					vm.message.patient = vm.patient2.id;
+					vm.message.event = vm.model.data.task_id;
+					http.post('private/dashboard/tasks/send', vm.message)
+						.then(function (res) {
+							blockUI.stop();
+							if (res.state) {
+								alertService.add(0, res.state.message);
+							}
+						});
+					$uibModalInstance.dismiss('cancel');
 				});
-			$uibModalInstance.dismiss('cancel');
 		};
 
-		//function create() {
-		//	var deferred = $q.defer();
-        //
-		//	http.post(vm.setUrl, paramsPOST)
-		//		.then(function (res) {
-		//			blockUI.stop();
-		//			if (res.state) {
-		//				alertService.add(0, res.state.message);
-		//			}
-		//			deferred.resolve(res);
-		//		}, function (error) {
-		//			deferred.reject(error);
-		//		});
-		//	return deferred.promise;
-		//}
+		vm.create_ = function () {
+			var deferred = $q.defer();
+			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: vm.patient2.id};
+			http.post('private/dashboard/tasks/create', paramsPOST)
+				.then(function (res) {
+					deferred.resolve(res);
+				}, function (error) {
+					deferred.reject(error);
+				});
+			return deferred.promise;
+		};
 
-		vm.save = function () {
-			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: $scope.patient.id};
-			if  (!vm.model.data.task_id) {
-				http.post('private/dashboard/tasks/create', paramsPOST)
-					.then(function (res) {
-						blockUI.stop();
-						if  (res.result) {
-							alertService.add(0, res.state.message);
-							vm.model.data.task_id = res.result.id;
-						}
-					});
+		vm.edit = function(res) {
+			var deferred = $q.defer();
+			var paramsPOST = {event: {
+				id: vm.model.data.task_id,
+				date: null,
+				status: '',
+				patient: {id: vm.patient2.id},
+				template: null,
+				data: {},
+				fromUser: {id: null},
+				toUser: {id: vm.toUser.id},
+				descr: ''
 			}
-			paramsPOST = {event: {
-								id: vm.model.data.task_id,
-								date: null,
-								status: '',
-								patient: {id: $scope.patient2.id},
-								template: null,
-								data: {},
-								fromUser: {id: null},
-								toUser: {id: $scope.toUser.id},
-								descr: ''
-								}
-						};
+			};
 			http.post('private/dashboard/tasks/edit', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if  (res.result) {
 						alertService.add(0, res.state.message);
 					}
+					deferred.resolve(res);
+				}, function (error) {
+					deferred.reject(error);
 				});
+			return deferred.promise;
+		};
+
+		vm.save = function () {
+			var deferred = $q.defer();
+			if  (!vm.model.data.task_id) {
+				vm.create_()
+					.then(function(res) {
+						vm.model.data.task_id = res.result.id;
+					}, function (error) {
+						deferred.reject(error);
+					})
+					.then(function(res) {
+						vm.edit();
+						deferred.resolve(res);
+					}, function (error) {
+						deferred.reject(error);
+					});
+			} else {
+				vm.edit()
+					.then(function(res){
+						deferred.resolve(res);
+					}, function (error) {
+						deferred.reject(error);
+					});
+			}
 			$uibModalInstance.close();
+			return deferred.promise;
 		};
 
 
