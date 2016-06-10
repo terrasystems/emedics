@@ -1,15 +1,56 @@
 <div class="container">
 	<div class="row form-list">
 
-		<uib-tabset >
+		<uib-tabset>
+			<div class="search_criterias pull-right" >
+				<label class="checkbox-inline"><input type="checkbox" value="">All</label>
+				<label class="checkbox-inline"><input type="checkbox" value="">Patient</label>
+				<label class="checkbox-inline"><input type="checkbox" value="">Med</label>
+				<label class="checkbox-inline"><input type="checkbox" value="">Bought</label>
+				<label class="checkbox-inline"><input type="checkbox" value="">Free</label>
+				<label class="checkbox-inline"><input type="checkbox" value="">Gift</label>
+			</div>
+			<uib-tab ng-click="vm.FormTemplate = vm.FormTemplate" index="1" heading="Main">
+				<div ui-list-view="form in vm.FormTemplate" options="listOptions">
+
+					<div class=" pull-right btn-group btn-group-xs template_button">
+						<button class="btn btn-danger btn-small"
+								ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay">
+							Buy
+						</button>
+						<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
+								ng-disabled="form.isLoad" ng-show="vm.isPatient">Load
+						</button>
+						<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);"
+								ng-disabled="form.isPreview">View
+						</button>
+					</div>
+
+					<p class=" col-md-3"><label class="control-label"><span translate="NUMBER"></span>: </label>{{form.number}}
+					</p>
+
+					<p class=" col-md-3"><label class="control-label"><span translate="NAME"></span>: </label>{{form.name}}
+					</p>
+
+					<p class=" col-md-3"><label class="control-label"><span translate="DESCR"></span>: </label>{{form.descr}}
+					</p>
+
+					<p class=" col-md-1"><label class="control-label"><span></span></label>{{form.status}}
+					</p>
+				</div>
+			</uib-tab>
+
 			<uib-tab ng-click="vm.myForms=vm.myForms" index="0" heading="My">
-				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have
+				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
+					dont have
 					any forms</h5></div>
-				<div   ui-list-view="forms in vm.myForms track by $index" options="listOptions">
+				<div ui-list-view="forms in vm.myForms track by $index" options="listOptions">
 
 					<div class=" pull-right btn-group btn-group-xs delete_myForm">
-						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)" ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
-						<button style="float: right" class="btn btn-small" ng-click="vm.onAddTask(forms)"><span translate="+TASK"></span></button>
+						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)"
+								ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
+						<button style="float: right" class="btn btn-small" ng-click="vm.onAddTask(forms)"><span
+								translate="+TASK"></span></button>
 					</div>
 
 					<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}
@@ -26,34 +67,7 @@
 				</div>
 
 			</uib-tab>
-			<uib-tab ng-click="vm.FormTemplate = vm.FormTemplate" index="1" heading="Main">
-				<div ui-list-view="form in vm.FormTemplate" options="listOptions">
 
-					<div class=" pull-right btn-group btn-group-xs template_button">
-						<button class="btn btn-danger btn-small" ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay">Buy</button>
-						<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;" ng-disabled="form.isLoad" ng-show="vm.isPatient">Load</button>
-						<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);" ng-disabled="form.isPreview">View</button>
-					</div>
-
-					<p class=" col-md-3"><label class="control-label"><span translate="NUMBER"></span>: </label>{{form.number}}
-					</p>
-
-					<p class=" col-md-3"><label class="control-label"><span translate="NAME"></span>: </label>{{form.name}}
-					</p>
-
-					<p class=" col-md-3"><label class="control-label"><span translate="DESCR"></span>: </label>{{form.descr}}
-					</p>
-
-					<p class=" col-md-1"><label class="control-label"><span></span></label>{{form.status}}
-					</p>
-				</div>
-
-
-
-
-
-
-			</uib-tab>
 		</uib-tabset>
 
 
