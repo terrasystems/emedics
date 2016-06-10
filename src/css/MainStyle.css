@@ -2,9 +2,11 @@
 body {
 	background: url(../images/bkgd_pattern.png);
 }
+
 textarea {
 	resize: none; /* Запрещаем изменять размер */
 }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -239,7 +241,7 @@ div.form-list.ui-list-view.ng-isolate-scope {
 }
 
 /*.form-list span {*/
-	/*margin-left: 10px;*/
+/*margin-left: 10px;*/
 /*}*/
 
 label.checkbox-inline.ng-scope {
@@ -346,7 +348,7 @@ div.ui-list-view-cell.ng-scope {
 }
 
 .msg_container {
-	border:1px solid;
+	border: 1px solid;
 	height: 200px;
 	border-radius: 10px;
 	margin-top: 45px;
@@ -364,15 +366,14 @@ div.ui-list-view-cell.ng-scope {
 	border-radius: 10px;
 }
 
-
 /*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{*/
-	 /*width: 100%;*/
- /*}*/
+/*width: 100%;*/
+/*}*/
 /*.form-control.ui-select-search.ng-valid.ng-dirty.ng-valid-parse.ng-empty.ng-touched{*/
-	/*width: 40px;*/
+/*width: 40px;*/
 /*}*/
 /*span.btn.btn-default.form-control.ui-select-toggle{*/
-	/*width: 100%;*/
+/*width: 100%;*/
 /*}*/
 
 .form_select {
@@ -387,41 +388,50 @@ div.panel-group {
 	margin-top: 15px;
 	outline: none;
 }
-.ui-select-choices{
-	top:35px;
+
+.ui-select-choices {
+	top: 35px;
 }
-div.panel-group{
+
+div.panel-group {
 	margin-top: 30px;
 }
-.header_settings{
+
+.header_settings {
 	margin-top: 3px;
 }
-.email_header{
+
+.email_header {
 	border-bottom: solid 1px;
 }
-.email_name{
+
+.email_name {
 	text-align: center;
 }
-.settings{
+
+.settings {
 	width: 150px;
 }
-.form-list{
+
+.form-list {
 	background: #d6d6d6;
 }
-.info{
+
+.info {
 	margin-top: 20px;
 }
+
 #sizing-addon11 {
-	min-width:120px;
-	text-align:left;
+	min-width: 120px;
+	text-align: left;
 }
 
-.noData_msg{
+.noData_msg {
 	text-align: center;
 
 }
 
-.notif_counter{
+.notif_counter {
 	position: absolute;
 	margin-top: -39px;
 	margin-left: 94px;
@@ -431,36 +441,44 @@ div.panel-group{
 	border-radius: 6px;
 	font-size: 12px;
 }
-.delete_myForm{
+
+.delete_myForm {
 	margin-top: 12px;
 	margin-right: 10px;
 }
-.template_button{
+
+.template_button {
 	margin-top: 15px;
 	margin-right: 5px;
 }
-.tasks_head{
+
+.tasks_head {
 	list-style: none;
 }
+
 /*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-empty{*/
-	/*min-width: 350px !important;*/
+/*min-width: 350px !important;*/
 /*}*/
 /*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{*/
-	/*min-width: 350px !important;*/
+/*min-width: 350px !important;*/
 /*}*/
 .ui-select-bootstrap[search-enabled=false] .ui-select-match.ng-hide {
 	display: inline-block !important;
 }
+
 .ui-select-bootstrap[search-enabled=false] .ui-select-match .text-muted.ng-hide {
 	display: inline !important;
 }
+
 .ui-select-bootstrap[search-enabled=false].ng-dirty .ui-select-match .text-muted.ng-hide {
 	display: none !important;
 }
-div.modal-dialog{
+
+div.modal-dialog {
 	width: 400px;
 }
-.msg_modal{
+
+.msg_modal {
 	border: 1px solid;
 	height: 200px;
 	width: 350px;
@@ -470,20 +488,35 @@ div.modal-dialog{
 	margin-left: auto;
 	margin-right: auto;
 }
-div.content_modal{
+
+div.content_modal {
 	width: 350px;
 	margin-left: auto;
 	margin-right: auto;
 }
-.content_modal2{
+
+.content_modal2 {
 	height: 255px;
 	width: 350px;
 	margin-left: auto;
 	margin-right: auto;
 }
-input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty{
+
+input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 	width: 350px;
 }
+
+.search_criterias {
+	margin-top: 10px;
+}
+
+.form_search {
+	border-radius: 10px;
+	outline: none;
+	border: 0;
+	padding-left: 7px;
+}
+
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -567,9 +600,11 @@ and (min-width: 1824px) {
 
 	/*** You've spent way too much on a phone ***/
 }
-.fieldgroup{
+
+.fieldgroup {
 	background: #ccc;
 }
-.field{
+
+.field {
 	margin-left: 20px;
 }

@@ -2,13 +2,15 @@
 	<div class="row form-list">
 
 		<uib-tabset>
-			<div class="search_criterias pull-right" >
-				<label class="checkbox-inline"><input type="checkbox" value="">All</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Patient</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Med</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Bought</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Free</label>
-				<label class="checkbox-inline"><input type="checkbox" value="">Gift</label>
+
+			<div class="search_criterias pull-right">
+				<input class="form_search" placeholder="search your form" style="" type="text"/>
+				<label class="checkbox-inline "><input type="checkbox" value="">All</label>
+				<label class="checkbox-inline "><input type="checkbox" value="">Patient</label>
+				<label class="checkbox-inline "><input type="checkbox" value="">Med</label>
+				<label class="checkbox-inline "><input type="checkbox" value="">Bought</label>
+				<label class="checkbox-inline "><input type="checkbox" value="">Free</label>
+				<label class="checkbox-inline "><input type="checkbox" value="">Gift</label>
 			</div>
 			<uib-tab ng-click="vm.FormTemplate = vm.FormTemplate" index="1" heading="Main">
 				<div ui-list-view="form in vm.FormTemplate" options="listOptions">
