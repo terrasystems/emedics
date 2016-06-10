@@ -6,8 +6,112 @@ angular.module('modules.dash')
 	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal,localStorageService,$stateParams) {
 		var vm = this;
 		vm.FormTemplate = [];
+		vm.myForms = [];
 		vm.user = localStorageService.get('userData');
 		vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
+
+		vm.filter_= {};
+		vm.onAll = function() {
+			//console.dir(vm.filter_.xALL);
+			vm.filter_.xALL = true;
+			vm.filter_.xPAT = false;
+			vm.filter_.xMED = false;
+			vm.filter_.xBOUGHT = false;
+			vm.filter_.xFREE = false;
+			vm.filter_.xGIFT = false;
+			vm.filter_.searchStr = '';
+		};
+		vm.onAll();
+
+		vm.onNoAll = function() {
+			vm.filter_.xALL = false;
+		};
+
+		vm.onPat = function() {
+			vm.filter_.xMED = (vm.filter_.xPAT) ? false : vm.filter_.xMED;
+			vm.onNoAll();
+		};
+
+		vm.onMed = function() {
+			vm.filter_.xPAT = (vm.filter_.xMED) ? false : vm.filter_.xPAT;
+			vm.onNoAll();
+		};
+
+		vm.onBought = function() {
+			if  (vm.filter_.xBOUGHT) {
+				vm.filter_.xFREE = false;
+				vm.filter_.xGIFT = false;
+			}
+			vm.onNoAll();
+		};
+
+		vm.onFree = function() {
+			if  (vm.filter_.xFREE) {
+				vm.filter_.xBOUGHT = false;
+				vm.filter_.xGIFT = false;
+			}
+			vm.onNoAll();
+		};
+
+		vm.onGift = function() {
+			if  (vm.filter_.xGIFT) {
+				vm.filter_.xBOUGHT = false;
+				vm.filter_.xFREE = false;
+			}
+			vm.onNoAll();
+		};
+
+		vm.filterByCategoryMy = function (item) {
+			//console.log(item);
+			if  (!vm.filter_.xALL) {
+				if (   !(
+						(vm.filter_.xPAT && item.templateDto.typeEnum === 'PATIENT') ||
+						(vm.filter_.xMED && item.templateDto.typeEnum === 'MEDICAL') ||
+						(!vm.filter_.xPAT && !vm.filter_.xMED)
+					) ||
+					!(
+						(vm.filter_.xBOUGHT && item.templateDto.commercialEnum === 'PAID') ||
+						(vm.filter_.xFREE && item.templateDto.commercialEnum === 'FREE') ||
+						(vm.filter_.xGIFT && item.templateDto.commercialEnum === 'GIFT') ||
+						(!vm.filter_.xBOUGHT && !vm.filter_.xFREE && !vm.filter_.xGIFT)
+					)
+				) {
+					return;
+				}
+			}
+			if  (vm.filter_.searchStr !== '') {
+				if  (item.templateDto.name.toUpperCase().indexOf(vm.filter_.searchStr.toUpperCase()) === -1) {
+					return;
+				}
+			}
+			return item;
+		};
+
+		vm.filterByCategory = function (item) {
+			//console.log(item);
+			if  (!vm.filter_.xALL) {
+				if (   !(
+						(vm.filter_.xPAT && item.typeEnum === 'PATIENT') ||
+						(vm.filter_.xMED && item.typeEnum === 'MEDICAL') ||
+						(!vm.filter_.xPAT && !vm.filter_.xMED)
+					) ||
+					   !(
+						(vm.filter_.xBOUGHT && item.commercialEnum === 'PAID') ||
+						(vm.filter_.xFREE && item.commercialEnum === 'FREE') ||
+						(vm.filter_.xGIFT && item.commercialEnum === 'GIFT') ||
+						(!vm.filter_.xBOUGHT && !vm.filter_.xFREE && !vm.filter_.xGIFT)
+					)
+					) {
+					return;
+				}
+			}
+			if  (vm.filter_.searchStr !== '') {
+				if  (item.name.toUpperCase().indexOf(vm.filter_.searchStr.toUpperCase()) === -1) {
+					return;
+				}
+			}
+			return item;
+		};
 
 		//if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
 		//	$state.go('main.private.dashboard.abstract.catalog');
@@ -15,8 +119,6 @@ angular.module('modules.dash')
 		//}
 
 		vm.arr = [];
-
-		vm.myForms = [];
 
 		vm.Refresh = function () {
 			http.get('private/dashboard/user/template')
@@ -29,14 +131,12 @@ angular.module('modules.dash')
 		};
 		vm.Refresh();
 
-
 		vm.myForms.forEach(function(e) {
 			var item = {};
 			item.id = e.templateDto.id;
 			item.type = e.type;
 			vm.arr.push(item);
 		});
-
 
 		vm.convertFormTemplate = function(arr) {
 			arr.map(function(item){
@@ -100,13 +200,6 @@ angular.module('modules.dash')
 				});
 		};
 
-
-
-
-
-
-		vm.onRefresh();
-
 		vm.onRemove = function(id) {
 			http.get('private/dashboard/template/delete/'+id)
 				.then(function (res) {
@@ -115,7 +208,6 @@ angular.module('modules.dash')
 				});
 			window.location.reload();
 		};
-
 
 		vm.onAddTask = function(obj) {
 			var model = { userTempl_id: obj.id, obj: obj};
@@ -203,7 +295,11 @@ angular.module('modules.dash')
 			var paramsPOST = {template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null}, patient: vm.patient2.id};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
-					deferred.resolve(res);
+					if (!res.state.value) {
+						deferred.reject(res);
+					} else {
+						deferred.resolve(res);
+					}
 				}, function (error) {
 					deferred.reject(error);
 				});
@@ -230,7 +326,11 @@ angular.module('modules.dash')
 					if  (res.result) {
 						alertService.add(0, res.state.message);
 					}
-					deferred.resolve(res);
+					if (!res.state.value) {
+						deferred.reject(res);
+					} else {
+						deferred.resolve(res);
+					}
 				}, function (error) {
 					deferred.reject(error);
 				});

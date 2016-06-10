@@ -2,18 +2,17 @@
 	<div class="row form-list">
 
 		<uib-tabset>
-
-			<div class="search_criterias pull-right">
-				<input class="form_search" placeholder="search your form" style="" type="text"/>
-				<label class="checkbox-inline "><input type="checkbox" value="">All</label>
-				<label class="checkbox-inline "><input type="checkbox" value="">Patient</label>
-				<label class="checkbox-inline "><input type="checkbox" value="">Med</label>
-				<label class="checkbox-inline "><input type="checkbox" value="">Bought</label>
-				<label class="checkbox-inline "><input type="checkbox" value="">Free</label>
-				<label class="checkbox-inline "><input type="checkbox" value="">Gift</label>
+			<div class="search_criterias pull-right" >
+				<input class="form_search" placeholder="search your form" style="" type="text" ng-model="vm.filter_.searchStr" />
+				<label class="checkbox-inline" style="color:red"><input type="checkbox" ng-model="vm.filter_.xALL" ng-change="vm.onAll();">All</label>
+				<label class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xPAT" ng-change="vm.onPat();">Patient</label>
+				<label class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xMED" ng-change="vm.onMed();">Med</label>
+				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xBOUGHT" ng-change="vm.onBought();">Bought</label>
+				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xFREE" ng-change="vm.onFree();">Free</label>
+				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
 			</div>
-			<uib-tab ng-click="vm.FormTemplate = vm.FormTemplate" index="1" heading="Main">
-				<div ui-list-view="form in vm.FormTemplate" options="listOptions">
+			<uib-tab ng-click="vm.onAll();" index="0" heading="Main">
+				<div class="ui-list-view-bordered" ui-list-view="form in vm.FormTemplate | filter:vm.filterByCategory" options="listOptions1">
 
 					<div class=" pull-right btn-group btn-group-xs template_button">
 						<button class="btn btn-danger btn-small"
@@ -42,11 +41,11 @@
 				</div>
 			</uib-tab>
 
-			<uib-tab ng-click="vm.myForms=vm.myForms" index="0" heading="My">
+			<uib-tab ng-click="vm.onAll();" index="1" heading="My">
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
 					dont have
 					any forms</h5></div>
-				<div ui-list-view="forms in vm.myForms track by $index" options="listOptions">
+				<div class="ui-list-view-bordered" ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">
 
 					<div class=" pull-right btn-group btn-group-xs delete_myForm">
 						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)"
