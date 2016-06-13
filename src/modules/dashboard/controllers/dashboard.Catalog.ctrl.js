@@ -183,11 +183,10 @@ angular.module('modules.dash')
 
 		vm.onLoad = function (id) {
 			http.get('private/dashboard/template/load/' + id)
-				.then(function (rest) {
+					.then(function (rest) {
 					vm.templateParams = vm.FormTemplate.find(function (form) {
 						return form.id === id ? true : false;
 					});
-					//console.log(vm.templateParams);
 					var paramsPOST = {
 						template: {
 							id: rest.result,
@@ -195,18 +194,18 @@ angular.module('modules.dash')
 							description: null,
 							templateDto: null
 						},
+
 						patient: null
 
 					};
+
 					http.post('private/dashboard/tasks/create', paramsPOST);
-				}, function (res) {
+				},
+				function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				}
 			);
-			// .then(function (res){
-			//	blockUI.stop();
-			//	alertService.add(0, res.state.message);
 
 
 			//window.location.reload();

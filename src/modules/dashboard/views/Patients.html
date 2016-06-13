@@ -43,8 +43,8 @@
 							<span translate="NUMBER"></span>: {{item.form.blank.number}}
 							<span translate="CATEGORY"></span>: {{item.form.blank.category}}
 							<div class="pull-right btn-group btn-group-xs">
-								<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
-								<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>
+								<!--<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>-->
+								<!--<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>-->
 							</div>
 						</uib-accordion-heading>
 
@@ -62,13 +62,7 @@
 
 					</uib-accordion-group>
 				</uib-accordion>
-				<!--<div ng-repeat="item in patient.history">-->
-					<!--<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)"><span translate="EDIT"></span></button>-->
-					<!--<p><span translate="NAME"></span>: {{item.form.blank.name}}</p>-->
-					<!--<p><span translate="DESCR"></span>: {{item.form.blank.descr}}</p>-->
-					<!--<p><span translate="CATEGORY"></span>: {{item.form.blank.category}}</p>-->
-					<!--<p><span translate="NUMBER"></span>: {{item.form.blank.number}} </p>-->
-				<!--</div>-->
+
 
 				<div ng-if="vm.patients.length==0" class="text-center">
 					<span><h4><span translate="NO_DATA"></span></h4></span>

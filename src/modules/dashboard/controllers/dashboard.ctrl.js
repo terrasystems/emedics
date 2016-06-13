@@ -10,7 +10,6 @@ angular.module('modules.dash')
 		vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.abstract.tasks', disable: false},
 			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.abstract.ref', disable: false },
 			{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.abstract.notifications', disable: false },
-			//{heading: $translate.instant('PATIENT_FORMS'), route: 'main.private.dashboard.abstract.forms', disable: false},
 			{heading: $translate.instant('MYFORMS'), route:'main.private.dashboard.abstract.catalog', disable: false},
 			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.abstract.drafts', disable: false}
 	];
