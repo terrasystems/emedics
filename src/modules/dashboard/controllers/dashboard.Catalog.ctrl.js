@@ -11,7 +11,7 @@ angular.module('modules.dash')
 		vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
 
 		vm.filter_ = {};
-		vm.onAll = function () {
+		function onAll () {
 			//console.dir(vm.filter_.xALL);
 			vm.filter_.xALL = true;
 			vm.filter_.xPAT = false;
@@ -21,7 +21,7 @@ angular.module('modules.dash')
 			vm.filter_.xGIFT = false;
 			vm.filter_.searchStr = '';
 		};
-		vm.onAll();
+		onAll();
 
 		vm.onNoAll = function () {
 			vm.filter_.xALL = false;
@@ -118,7 +118,8 @@ angular.module('modules.dash')
 
 		vm.arr = [];
 
-		vm.Refresh = function () {
+		vm.Refresh = getUserTemplate;
+			function getUserTemplate () {
 			http.get('private/dashboard/user/template')
 				.then(function (res) {
 					blockUI.stop();
@@ -161,7 +162,8 @@ angular.module('modules.dash')
 			return arr;
 		};
 
-		vm.onRefresh = function () {
+		vm.onRefresh = getAllTemplates;
+			function getAllTemplates () {
 			http.get('private/dashboard/template')
 				.then(function (res) {
 					blockUI.stop();
