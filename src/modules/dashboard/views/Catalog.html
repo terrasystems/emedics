@@ -48,7 +48,7 @@
 				<div  ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">
 
 					<div class=" pull-right btn-group btn-group-xs delete_myForm">
-						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)"
+						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"
 								ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
 						<button style="float: right" class="btn btn-small" ng-click="vm.onAddTask(forms)"><span
 								translate="+TASK"></span></button>

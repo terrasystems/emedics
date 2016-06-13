@@ -223,10 +223,12 @@ angular.module('modules.dash')
 
 		vm.onRemove = function (id) {
 			http.get('private/dashboard/template/delete/' + id)
-				.then(function (res) {
+		   .then(function (res) {
+				vm.Refresh();
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				});
+
 		};
 
 		vm.onAddTask = function (obj) {
