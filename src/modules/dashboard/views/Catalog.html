@@ -4,23 +4,23 @@
 		<uib-tabset>
 			<div class="search_criterias pull-right" >
 				<input class="form_search" placeholder="search your form" style="" type="text" ng-model="vm.filter_.searchStr" />
-				<label class="checkbox-inline" style="color:red"><input type="checkbox" ng-model="vm.filter_.xALL" ng-change="vm.onAll();">All</label>
+				<label class="checkbox-inline" style="color:red"><input type="checkbox" ng-model="vm.filter_.xALL" ng-change="onAll();">All</label>
 				<label class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xPAT" ng-change="vm.onPat();">Patient</label>
 				<label class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xMED" ng-change="vm.onMed();">Med</label>
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xBOUGHT" ng-change="vm.onBought();">Bought</label>
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xFREE" ng-change="vm.onFree();">Free</label>
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
 			</div>
-			<uib-tab ng-click="vm.onAll();" index="0" heading="Main">
+			<uib-tab ng-click="vm.onRefresh();" index="0" heading="Main">
 				<div  ui-list-view="form in vm.FormTemplate | filter:vm.filterByCategory" options="listOptions1">
 
 					<div class=" pull-right btn-group btn-group-xs template_button">
 						<button class="btn btn-danger btn-small"
-								ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay" ng-if="form.commercialEnum==='PAID'">
+								ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay" ng-if="form.commercialEnum==='PAID'" ng-hide="form.existPaid === true">
 							Buy
 						</button>
 						<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
-								ng-disabled="form.isLoad">Load
+								ng-disabled="form.isLoad" ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');">Load
 						</button>
 						<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);"
 								ng-disabled="form.isPreview">View
@@ -41,7 +41,7 @@
 				</div>
 			</uib-tab>
 
-			<uib-tab ng-click="vm.onAll();" index="1" heading="My">
+			<uib-tab ng-click="vm.Refresh();" index="1" heading="My">
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
 					dont have
 					any forms</h5></div>

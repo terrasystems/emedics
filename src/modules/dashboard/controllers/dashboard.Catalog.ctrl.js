@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams,$scope) {
 		var vm = this;
 		vm.FormTemplate = [];
 		vm.myForms = [];
