@@ -187,7 +187,7 @@ angular.module('modules.dash')
 			http.get('private/dashboard/template/load/' + id)
 					.then(function (rest) {
 					vm.templateParams = vm.FormTemplate.find(function (form) {
-						return form.id === id ? true : false;
+						return form.id === id;
 					});
 					var paramsPOST = {
 						template: {
@@ -232,7 +232,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onAddTask = function (obj) {
-			var model = {userTempl_id: obj.id, obj: obj};
+			var model = {templ_id: obj.id, obj: obj};
 			blockUI.start();
 
 			var result = $uibModal.open({
@@ -315,7 +315,7 @@ angular.module('modules.dash')
 		vm.create_ = function () {
 			var deferred = $q.defer();
 			var paramsPOST = {
-				template: {id: vm.model.data.userTempl_id, type: '', description: '', templateDto: null},
+				template: {id: vm.model.data.templ_id, type: '', description: '', templateDto: null},
 				patient: vm.patient2.id
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)

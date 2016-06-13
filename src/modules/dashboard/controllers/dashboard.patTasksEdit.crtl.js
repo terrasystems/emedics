@@ -28,13 +28,11 @@ angular.module('modules.dash')
 
 		vm.user = localStorageService.get('userData');
 		if ($stateParams.type == 'tasks') {
-			//vm.getUrl = 'private/dashboard/' + vm.user.type + '/forms/' + vm.id;
-			//vm.setUrl = 'private/dashboard/' + vm.user.type + '/forms/edit';
 			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
 			vm.setUrl = 'private/dashboard/tasks/edit';
 		} else {
-			vm.getUrl = 'private/dashboard/docpatients/forms/'+vm.id;
-			vm.setUrl = 'private/dashboard/docpatients/forms/edit';
+			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
+			vm.setUrl = 'private/dashboard/tasks/edit';
 		}
 
 		vm.sections = [];
@@ -46,70 +44,104 @@ angular.module('modules.dash')
 
 		vm.onSubmit = onSubmit;
 
-		var paramsPOST = {};
 
-		http.get(vm.getUrl, paramsPOST)
-			.then(function (res) {
-				blockUI.stop();
+		vm.getModelEdit = function (id) {
+			http.get('private/dashboard/tasks/' + id)
+				.then(function (res) {
+					blockUI.stop();
 
-				if ($stateParams.type == 'tasks') {
-					vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
-				} else {
-					vm.checkArr = (res.result && res.result.form && res.result.form.template && res.result.form.template.body && res.result.form.template.body.sections && res.result.form.id);
-				}
+					//if ($stateParams.type == 'tasks') {
+						vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
+					//} else {
+					//	vm.checkArr = (res.result && res.result.form && res.result.form.template && res.result.form.template.body && res.result.form.template.body.sections && res.result.form.id);
+					//}
 
-				if (vm.checkArr) {
-					vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
-					vm.formInfo = {};
-					vm.formInfo.id = ($stateParams.type == 'tasks') ?  res.result.id : res.result.form.id;
-					vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.template.category : res.result.form.template.category;
-					vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.template.name : res.result.form.template.name;
-					vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.template.number : res.result.form.template.number;
-					vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.template.descr : res.result.form.template.descr;
+					if (vm.checkArr) {
+						vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
+						vm.formInfo = {};
 
-					vm.sectionsName = [];
-					vm.sections = [];
-					if ($stateParams.type == 'tasks') {
-						vm.sections = eval($base64.decode(res.result.template.body.sections));
-						vm.sections.forEach(function (item) {
-							vm.sectionsName.push(Object.keys(item)[0]);
-						});
-					} else {
-						vm.sections = eval($base64.decode(res.result.form.template.body.sections));
-						vm.sections.forEach(function (item) {
-							vm.sectionsName.push(Object.keys(item)[0]);
-						});
-					}
+						vm.formInfo.id = res.result.id;
+						vm.formInfo.category = res.result.template.category;
+						vm.formInfo.name = res.result.template.name;
+						vm.formInfo.number = res.result.template.number;
+						vm.formInfo.descr = res.result.template.descr;
+						//vm.formInfo.id = ($stateParams.type == 'tasks') ?  res.result.id : res.result.form.id;
+						//vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.template.category : res.result.form.template.category;
+						//vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.template.name : res.result.form.template.name;
+						//vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.template.number : res.result.form.template.number;
+						//vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.template.descr : res.result.form.template.descr;
 
-					if (!vm.model) {
-						vm.model = [];
-						vm.sectionsName.forEach(function (item) {
-							var it = {};
-							it[item] = {};
-							vm.model.push(it);
-						});
-					}
-					vm.selectedSection = vm.sectionsName[0];
-					if (vm.sectionsName.length > 0) {
-						for (var key in  vm.model) {
-							var obj = vm.model[key][Object.keys(vm.model[key])[0]];
-							for (var prop in obj) {
-								if (obj.hasOwnProperty(prop) && prop.indexOf('_DATE') > 0 && obj[prop] !== null) {
-									obj[prop] = new Date(obj[prop]);
+						vm.sectionsName = [];
+						vm.sections = [];
+						//if ($stateParams.type == 'tasks') {
+							vm.sections = eval($base64.decode(res.result.template.body.sections));
+							vm.sections.forEach(function (item) {
+								vm.sectionsName.push(Object.keys(item)[0]);
+							});
+						//} else {
+						//	vm.sections = eval($base64.decode(res.result.form.template.body.sections));
+						//	vm.sections.forEach(function (item) {
+						//		vm.sectionsName.push(Object.keys(item)[0]);
+						//	});
+						//}
+
+						if (!vm.model) {
+							vm.model = [];
+							vm.sectionsName.forEach(function (item) {
+								var it = {};
+								it[item] = {};
+								vm.model.push(it);
+							});
+						}
+						vm.selectedSection = vm.sectionsName[0];
+						if (vm.sectionsName.length > 0) {
+							for (var key in  vm.model) {
+								var obj = vm.model[key][Object.keys(vm.model[key])[0]];
+								for (var prop in obj) {
+									if (obj.hasOwnProperty(prop) && prop.indexOf('_DATE') > 0 && obj[prop] !== null) {
+										obj[prop] = new Date(obj[prop]);
+									}
 								}
 							}
 						}
-					}
 
-					$scope.$watch('vm.selectedSection', function (newValue) {
-						for (var key in vm.model) {
-							if (newValue == Object.keys(vm.model[key])[0]) {
-								vm.selectedKey = key;
+						$scope.$watch('vm.selectedSection', function (newValue) {
+							for (var key in vm.model) {
+								if (newValue == Object.keys(vm.model[key])[0]) {
+									vm.selectedKey = key;
+								}
 							}
-						}
-					});
+						});
+					}
+				});
+		};
+
+
+		if ($stateParams.type == 'patients') {
+			console.log('...create!');
+			var paramsPOST = {
+				template: {
+					id: vm.id,
+					type: null,
+					description: null,
+					templateDto: null
+				},
+				patient: $stateParams.patId
+			};
+			http.post('private/dashboard/tasks/create', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+						vm.id = res.result.id;
+					}
 				}
-			});
+			).then( function(res) {
+					vm.getModelEdit(vm.id);
+				});
+		} else {
+			vm.getModelEdit(vm.id);
+		}
 
 		vm.s = function () {
 			save().then(function () {
@@ -123,10 +155,7 @@ angular.module('modules.dash')
 
 		function save() {
 			var deferred = $q.defer();
-			//paramsPOST = {page: {start: 0, count: 20},criteria: {edit: {data:{}}, create: null}};
-			//paramsPOST.criteria.edit.id = vm.id;
-			//paramsPOST.criteria.edit.data.sections = vm.model;
-			paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
+			var paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
@@ -164,6 +193,7 @@ angular.module('modules.dash')
 					}
 				}
 			}).result;
+			$state.go('main.private.dashboard.abstract.tasks');
 		};
 
 	});

@@ -14,8 +14,6 @@
 					translate="APPLY"></span></button>
 		</div>
 
-
-
 	<div class="ui-list-view ">
 		<div ng-show="vm.patients.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any patients</h5>
 		</div>
@@ -24,47 +22,39 @@
 			<uib-accordion-group ng-repeat="patient in vm.patients"  is-open="patient.status.open">
 
 				<uib-accordion-heading>
-					<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': patient.status.open, 'glyphicon-chevron-right': !patient.status.open}" ng-click="vm.onOpenPatient(patient.id)"></i>
-					<span translate="NAME"></span>: {{patient.name}}
-					<span translate="EMAIL"></span>: {{patient.email}}
-					<span translate="PHONE"></span>: {{patient.phone}}
-					<div class="pull-right btn-group btn-group-xs">
-						<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
-						<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>
+					<div ng-click="vm.onOpenPatient(patient.id)">
+						<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': patient.status.open, 'glyphicon-chevron-right': !patient.status.open}"></i>
+						<span translate="NAME"></span>: {{patient.name}}
+						<span translate="EMAIL"></span>: {{patient.email}}
+						<span translate="PHONE"></span>: {{patient.phone}}
+						<div class="pull-right btn-group btn-group-xs">
+							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
+							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>
+						</div>
 					</div>
 				</uib-accordion-heading>
 
 				<uib-accordion>
-					<uib-accordion-group ng-repeat="item in patient.history" is-open="item.status.open">
+					<uib-accordion-group ng-repeat="item in vm.templates" is-open="item.status.open">
 
 						<uib-accordion-heading>
 							<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></i>
-							<span translate="NAME"></span>: {{item.form.blank.name}}
-							<span translate="NUMBER"></span>: {{item.form.blank.number}}
-							<span translate="CATEGORY"></span>: {{item.form.blank.category}}
-							<div class="pull-right btn-group btn-group-xs">
-								<!--<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>-->
-								<!--<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>-->
-							</div>
+							<span translate="NAME"></span>: {{item.name}}
 						</uib-accordion-heading>
 
-						<!--<div ng-repeat="item in patient.history">-->
-							<button style="float: right" class="btn btn-small" ng-click="vm.onEdit(item.id, patient.id)"><span translate="EDIT"></span></button>
-							<p><span translate="NAME"></span>: {{item.form.blank.name}}</p>
-							<p><span translate="DESCR"></span>: {{item.form.blank.descr}}</p>
-							<p><span translate="CATEGORY"></span>: {{item.form.blank.category}}</p>
-							<p><span translate="NUMBER"></span>: {{item.form.blank.number}} </p>
-						<!--</div>-->
-
-						<div ng-if="patient.history.length==0" class="text-center">
-							<span><h4><span translate="NO_DATA"></span></h4></span>
+						<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">
+							<button style="float: right" class="btn btn-success" ng-click="vm.onSend(item.id, hist)"><span translate="SEND"></span></button>
+							<button style="float: right" class="btn btn-info" ng-click="vm.onEdit(item.id, patient.id)"><span translate="EDIT"></span></button>
+							<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDate(hist.date)}}</p>
+							<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username}}</p>
+							<p><label class="col-sm-3 control-label"><span translate="DESCR"></span>: </label>{{hist.descr}}</p>
+							<p><label class="col-sm-3 control-label"><span translate="STATUS"></span>: </label>{{hist.status}}</p>
 						</div>
 
 					</uib-accordion-group>
 				</uib-accordion>
 
-
-				<div ng-if="vm.patients.length==0" class="text-center">
+				<div ng-if="vm.templates.length==0" class="text-center">
 					<span><h4><span translate="NO_DATA"></span></h4></span>
 				</div>
 

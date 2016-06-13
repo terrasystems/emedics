@@ -3,85 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService){
+	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal){
 		var vm = this;
 		vm.searchref = '';
-
-		//vm.patients = [
-		//{
-		//	'id': '32',
-		//	'email': 'tggg1@testmail.com',
-		//	'phone': '555-55-55',
-		//	'name': 'Patient #100',
-		//	'forms': [
-		//		{
-		//		'id': '32',
-		//		'data': null,
-		//		'blank': {
-		//			'body': null,
-		//			'name': 'Blank Name',
-		//			'type': '1',
-		//			'descr': 'Descr1',
-		//			'category': 'main Categ',
-		//			'number': 'F1'
-		//		},
-		//		'active': 'true'
-		//		},
-		//		{
-		//			'id': '33',
-		//			'data': null,
-		//			'blank': {
-		//				'body': null,
-		//				'name': 'Blank Name #2',
-		//				'type': '2',
-		//				'descr': 'Descr2',
-		//				'category': 'main Categ',
-		//				'number': 'F2'
-		//			},
-		//			'active': 'true'
-		//		}
-		//	]
-		//},
-		//{
-		//	'id': '3002',
-		//	'email': 'aaaaa2@testmail.com',
-		//	'phone': '555-55-55',
-		//	'name': 'Patient #2000',
-		//	'forms': [
-		//	{
-		//		'id': '320',
-		//		'data': null,
-		//		'blank': {
-		//			'body': null,
-		//			'name': 'Blank Name',
-		//			'type': '1',
-		//			'descr': 'Descr1',
-		//			'category': 'main Categ',
-		//			'number': 'F1'
-		//		},
-		//		'active': 'true'
-		//	},
-		//	{
-		//		'id': '33',
- 		//		'data': null,
-		//		'blank': {
-		//			'body': null,
-		//			'name': 'Blank Name #2',
-		//			'type': '2',
-		//			'descr': 'Descr2',
-		//			'category': 'main Categ',
-		//			'number': 'F2'
-		//		},
-		//		'active': 'true'
-		//	}
-		//	]
-		//}
-		//];
+		vm.patients = [];
+		vm.templates = [];
 
 		vm.refresh = function () {
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.list = [];
-			http.get('private/dashboard/docpatients', vm.paramsPOST)
+			http.get('private/dashboard/patients')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result && angular.isArray(res.result) ) {
@@ -93,7 +22,7 @@ angular.module('modules.dash')
 
 		vm.onEdit = function(formID, patientId) {
 			console.log('formID: '+ formID +', patID: ' + patientId );
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patientss', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patients', patId: patientId});
 		};
 
 		$scope.getFindPatients = function (val) {
@@ -115,7 +44,6 @@ angular.module('modules.dash')
 		};
 
 		$scope.onApply = function (obj) {
-
 			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
 				vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
@@ -125,7 +53,7 @@ angular.module('modules.dash')
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
-						$scope.doctor='';
+						$scope.doctor = '';
 						vm.refresh();
 					});
 			}
@@ -146,7 +74,6 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			console.log(id_);
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
 			vm.paramsPOST.criteria.list.push({id: id_});
@@ -163,13 +90,45 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			console.log(email);
 			http.post('private/dashboard/docpatients/invite', email)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 					vm.refresh();
 				});
+		};
+
+		vm.onOpenPatient = function (id) {
+			vm.templates = [];
+			http.get('private/dashboard/patients/' + id + '/events')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result) ) {
+						vm.templates = res.result;
+					}
+				});
+		};
+
+		vm.onSend = function (obj) {
+			var model = { templ_id: obj.id, obj: obj };
+			blockUI.start();
+			var result = $uibModal.open({
+				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
+				controller: 'modalAddNotifCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function ($q) {
+						var deferred = $q.defer();
+						deferred.resolve({data: model});
+						return deferred.promise;
+					}
+				}
+			}).result;
+		};
+
+		vm.convertDate = function (d) {
+			var x = new Date(d);
+			return x.toISOString().slice(0,19).replace('', ' ');
 		};
 
 	});
