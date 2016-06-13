@@ -12,7 +12,7 @@
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
 			</div>
 			<uib-tab ng-click="vm.onAll();" index="0" heading="Main">
-				<div class="ui-list-view-bordered" ui-list-view="form in vm.FormTemplate | filter:vm.filterByCategory" options="listOptions1">
+				<div  ui-list-view="form in vm.FormTemplate | filter:vm.filterByCategory" options="listOptions1">
 
 					<div class=" pull-right btn-group btn-group-xs template_button">
 						<button class="btn btn-danger btn-small"
@@ -20,7 +20,7 @@
 							Buy
 						</button>
 						<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
-								ng-disabled="form.isLoad" ng-show="vm.isPatient">Load
+								ng-disabled="form.isLoad">Load
 						</button>
 						<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);"
 								ng-disabled="form.isPreview">View
@@ -45,7 +45,7 @@
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
 					dont have
 					any forms</h5></div>
-				<div class="ui-list-view-bordered" ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">
+				<div  ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">
 
 					<div class=" pull-right btn-group btn-group-xs delete_myForm">
 						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id)"
