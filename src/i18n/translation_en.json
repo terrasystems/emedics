@@ -50,7 +50,7 @@
   	"EDIT": "Edit",
 	"EMAIL": "Email address",
 	"EMAIL_1": "Enter email",
-    "FORM_TASKS":"From",
+    "FORM_TASKS":"Form",
   	"INVITE": "Invite",
 	"FORGOT_PASS": "Forgot password ?",
 	"FORM": "Form",
@@ -111,6 +111,7 @@
 	"WEBSITE": "Website",
 	"WEBSITE_1": "Enter your web-site",
 
+
   	"MSG_PATS_NOT_EXIST": "Patient with such id doesn't exist",
   	"MSG_PAT_ADD": "Patient added",
   	"MSG_FORM_EDIT": "Forms edited",
@@ -152,5 +153,6 @@
   	"MSG_ALL_REFS": "All References",
   	"MSG_REMOVE_REF": "References Removed",
   	"MSG_CANT_REMOVE_REF": "Cant remove references",
-  	"MSG_NO_DATA": "Don't receive data from server"
+  	"MSG_NO_DATA": "Don't receive data from server",
+  	"LOAD":"Load"
 }

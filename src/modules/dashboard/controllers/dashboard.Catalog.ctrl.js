@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams,$scope) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope) {
 		var vm = this;
 		vm.FormTemplate = [];
 		vm.myForms = [];
@@ -11,7 +11,7 @@ angular.module('modules.dash')
 		vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
 
 		vm.filter_ = {};
-		function onAll () {
+		function onAll() {
 			vm.filter_.xALL = true;
 			vm.filter_.xPAT = false;
 			vm.filter_.xMED = false;
@@ -20,6 +20,7 @@ angular.module('modules.dash')
 			vm.filter_.xGIFT = false;
 			vm.filter_.searchStr = '';
 		}
+
 		onAll();
 
 		vm.onNoAll = function () {
@@ -111,7 +112,7 @@ angular.module('modules.dash')
 		vm.arr = [];
 
 		vm.Refresh = getUserTemplate;
-			function getUserTemplate () {
+		function getUserTemplate() {
 			http.get('private/dashboard/user/template')
 				.then(function (res) {
 					blockUI.stop();
@@ -120,6 +121,7 @@ angular.module('modules.dash')
 					}
 				});
 		}
+
 		vm.Refresh();
 
 		vm.myForms.forEach(function (e) {
@@ -155,7 +157,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onRefresh = getAllTemplates;
-			function getAllTemplates () {
+		function getAllTemplates() {
 			http.get('private/dashboard/template')
 				.then(function (res) {
 					blockUI.stop();
@@ -164,6 +166,7 @@ angular.module('modules.dash')
 					}
 				});
 		}
+
 		vm.onRefresh();
 
 		vm.onBuy = function (id) {
@@ -176,7 +179,7 @@ angular.module('modules.dash')
 
 		vm.onLoad = function (id) {
 			http.get('private/dashboard/template/load/' + id)
-					.then(function (rest) {
+				.then(function (rest) {
 					vm.templateParams = vm.FormTemplate.find(function (form) {
 						return form.id === id;
 					});
@@ -212,29 +215,35 @@ angular.module('modules.dash')
 
 		vm.onRemove = function (id) {
 			http.get('private/dashboard/template/delete/' + id)
-		   .then(function (res) {
-				vm.Refresh();
+				.then(function (res) {
+					vm.Refresh();
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				});
 		};
 
 		vm.onAddTask = function (obj) {
-			var model = {templ_id: obj.id, obj: obj};
-			blockUI.start();
+			//var result = vm.myForms.filter(function( obj ) {
+			//	return obj.id = id;
+			//});
+			console.log(obj);
+			var paramsPOST = {
+				template: {
+					id: obj.templateDto.id,
+					type: null,
+					description: null,
+					templateDto: null
+				},
+				patient: null
+			};
 
-			var result = $uibModal.open({
-				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
-				controller: 'modalAddNotifCtrl',
-				controllerAs: 'vm',
-				resolve: {
-					model: function ($q) {
-						var deferred = $q.defer();
-						deferred.resolve({data: model});
-						return deferred.promise;
-					}
-				}
-			}).result;
+			http.post('private/dashboard/tasks/create', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, res.state.message);
+				});
+
+
 		};
 
 	});
