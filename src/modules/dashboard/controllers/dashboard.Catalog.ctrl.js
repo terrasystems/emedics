@@ -5,6 +5,7 @@ angular.module('modules.dash')
 
 	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope) {
 		var vm = this;
+		vm.userType = localStorageService.get('userData');
 		vm.FormTemplate = [];
 		vm.myForms = [];
 		vm.user = localStorageService.get('userData');
@@ -223,10 +224,6 @@ angular.module('modules.dash')
 		};
 
 		vm.onAddTask = function (obj) {
-			//var result = vm.myForms.filter(function( obj ) {
-			//	return obj.id = id;
-			//});
-			console.log(obj);
 			var paramsPOST = {
 				template: {
 					id: obj.templateDto.id,

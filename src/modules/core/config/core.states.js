@@ -90,17 +90,6 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.abstract.forms',
-			url:'/forms',
-			//parent:'main.private.dashboard',
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patForms.html',
-					controller:'patientFormsCtrl as vm'
-				}
-			}
-		},
-		{
 		name:'main.private.dashboard.abstract.patients',
 			url:'/patients',
 			views:{
