@@ -48,7 +48,7 @@ angular.module('modules.dash')
 								}
 								$uibModalInstance.close(res);
 							}, function (error) {
-								$uibModalInstance.close(res);
+								$uibModalInstance.close(error);
 								deferred.reject(error);
 							});
 					});
