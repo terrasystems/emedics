@@ -32,23 +32,7 @@ angular.module('modules.dash')
 				});
 		};
 
-		//vm.getFind2 = function (val, type) {
-		//	return http.post('private/dashboard/' + vm.user.type + '/references/refs', {search: val, type: type})
-		//		.then(function (res) {
-		//			blockUI.stop();
-		//			if (angular.isArray(res.result) && res.result.length > 0) {
-		//				res.result.map(function (item) {
-		//					item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
-		//					return item;
-		//				});
-		//			}
-		//			return res.result;
-		//		});
-		//};
-
 		vm.send = function () {
-			vm.save()
-				.then(function () {
 					vm.message.toUser = vm.toUser.id;
 					vm.message.patient = vm.patient2.id;
 					vm.message.event = vm.model.data.task_id;
@@ -60,9 +44,7 @@ angular.module('modules.dash')
 							}
 							$uibModalInstance.close(res);
 						});
-				}, function() {
-					$uibModalInstance.close();
-				});
+
 		};
 
 		vm.create_ = function () {
@@ -122,12 +104,6 @@ angular.module('modules.dash')
 				vm.create_()
 					.then(function (res) {
 						vm.model.data.task_id = res.result.id;
-						vm.edit()
-							.then(function (res) {
-								deferred.resolve(res);
-							}, function (error) {
-								deferred.reject(error);
-							});
 					}, function (error) {
 						deferred.reject(error);
 					});
