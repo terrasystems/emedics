@@ -27,7 +27,6 @@
 			<textarea rows="6" cols="6" ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}" rows="5"></textarea>
 		</form>
 
-		<!--<button class="pull-right btn btn-primary" ng-click="vm.save()" ng-if="!(!!vm.model.data.task_id)">Save</button>-->
 		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-warning" ng-click="vm.send()" ng-disabled="(!vm.patient2.id && !vm.toUser.id)">Send</button>
 	</div>
 </div>

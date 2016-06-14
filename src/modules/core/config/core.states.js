@@ -157,16 +157,6 @@ angular.module('modules.core')
 				}
 			}
 		},
-		//{
-		//	name:'main.private.dashboard.abstract.ref2',
-		//	url:'/references2',
-		//	views:{
-		//		'forms@dashboard':{
-		//			templateUrl:'modules/dashboard/views/dashboard.patRefs2.html',
-		//			controller:'patientReferences2Ctrl as vm'
-		//		}
-		//	}
-		//},
 		{
 			name:'main.private.dashboard.abstract.notifications',
 			url:'/notifications',
@@ -228,21 +218,6 @@ angular.module('modules.core')
 				id: '',
 				type: '',
 				patId: null
-			}
-		},
-		{
-			name:'main.private.dashboard.abstract.notifications.addnotification',
-			url:'/add',
-			params:{
-				name:null,
-				id:null
-			},
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.NotifAdd.html',
-					controller:'addNotificationCtrl as vm'
-
-				}
 			}
 		},
 		{
