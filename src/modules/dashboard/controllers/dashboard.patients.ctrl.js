@@ -21,7 +21,6 @@ angular.module('modules.dash')
 		vm.refresh();
 
 		vm.onEdit = function(formID, patientId) {
-			console.log('formID: '+ formID +', patID: ' + patientId );
 			$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patients', patId: patientId});
 		};
 

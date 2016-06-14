@@ -18,7 +18,7 @@ angular.module('modules.dash')
 			vm.mainState = 'main.private.dashboard.abstract.patients';
 		}
 
-	    vm.hideButton = $stateParams.type;
+	    //vm.hideButton = $stateParams.type;
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go(vm.mainState);
 			return;
@@ -27,13 +27,8 @@ angular.module('modules.dash')
 		}
 
 		vm.user = localStorageService.get('userData');
-		if ($stateParams.type == 'tasks') {
-			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
-			vm.setUrl = 'private/dashboard/tasks/edit';
-		} else {
-			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
-			vm.setUrl = 'private/dashboard/tasks/edit';
-		}
+		vm.getUrl = 'private/dashboard/tasks/' + vm.id;
+		vm.setUrl = 'private/dashboard/tasks/edit';
 
 		vm.sections = [];
 		vm.options = [];
@@ -44,17 +39,12 @@ angular.module('modules.dash')
 
 		vm.onSubmit = onSubmit;
 
-
 		vm.getModelEdit = function (id) {
 			http.get('private/dashboard/tasks/' + id)
 				.then(function (res) {
 					blockUI.stop();
 
-					//if ($stateParams.type == 'tasks') {
-						vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
-					//} else {
-					//	vm.checkArr = (res.result && res.result.form && res.result.form.template && res.result.form.template.body && res.result.form.template.body.sections && res.result.form.id);
-					//}
+					vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
 
 					if (vm.checkArr) {
 						vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
@@ -65,25 +55,13 @@ angular.module('modules.dash')
 						vm.formInfo.name = res.result.template.name;
 						vm.formInfo.number = res.result.template.number;
 						vm.formInfo.descr = res.result.template.descr;
-						//vm.formInfo.id = ($stateParams.type == 'tasks') ?  res.result.id : res.result.form.id;
-						//vm.formInfo.category = ($stateParams.type == 'tasks') ? res.result.template.category : res.result.form.template.category;
-						//vm.formInfo.name =($stateParams.type == 'tasks') ? res.result.template.name : res.result.form.template.name;
-						//vm.formInfo.number = ($stateParams.type == 'tasks') ? res.result.template.number : res.result.form.template.number;
-						//vm.formInfo.descr = ($stateParams.type == 'tasks') ? res.result.template.descr : res.result.form.template.descr;
-
 						vm.sectionsName = [];
 						vm.sections = [];
-						//if ($stateParams.type == 'tasks') {
-							vm.sections = eval($base64.decode(res.result.template.body.sections));
-							vm.sections.forEach(function (item) {
-								vm.sectionsName.push(Object.keys(item)[0]);
-							});
-						//} else {
-						//	vm.sections = eval($base64.decode(res.result.form.template.body.sections));
-						//	vm.sections.forEach(function (item) {
-						//		vm.sectionsName.push(Object.keys(item)[0]);
-						//	});
-						//}
+
+						vm.sections = eval($base64.decode(res.result.template.body.sections));
+						vm.sections.forEach(function (item) {
+							vm.sectionsName.push(Object.keys(item)[0]);
+						});
 
 						if (!vm.model) {
 							vm.model = [];
@@ -115,7 +93,6 @@ angular.module('modules.dash')
 					}
 				});
 		};
-
 
 		if ($stateParams.type == 'patients') {
 			console.log('...create!');
@@ -192,8 +169,10 @@ angular.module('modules.dash')
 						return deferred.promise;
 					}
 				}
-			}).result;
-			$state.go('main.private.dashboard.abstract.tasks');
+			}).result
+				.then(function() {
+					$state.go('main.private.dashboard.abstract.tasks');
+				});
 		};
 
 	});

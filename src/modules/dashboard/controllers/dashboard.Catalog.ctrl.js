@@ -111,11 +111,6 @@ angular.module('modules.dash')
 			return item;
 		};
 
-		//if (!$stateParams.arr || $stateParams.arr === null || !angular.isArray($stateParams.arr)) {
-		//	$state.go('main.private.dashboard.abstract.catalog');
-		//	return;
-		//}
-
 		vm.arr = [];
 
 		vm.Refresh = getUserTemplate;
@@ -127,7 +122,7 @@ angular.module('modules.dash')
 						vm.myForms = res.result;
 					}
 				});
-		};
+		}
 		vm.Refresh();
 
 		vm.myForms.forEach(function (e) {
@@ -171,7 +166,7 @@ angular.module('modules.dash')
 						vm.FormTemplate = vm.convertFormTemplate(res.result);
 					}
 				});
-		};
+		}
 		vm.onRefresh();
 
 		vm.onBuy = function (id) {
@@ -307,8 +302,8 @@ angular.module('modules.dash')
 							if (res.state) {
 								alertService.add(0, res.state.message);
 							}
+							$uibModalInstance.close(res);
 						});
-					$uibModalInstance.dismiss('cancel');
 				});
 		};
 
@@ -386,7 +381,6 @@ angular.module('modules.dash')
 						deferred.reject(error);
 					});
 			}
-			$uibModalInstance.close();
 			return deferred.promise;
 		};
 
