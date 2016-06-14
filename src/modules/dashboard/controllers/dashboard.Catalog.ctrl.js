@@ -175,7 +175,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					alertService.add(0, res.state.message);
 				});
-			window.location.reload();
+
 		};
 
 		vm.onLoad = function (id) {
