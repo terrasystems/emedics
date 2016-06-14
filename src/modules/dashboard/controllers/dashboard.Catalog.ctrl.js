@@ -189,7 +189,11 @@ angular.module('modules.dash')
 						},
 						patient: null
 					};
-					http.post('private/dashboard/tasks/create', paramsPOST);
+					http.post('private/dashboard/tasks/create', paramsPOST)
+						.then(function (res) {
+							blockUI.stop();
+							alertService.add(0, res.state.message);
+						});
 				},
 				function (res) {
 					blockUI.stop();

@@ -3,8 +3,9 @@
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages',
 	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', 'ngMockE2E', 'pouchdb',
+	'ui.select','ngSanitize','ui.router.tabs', 'angular-confirm',
 	//--
-	'modules.core', 'modules.public', 'modules.dash','ui.select','ngSanitize','ui.router.tabs']);
+	'modules.core', 'modules.public', 'modules.dash']);
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,

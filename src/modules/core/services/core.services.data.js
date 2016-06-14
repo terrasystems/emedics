@@ -3,6 +3,22 @@
 
 angular.module('modules.core')
 
+	.service('confirmService', function($q, $confirm, $translate){
+		return function(text){
+			var deferred = $q.defer();
+			$confirm({
+				text: $translate.instant(text)
+			}, {
+				templateUrl: 'modules/core/views/modalconfirm.tmpl.html'
+			}).then(function () {
+				deferred.resolve(true);
+			}, function(){
+				deferred.reject(false);
+			});
+			return deferred.promise;
+		};
+	})
+
 	.service('alertService', function ($rootScope, toastr) {
 		var alertService = {};
 		alertService.add = function (type, titleText, msg, msgParam) {

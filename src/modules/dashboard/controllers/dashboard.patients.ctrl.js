@@ -21,7 +21,24 @@ angular.module('modules.dash')
 		vm.refresh();
 
 		vm.onEdit = function(formID, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patients', patId: patientId});
+			var paramsPOST = {
+				template: {
+					id: formID,
+					type: null,
+					description: null,
+					templateDto: null
+				},
+				patient: patientId
+			};
+			http.post('private/dashboard/tasks/create', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+						formID = res.result.id;
+						$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patients', patId: patientId});
+					}
+				});
 		};
 
 		$scope.getFindPatients = function (val) {
