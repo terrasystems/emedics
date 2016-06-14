@@ -137,7 +137,7 @@ angular.module('modules.dash')
 					}
 				}
 			};
-			confirmService({text: 'Save task?'})
+			confirmService('Save task?')
 				.then(function(res) {
 					save().then(function () {
 						var result = $uibModal.open(config);

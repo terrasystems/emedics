@@ -44,7 +44,7 @@ angular.module('modules.dash')
 		$scope.getFindPatients = function (val) {
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.search = val;
-			return http.post('private/dashboard/docpatients/search', vm.paramsPOST)
+			return http.post('private/dashboard/patients/search', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if  (angular.isArray(res.result) && res.result.length>0) {
@@ -65,7 +65,7 @@ angular.module('modules.dash')
 				vm.paramsPOST.criteria.list = [];
 				vm.paramsPOST.criteria.search = '';
 				vm.paramsPOST.criteria.list.push({id: $scope.doctor.id, email: null, phone: null, name: null, history:[]});
-				http.post('private/dashboard/docpatients/add', vm.paramsPOST)
+				http.post('private/dashboard/patients/add', vm.paramsPOST)
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
@@ -93,7 +93,7 @@ angular.module('modules.dash')
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
 			vm.paramsPOST.criteria.list.push({id: id_});
-			http.post('private/dashboard/docpatients/remove', vm.paramsPOST)
+			http.post('private/dashboard/patients/remove', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
@@ -106,7 +106,7 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.post('private/dashboard/docpatients/invite', email)
+			http.post('private/dashboard/patients/invite', email)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);

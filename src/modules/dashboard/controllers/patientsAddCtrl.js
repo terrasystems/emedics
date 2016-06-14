@@ -38,7 +38,7 @@ angular.module('modules.dash')
 		];
 
 		vm.onSubmit = function () {
-			http.post('private/dashboard/docpatients/create', vm.model.email)
+			http.post('private/dashboard/patients/create', vm.model.email)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
