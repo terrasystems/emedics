@@ -7,7 +7,7 @@ angular.module('modules.dash')
 	// $stateParams.type: 'tasks' / 'patients'
 	// $stateParams.patId: id exists patient
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
-												  $scope, alertService, $timeout, $translate, $base64, $confirm) {
+												  $scope, alertService, $timeout, $translate, $base64, confirmService) {
 
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -94,29 +94,6 @@ angular.module('modules.dash')
 				});
 		};
 
-		//if ($stateParams.type == 'patients') {
-		//	console.log('...create!');
-		//	var paramsPOST = {
-		//		template: {
-		//			id: vm.id,
-		//			type: null,
-		//			description: null,
-		//			templateDto: null
-		//		},
-		//		patient: $stateParams.patId
-		//	};
-		//	http.post('private/dashboard/tasks/create', paramsPOST)
-		//		.then(function (res) {
-		//			blockUI.stop();
-		//			if (res.state) {
-		//				alertService.add(0, res.state.message);
-		//				vm.id = res.result.id;
-		//				vm.getModelEdit(vm.id);
-		//			}
-		//		});
-		//} else {
-		//	vm.getModelEdit(vm.id);
-		//}
 		vm.getModelEdit(vm.id);
 
 		function save() {
@@ -141,6 +118,12 @@ angular.module('modules.dash')
 			});
 		};
 
+		vm.onSaveDraft = function () {
+			console.log('..Save Draft!');
+			/* TODO */
+			$state.go(vm.mainState);
+		};
+
 		vm.onSend = function() {
 			var config = {
 				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
@@ -154,7 +137,7 @@ angular.module('modules.dash')
 					}
 				}
 			};
-			$confirm({text: 'Save task?'})
+			confirmService({text: 'Save task?'})
 				.then(function(res) {
 					save().then(function () {
 						var result = $uibModal.open(config);
