@@ -33,18 +33,35 @@ angular.module('modules.dash')
 		};
 
 		vm.send = function () {
-					vm.message.toUser = vm.toUser.id;
-					vm.message.patient = vm.patient2.id;
-					vm.message.event = vm.model.data.task_id;
-					http.post('private/dashboard/tasks/send', vm.message)
-						.then(function (res) {
-							blockUI.stop();
-							if (res.state) {
-								alertService.add(0, res.state.message);
-							}
-							$uibModalInstance.close(res);
-						});
-
+			vm.message.toUser = vm.toUser.id;
+			vm.message.patient = vm.patient2.id;
+			vm.message.event = vm.model.data.task_id;
+			if (!vm.model.data.task_id) {
+				vm.save()
+					.then(function () {
+						vm.message.event = vm.model.data.task_id;
+						http.post('private/dashboard/tasks/send', vm.message)
+							.then(function (res) {
+								blockUI.stop();
+								if (res.state) {
+									alertService.add(0, res.state.message);
+								}
+								$uibModalInstance.close(res);
+							}, function (error) {
+								$uibModalInstance.close(res);
+								deferred.reject(error);
+							});
+					});
+			} else {
+				http.post('private/dashboard/tasks/send', vm.message)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							alertService.add(0, res.state.message);
+						}
+						$uibModalInstance.close(res);
+					});
+			}
 		};
 
 		vm.create_ = function () {
@@ -104,6 +121,7 @@ angular.module('modules.dash')
 				vm.create_()
 					.then(function (res) {
 						vm.model.data.task_id = res.result.id;
+						deferred.resolve(res);
 					}, function (error) {
 						deferred.reject(error);
 					});
