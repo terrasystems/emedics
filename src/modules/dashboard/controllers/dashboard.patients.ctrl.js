@@ -143,6 +143,10 @@ angular.module('modules.dash')
 				});
 		};
 
+		vm.onView = function (histId, patientId) {
+			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients+', patId: patientId});
+		};
+
 		vm.onSend = function (obj,hist) {
 			var model = { templ_id: obj.id, obj: obj };
 
