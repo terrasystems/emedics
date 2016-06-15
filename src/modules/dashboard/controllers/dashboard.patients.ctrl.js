@@ -125,8 +125,9 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onSend = function (obj) {
+		vm.onSend = function (obj,hist) {
 			var model = { templ_id: obj.id, obj: obj };
+
 			blockUI.start();
 			var result = $uibModal.open({
 				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
@@ -135,7 +136,12 @@ angular.module('modules.dash')
 				resolve: {
 					model: function ($q) {
 						var deferred = $q.defer();
-						deferred.resolve({data: model});
+						deferred.resolve({data: model,patient:{
+							'name':hist.fromUser.username,
+							'email':hist.fromUser.email,
+							'id':hist.fromUser.id
+
+						}});
 						return deferred.promise;
 					}
 				}

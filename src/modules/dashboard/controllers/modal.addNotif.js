@@ -7,15 +7,21 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
+		vm.patient2={};
+		vm.toUser = {};
+		if(vm.model.patient){
+			vm.toUser.id=vm.model.patient.id;
+		  vm.patient2.id=vm.model.patient.id;
+
+			//vm.patient2=vm.model.patient.email;
+
+
+		}
 		blockUI.stop();
 
 		if (vm.user.type === 'patient') {
-			vm.patient2 = {};
 			vm.patient2.id = vm.user.id;
-		} else {
-			vm.patient2 = '';
 		}
-		vm.toUser = '';
 		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 
 		vm.getFind = function (val, type) {
@@ -32,10 +38,12 @@ angular.module('modules.dash')
 				});
 		};
 
+
 		vm.send = function () {
-			vm.message.toUser = vm.toUser.id;
+			vm.message.toUser = vm.toUser.id ;
 			vm.message.patient = vm.patient2.id;
 			vm.message.event = vm.model.data.task_id;
+
 			if (!vm.model.data.task_id) {
 				vm.save()
 					.then(function () {
