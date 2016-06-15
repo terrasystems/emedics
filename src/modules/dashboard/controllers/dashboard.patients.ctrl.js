@@ -3,8 +3,9 @@
 
 angular.module('modules.dash')
 
-	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal){
+	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService){
 		var vm = this;
+		vm.user = localStorageService.get('userData');
 		vm.searchref = '';
 		vm.patients = [];
 		vm.templates = [];
@@ -20,23 +21,40 @@ angular.module('modules.dash')
 		};
 		vm.refresh();
 
-		vm.onEdit = function(formID, patientId) {
+		vm.onCopyTask = function(taskObj, patientId) {
 			var paramsPOST = {
 				template: {
-					id: formID,
-					type: null,
-					description: null,
-					templateDto: null
+					id: taskObj.template.id,
+					templateDto: {id : taskObj.template.id}
 				},
 				patient: patientId
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-						formID = res.result.id;
-						$state.go('main.private.dashboard.abstract.patients.edit', {id: formID, type: 'patients', patId: patientId});
+					if (res.state && res.state.value && !!res.state.value) {
+						var newTaskID = res.result.id;
+						paramsPOST = {event:
+						{	id: newTaskID,
+							patient: {id: taskObj.patient.id},
+							template: {id: taskObj.template.id},
+							data: taskObj.data,
+							fromUser: {id: taskObj.fromUser.id},
+							toUser: {id: taskObj.toUser.id},
+							descr: taskObj.descr
+						}
+						};
+						http.post('private/dashboard/tasks/edit', paramsPOST)
+							.then(function (res) {
+								blockUI.stop();
+								if (res.result) {
+									alertService.add(0, res.state.message);
+									newTaskID = res.result.id;
+									$state.go('main.private.dashboard.abstract.patients.edit', {id: newTaskID, type: 'patients', patId: patientId});
+								}
+							});
+					} else {
+						alertService.add(2, res.state.message);
 					}
 				});
 		};

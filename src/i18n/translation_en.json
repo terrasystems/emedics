@@ -110,6 +110,7 @@
 	"USER_NAME": "Enter your Name",
 	"WEBSITE": "Website",
 	"WEBSITE_1": "Enter your web-site",
+  	"COPY_TASK": "Copy task",
 
 
   	"MSG_PATS_NOT_EXIST": "Patient with such id doesn't exist",
