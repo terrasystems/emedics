@@ -54,12 +54,9 @@ angular.module('modules.core')
 				ngModelAttrs: ngModelAttrs,
 				templateOptions: {
 					datepickerOptions: {
-						format: 'yyyy-MMMM-dd',
 						initDate: new Date()
 					}
-				},
-				parsers: [toDateConv],
-				//formatters: [toStringConv]
+				}
 			},
 			controller: ['$scope', function ($scope) {
 				$scope.datepicker = {};
@@ -80,24 +77,4 @@ angular.module('modules.core')
 			});
 		}
 
-		function toDateConv(value) {
-			//console.log(value.toISOString().slice(0,10));
-			if  (value && !(value === null)) {
-				value = value.toISOString().slice(0,10);
-			}
-			return (value);
-		}
-
-		function toStringConv(value) {
-			console.log('1) '+value);
-			if  (value) {
-				value = new Date(value);
-				console.log('2) '+value);
-			}
-			return (value);
-		}
-
-	})
-
-
-;
+	});
