@@ -540,7 +540,7 @@ input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 }
 .header-fixed > tbody > tr > td,
 .header-fixed > thead > tr > th {
-	width: 20%;
+	width: 16%;
 	float: left;
 }
 .Refs_add{

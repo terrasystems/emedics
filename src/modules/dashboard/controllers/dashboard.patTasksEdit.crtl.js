@@ -29,7 +29,7 @@ angular.module('modules.dash')
 			vm.id = $stateParams.id;
 		}
 
-		if ($stateParams.type == 'patients+') {
+		if ($stateParams.type == 'patients+' || $stateParams.type == 'tasks+') {
 			vm.viewButtons = false;
 		} else {
 			vm.viewButtons = true;
