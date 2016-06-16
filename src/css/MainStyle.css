@@ -192,6 +192,7 @@ div.contact-list.ui-list-view.ng-isolate-scope {
 
 .form-list p {
 	margin-left: 15px;
+	font-size: 13px;
 }
 
 div.form-list.ui-list-view.ng-isolate-scope {
@@ -541,6 +542,17 @@ input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 .header-fixed > thead > tr > th {
 	width: 20%;
 	float: left;
+}
+.Refs_add{
+	width: 350px;
+	background: #E2E2E2;
+	border: solid 1px;
+	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.addon_refs{
+	padding-top:15px ;
 }
 /*---------media--------*/
 
