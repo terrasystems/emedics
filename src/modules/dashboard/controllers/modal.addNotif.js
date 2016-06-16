@@ -35,7 +35,6 @@ angular.module('modules.dash')
 				});
 		};
 
-
 		vm.send = function () {
 			vm.message.toUser = vm.toUser.id ;
 			vm.message.patient = vm.patient2.id;

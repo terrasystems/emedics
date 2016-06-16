@@ -48,7 +48,6 @@ angular.module('modules.core')
 		formlyConfig.setType({
 			name: 'datepicker',
 			template: '<p class="input-group"><input type="text" id="{{::id}}" name="{{::id}}" ng-model="model[options.key]" class="form-control" ng-click="datepicker.open($event)" uib-datepicker-popup="{{to.datepickerOptions.format}}" is-open="datepicker.opened" datepicker-options="to.datepickerOptions"/><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="datepicker.open($event)" ng-disabled="to.disabled"><i class="glyphicon glyphicon-calendar"></i></button></span></p>',
-			//templateUrl: 'datepicker.html',
 			wrapper: ['bootstrapLabel', 'bootstrapHasError'],
 			defaultOptions: {
 				ngModelAttrs: ngModelAttrs,
@@ -76,5 +75,7 @@ angular.module('modules.core')
 				return chr ? chr.toLowerCase() : '';
 			});
 		}
+
+
 
 	});

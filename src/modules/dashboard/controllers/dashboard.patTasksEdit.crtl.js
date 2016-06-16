@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 
 	// $stateParams.id: id exists task
-	// $stateParams.type: 'tasks' / 'patients'
+	// $stateParams.type: 'tasks' / 'patients' / 'patients+'
 	// $stateParams.patId: id exists patient
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService) {
@@ -27,6 +27,12 @@ angular.module('modules.dash')
 			return;
 		} else {
 			vm.id = $stateParams.id;
+		}
+
+		if ($stateParams.type == 'patients+') {
+			vm.viewButtons = false;
+		} else {
+			vm.viewButtons = true;
 		}
 
 		vm.user = localStorageService.get('userData');
@@ -153,4 +159,7 @@ angular.module('modules.dash')
 				});
 		};
 
+		vm.onReturn = function () {
+			$state.go(vm.mainState);
+		};
 	});
