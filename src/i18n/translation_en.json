@@ -42,6 +42,7 @@
   	"CONFIRM": "Confirm",
   	"CONFIRM_PASS": "Confirm password",
   	"CONFIRM_PASS2": "Confirm your password, please",
+  	"COPY_TASK": "Copy task",
 	"DOCTOR": "Doctor",
     "DESCRIPTION":"Description",
     "DATE":"Date/Time",
@@ -88,6 +89,7 @@
   	"PHONE": "Phone",
   	"REFERENCES": "References",
 	"REGISTRATION": "Registration",
+  	"RETURN": "Return",
 	"REQUIRED": "This field is required",
 	"RESET_PASS": "Write your email for reset password",
 	"SAVE": "Save",
@@ -108,9 +110,9 @@
 	"TYPE": "Type",
   	"TYPE_EXPORT": "Type export",
 	"USER_NAME": "Enter your Name",
+  	"VIEW": "View",
 	"WEBSITE": "Website",
 	"WEBSITE_1": "Enter your web-site",
-  	"COPY_TASK": "Copy task",
 
 
   	"MSG_PATS_NOT_EXIST": "Patient with such id doesn't exist",
