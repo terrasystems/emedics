@@ -13,9 +13,6 @@ angular.module('modules.dash')
 			vm.toUser.id=vm.model.patient.id;
 		  vm.patient2.id=vm.model.patient.id;
 
-			//vm.patient2=vm.model.patient.email;
-
-
 		}
 		blockUI.stop();
 
