@@ -35,16 +35,6 @@
 		<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont
 			have
 			any tasks</h5></div>
-
-		<!--<div class="row tasks_head_board">-->
-		<!--<ul class="tasks_head">-->
-		<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="DATE"></p></li>-->
-		<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="NUMBER"></p></li>-->
-		<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="PATIENT_NAME"></p></li>-->
-		<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="FORM_TASKS"></p></li>-->
-		<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="DESCRIPTION"></p></li>-->
-		<!--</ul>-->
-		<!--</div>-->
 		<table class="table table-hover header-fixed">
 			<thead>
 			<tr>
@@ -68,64 +58,4 @@
 		</table>
 	</div>
 
-
-	<!--<div class="container">-->
-
-		<!--<div class=" row form-list " options="listOptions">-->
-			<!--<div class="container">-->
-				<!--<div class="row tasks_head_board">-->
-					<!--<ul class="tasks_head">-->
-						<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="DATE"></p></li>-->
-						<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="NUMBER"></p></li>-->
-						<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="PATIENT_NAME"></p></li>-->
-						<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="FORM_TASKS"></p></li>-->
-						<!--<li><p class="col-md-2 col-sm-2 col-xs-2" translate="DESCRIPTION"></p></li>-->
-					<!--</ul>-->
-				<!--</div>-->
-			<!--</div>-->
-			<!--<div ng-if="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont-->
-				<!--have-->
-				<!--any tasks</h5></div>-->
-			<!--<div class="" ui-list-view="form in vm.list track by $index" options="listOptions">-->
-
-				<!--<div class="tasks" ng-click="vm.onClick(form.id)">-->
-					<!--<p class="col-md-2 col-sm-2 col-xs-2">{{vm.convertDate(form.date)}}</p>-->
-
-					<!--<p class="col-md-2 col-sm-2 col-xs-2">{{form.template.number}}</p>-->
-
-					<!--<p class="col-md-2 col-sm-2 col-xs-2">{{form.patient.username}}</p>-->
-					<!--<p class="col-md-2 col-sm-2 col-xs-2">{{form.template.name}}</p>-->
-
-					<!--<p class="col-md- col-sm-2 col-xs-2" >{{form.template.descr}}</p>-->
-				<!--</div>-->
-
-
-			<!--</div>-->
-		<!--</div>-->
-	<!--</div>-->
 </section>
-
-
-<!--<div class="container">-->
-	<!--<table class="table table-hover">-->
-		<!--<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont-->
-			<!--have-->
-			<!--any tasks</h5></div>-->
-		<!--<thead>-->
-		<!--<tr ng-click="vm.onClick(form.id)">-->
-			<!--<th translate="DATE"></th>-->
-			<!--<th translate="NUMBER"></th>-->
-			<!--<th translate="NAME"></th>-->
-		<!--</tr>-->
-		<!--</thead>-->
-		<!--<tbody ng-repeat="form in vm.list track by $index">-->
-		<!--<tr>-->
-			<!--<td>{{vm.convertDate(form.date)}}</td>-->
-			<!--<td>{{form.template.number}}</td>-->
-			<!--<td>{{form.template.name}}</td>-->
-			<!--<td>{{form.template.descr}}</td>-->
-		<!--</tr>-->
-		<!-- -->
-		<!--</tbody>-->
-	<!--</table>-->
-<!--</div>-->

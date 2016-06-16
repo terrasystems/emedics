@@ -12,60 +12,99 @@
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
 			</div>
 			<uib-tab ng-click="vm.onRefresh();" index="0" heading="Main">
-				<div  ui-list-view="form in vm.FormTemplate | filter:vm.filterByCategory" options="listOptions1">
+				<table class="table table-hover header-fixed">
+					<thead>
+					<tr>
+						<th translate="NUMBER"></th>
+						<th translate="NAME"></th>
+						<th translate="DESCR"></th>
+						<th translate="STATUS"></th>
 
-					<div class=" pull-right btn-group btn-group-xs template_button">
-						<button class="btn btn-danger btn-small"
-								ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay" ng-if="form.commercialEnum==='PAID'" ng-hide="form.existPaid === true">
-							Buy
-						</button>
-						<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
-								 ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');" translate="LOAD">
-						</button>
-						<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);"
-								>View
-						</button>
-					</div>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" >
 
-					<p class=" col-md-3"><label class="control-label"><span translate="NUMBER"></span>:</label>{{form.number}}
-					</p>
+						<td>{{form.number}}</td>
+						<td>{{form.name}}</td>
+						<td>{{form.descr}}</td>
+						<td>{{form.commercialEnum}}
+							<div class=" pull-right btn-group btn-group-xs">
+								<button class="btn btn-danger btn-small"
+										ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay" ng-if="form.commercialEnum==='PAID'" ng-hide="form.existPaid === true">
+									Buy
+								</button>
+								<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
+										ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');" translate="LOAD">
+								</button>
+								<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);">
+									View
+								</button>
+							</div>
+						</td>
+					</tr>
 
-					<p class=" col-md-3"><label class="control-label"><span translate="NAME"></span>:</label>{{form.name}}
-					</p>
-
-					<p class=" col-md-3"><label class="control-label"><span translate="DESCR"></span>:</label>{{form.descr}}
-					</p>
-
-					<p class=" col-md-1"><label class="control-label"><span></span></label>{{form.status}}
-					</p>
-				</div>
+					</tbody>
+				</table>
 			</uib-tab>
 
 			<uib-tab ng-click="vm.Refresh();" index="1" heading="My">
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
 					dont have
 					any forms</h5></div>
-				<div  ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">
 
-					<div class=" pull-right btn-group btn-group-xs delete_myForm">
-						<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"
-								ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
-						<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onAddTask(forms);"><span
-								translate="LOAD"></span></button>
-					</div>
 
-					<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}
-					</p>
+				<table class="table table-hover header-fixed">
+					<thead>
+					<tr>
+						<th translate="NUMBER"></th>
+						<th translate="NAME"></th>
+						<th translate="DESCR"></th>
+						<th translate="STATUS"></th>
 
-					<p class=" col-md-3"><label class="control-label "><span translate="NAME"></span>: </label>{{forms.templateDto.name}}
-					</p>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="forms in vm.myForms | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
 
-					<p class=" col-md-3"><label class="control-label "><span translate="DESCR"></span>: </label>{{forms.templateDto.descr}}
-					</p>
+						<td>{{forms.templateDto.number}}</td>
+						<td>{{forms.templateDto.name}}</td>
+						<td>{{forms.templateDto.descr}}</td>
+						<td>{{forms.type}}
+							<div class=" pull-right btn-group btn-group-xs">
+							<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"
+							ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
+							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onAddTask(forms);"><span
+							translate="LOAD"></span></button>
+							</div>
+						</td>
+					</tr>
 
-					<p class=" col-md-1"><label class="control-label "><span></span> </label>{{forms.type}}
-					</p>
-				</div>
+					</tbody>
+				</table>
+
+
+				<!--<div  ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">-->
+
+					<!--<div class=" pull-right btn-group btn-group-xs delete_myForm">-->
+						<!--<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"-->
+								<!--ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>-->
+						<!--<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onAddTask(forms);"><span-->
+								<!--translate="LOAD"></span></button>-->
+					<!--</div>-->
+
+					<!--<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}-->
+					<!--</p>-->
+
+					<!--<p class=" col-md-3"><label class="control-label "><span translate="NAME"></span>: </label>{{forms.templateDto.name}}-->
+					<!--</p>-->
+
+					<!--<p class=" col-md-3"><label class="control-label "><span translate="DESCR"></span>: </label>{{forms.templateDto.descr}}-->
+					<!--</p>-->
+
+					<!--<p class=" col-md-1"><label class="control-label "><span></span> </label>{{forms.type}}-->
+					<!--</p>-->
+				<!--</div>-->
 
 			</uib-tab>
 

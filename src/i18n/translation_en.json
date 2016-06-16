@@ -103,6 +103,7 @@
   	"SEARCH_REFS2": "Search a references in the database...",
   	"SEARCH_PATS": "Search a patients in the database...",
   	"SELECT_SECTION": "Select section",
+    "STATUS":"Status",
   	"TASKS": "Tasks",
 	"TO_DOCTOR": "To doctor: ",
 	"TITLE": "Title:",

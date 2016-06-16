@@ -447,21 +447,11 @@ div.panel-group {
 	margin-right: 10px;
 }
 
-.template_button {
-	margin-top: 15px;
-	margin-right: 5px;
-}
 
 .tasks_head {
 	list-style: none;
 }
 
-/*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-empty{*/
-/*min-width: 350px !important;*/
-/*}*/
-/*input.form-control.ui-select-search.ng-valid.ng-dirty.ng-touched.ng-not-empty.ng-valid-parse{*/
-/*min-width: 350px !important;*/
-/*}*/
 .ui-select-bootstrap[search-enabled=false] .ui-select-match.ng-hide {
 	display: inline-block !important;
 }
@@ -539,12 +529,12 @@ input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 
 .header-fixed > tbody {
 	overflow-y: auto;
-	height: 68vh;
+	height: 67vh;
 }
 
 .header-fixed > tbody > tr > td,
 .header-fixed > thead > tr > th {
-	width: 20%;
+	width: 25%;
 	float: left;
 }
 
