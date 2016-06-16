@@ -162,4 +162,17 @@ angular.module('modules.dash')
 		vm.onReturn = function () {
 			$state.go(vm.mainState);
 		};
+
+		vm.onCloseTask = function() {
+			confirmService('Close task?')
+				.then(function(res) {
+				http.get('private/dashboard/tasks/close/'+vm.id)
+					.then(function (res) {
+						blockUI.stop();
+						alertService.add(0, res.state.message);
+					});
+				vm.onReturn();
+				});
+		};
+
 	});
