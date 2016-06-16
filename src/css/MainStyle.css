@@ -532,12 +532,16 @@ input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 	height: 67vh;
 }
 
-.header-fixed > tbody > tr > td,
-.header-fixed > thead > tr > th {
+.header-fixed1 > tbody > tr > td,
+.header-fixed1 > thead > tr > th {
 	width: 25%;
 	float: left;
 }
-
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+	width: 20%;
+	float: left;
+}
 /*---------media--------*/
 
 /* Smartphones (portrait and landscape) ----------- */
