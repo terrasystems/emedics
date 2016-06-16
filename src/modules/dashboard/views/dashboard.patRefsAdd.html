@@ -29,6 +29,47 @@
 					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
 				</div>
 
+				<!--<div class="input-group">-->
+					<!--<span class="input-group-addon" id="basic-addon1" translate="TYPE"></span>-->
+
+					<!--<ui-select-match placeholder="Select your type..."></ui-select-match>-->
+
+					<!--<ui-select-choices repeat=""></ui-select-choices>-->
+
+					<!--</ui-select>-->
+				<!--</div>-->
+
+				<button class=" btn btn-primary" translate="REGISTRATION"></button>
+
+			</uib-tab>
+			<uib-tab heading="Doctor">
+
+				<div class="input-group addon_refs">
+					<span class="input-group-addon" id="basic-addon1" translate="FIRST_NAME"></span>
+					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1" translate="LAST_NAME"></span>
+					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1" translate="BIRTH_DATE"></span>
+
+					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+						   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+						   close-text="Close" alt-input-formats="altInputFormats"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i
+					class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+
+
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon1" translate="EMAIL"></span>
+					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+				</div>
+
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1" translate="TYPE"></span>
 
@@ -40,10 +81,6 @@
 				</div>
 
 				<button class=" btn btn-primary" translate="REGISTRATION"></button>
-
-			</uib-tab>
-			<uib-tab heading="Doctor">
-
 
 			</uib-tab>
 		</uib-tabset>
