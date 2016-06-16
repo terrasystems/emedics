@@ -40,7 +40,7 @@ angular.module('modules.dash')
 							template: {id: taskObj.template.id},
 							data: taskObj.data,
 							fromUser: {id: taskObj.fromUser.id},
-							toUser: {id: taskObj.toUser.id},
+							toUser: taskObj.toUser,
 							descr: taskObj.descr
 						}
 						};
