@@ -46,8 +46,8 @@ angular.module('modules.dash')
 		};
 
 		vm.convertDate = function (d) {
-			var x = new Date(d);
-			return x.toISOString().slice(0,19).replace('T', ' ');
+			var y = new Date(d);
+			return y.toLocaleString().replace(',', ' / ');
 		};
 
 	});
