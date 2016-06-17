@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 
 	// $stateParams.id: id exists task
-	// $stateParams.type: 'tasks' / 'patients' / 'patients+'
+	// $stateParams.type: 'tasks' / 'patients' / 'patients+' / 'tasks+'
 	// $stateParams.patId: id exists patient
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService) {
@@ -16,7 +16,7 @@ angular.module('modules.dash')
 
 		var vm = this;
 
-		if ($stateParams.type == 'tasks') {
+		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
 		} else {
 			vm.mainState = 'main.private.dashboard.abstract.patients';
@@ -29,7 +29,7 @@ angular.module('modules.dash')
 			vm.id = $stateParams.id;
 		}
 
-		if ($stateParams.type == 'patients+') {
+		if ($stateParams.type == 'patients+' || $stateParams.type == 'tasks+') {
 			vm.viewButtons = false;
 		} else {
 			vm.viewButtons = true;
@@ -170,8 +170,8 @@ angular.module('modules.dash')
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
+						vm.onReturn();
 					});
-				vm.onReturn();
 				});
 		};
 
