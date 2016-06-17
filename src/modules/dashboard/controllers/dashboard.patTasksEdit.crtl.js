@@ -170,8 +170,8 @@ angular.module('modules.dash')
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
+						vm.onReturn();
 					});
-				vm.onReturn();
 				});
 		};
 
