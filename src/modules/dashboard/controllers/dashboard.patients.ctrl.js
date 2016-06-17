@@ -36,10 +36,10 @@ angular.module('modules.dash')
 						var newTaskID = res.result.id;
 						paramsPOST = {event:
 						{	id: newTaskID,
-							patient: {id: taskObj.patient.id},
-							template: {id: taskObj.template.id},
+							patient: taskObj.patient,
+							template: taskObj.template,
 							data: taskObj.data,
-							fromUser: {id: taskObj.fromUser.id},
+							fromUser: taskObj.fromUser,
 							toUser: taskObj.toUser,
 							descr: taskObj.descr
 						}
@@ -162,7 +162,6 @@ angular.module('modules.dash')
 							'name':hist.fromUser.username,
 							'email':hist.fromUser.email,
 							'id':hist.fromUser.id
-
 						}});
 						return deferred.promise;
 					}

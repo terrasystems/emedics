@@ -157,7 +157,6 @@ angular.module('modules.dash')
 					}
 				}
 			}
-
 			return '';
 		}
 

@@ -78,9 +78,9 @@
 						<td>{{form.template.name}}</td>
 						<td>{{form.template.descr}}</td>
 						<td><div class="btn-group btn-group-xs">
-							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSend(item, hist)"><span translate="SEND"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onView(hist.id, patient.id)"><span translate="VIEW"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyTask(hist, patient.id)"><span translate="COPY_TASK"></span></button>
+							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSendHistory(form.template, form)"><span translate="SEND"></span></button>
+							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onViewHistory(form.id, form.patient.id)"><span translate="VIEW"></span></button>
+							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyHistory(form, form.patient.id)"><span translate="COPY_TASK"></span></button>
 						</div></td>
 					</tr>
 					</tbody>
@@ -110,9 +110,9 @@
 						<td>{{form.template.name}}</td>
 						<td>{{form.template.descr}}</td>
 						<td><div class="btn-group btn-group-xs">
-							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSend(item, hist)"><span translate="SEND"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onView(hist.id, patient.id)"><span translate="VIEW"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyTask(hist, patient.id)"><span translate="COPY_TASK"></span></button>
+							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSendHistory(form.template, form)"><span translate="SEND"></span></button>
+							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onViewHistory(form.id, form.patient.id)"><span translate="VIEW"></span></button>
+							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyHistory(form, form.patient.id)"><span translate="COPY_TASK"></span></button>
 						</div></td>
 					</tr>
 					</tbody>

@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 
 	// $stateParams.id: id exists task
-	// $stateParams.type: 'tasks' / 'patients' / 'patients+'
+	// $stateParams.type: 'tasks' / 'patients' / 'patients+' / 'tasks+'
 	// $stateParams.patId: id exists patient
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService) {
@@ -16,7 +16,7 @@ angular.module('modules.dash')
 
 		var vm = this;
 
-		if ($stateParams.type == 'tasks') {
+		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
 		} else {
 			vm.mainState = 'main.private.dashboard.abstract.patients';
