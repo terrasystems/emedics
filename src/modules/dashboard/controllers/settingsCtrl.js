@@ -3,61 +3,39 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, auth) {
+	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, settings_fields, auth) {
 		var vm = this;
-		console.log('settingsCTRL');
-		vm.paramsPOST = {
-			id: null,
-			password: '',
-			username: angular.copy($rootScope.userData.username),
-			email: angular.copy($rootScope.userData.email),
-			typeExp: angular.copy($rootScope.userData.typeExp),
-			type: null
-		};
+		vm.settings_fields = settings_fields;
+		vm.settings_model = {};
+		vm.settings_options = {};
+		vm.changedPass = {oldPass: '', newPass: ''};
+		vm.PassConfirm = {confirm: ''};
 
-		vm.changedPass = {
-			'oldPass': '',
-			'newPass': ''
-
-		};
-		vm.PassConfirm = {
-			'confirm': ''
-		};
-//vm.disableChange= function(){
-//	if( vm.changedPass.newPass !== vm.PassConfirm.confirm  ){
-//		return true;
-//	}
-//};
-
-
-		vm.onChangePass = function () {
-			console.log(vm.changedPass);
-			http.post('private/change_pass', vm.changedPass)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-
-						alertService.add(0, res.state.message);
-					}
-				});
-			vm.changedPass = {
-				'oldPass': '',
-				'newPass': ''
-			};
-			vm.PassConfirm = {
-				'confirm': ''
-			};
-		};
-		vm.possibleChoices = [{type: 'Doctor'}, {type: 'Patient'}, {type: 'Homecare Organization'}];
+		http.get('private/userInfo')
+			.then(function (res) {
+				blockUI.stop();
+				vm.settings_model = res.user;
+			});
 
 		vm.onSave = function () {
-			console.log(vm.paramsPOST);
-			http.post('private/user_edit', vm.paramsPOST)
+			http.post('private/user_edit', vm.settings_model)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
 						alertService.add(0, res.state.message);
 						auth.saveUserData(res);
+					}
+				});
+		};
+
+		vm.onChangePass = function () {
+			http.post('private/change_pass', vm.changedPass)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+						vm.changedPass = {oldPass: '', newPass: ''};
+						vm.PassConfirm = {confirm: ''};
 					}
 				});
 		};

@@ -60,6 +60,7 @@
 	"FORM": "Form",
 	"FORM": "Sending ",
 	"HELLO": "Hello, ",
+  	"LAST_NAME": "Last name",
 	"LOGOUT": "Logout",
 	"MESSAGE": "Message",
 	"MESSAGE_TEXT": "Message text...",

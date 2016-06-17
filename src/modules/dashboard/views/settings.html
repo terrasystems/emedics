@@ -2,91 +2,78 @@
 
 	<uib-tab index="0" heading="{{'CHANGE_INFO' | translate}}">
 		<div class="container form-list">
-			<div class="row ">
+			<div class="row">
 				<div class="col-md-12 form-group ">
-					<form name="emailChange">
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon11" translate="NAME"></span>
-						<input aria-describedby="sizing-addon2" ng-model="vm.paramsPOST.username" type="text" class="form-control" placeholder="{{'NEW_NAME' | translate}}">
-					</div>
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon11" translate="EMAIL"></span>
-						<input  ng-model="vm.paramsPOST.email" type="text" class="form-control" placeholder="{{'NEW_EMAIL' | translate}}" aria-describedby="sizing-addon3" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" required>
-					</div>
-						<span ng-show="emailChange.$invalid">Please,type correct email</span>
-					<!--<div class="input-group input-group-md info">-->
-						<!--<lebel><span translate="TYPE_EXPORT"></span>:</lebel>-->
-						<!--<select ng-model="vm.paramsPOST.typeExp" ng-change="update()">-->
-							<!--<option ng-repeat="item in vm.possibleChoices" ng-selected="selectedItem == item.type"-->
-									<!--value="{{item.type}}">{{item.type}}-->
-							<!--</option>-->
-						<!--</select>-->
-					<!--</div>-->
 
-
-
-					<div class="form-group input-group-md info">
-						<select class="form-control" id="sel1" ng-model="vm.paramsPOST.typeExp" ng-change="update()">
-							<option translate="TYPE_EXPORT" value="" disabled selected></option>
-							<option ng-repeat="item in vm.possibleChoices" ng-selected="selectedItem == item.type"
-									value="{{item.type}}">{{item.type}}</option>
-
-						</select>
-					</div>
-						<button ng-disabled="emailChange.$invalid" type="submit" class="btn btn-success pull-right" ng-click="vm.onSave();"><span translate="SAVE"></span></button>
+						<form ng-submit="vm.onSave()" name="vm.settingsForm" novalidate>
+							<formly-form  model="vm.settings_model" fields="vm.settings_fields" form="vm.settingsForm" options="vm.settings_options">
+								<button type="submit"
+										class="btn btn_submit btn-default login-button submit-button"
+										ng-disabled="vm.settingsForm.$invalid">
+									<span translate="SAVE"></span></button>
+							</formly-form>
 						</form>
+
 				</div>
 			</div>
 			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
 		</div>
-
 	</uib-tab>
-
-
 
 	<uib-tab index="2" heading="{{'CHANGE_PASS' | translate}}">
 		<div class="container form-list">
 			<div class="row ">
 				<div class="col-md-12 form-group  ">
 					<form name="infoForm">
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon11" translate="OLD_PASS"></span>
-						<input ng-model="vm.changedPass.oldPass"
-							   type="password"
-							   class="form-control"
-							   placeholder="{{'OLD_PASS2' | translate}}"
-							   aria-describedby="sizing-addon3"
-							   required>
-					</div>
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon11" translate="NEW_PASS"></span>
-						<input ng-model="vm.changedPass.newPass"
-							   type="password"
-							   class="form-control"
-							   placeholder="{{'NEW_PASS2' | translate}}"
-							   aria-describedby="sizing-addon3"
-							   required>
-					</div>
-					<div class="input-group input-group-md info">
-						<span class="input-group-addon" id="sizing-addon11" translate="CONFIRM"></span>
-						<input ng-model="vm.PassConfirm.confirm"
-							   type="password"
-							   class="form-control"
-							   placeholder="{{'CONFIRM_PASS' | translate}}"
-							   aria-describedby="sizing-addon3"
-							   required>
-					</div>
-					<button ng-click="vm.onChangePass();"
-							ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid"
-							type="submit"
-							class="btn btn-success pull-right"><span translate="CHANGE"></span>
-					</button>
-					<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm" translate="CONFIRM_PASS2"></span>
+
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="OLD_PASS"></span>
+							<input ng-model="vm.changedPass.oldPass"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'OLD_PASS2' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="NEW_PASS"></span>
+							<input ng-model="vm.changedPass.newPass"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'NEW_PASS2' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="CONFIRM"></span>
+							<input ng-model="vm.PassConfirm.confirm"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'CONFIRM_PASS' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<button ng-click="vm.onChangePass();"
+								ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid"
+								type="submit"
+								class="btn btn-success pull-right">
+							<span translate="CHANGE"></span>
+						</button>
+						<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm" translate="CONFIRM_PASS2"></span>
+
 					</form>
 				</div>
 			</div>
-			<a  ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
+			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
 		</div>
 
 	</uib-tab>
 </uib-tabset>
+
+
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+	</div>
+</script>
