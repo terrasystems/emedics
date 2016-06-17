@@ -163,5 +163,8 @@
   	"MSG_CANT_REMOVE_REF": "Cant remove references",
   	"MSG_NO_DATA": "Don't receive data from server",
   	"LOAD":"Load",
-    "LAST_NAME":"Last Name"
+    "LAST_NAME":"Last Name",
+    "ENTER_LAST_NAME":"Enter your last name",
+  	"ENTER_BIRTH_DATE":"Select your birth date"
+
 }

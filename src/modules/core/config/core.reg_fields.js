@@ -3,214 +3,256 @@
 
 angular.module('modules.core')
 
-	.service('pat_fields', function($translate) {
+	.service('pat_fields', function ($translate) {
 		var arr = [
-		{
-			className: 'col-md-12',
-			key: 'user.username',
-			type: 'input',
-			templateOptions: {
-				label: $translate.instant('NAME'),
-				placeholder: $translate.instant('USER_NAME'),
-				required: true
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.email',
-			type: 'input',
-			validators: {
-				EmailAddress: {
-					expression: function ($viewValue, $modelValue) {
-						var value = $modelValue || $viewValue;
-						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-					},
-					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+			{
+				className: 'col-md-12',
+				key: 'user.firstName',
+				type: 'input',
+				templateOptions: {
+					label: $translate.instant('NAME'),
+					placeholder: $translate.instant('USER_NAME'),
+					required: true
 				}
 			},
-			templateOptions: {
-				type: 'text',
-				required: true,
-				label: $translate.instant('EMAIL'),
-				placeholder: $translate.instant('EMAIL_1')
+			{
+				className: 'col-md-12',
+				key: 'user.lastName',
+				type: 'input',
+				templateOptions: {
+					label: $translate.instant('LAST_NAME'),
+					placeholder: $translate.instant('ENTER_LAST_NAME'),
+					required: true
+				}
 			},
-			validation: {
-				messages: {
-					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required';
+			{
+				className: 'col-md-12',
+				key: 'birth',
+				type: 'datepicker',
+				templateOptions: {
+					type: 'text',
+					label: $translate.instant('BIRTH_DATE'),
+					placeholder: $translate.instant('BIRTH_DATE'),
+					datepickerPopup: 'yyyy-MMMM-dd'
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.email',
+				type: 'input',
+				validators: {
+					EmailAddress: {
+						expression: function ($viewValue, $modelValue) {
+							var value = $modelValue || $viewValue;
+							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+						},
+						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+					}
+				},
+				templateOptions: {
+					type: 'text',
+					required: true,
+					label: $translate.instant('EMAIL'),
+					placeholder: $translate.instant('EMAIL_1')
+				},
+				validation: {
+					messages: {
+						required: function ($viewValue, $modelValue, scope) {
+							return scope.to.label + ' is required';
+						}
 					}
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.password',
+				type: 'input',
+				templateOptions: {
+					type: 'password',
+					required: true,
+					label: $translate.instant('PASSWORD'),
+					placeholder: $translate.instant('PASSWORD_1')
+				}
 			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.password',
-			type: 'input',
-			templateOptions: {
-				type: 'password',
-				required: true,
-				label: $translate.instant('PASSWORD'),
-				placeholder: $translate.instant('PASSWORD_1')
-			}
-		}
 		];
 		return arr;
 	})
 
-	.service('doc_fields', function($translate) {
+	.service('doc_fields', function ($translate) {
 		var arr = [
-		{
-			className: 'col-md-12',
-			key: 'user.username',
-			type: 'input',
-			templateOptions: {
-				required: true,
-				label: $translate.instant('NAME'),
-				placeholder: $translate.instant('USER_NAME')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.email',
-			type: 'input',
-			validators: {
-				EmailAddress: {
-					expression: function ($viewValue, $modelValue) {
-						var value = $modelValue || $viewValue;
-						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-					},
-					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+			{
+				className: 'col-md-12',
+				key: 'user.firstName',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('NAME'),
+					placeholder: $translate.instant('USER_NAME')
 				}
 			},
-			templateOptions: {
-				type: 'text',
-				required: true,
-				label: $translate.instant('EMAIL'),
-				placeholder: $translate.instant('EMAIL_1')
+			{
+				className: 'col-md-12',
+				key: 'user.lastName',
+				type: 'input',
+				templateOptions: {
+					label: $translate.instant('LAST_NAME'),
+					placeholder: $translate.instant('ENTER_LAST_NAME'),
+					required: true
+				}
 			},
-			validation: {
-				messages: {
-					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required';
+			{
+				className: 'col-md-12',
+				key: 'birth',
+				type: 'datepicker',
+				templateOptions: {
+					type: 'text',
+					label: $translate.instant('BIRTH_DATE'),
+					placeholder: $translate.instant('BIRTH_DATE'),
+					datepickerPopup: 'yyyy-MMMM-dd'
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.email',
+				type: 'input',
+				validators: {
+					EmailAddress: {
+						expression: function ($viewValue, $modelValue) {
+							var value = $modelValue || $viewValue;
+							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+						},
+						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+					}
+				},
+				templateOptions: {
+					type: 'text',
+					required: true,
+					label: $translate.instant('EMAIL'),
+					placeholder: $translate.instant('EMAIL_1')
+				},
+				validation: {
+					messages: {
+						required: function ($viewValue, $modelValue, scope) {
+							return scope.to.label + ' is required';
+						}
 					}
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.password',
+				type: 'input',
+				templateOptions: {
+					type: 'password',
+					required: true,
+					label: $translate.instant('PASSWORD'),
+					placeholder: $translate.instant('PASSWORD_1')
+				}
 			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.password',
-			type: 'input',
-			templateOptions: {
-				type: 'password',
-				required: true,
-				label: $translate.instant('PASSWORD'),
-				placeholder: $translate.instant('PASSWORD_1')
-			}
-		}
 		];
 		return arr;
 	})
 
-	.service('org_fields', function($translate) {
+	.service('org_fields', function ($translate) {
 		var arr = [
-		{
-			className: 'col-md-12',
-			key: 'user.username',
-			type: 'input',
-			templateOptions: {
-				required: true,
-				label: $translate.instant('NAME'),
-				placeholder: $translate.instant('USER_NAME')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.email',
-			type: 'input',
-			validators: {
-				EmailAddress: {
-					expression: function ($viewValue, $modelValue) {
-						var value = $modelValue || $viewValue;
-						return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-					},
-					message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+			{
+				className: 'col-md-12',
+				key: 'user.username',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('NAME'),
+					placeholder: $translate.instant('USER_NAME')
 				}
 			},
-			templateOptions: {
-				type: 'text',
-				required: true,
-				label: $translate.instant('EMAIL'),
-				placeholder: $translate.instant('EMAIL_1')
-			},
-			validation: {
-				messages: {
-					required: function ($viewValue, $modelValue, scope) {
-						return scope.to.label + ' is required';
+			{
+				className: 'col-md-12',
+				key: 'user.email',
+				type: 'input',
+				validators: {
+					EmailAddress: {
+						expression: function ($viewValue, $modelValue) {
+							var value = $modelValue || $viewValue;
+							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
+						},
+						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+					}
+				},
+				templateOptions: {
+					type: 'text',
+					required: true,
+					label: $translate.instant('EMAIL'),
+					placeholder: $translate.instant('EMAIL_1')
+				},
+				validation: {
+					messages: {
+						required: function ($viewValue, $modelValue, scope) {
+							return scope.to.label + ' is required';
+						}
 					}
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.password',
+				type: 'input',
+				templateOptions: {
+					type: 'password',
+					required: true,
+					label: $translate.instant('PASSWORD'),
+					placeholder: $translate.instant('PASSWORD_1')
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.www',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('WEBSITE'),
+					placeholder: $translate.instant('WEBSITE_1')
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.fullname',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('ORG_NAME'),
+					placeholder: $translate.instant('ORG_NAME_FULL')
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.address',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('ADDRESS'),
+					placeholder: $translate.instant('ORG_ADDRESS')
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.type',
+				type: 'select',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('ORG_TYPE'),
+					placeholder: $translate.instant('ORG_TYPE'),
+					options: [
+						{name: $translate.instant('ORG_TYPE_1'), value: 'type_1'},
+						{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
+						{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
+					]
+				}
 			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'user.password',
-			type: 'input',
-			templateOptions: {
-				type: 'password',
-				required: true,
-				label: $translate.instant('PASSWORD'),
-				placeholder: $translate.instant('PASSWORD_1')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'org.www',
-			type: 'input',
-			templateOptions: {
-				required: true,
-				label:  $translate.instant('WEBSITE'),
-				placeholder:  $translate.instant('WEBSITE_1')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'org.fullname',
-			type: 'input',
-			templateOptions: {
-				required: true,
-				label:  $translate.instant('ORG_NAME'),
-				placeholder:  $translate.instant('ORG_NAME_FULL')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'org.address',
-			type: 'input',
-			templateOptions: {
-				required: true,
-				label: $translate.instant('ADDRESS'),
-				placeholder: $translate.instant('ORG_ADDRESS')
-			}
-		},
-		{
-			className: 'col-md-12',
-			key: 'org.type',
-			type: 'select',
-			templateOptions: {
-				required: true,
-				label: $translate.instant('ORG_TYPE'),
-				placeholder: $translate.instant('ORG_TYPE'),
-				options: [
-					{name: $translate.instant('ORG_TYPE_1'), value: 'type_1'},
-					{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
-					{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
-				]
-			}
-		}
 		];
 		return arr;
 	})
 
-	.service('settings_fields', function($translate) {
+	.service('settings_fields', function ($translate) {
 		var arr = [
 			{
 				className: 'col-md-12',
