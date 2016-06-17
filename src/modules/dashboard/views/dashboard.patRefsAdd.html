@@ -1,86 +1,106 @@
 <div class="container ">
 	<div class="Refs_add">
 		<uib-tabset>
+
+			<!-- FIRST TAB-->
 			<uib-tab heading="Patient">
+				<form name="userForm" class="elegant-aero" ng-submit="submitForm()" novalidate>
 
-				<div class="input-group addon_refs">
-					<span class="input-group-addon" id="basic-addon1" translate="FIRST_NAME"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="LAST_NAME"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="BIRTH_DATE"></span>
+					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+						<label translate="FIRST_NAME"></label>
+						<input type="text" name="name" class="form-control" ng-model="user.name" required>
+						<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+						<label translate="LAST_NAME"></label>
+						<input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" required>
+						<p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">You Last Name is required.</p>
 
-					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+						<label translate="EMAIL"></label>
+						<input type="email" name="email" class="form-control" ng-model="user.email" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" required>
+						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+					</div>
+
+
+
+				<div class="input-group">
+					<label translate="BIRTH_DATE"></label>
+					<input name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
 						   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-						   close-text="Close" alt-input-formats="altInputFormats"/>
-          <span class="input-group-btn">
+						   close-text="Close" alt-input-formats="altInputFormats" />
+
+          <span class="input-group-btn" style="padding-top: 5px;">
             <button type="button" class="btn btn-default" ng-click="open1()"><i
-					class="glyphicon glyphicon-calendar"></i></button>
+					class="glyphicon glyphicon-calendar" style=""></i></button>
           </span>
-
-
 				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="EMAIL"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
+					<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
+				</form>
 
-				<!--<div class="input-group">-->
-					<!--<span class="input-group-addon" id="basic-addon1" translate="TYPE"></span>-->
 
-					<!--<ui-select-match placeholder="Select your type..."></ui-select-match>-->
 
-					<!--<ui-select-choices repeat=""></ui-select-choices>-->
 
-					<!--</ui-select>-->
-				<!--</div>-->
-
-				<button class=" btn btn-primary" translate="REGISTRATION"></button>
 
 			</uib-tab>
+
+
+
+			<!-- SECOND TAB-->
 			<uib-tab heading="Doctor">
 
-				<div class="input-group addon_refs">
-					<span class="input-group-addon" id="basic-addon1" translate="FIRST_NAME"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="LAST_NAME"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="BIRTH_DATE"></span>
+				<form name="userForm" class="elegant-aero" ng-submit="submitForm()" novalidate>
 
-					<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
-						   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-						   close-text="Close" alt-input-formats="altInputFormats"/>
-          <span class="input-group-btn">
+					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+						<label translate="FIRST_NAME"></label>
+						<input type="text" name="name" class="form-control" ng-model="doctor.name" required>
+						<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+						<label translate="LAST_NAME"></label>
+						<input type="text" name="lastname" class="form-control" ng-model="doctor.lastname" ng-minlength="3" required>
+						<p ng-show="userForm.lastname.$invalid && !userForm.lastname.$pristine" class="help-block">You Last Name is required.</p>
+
+					</div>
+					<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+						<label translate="EMAIL"></label>
+						<input type="email" name="email" class="form-control" ng-model="user.email" ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" required>
+						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+					</div>
+
+
+
+					<div class="input-group">
+						<label translate="BIRTH_DATE"></label>
+						<input name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+							   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
+							   close-text="Close" alt-input-formats="altInputFormats" />
+
+          <span class="input-group-btn" style="padding-top: 5px;">
             <button type="button" class="btn btn-default" ng-click="open1()"><i
-					class="glyphicon glyphicon-calendar"></i></button>
+					class="glyphicon glyphicon-calendar" style=""></i></button>
           </span>
+					</div>
 
 
-				</div>
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="EMAIL"></span>
-					<input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
-				</div>
 
-				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1" translate="TYPE"></span>
+				<div class="form-group">
+					<label translate="TYPE"></label>
 
-					<ui-select-match placeholder="Select your type..."></ui-select-match>
+					<ui-select ng-model="ctrl.address.selected"
+							   theme="bootstrap"
+							   ng-disabled="ctrl.disabled"
+							   reset-search-input="false"
+							   append-to-body="true">
+						<ui-select-match placeholder="Select your type"></ui-select-match>
+						<ui-select-choices repeat="" required>
 
-					<ui-select-choices repeat=""></ui-select-choices>
-
+						</ui-select-choices>
 					</ui-select>
 				</div>
-
-				<button class=" btn btn-primary" translate="REGISTRATION"></button>
+					<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
+				</form>
 
 			</uib-tab>
 		</uib-tabset>
@@ -99,11 +119,3 @@
 	</div>
 </div>
 
-<!--<script type="text/ng-template" id="error-messages.html">-->
-<!--<formly-transclude></formly-transclude>-->
-<!--<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">-->
-<!--<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{-->
-<!--message(fc.$viewValue, fc.$modelValue, this)}}-->
-<!--</div>-->
-<!--</div>-->
-<!--</script>-->
