@@ -190,4 +190,64 @@ angular.module('modules.public', [])
 				});
 		};
 
+	})
+
+
+	.controller('confirmNewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService, $translate, $stateParams) {
+		var vm = this;
+		if  (!$stateParams.key) {
+			$state.go('main.public.login');
+			return;
+		}
+		vm.newPass = {};
+
+		vm.fieldsPass = [
+			{
+				key: 'password',
+				type: 'input',
+				templateOptions: {
+					label: 'Password',
+					required: true,
+					placeholder: $translate.instant('Enter new password...')
+				}
+			},
+			{
+				key: 'confirmPassword',
+				type: 'input',
+				extras: {validateOnModelChange: true},
+				templateOptions: {
+					label: 'Confirm password',
+					required: true,
+					placeholder: $translate.instant('Confirm new password...')
+				},
+				validators: {
+					samePassword: 'model.password === model.confirmPassword'
+				}
+			}
+		];
+
+
+		vm.onSubmit = function () {
+			var paramsPOST = {
+				validKey:$stateParams.key,
+				newPassword: vm.newPass.password
+			};
+
+			blockUI.start();
+			http.post('public/changePassword', paramsPOST)
+				.then(function (res) {
+					blockUI.stop();
+					alertService.add(0, '', res.state.message, '');
+					$timeout(function () {
+						$state.go('main.public.login');
+					}, 500);
+				}, function () {
+					blockUI.stop();
+					$timeout(function () {
+						$state.go('main.public.login');
+					}, 500);
+				});
+		};
+
 	});
+

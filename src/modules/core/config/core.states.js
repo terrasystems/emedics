@@ -48,6 +48,31 @@ angular.module('modules.core')
 			}
 		},
 		{
+			name: 'main.public.newpassword.confirm',
+			url: '/confirm',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/public/views/confirm.newpassword.html',
+					controller: 'confirmNewPasswordCtrl as vm'
+				}
+			},
+			params: {
+				key: ''
+			}
+		},
+		{
+			name: 'main.public.validationkey',
+			url: 'validationkey/:key',
+			onEnter: function($stateParams, http, $state) {
+				http.get('public/validation_key/' + $stateParams.key)
+					.then(function(res) {
+						console.log(res);
+						$state.go('main.public.newpassword.confirm', {key: $stateParams.key});
+					});
+				console.log($stateParams.code);
+			}
+		},
+		{
 			name: 'main.public.activation',
 			url: 'activation/:code',
 			onEnter: function($stateParams, http, $state, auth) {

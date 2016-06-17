@@ -135,6 +135,18 @@ ul.nav.nav-tabs {
 	border: solid 1px
 }
 
+.container-my {
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #E2E2E2;
+	margin-top: 20%;
+	min-height: 200px;
+	padding-top: 10px;
+	border-radius: 10px;
+	border: solid 1px
+}
+
 .btn-forgot {
 	float: right;
 }
