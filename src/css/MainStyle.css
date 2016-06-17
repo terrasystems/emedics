@@ -538,8 +538,13 @@ input.form-control.ui-select-search.ng-valid.ng-touched.ng-dirty.ng-empty {
 	width: 25%;
 	float: left;
 }
-.header-fixed > tbody > tr > td,
-.header-fixed > thead > tr > th {
+.header-fixed2 > tbody > tr > td,
+.header-fixed2 > thead > tr > th {
+	width: 20%;
+	float: left;
+}
+.header-fixed3 > tbody > tr > td,
+.header-fixed3 > thead > tr > th {
 	width: 16%;
 	float: left;
 }

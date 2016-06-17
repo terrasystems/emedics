@@ -8,53 +8,45 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.paramsPOST = initParamsPOST.params;
-		vm.msg ='incorrect email';
-		vm.model = {};
-		vm.fields = [
-			//{
-			//	className: 'col-md-12',
-			//	key: 'name',
-			//	type: 'input',
-			//	templateOptions: {
-			//		label: 'Name',
-			//		required: false,
-			//		placeholder: 'Enter Name'
-			//	}
-			//},
+		//vm.msg ='incorrect email';
 
-			{
-				className: 'col-md-12',
-				key: 'email',
-				type: 'input',
-				validators: {
-					EmailAddress: {
-						expression: function ($viewValue, $modelValue) {
-							var value = $modelValue || $viewValue;
-							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
-						}
+		vm.addRef = {
+			'email':'',
+			'type':'',
+			'firstName':null,
+			'lastName': null,
+			'birth': null,
+			'docType':''
+		};
 
-				}
-				},
-				templateOptions: {
-					type: 'text',
-					required: true,
-					label: $translate.instant('EMAIL'),
-					placeholder: $translate.instant('EMAIL_1')
-				},
-				validation: {
-					messages: {
-						required: function ($viewValue, $modelValue, scope) {
-							return scope.to.label + ' is required';
-						}
-					}
-				}
 
-			}
-		];
+vm.type1= function(){
+	vm.addRef = {
+		'email':'',
+		'type':'pat',
+		'firstName':null,
+		'lastName': null,
+		'birth': null,
+		'docType':''
+	};
+};
+		vm.type1();
 
+		vm.type2=function(){
+			vm.addRef = {
+				'email':'',
+				'type':'doc',
+				'firstName':null,
+				'lastName': null,
+				'birth': null,
+				'docType':''
+			};
+		};
+		vm.type2();
 
 		vm.onSubmit = function () {
-			http.post('private/dashboard/' + vm.user.type + '/references/create', vm.model.email)
+
+			http.post('private/dashboard/' + vm.user.type + '/references/create', vm.addRef)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
@@ -66,9 +58,22 @@ angular.module('modules.dash')
 				});
 		};
 
+ vm.getTypes=function(){
+	 http.get('private/dashboard/doc_type/doctor')
+			 .then(function (res) {
+				 blockUI.stop();
+				 if (res.result) {
+					 vm.types = res.result;
+				 }
+			 });
 
+};
+		vm.getTypes();
+
+//Datepicker
 		$scope.today = function() {
 			$scope.dt = new Date();
+
 		};
 		$scope.today();
 
@@ -83,19 +88,11 @@ angular.module('modules.dash')
 		};
 
 		$scope.dateOptions = {
-			dateDisabled: disabled,
 			formatYear: 'yy',
 			maxDate: new Date(2020, 5, 22),
 			minDate: new Date(),
 			startingDay: 1
 		};
-
-		// Disable weekend selection
-		function disabled(data) {
-			var date = data.date,
-				mode = data.mode;
-			return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-		}
 
 		$scope.toggleMin = function() {
 			$scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();

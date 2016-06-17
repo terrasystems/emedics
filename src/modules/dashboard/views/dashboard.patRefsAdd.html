@@ -3,23 +3,23 @@
 		<uib-tabset>
 
 			<!-- FIRST TAB-->
-			<uib-tab heading="Patient">
+			<uib-tab ng-if="'patient'!==vm.user.type" ng-click="vm.type1()" heading="Patient">
 				<form name="userForm" class="elegant-aero" ng-submit="submitForm()" novalidate>
 
 					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
 						<label translate="FIRST_NAME"></label>
-						<input type="text" name="name" class="form-control" ng-model="user.name" required>
+						<input type="text" name="name" class="form-control" ng-model="vm.addRef.firstName" required>
 						<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
 					</div>
 					<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
 						<label translate="LAST_NAME"></label>
-						<input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" required>
+						<input type="text" name="username" class="form-control" ng-model="vm.addRef.lastName" ng-minlength="3" required>
 						<p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">You Last Name is required.</p>
 
 					</div>
 					<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
 						<label translate="EMAIL"></label>
-						<input type="email" name="email" class="form-control" ng-model="user.email"  required>
+						<input ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" type="email" name="email" class="form-control" ng-model="vm.addRef.email"  required>
 						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 					</div>
 
@@ -27,7 +27,7 @@
 
 				<div class="input-group">
 					<label translate="BIRTH_DATE"></label>
-					<input name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+					<input name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="vm.addRef.birth"
 						   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
 						   close-text="Close" alt-input-formats="altInputFormats" />
 
@@ -36,7 +36,7 @@
 					class="glyphicon glyphicon-calendar" style=""></i></button>
           </span>
 				</div>
-					<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
+					<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
 				</form>
 
 
@@ -48,24 +48,24 @@
 
 
 			<!-- SECOND TAB-->
-			<uib-tab heading="Doctor">
+			<uib-tab ng-click="vm.type2();" heading="Doctor">
 
 				<form name="doctorForm" class="elegant-aero" ng-submit="submitForm()" novalidate>
 
 					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
 						<label translate="FIRST_NAME"></label>
-						<input type="text" name="name" class="form-control" ng-model="doctor.name" required>
+						<input type="text" name="name" class="form-control" ng-model="vm.addRef.firstName" required>
 						<p ng-show="doctorForm.name.$invalid && !doctorForm.name.$pristine" class="help-block">You name is required.</p>
 					</div>
 					<div class="form-group" ng-class="{ 'has-error' : doctorForm.username.$invalid && !doctorForm.username.$pristine }">
 						<label translate="LAST_NAME"></label>
-						<input type="text" name="lastname" class="form-control" ng-model="doctor.lastname" ng-minlength="3" required>
+						<input type="text" name="lastname" class="form-control" ng-model="vm.addRef.lastName" ng-minlength="3" required>
 						<p ng-show="doctorForm.lastname.$invalid && !doctorForm.lastname.$pristine" class="help-block">You Last Name is required.</p>
 
 					</div>
 					<div class="form-group" ng-class="{ 'has-error' : doctorForm.email.$invalid && !doctorForm.email.$pristine }">
 						<label translate="EMAIL"></label>
-						<input type="email" name="email" class="form-control" ng-model="user.email" required>
+						<input ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" type="email" name="email" class="form-control" ng-model="vm.addRef.email" required>
 						<p ng-show="doctorForm.email.$invalid && !doctorForm.email.$pristine" class="help-block">Enter a valid email.</p>
 					</div>
 
@@ -73,7 +73,7 @@
 
 					<div class="input-group">
 						<label translate="BIRTH_DATE"></label>
-						<input name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+						<input ng-click="open1()" name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="vm.addRef.birth"
 							   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
 							   close-text="Close" alt-input-formats="altInputFormats" />
 
@@ -88,18 +88,15 @@
 				<div class="form-group">
 					<label translate="TYPE"></label>
 
-					<ui-select ng-model="ctrl.address.selected"
-							   theme="bootstrap"
-							   ng-disabled="ctrl.disabled"
-							   reset-search-input="false"
-							   append-to-body="true">
-						<ui-select-match placeholder="Select your type"></ui-select-match>
-						<ui-select-choices repeat="" required>
+					<ui-select ng-model="vm.addRef.docType" theme="bootstrap" reset-search-input="false" append-to-body="true">
+						<ui-select-match  placeholder="Select your type">{{$select.selected.name}}</ui-select-match>
+						<ui-select-choices repeat="type.id as type in vm.types track by $index"  required>
+							<p>{{type.name}}</p>
 
 						</ui-select-choices>
 					</ui-select>
 				</div>
-					<button type="submit" class="btn btn-primary" ng-disabled="doctorForm.$invalid" translate="REGISTRATION"></button>
+					<button ng-click="vm.onSubmit();" type="submit" class="btn btn-primary" ng-disabled="doctorForm.$invalid" translate="REGISTRATION"></button>
 				</form>
 
 			</uib-tab>
