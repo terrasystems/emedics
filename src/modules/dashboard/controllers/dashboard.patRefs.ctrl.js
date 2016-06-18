@@ -15,10 +15,10 @@ angular.module('modules.dash')
 		//*** add item in list
 		$scope.onApply = function (obj) {
 			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
-				vm.paramsPOST = initParamsPOST.params;
+			/*	vm.paramsPOST = initParamsPOST.params;
 				vm.paramsPOST.criteria.list = [];
-				vm.paramsPOST.criteria.list.push($scope.doctor.id);
-				http.post('private/dashboard/' + vm.user.type + '/references/add', vm.paramsPOST)
+				vm.paramsPOST.criteria.list.push($scope.doctor.id);*/
+				http.get('private/dashboard/' + vm.user.type + '/references/add/'+ $scope.doctor.id)
 					.then(function (res) {
 						blockUI.stop();
 						alertService.add(0, res.state.message);
@@ -44,10 +44,10 @@ angular.module('modules.dash')
 
 		//*** delete item
 		vm.onRemove = function (index, id) {
-			vm.paramsPOST = initParamsPOST.params;
+			/*vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
-			vm.paramsPOST.criteria.list.push(id);
-			http.post('private/dashboard/' + vm.user.type + '/references/remove', vm.paramsPOST)
+			vm.paramsPOST.criteria.list.push(id);*/
+			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
