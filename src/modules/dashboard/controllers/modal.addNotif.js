@@ -7,12 +7,14 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
-		vm.patient2={};
+		vm.patient2 = {};
 		vm.toUser = {};
-		if(vm.model.patient){
+		if (vm.model.patient) {
 			vm.toUser.id=vm.model.patient.id;
-		  vm.patient2.id=vm.model.patient.id;
-
+			vm.patient2.id=vm.model.patient.id;
+		} else {
+			vm.patient2 = '';
+			vm.toUser = '';
 		}
 		blockUI.stop();
 
