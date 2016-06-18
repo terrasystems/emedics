@@ -66,10 +66,8 @@ angular.module('modules.core')
 			onEnter: function($stateParams, http, $state) {
 				http.get('public/validation_key/' + $stateParams.key)
 					.then(function(res) {
-						console.log(res);
 						$state.go('main.public.newpassword.confirm', {key: $stateParams.key});
 					});
-				console.log($stateParams.code);
 			}
 		},
 		{
@@ -200,19 +198,6 @@ angular.module('modules.core')
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/Catalog.html',
 					controller:'CatalogCtrl as vm'
-				}
-			},
-			params:{
-				arr: null
-			}
-		},
-		{
-			name:'main.private.dashboard.abstract.catalog.catalogtemplate',
-			url:'/catalogTemplates',
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/CatalogTemplates.html',
-					controller:'CatalogTemplateCtrl as vm'
 				}
 			},
 			params:{
