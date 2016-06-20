@@ -160,12 +160,25 @@ angular.module('modules.core')
 		},
 		{
 			name:'main.private.dashboard.abstract.stafs',
-			url:'/stafs',
+			url:'/stuff',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.staf.html',
 					controller:'stafCtrl as vm'
 				}
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.stafs.stuffedit',
+			url:'/stuffedit',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.stuffEdit.html',
+					controller:'stuffEditCtrl as vm'
+				}
+			},
+			params:{
+				id: ''
 			}
 		},
 		{

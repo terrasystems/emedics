@@ -5,8 +5,7 @@ angular.module('modules.dash')
 	.controller('stuffEditCtrl', function(http, blockUI, alertService, $state, $stateParams,$translate){
 		var vm = this;
 		console.log($stateParams.id);
-console.log('stuff edit ctrl');
-
+console.log("stuff edit ctrl");
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go('main.private.dashboard.abstract.stafs');
 			return;

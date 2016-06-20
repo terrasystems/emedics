@@ -207,6 +207,7 @@ angular.module('modules.public', [])
 				type: 'input',
 				templateOptions: {
 					label: 'Password',
+					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Enter new password...')
 				}
@@ -217,6 +218,7 @@ angular.module('modules.public', [])
 				extras: {validateOnModelChange: true},
 				templateOptions: {
 					label: 'Confirm password',
+					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Confirm new password...')
 				},
