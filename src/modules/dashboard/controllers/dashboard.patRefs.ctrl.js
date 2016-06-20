@@ -43,11 +43,11 @@ angular.module('modules.dash')
 		vm.refresh();
 
 		//*** delete item
-		vm.onRemove = function (index, id) {
-			/*vm.paramsPOST = initParamsPOST.params;
+		vm.remove = function (index, id) {
+			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.list = [];
-			vm.paramsPOST.criteria.list.push(id);*/
-			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
+			vm.paramsPOST.criteria.list.push(id);
+			http.post('private/dashboard/' + vm.user.type + '/references/remove', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
@@ -85,18 +85,17 @@ angular.module('modules.dash')
 			}
 		};
 
-		vm.onInvite = function (id, $event) {
+		vm.onInvite = function (email, $event) {
 			if($event){
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
+			console.log(email);
+			http.post('private/dashboard/' + vm.user.type + '/references/invite', email)
 				.then(function (res) {
 					blockUI.stop();
-					if  (res.state) {
-						alertService.add(0, res.state.message);
-						vm.refresh();
-					}
+					alertService.add(0, res.state.message);
+					vm.refresh();
 				});
 		};
 

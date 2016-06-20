@@ -19,7 +19,8 @@ angular.module('modules.dash')
 		blockUI.stop();
 
 		if (vm.user.type === 'patient') {
-			vm.patient2.id = vm.user.id;
+			vm.patient2 = {};
+			vm.patient2.id=vm.user.id;
 		}
 		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 
