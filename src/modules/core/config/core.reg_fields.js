@@ -157,16 +157,6 @@ angular.module('modules.core')
 		var arr = [
 			{
 				className: 'col-md-12',
-				key: 'user.username',
-				type: 'input',
-				templateOptions: {
-					required: true,
-					label: $translate.instant('NAME'),
-					placeholder: $translate.instant('USER_NAME')
-				}
-			},
-			{
-				className: 'col-md-12',
 				key: 'user.email',
 				type: 'input',
 				validators: {
@@ -246,6 +236,26 @@ angular.module('modules.core')
 						{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
 						{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
 					]
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.firstName',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('FIRST_NAME'),
+					placeholder: $translate.instant('USER_NAME')
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.lastName',
+				type: 'input',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('LAST_NAME'),
+					placeholder: $translate.instant('ENTER_LAST_NAME')
 				}
 			}
 		];
