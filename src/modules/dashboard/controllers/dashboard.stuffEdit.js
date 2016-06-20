@@ -5,12 +5,19 @@ angular.module('modules.dash')
 	.controller('stuffEditCtrl', function(http, blockUI, alertService, $state, $stateParams,$translate){
 		var vm = this;
 		console.log($stateParams.id);
-console.log("stuff edit ctrl");
+
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
 			$state.go('main.private.dashboard.abstract.stafs');
 			return;
 		}
-    vm.stuff={};
+	    vm.stuff = {firstName: null, lastName: null, birth: null, email: null, password: null, typeExp: null};
+
+		//http.get('private/dashboard/stuff/' + $stateParams.id)
+		//	.then(function (res) {
+		//		vm.Refresh();
+		//		blockUI.stop();
+		//		alertService.add(0, res.state.message);
+		//	});
 
 		vm.StuffFields = [
 			{
@@ -109,4 +116,5 @@ console.log("stuff edit ctrl");
 			}
 		];
 
+		//vm.stuff = {};
 	});
