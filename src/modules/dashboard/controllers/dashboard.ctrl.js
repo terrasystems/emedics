@@ -22,7 +22,7 @@ angular.module('modules.dash')
 			});
 		}
 
-		if(vm.user.org === 'true'){
+		if(vm.user.org == 'true' || true){
 			vm.tabData.push({heading: $translate.instant('STUFF'),
 				route:'main.private.dashboard.abstract.stafs',
 				disable: false});
