@@ -82,17 +82,18 @@ angular.module('modules.dash')
 			}
 		};
 
-		vm.onInvite = function (email, $event) {
+		vm.onInvite = function (id, $event) {
 			if($event){
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			console.log(email);
-			http.post('private/dashboard/' + vm.user.type + '/references/invite', email)
+			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
-					vm.refresh();
+					if  (res.state) {
+						alertService.add(0, res.state.message);
+						vm.refresh();
+					}
 				});
 		};
 
