@@ -10,8 +10,8 @@ angular.module('modules.dash')
 		vm.patient2 = {};
 		vm.toUser = {};
 		if (vm.model.patient) {
-			vm.toUser.id=vm.model.patient.id;
-			vm.patient2.id=vm.model.patient.id;
+			vm.toUser.id = vm.model.patient.id;
+			vm.patient2.id = vm.model.patient.id;
 		} else {
 			vm.patient2 = '';
 			vm.toUser = '';
@@ -20,7 +20,7 @@ angular.module('modules.dash')
 
 		if (vm.user.type === 'patient') {
 			vm.patient2 = {};
-			vm.patient2.id=vm.user.id;
+			vm.patient2.id = vm.user.id;
 		}
 		vm.message = {toUser: null, event: vm.model.data.task_id, message: '', patient: null};
 

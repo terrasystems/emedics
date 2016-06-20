@@ -43,11 +43,8 @@ angular.module('modules.dash')
 		vm.refresh();
 
 		//*** delete item
-		vm.remove = function (index, id) {
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.list = [];
-			vm.paramsPOST.criteria.list.push(id);
-			http.post('private/dashboard/' + vm.user.type + '/references/remove', vm.paramsPOST)
+		vm.onRemove = function (index, id) {
+			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
