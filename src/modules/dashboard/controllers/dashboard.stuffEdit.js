@@ -10,21 +10,20 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.stafs');
 			return;
 		}
-	    vm.stuff = {firstName: null, lastName: null, birth: null, email: null, password: null, typeExp: null};
+	    vm.stuff = {firstName: null, lastName: '', birth: null, email: '', password: '', typeExp: '', phone: ''};
 
 		if ($stateParams.id !=='add') {
 			http.get('private/dashboard/stuff/' + $stateParams.id)
 				.then(function (res) {
-					vm.Refresh();
 					blockUI.stop();
-					alertService.add(0, res.state.message);
+					vm.stuff = res.result;
 				});
 		}
 
 		vm.StuffFields = [
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.firstName',
+				key: 'firstName',
 				type: 'input',
 				templateOptions: {
 					required: false,
@@ -37,7 +36,7 @@ angular.module('modules.dash')
 			},
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.lastName',
+				key: 'lastName',
 				type: 'input',
 				templateOptions: {
 					required: false,
@@ -50,7 +49,7 @@ angular.module('modules.dash')
 			},
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.birth',
+				key: 'birth',
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
@@ -60,7 +59,7 @@ angular.module('modules.dash')
 			},
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.email',
+				key: 'email',
 				type: 'input',
 				validators: {
 					EmailAddress: {
@@ -88,7 +87,7 @@ angular.module('modules.dash')
 			},
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.password',
+				key: 'password',
 				type: 'input',
 				templateOptions: {
 					type:'password',
@@ -101,7 +100,7 @@ angular.module('modules.dash')
 			},
 			{
 				className: 'col-md-12',
-				key: 'vm.stuff.typeExp',
+				key: 'typeExp',
 				type: 'select',
 				templateOptions: {
 					required: false,
@@ -115,8 +114,43 @@ angular.module('modules.dash')
 				validation: {
 					show: true
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'phone',
+				type: 'input',
+				templateOptions: {
+					required: false,
+					label: $translate.instant('PHONE'),
+					placeholder: $translate.instant('PHONE')
+				},
+				validation: {
+					show: true
+				}
 			}
 		];
 
-		//vm.stuff = {};
+		vm.onSave = function() {
+			if ($stateParams.id == 'add') {
+				vm.stuff.id = null;
+				http.post('private/dashboard/stuff/create', vm.stuff)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							alertService.add(0, res.state.message);
+							$state.go('main.private.dashboard.abstract.stafs');
+						}
+					});
+			} else {
+				http.post('private/dashboard/stuff/edit', vm.stuff)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							alertService.add(0, res.state.message);
+							$state.go('main.private.dashboard.abstract.stafs');
+						}
+					});
+			}
+		};
+
 	});

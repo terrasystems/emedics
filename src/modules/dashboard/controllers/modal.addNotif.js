@@ -143,5 +143,4 @@ angular.module('modules.dash')
 			return deferred.promise;
 		};
 
-
 	});

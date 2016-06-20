@@ -2,27 +2,22 @@
 <div class="container">
 	<div class="row form-list">
 		<div ng-show="vm.stafs.length == 0" class=""> <h5 class="noData_msg"> You don't have any stuff</h5></div>
-		<button ng-click="vm.onCreate_('add');" class="pull-right btn btn-primary">Add Stuff</button>
+		<button ng-click="vm.onEdit('add');" class="pull-right btn btn-primary">Add Stuff</button>
 		<ul ui-list-view="staf in vm.stafs" options="listOptions">
 
 			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span
 					translate="NAME"></span>:
-				<h4>{{staf.name}}</h4></li>
+				<h4>{{staf.firstName}} {{staf.lastName}}</h4></li>
 			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span
-					translate="TYPE"></span>:
-				<h4>{{staf.type}}</h4></li>
+					translate="BIRTH_DATE"></span>:
+				<h4>{{vm.convertDate(staf.birth)}}</h4></li>
 			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span
 					translate="PHONE"></span>:
 				<h5>{{staf.phone}}</h5></li>
 
-			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-				<button style="margin-top: 10px;" class="btn btn-info" ng-click="">
-					<span translate="EDIT"></span>
-				</button>
-				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="">
-					<span translate="DELETE"></span>
-					<i class="glyphicon glyphicon-trash"></i>
-				</button>
+			<div class="buttons pull-right btn-group btn-group-xs">
+				<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onEdit(staf.id)"><span translate="EDIT"></span></button>
+				<!--<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.onRemove(staf.id)"><span translate="DELETE"></span><i class="glyphicon glyphicon-trash"></i></button>-->
 			</div>
 		</ul>
 
