@@ -12,14 +12,12 @@ angular.module('modules.dash')
 		}
 	    vm.stuff = {firstName: null, lastName: null, birth: null, email: null, password: null, typeExp: null};
 
-		if ($stateParams.id !=='add') {
-			http.get('private/dashboard/stuff/' + $stateParams.id)
-				.then(function (res) {
-					vm.Refresh();
-					blockUI.stop();
-					alertService.add(0, res.state.message);
-				});
-		}
+		//http.get('private/dashboard/stuff/' + $stateParams.id)
+		//	.then(function (res) {
+		//		vm.Refresh();
+		//		blockUI.stop();
+		//		alertService.add(0, res.state.message);
+		//	});
 
 		vm.StuffFields = [
 			{
@@ -68,7 +66,7 @@ angular.module('modules.dash')
 							var value = $modelValue || $viewValue;
 							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 						},
-						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+						message: ' $translate.instant("NO_VALID_EMAIL")'
 					}
 				},
 				templateOptions: {
