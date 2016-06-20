@@ -24,6 +24,7 @@ angular.module('modules.dash')
 					if (res.state) {
 						alertService.add(0, res.state.message);
 						auth.saveUserData(res);
+						$rootScope.$broadcast('change.username');
 					}
 				});
 		};

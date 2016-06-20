@@ -1,0 +1,30 @@
+
+<div class="container">
+	<div class="row form-list">
+		<div ng-show="vm.stafs.length == 0" class="><h5 class="noData_msg">You don't have any stafs</h5></div>
+
+		<ul ui-list-view="staf in vm.stafs" options="listOptions">
+
+			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="NAME"></span>:
+				<h4>{{staf.name}}</h4></li>
+			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="TYPE"></span>:
+				<h4>{{staf.type}}</h4></li>
+			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span
+					translate="PHONE"></span>:
+				<h5>{{staf.phone}}</h5></li>
+
+			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
+				<button style="margin-top: 10px;" class="btn btn-info" ng-click="">
+					<span translate="EDIT"></span>
+				</button>
+				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="">
+					<span translate="DELETE"></span>
+					<i class="glyphicon glyphicon-trash"></i>
+				</button>
+			</div>
+		</ul>
+
+	</div>
+</div>

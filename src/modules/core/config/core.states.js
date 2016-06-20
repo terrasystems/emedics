@@ -159,6 +159,16 @@ angular.module('modules.core')
 			}
 		},
 		{
+			name:'main.private.dashboard.abstract.stafs',
+			url:'/stafs',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.staf.html',
+					controller:'stafCtrl as vm'
+				}
+			}
+		},
+		{
 			name:'main.private.dashboard.abstract.refadd',
 			url:'/references/add',
 			//parent:'main.private.dashboard',

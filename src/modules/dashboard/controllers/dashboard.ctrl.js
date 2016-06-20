@@ -11,7 +11,8 @@ angular.module('modules.dash')
 			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.abstract.ref', disable: false },
 			{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.abstract.notifications', disable: false },
 			{heading: $translate.instant('MYFORMS'), route:'main.private.dashboard.abstract.catalog', disable: false},
-			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.abstract.drafts', disable: false}
+			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.abstract.drafts', disable: false},
+			{heading: $translate.instant('STAFS'), route:'main.private.dashboard.abstract.stafs', disable: false}
 	];
 
 		if ('patient'!==vm.user.type) {
@@ -41,6 +42,10 @@ angular.module('modules.dash')
 					});
 			}
 		);
+
+		$scope.$on('change.username', function() {
+			vm.user = localStorageService.get('userData');
+		});
 
 		$rootScope.$broadcast('calc.notif');
 
