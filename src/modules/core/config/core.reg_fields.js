@@ -175,7 +175,7 @@ angular.module('modules.core')
 							var value = $modelValue || $viewValue;
 							return /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/.test(value);
 						},
-						message: '$viewValue + $translate.instant("NO_VALID_EMAIL")'
+						message: '$translate.instant("NO_VALID_EMAIL")'
 					}
 				},
 				templateOptions: {
