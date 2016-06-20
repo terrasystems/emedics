@@ -2,9 +2,16 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('stafCtrl', function(http, blockUI, alertService, $state){
+	.controller('stafCtrl', function(http, blockUI, alertService, $state, localStorageService){
 		var vm = this;
 		vm.stafs = [];
+		vm.user = localStorageService.get('userData');
+
+		if (vm.user.type === 'doctor' && vm.user.org === 'true') {
+			vm.canEdit = true;
+		} else {
+			vm.canEdit = false;
+		}
 
 		vm.onRefresh = function() {
 			http.get('private/dashboard/stuff')
