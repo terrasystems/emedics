@@ -9,7 +9,7 @@ angular.module('modules.dash')
 		console.log('...stafCtrl');
 
 		vm.onRefresh = function() {
-			http.get('private/dashboard/dashboard/stuff')
+			http.get('private/dashboard/stuff')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
