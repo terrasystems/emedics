@@ -1,8 +1,21 @@
 <div class="container ui-list-view">
+	<form ng-submit="vm.onSave()" name="vm.form">
 
-		<formly-form model="vm.stuff" fields="vm.StuffFields">
+		<formly-form model="vm.stuff" fields="vm.StuffFields" form="vm.form">
 			<button type="submit" class="pull-right btn btn-default" ng-click="">Submit</button>
 		</formly-form>
-		<button ui-sref="main.private.dashboard.abstract.stafs" class="btn btn-primary">Back to Stuff</button>
 
+	</form>
+	<button ui-sref="main.private.dashboard.abstract.stafs" class="btn btn-primary">Back to Stuff</button>
 </div>
+
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}"
+			 ng-repeat="(name, message) in ::options.validation.messages"
+			 class="message">
+			{{ message(fc.$viewValue, fc.$modelValue, this)}}
+		</div>
+	</div>
+</script>

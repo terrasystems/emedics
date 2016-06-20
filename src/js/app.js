@@ -2,14 +2,14 @@
 /*jshint -W117, -W097*/
 
 var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 'formlyBootstrap', 'ngMessages',
-	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', 'ngMockE2E', 'pouchdb',
+	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', /*'ngMockE2E',*/ 'pouchdb',
 	'ui.select','ngSanitize','ui.router.tabs', 'angular-confirm',
 	//--
 	'modules.core', 'modules.public', 'modules.dash']);
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
-						 localStorageServiceProvider, $translateProvider, $provide) {
+						 localStorageServiceProvider, $translateProvider/*, $provide*/) {
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
@@ -44,7 +44,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 })
 
 
-.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, $httpBackend, constants, $translate) {
+.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, /*$httpBackend,*/ constants, $translate) {
 	$translate.use('en');
 
 	formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
@@ -56,12 +56,12 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		}
 	});
 
-	$httpBackend.whenGET(/^modules\//).passThrough();
-	$httpBackend.whenGET(/^i18n\//).passThrough();
-	$httpBackend.whenGET(/rest\/public\/.*/).passThrough();
-	$httpBackend.whenPOST(/rest\/public\/.*/).passThrough();
-	$httpBackend.whenGET(/rest\/private\/.*/).passThrough();
-	$httpBackend.whenPOST(/rest\/private\/.*/).passThrough();
+	//$httpBackend.whenGET(/^modules\//).passThrough();
+	//$httpBackend.whenGET(/^i18n\//).passThrough();
+	//$httpBackend.whenGET(/rest\/public\/.*/).passThrough();
+	//$httpBackend.whenPOST(/rest\/public\/.*/).passThrough();
+	//$httpBackend.whenGET(/rest\/private\/.*/).passThrough();
+	//$httpBackend.whenPOST(/rest\/private\/.*/).passThrough();
 
 	//$httpBackend.whenGET(/template_user\.list/).respond(function () {
 	//	console.log('... mock "template_user.list"');

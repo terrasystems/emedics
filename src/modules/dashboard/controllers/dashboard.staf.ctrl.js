@@ -6,10 +6,8 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.stafs = [];
 
-		console.log('...stafCtrl');
-
 		vm.onRefresh = function() {
-			http.get('private/dashboard/dashboard/stuff')
+			http.get('private/dashboard/stuff')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -20,16 +18,21 @@ angular.module('modules.dash')
 		vm.onRefresh();
 
 		vm.onRemove = function (id) {
-			http.get('private/dashboard/.../' + id)
-				.then(function (res) {
-					vm.Refresh();
-					blockUI.stop();
-					alertService.add(0, res.state.message);
-				});
+			//http.get('private/dashboard/.../' + id)
+			//	.then(function (res) {
+			//		vm.Refresh();
+			//		blockUI.stop();
+			//		alertService.add(0, res.state.message);
+			//	});
 		};
 
-		vm.onCreate_ = function(index) {
+		vm.onEdit = function (index) {
 			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: index});
+		};
+
+		vm.convertDate = function (d) {
+			var y = new Date(d);
+			return y.toLocaleString().slice(0,10);
 		};
 
 	});
