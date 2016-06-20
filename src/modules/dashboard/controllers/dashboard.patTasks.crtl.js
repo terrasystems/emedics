@@ -47,14 +47,8 @@ angular.module('modules.dash')
 				controller: 'modalAddNotifCtrl',
 				controllerAs: 'vm',
 				resolve: {
-					model: function ($q) {
-						var deferred = $q.defer();
-						deferred.resolve({data: model,patient:{
-							'name':hist.fromUser.username,
-							'email':hist.fromUser.email,
-							'id':hist.fromUser.id
-						}});
-						return deferred.promise;
+					model: function () {
+						return {data:{}};
 					}
 				}
 			}).result;

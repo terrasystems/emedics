@@ -206,7 +206,6 @@ angular.module('modules.core')
 		{
 			name:'main.private.dashboard.abstract.tasks',
 			url:'/tasks',
-			//parent: 'main.private.dashboard',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.patTasks.html',
