@@ -1,127 +1,149 @@
-<uib-tabset>
+<div class="ui-list-view">
+	<uib-tabset>
 
-	<uib-tab ng-click="vm.onRefreshNew();" index="0" heading="New">
-		<section ng-if="vm.user.type === 'patient'">
-			<div class="container ui-list-view">
-				<table class="table table-hover">
-					<thead>
-					<tr>
-						<th translate="DATE"></th>
-						<th translate="NUMBER"></th>
-						<th translate="NAME"></th>
-						<th translate="DESCRIPTION"></th>
-					</tr>
-					</thead>
-					<tbody >
-					<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
-						<td>{{vm.convertDate(form.date)}}</td>
-						<td>{{form.template.number}}</td>
-						<td>{{form.template.name}}</td>
-						<td>{{form.template.descr}}</td>
-					</tr>
-					</tbody>
-				</table>
-				<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have any tasks</h5></div>
-			</div>
-		</section>
-		<section ng-if="vm.user.type === 'doctor'">
-			<div class="container ui-list-view">
-				<table class="table table-hover header-fixed2">
-					<thead>
-					<tr>
-						<th translate="DATE"></th>
-						<th translate="NUMBER"></th>
-						<th translate="PATIENT_NAME"></th>
-						<th translate="FORM_TASKS"></th>
-						<th translate="DESCRIPTION"></th>
-					</tr>
-					</thead>
+		<uib-tab ng-click="vm.onRefreshNew();" index="0" heading="New">
+			<section ng-if="vm.user.type === 'patient'">
+				<div class="container ui-list-view">
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th translate="DATE"></th>
+							<th translate="NUMBER"></th>
+							<th translate="NAME"></th>
+							<th translate="DESCRIPTION"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
+							<td>{{vm.convertDate(form.date)}}</td>
+							<td>{{form.template.number}}</td>
+							<td>{{form.template.name}}</td>
+							<td>{{form.template.descr}}</td>
+						</tr>
+						</tbody>
+					</table>
+					<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
+						dont have any tasks</h5></div>
+				</div>
+			</section>
+			<section ng-if="vm.user.type === 'doctor'">
+				<div class="container ui-list-view">
+					<table class="table table-hover header-fixed2">
+						<thead>
+						<tr>
+							<th translate="DATE"></th>
+							<th translate="NUMBER"></th>
+							<th translate="PATIENT_NAME"></th>
+							<th translate="FORM_TASKS"></th>
+							<th translate="DESCRIPTION"></th>
+						</tr>
+						</thead>
 
-					<tbody >
-					<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
-						<td>{{vm.convertDate(form.date)}}</td>
-						<td>{{form.template.number}}</td>
-						<td>{{form.patient.username}}</td>
-						<td>{{form.template.name}}</td>
-						<td>{{form.template.descr}}</td>
-					</tr>
-					</tbody>
+						<tbody>
+						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
+							<td>{{vm.convertDate(form.date)}}</td>
+							<td>{{form.template.number}}</td>
+							<td>{{form.patient.username}}</td>
+							<td>{{form.template.name}}</td>
+							<td>{{form.template.descr}}</td>
+						</tr>
+						</tbody>
 
-				</table>
-				<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have any tasks</h5></div>
-			</div>
-		</section>
+					</table>
+					<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
+						dont have any tasks</h5></div>
+				</div>
+			</section>
 
-	</uib-tab>
+		</uib-tab>
 
 
-	<uib-tab ng-click="vm.onRefreshHistory();" index="1" heading="History">
+		<uib-tab ng-click="vm.onRefreshHistory();" index="1" heading="History">
 
-		<section ng-if="vm.user.type === 'patient'">
-			<div class="container ui-list-view">
+			<section ng-if="vm.user.type === 'patient'">
+				<div class="container ui-list-view">
 
-				<table class="table table-hover">
-					<thead>
-					<tr>
-						<th translate="DATE"></th>
-						<th translate="NUMBER"></th>
-						<th translate="NAME"></th>
-						<th translate="DESCRIPTION"></th>
-						<th translate="ACTION"></th>
-					</tr>
-					</thead>
+					<table class="table table-hover">
+						<thead>
+						<tr>
+							<th translate="DATE"></th>
+							<th translate="NUMBER"></th>
+							<th translate="NAME"></th>
+							<th translate="DESCRIPTION"></th>
+							<th translate="ACTION"></th>
+						</tr>
+						</thead>
 
-					<tbody >
-					<tr ng-repeat="form in vm.history track by $index">
-						<td>{{vm.convertDate(form.date)}}</td>
-						<td>{{form.template.number}}</td>
-						<td>{{form.template.name}}</td>
-						<td>{{form.template.descr}}</td>
-						<td><div class="btn-group btn-group-xs">
-							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSendHistory(form.template, form)"><span translate="SEND"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onViewHistory(form.id, form.patient.id)"><span translate="VIEW"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyHistory(form, form.patient.id)"><span translate="COPY_TASK"></span></button>
-						</div></td>
-					</tr>
-					</tbody>
-				</table>
-				<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have history</h5></div>
-			</div>
-		</section>
-		<section ng-if="vm.user.type === 'doctor'">
-			<div class="container ui-list-view">
-				<table class="table table-hover header-fixed3">
-					<thead>
-					<tr>
-						<th translate="DATE"></th>
-						<th translate="NUMBER"></th>
-						<th translate="PATIENT_NAME"></th>
-						<th translate="FORM_TASKS"></th>
-						<th translate="DESCRIPTION"></th>
-						<th translate="ACTION"></th>
-					</tr>
-					</thead>
+						<tbody>
+						<tr ng-repeat="form in vm.history track by $index">
+							<td>{{vm.convertDate(form.date)}}</td>
+							<td>{{form.template.number}}</td>
+							<td>{{form.template.name}}</td>
+							<td>{{form.template.descr}}</td>
+							<td>
+								<div class="btn-group btn-group-xs">
+									<button style="float: right" class="btn btn-success btn-small"
+											ng-click="vm.onSendHistory(form.template, form)"><span
+											translate="SEND"></span></button>
+									<button style="float: right" class="btn btn-info btn-small"
+											ng-click="vm.onViewHistory(form.id, form.patient.id)"><span
+											translate="VIEW"></span></button>
+									<button style="float: right" class="btn btn-info btn-small"
+											ng-click="vm.onCopyHistory(form, form.patient.id)"><span
+											translate="COPY_TASK"></span></button>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+					<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">
+						You dont have history</h5></div>
+				</div>
+			</section>
+			<section ng-if="vm.user.type === 'doctor'">
+				<div class="container ui-list-view">
+					<table class="table table-hover header-fixed3">
+						<thead>
+						<tr>
+							<th translate="DATE"></th>
+							<th translate="NUMBER"></th>
+							<th translate="PATIENT_NAME"></th>
+							<th translate="FORM_TASKS"></th>
+							<th translate="DESCRIPTION"></th>
+							<th translate="ACTION"></th>
+						</tr>
+						</thead>
 
-					<tbody >
-					<tr ng-click="vm.onClick(form.id)" ng-repeat="form in vm.history track by $index">
-						<td>{{vm.convertDate(form.date)}}</td>
-						<td>{{form.template.number}}</td>
-						<td>{{form.patient.username}}</td>
-						<td>{{form.template.name}}</td>
-						<td>{{form.template.descr}}</td>
-						<td><div class="btn-group btn-group-xs">
-							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onSendHistory(form.template, form)"><span translate="SEND"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onViewHistory(form.id, form.patient.id)"><span translate="VIEW"></span></button>
-							<button style="float: right" class="btn btn-info btn-small" ng-click="vm.onCopyHistory(form, form.patient.id)"><span translate="COPY_TASK"></span></button>
-						</div></td>
-					</tr>
-					</tbody>
+						<tbody>
+						<tr ng-click="vm.onClick(form.id)" ng-repeat="form in vm.history track by $index">
+							<td>{{vm.convertDate(form.date)}}</td>
+							<td>{{form.template.number}}</td>
+							<td>{{form.patient.username}}</td>
+							<td>{{form.template.name}}</td>
+							<td>{{form.template.descr}}</td>
+							<td>
+								<div class="btn-group btn-group-xs">
+									<button style="float: right" class="btn btn-success btn-small"
+											ng-click="vm.onSendHistory(form.template, form)"><span
+											translate="SEND"></span></button>
+									<button style="float: right" class="btn btn-info btn-small"
+											ng-click="vm.onViewHistory(form.id, form.patient.id)"><span
+											translate="VIEW"></span></button>
+									<button style="float: right" class="btn btn-info btn-small"
+											ng-click="vm.onCopyHistory(form, form.patient.id)"><span
+											translate="COPY_TASK"></span></button>
+								</div>
+							</td>
+						</tr>
+						</tbody>
 
-				</table>
-				<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have history</h5></div>
-			</div>
-		</section>
+					</table>
+					<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">
+						You dont have history</h5></div>
+				</div>
+			</section>
 
-	</uib-tab>
+		</uib-tab>
 
-</uib-tabset>
+	</uib-tabset>
+</div>
