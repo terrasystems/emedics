@@ -29,7 +29,7 @@
 						<span translate="PHONE"></span>: {{patient.phone}}
 						<div class="pull-right btn-group btn-group-xs">
 							<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
-							<button ng-click="vm.onInvite(patient.email,$event)" class="btn btn-info"><span	translate="INVITE"></span></button>
+							<button ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
 						</div>
 					</div>
 				</uib-accordion-heading>
