@@ -164,7 +164,7 @@ angular.module('modules.core')
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.staf.html',
-					//controller:'stafCtrl as vm'
+					controller:'stafCtrl as vm'
 				}
 			}
 		},
@@ -174,8 +174,11 @@ angular.module('modules.core')
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/views/dashboard.stuffEdit.html',
-					controller:''
+					controller:'stuffEditCtrl as vm'
 				}
+			},
+			params:{
+				id: ''
 			}
 		},
 		{
