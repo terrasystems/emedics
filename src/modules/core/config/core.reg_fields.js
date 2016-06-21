@@ -27,7 +27,7 @@ angular.module('modules.core')
 			},
 			{
 				className: 'col-md-12',
-				key: 'birth',
+				key: 'user.birth',
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
@@ -103,7 +103,7 @@ angular.module('modules.core')
 			},
 			{
 				className: 'col-md-12',
-				key: 'birth',
+				key: 'user.birth',
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
