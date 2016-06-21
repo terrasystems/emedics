@@ -34,7 +34,7 @@
 				<h5>{{ref.phone}}</h5></li>
 
 			<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-				<button ng-if="ref.enabled === false" style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onInvite(ref.id, $event)">
+				<button ng-if="ref.enabled == false || ref.enebled == 'false' " style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onInvite(ref.id, $event)">
 					<span translate="INVITE"></span>
 				</button>
 				<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.onRemove($index, ref.id)">
