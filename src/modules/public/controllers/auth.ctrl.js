@@ -200,6 +200,7 @@ angular.module('modules.public', [])
 			return;
 		}
 		vm.newPass = {};
+		vm.options = {};
 
 		vm.fieldsPass = [
 			{
@@ -210,20 +211,32 @@ angular.module('modules.public', [])
 					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Enter new password...')
+				},
+				validation: {
+					show: false
 				}
 			},
 			{
 				key: 'confirmPassword',
 				type: 'input',
-				extras: {validateOnModelChange: true},
 				templateOptions: {
 					label: 'Confirm password',
 					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Confirm new password...')
 				},
+				validation: {
+					show: true
+				},
 				validators: {
-					samePassword: 'model.password === model.confirmPassword'
+					samePassword2: function($viewValue, $modelValue, scope) {
+						var value = $modelValue || $viewValue;
+						if (value) {
+							return $modelValue === scope.model.password;
+						} else {
+							return true;
+						}
+					}
 				}
 			}
 		];
