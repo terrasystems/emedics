@@ -1,14 +1,12 @@
 'use strict';
-/*jshint	-W117, -W097*/
+/*jshint -W117, -W097*/
 
 angular.module('modules.dash')
 
 	.controller('patientReferencesAddCtrl', function ($scope,$translate,$state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService) {
-		//console.log('..patientReferencesAddCtrl');
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.paramsPOST = initParamsPOST.params;
-		//vm.msg ='incorrect email';
 
 		vm.addRef = {
 			'email':'',
@@ -19,17 +17,16 @@ angular.module('modules.dash')
 			'docType':''
 		};
 
-
-vm.type1= function(){
-	vm.addRef = {
-		'email':'',
-		'type':'pat',
-		'firstName':null,
-		'lastName': null,
-		'birth': null,
-		'docType':''
-	};
-};
+		vm.type1 = function() {
+			vm.addRef = {
+				'email':'',
+				'type':'pat',
+				'firstName':null,
+				'lastName': null,
+				'birth': null,
+				'docType':''
+			};
+		};
 		vm.type1();
 
 		vm.type2=function(){
@@ -45,7 +42,6 @@ vm.type1= function(){
 		vm.type2();
 
 		vm.onSubmit = function () {
-
 			http.post('private/dashboard/' + vm.user.type + '/references/create', vm.addRef)
 				.then(function (res) {
 					blockUI.stop();
@@ -58,22 +54,20 @@ vm.type1= function(){
 				});
 		};
 
- vm.getTypes=function(){
-	 http.get('private/dashboard/doc_type/doctor')
-			 .then(function (res) {
-				 blockUI.stop();
-				 if (res.result) {
-					 vm.types = res.result;
-				 }
-			 });
-
-};
+		vm.getTypes = function() {
+			 http.get('public/dashboard/doc_type/doctor')
+				 .then(function (res) {
+					 blockUI.stop();
+					 if (res.result) {
+						 vm.types = res.result;
+					 }
+				 });
+		};
 		vm.getTypes();
 
 //Datepicker
 		$scope.today = function() {
 			$scope.dt = new Date();
-
 		};
 		$scope.today();
 

@@ -150,6 +150,17 @@ angular.module('modules.core')
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.type',
+				type: 'select',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('DOC_TYPE'),
+					placeholder: $translate.instant('DOC_TYPE'),
+					options: []
+				}
 			}
 		];
 		return arr;
@@ -233,11 +244,7 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('ORG_TYPE'),
 					placeholder: $translate.instant('ORG_TYPE'),
-					options: [
-						{name: $translate.instant('ORG_TYPE_1'), value: 'type_1'},
-						{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
-						{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
-					]
+					options: []
 				}
 			},
 			{
