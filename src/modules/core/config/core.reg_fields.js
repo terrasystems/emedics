@@ -12,7 +12,7 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME'),
-					required: true
+					required: false
 				}
 			},
 			{
@@ -22,7 +22,7 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
-					required: true
+					required: false
 				}
 			},
 			{
@@ -31,6 +31,7 @@ angular.module('modules.core')
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
+					required: false,
 					label: $translate.instant('BIRTH_DATE'),
 					placeholder: $translate.instant('BIRTH_DATE'),
 					datepickerPopup: 'yyyy-MMMM-dd'
@@ -85,7 +86,7 @@ angular.module('modules.core')
 				key: 'user.firstName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME')
 				}
@@ -97,7 +98,7 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
-					required: true
+					required: false
 				}
 			},
 			{
@@ -108,7 +109,8 @@ angular.module('modules.core')
 					type: 'text',
 					label: $translate.instant('BIRTH_DATE'),
 					placeholder: $translate.instant('BIRTH_DATE'),
-					datepickerPopup: 'yyyy-MMMM-dd'
+					datepickerPopup: 'yyyy-MMMM-dd',
+					required: false
 				}
 			},
 			{
@@ -198,7 +200,7 @@ angular.module('modules.core')
 				key: 'org.www',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('WEBSITE'),
 					placeholder: $translate.instant('WEBSITE_1')
 				}
@@ -218,7 +220,7 @@ angular.module('modules.core')
 				key: 'org.address',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('ADDRESS'),
 					placeholder: $translate.instant('ORG_ADDRESS')
 				}
@@ -243,7 +245,7 @@ angular.module('modules.core')
 				key: 'user.firstName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('FIRST_NAME'),
 					placeholder: $translate.instant('USER_NAME')
 				}
@@ -253,7 +255,7 @@ angular.module('modules.core')
 				key: 'user.lastName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME')
 				}
