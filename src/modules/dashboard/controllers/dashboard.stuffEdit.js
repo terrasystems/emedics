@@ -53,8 +53,12 @@ angular.module('modules.dash')
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
+					required: false,
 					label: $translate.instant('BIRTH_DATE'),
 					datepickerPopup: 'yyyy-MMMM-dd'
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -91,7 +95,7 @@ angular.module('modules.dash')
 				type: 'input',
 				templateOptions: {
 					type:'password',
-					required: false,
+					required: true,
 					label: $translate.instant('PASSWORD')
 				},
 				validation: {
@@ -120,7 +124,7 @@ angular.module('modules.dash')
 				key: 'phone',
 				type: 'input',
 				templateOptions: {
-					required: false,
+					required: true,
 					label: $translate.instant('PHONE'),
 					placeholder: $translate.instant('PHONE')
 				},

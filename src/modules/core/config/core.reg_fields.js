@@ -13,6 +13,9 @@ angular.module('modules.core')
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME'),
 					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -23,6 +26,9 @@ angular.module('modules.core')
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
 					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -35,6 +41,9 @@ angular.module('modules.core')
 					label: $translate.instant('BIRTH_DATE'),
 					placeholder: $translate.instant('BIRTH_DATE'),
 					datepickerPopup: 'yyyy-MMMM-dd'
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -57,6 +66,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -73,6 +83,9 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
+				},
+				validation: {
+					show: true
 				}
 			}
 		];
@@ -89,6 +102,9 @@ angular.module('modules.core')
 					required: false,
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -99,6 +115,9 @@ angular.module('modules.core')
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
 					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -111,6 +130,9 @@ angular.module('modules.core')
 					placeholder: $translate.instant('BIRTH_DATE'),
 					datepickerPopup: 'yyyy-MMMM-dd',
 					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -133,6 +155,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -149,6 +172,9 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -160,6 +186,9 @@ angular.module('modules.core')
 					label: $translate.instant('DOC_TYPE'),
 					placeholder: $translate.instant('DOC_TYPE'),
 					options: []
+				},
+				validation: {
+					show: true
 				}
 			}
 		];
@@ -188,6 +217,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -204,16 +234,9 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
-				}
-			},
-			{
-				className: 'col-md-12',
-				key: 'org.www',
-				type: 'input',
-				templateOptions: {
-					required: false,
-					label: $translate.instant('WEBSITE'),
-					placeholder: $translate.instant('WEBSITE_1')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -224,6 +247,22 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('ORG_NAME'),
 					placeholder: $translate.instant('ORG_NAME_FULL')
+				},
+				validation: {
+					show: true
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.www',
+				type: 'input',
+				templateOptions: {
+					required: false,
+					label: $translate.instant('WEBSITE'),
+					placeholder: $translate.instant('WEBSITE_1')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -234,6 +273,9 @@ angular.module('modules.core')
 					required: false,
 					label: $translate.instant('ADDRESS'),
 					placeholder: $translate.instant('ORG_ADDRESS')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -245,6 +287,9 @@ angular.module('modules.core')
 					label: $translate.instant('ORG_TYPE'),
 					placeholder: $translate.instant('ORG_TYPE'),
 					options: []
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -255,6 +300,9 @@ angular.module('modules.core')
 					required: false,
 					label: $translate.instant('FIRST_NAME'),
 					placeholder: $translate.instant('USER_NAME')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -265,6 +313,9 @@ angular.module('modules.core')
 					required: false,
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME')
+				},
+				validation: {
+					show: true
 				}
 			}
 		];

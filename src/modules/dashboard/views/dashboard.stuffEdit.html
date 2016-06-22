@@ -2,7 +2,7 @@
 	<form ng-submit="vm.onSave()" name="vm.form">
 
 		<formly-form model="vm.stuff" fields="vm.StuffFields" form="vm.form">
-			<button type="submit" class="pull-right btn btn-default" ng-click="">Submit</button>
+			<button type="submit" class="pull-right btn btn-default" ng-click="" ng-disabled="vm.form.$invalid">Submit</button>
 		</formly-form>
 
 	</form>
