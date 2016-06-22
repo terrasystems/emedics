@@ -7,7 +7,7 @@ angular.module('modules.dash')
 		vm.stafs = [];
 		vm.user = localStorageService.get('userData');
 
-		if (vm.user.type === 'doctor' && vm.user.org === 'true') {
+		if (vm.user.type === 'doctor' && (vm.user.org === 'true' || vm.user.org === true)) {
 			vm.canEdit = true;
 		} else {
 			vm.canEdit = false;

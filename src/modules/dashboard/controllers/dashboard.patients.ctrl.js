@@ -161,9 +161,9 @@ angular.module('modules.dash')
 					model: function ($q) {
 						var deferred = $q.defer();
 						deferred.resolve({data: model,patient:{
-							'name':hist.fromUser.username,
-							'email':hist.fromUser.email,
-							'id':hist.fromUser.id
+							'name':hist.patient.username,
+							'email':hist.patient.email,
+							'id':hist.patient.id
 						}});
 						return deferred.promise;
 					}

@@ -108,6 +108,42 @@ angular.module('modules.public', [])
 
 		vm.active = 0;
 
+		vm.getTypesDoc = function() {
+			http.get('public/dashboard/doc_type/doctor')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result)) {
+						res.result.map(function (item) {
+							var x = angular.copy(item.id);
+							delete item.id;
+							item.value = x;
+							item.name = $translate.instant(item.name);
+							return item;
+						});
+						vm.tabs[1].form.fields[5].templateOptions.options = res.result;
+					}
+				});
+		};
+		vm.getTypesDoc();
+
+		vm.getTypesOrg = function() {
+			http.get('public/dashboard/doc_type/organization')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result)) {
+						res.result.map(function (item) {
+							var x = angular.copy(item.id);
+							delete item.id;
+							item.value = x;
+							item.name = $translate.instant(item.name);
+							return item;
+						});
+						vm.tabs[2].form.fields[5].templateOptions.options = res.result;
+					}
+				});
+		};
+		vm.getTypesOrg();
+
 		vm.onSubmit = function () {
 			var  paramsPOST= {
 				"type": vm.tabs[vm.active].type,
@@ -200,6 +236,7 @@ angular.module('modules.public', [])
 			return;
 		}
 		vm.newPass = {};
+		vm.options = {};
 
 		vm.fieldsPass = [
 			{
@@ -210,20 +247,32 @@ angular.module('modules.public', [])
 					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Enter new password...')
+				},
+				validation: {
+					show: false
 				}
 			},
 			{
 				key: 'confirmPassword',
 				type: 'input',
-				extras: {validateOnModelChange: true},
 				templateOptions: {
 					label: 'Confirm password',
 					type: 'password',
 					required: true,
 					placeholder: $translate.instant('Confirm new password...')
 				},
+				validation: {
+					show: true
+				},
 				validators: {
-					samePassword: 'model.password === model.confirmPassword'
+					samePassword2: function($viewValue, $modelValue, scope) {
+						var value = $modelValue || $viewValue;
+						if (value) {
+							return $modelValue === scope.model.password;
+						} else {
+							return true;
+						}
+					}
 				}
 			}
 		];

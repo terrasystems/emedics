@@ -12,7 +12,10 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME'),
-					required: true
+					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -22,18 +25,25 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
-					required: true
+					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
 				className: 'col-md-12',
-				key: 'birth',
+				key: 'user.birth',
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
+					required: false,
 					label: $translate.instant('BIRTH_DATE'),
 					placeholder: $translate.instant('BIRTH_DATE'),
 					datepickerPopup: 'yyyy-MMMM-dd'
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -56,6 +66,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -72,6 +83,9 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
+				},
+				validation: {
+					show: true
 				}
 			}
 		];
@@ -85,9 +99,12 @@ angular.module('modules.core')
 				key: 'user.firstName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('NAME'),
 					placeholder: $translate.instant('USER_NAME')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -97,18 +114,25 @@ angular.module('modules.core')
 				templateOptions: {
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME'),
-					required: true
+					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
 				className: 'col-md-12',
-				key: 'birth',
+				key: 'user.birth',
 				type: 'datepicker',
 				templateOptions: {
 					type: 'text',
 					label: $translate.instant('BIRTH_DATE'),
 					placeholder: $translate.instant('BIRTH_DATE'),
-					datepickerPopup: 'yyyy-MMMM-dd'
+					datepickerPopup: 'yyyy-MMMM-dd',
+					required: false
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -131,6 +155,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -147,6 +172,23 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
+				},
+				validation: {
+					show: true
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'user.type',
+				type: 'select',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('DOC_TYPE'),
+					placeholder: $translate.instant('DOC_TYPE'),
+					options: []
+				},
+				validation: {
+					show: true
 				}
 			}
 		];
@@ -175,6 +217,7 @@ angular.module('modules.core')
 					placeholder: $translate.instant('EMAIL_1')
 				},
 				validation: {
+					show: true,
 					messages: {
 						required: function ($viewValue, $modelValue, scope) {
 							return scope.to.label + ' is required';
@@ -191,16 +234,9 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('PASSWORD'),
 					placeholder: $translate.instant('PASSWORD_1')
-				}
-			},
-			{
-				className: 'col-md-12',
-				key: 'org.www',
-				type: 'input',
-				templateOptions: {
-					required: true,
-					label: $translate.instant('WEBSITE'),
-					placeholder: $translate.instant('WEBSITE_1')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -211,6 +247,22 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('ORG_NAME'),
 					placeholder: $translate.instant('ORG_NAME_FULL')
+				},
+				validation: {
+					show: true
+				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'org.www',
+				type: 'input',
+				templateOptions: {
+					required: false,
+					label: $translate.instant('WEBSITE'),
+					placeholder: $translate.instant('WEBSITE_1')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -218,9 +270,12 @@ angular.module('modules.core')
 				key: 'org.address',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('ADDRESS'),
 					placeholder: $translate.instant('ORG_ADDRESS')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -231,11 +286,10 @@ angular.module('modules.core')
 					required: true,
 					label: $translate.instant('ORG_TYPE'),
 					placeholder: $translate.instant('ORG_TYPE'),
-					options: [
-						{name: $translate.instant('ORG_TYPE_1'), value: 'type_1'},
-						{name: $translate.instant('ORG_TYPE_2'), value: 'type_2'},
-						{name: $translate.instant('ORG_TYPE_3'), value: 'type_3'}
-					]
+					options: []
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -243,9 +297,12 @@ angular.module('modules.core')
 				key: 'user.firstName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('FIRST_NAME'),
 					placeholder: $translate.instant('USER_NAME')
+				},
+				validation: {
+					show: true
 				}
 			},
 			{
@@ -253,9 +310,12 @@ angular.module('modules.core')
 				key: 'user.lastName',
 				type: 'input',
 				templateOptions: {
-					required: true,
+					required: false,
 					label: $translate.instant('LAST_NAME'),
 					placeholder: $translate.instant('ENTER_LAST_NAME')
+				},
+				validation: {
+					show: true
 				}
 			}
 		];
