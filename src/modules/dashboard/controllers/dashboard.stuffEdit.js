@@ -111,8 +111,8 @@ angular.module('modules.dash')
 					label: $translate.instant('TYPE_EXPORT'),
 					placeholder: $translate.instant('TYPE_EXPORT'),
 					options: [
-						{name: $translate.instant('PDF'), value: 'PDF'},
-						{name: $translate.instant('HTML'), value: 'HTML'}
+						{name: $translate.instant('PDF'), value: '0'},
+						{name: $translate.instant('HTML'), value: '1'}
 					]
 				},
 				validation: {
