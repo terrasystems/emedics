@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($scope, $rootScope, localStorageService, $state, $translate, http, blockUI, initParamsPOST) {
+	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, initParamsPOST) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
@@ -27,6 +27,31 @@ angular.module('modules.dash')
 				route:'main.private.dashboard.abstract.stafs',
 				disable: false});
 		}
+
+		$rootScope.db = pouchDB(vm.user.id);
+		var base= $rootScope.db;
+		var doc = {
+			_id:new Date().toISOString(),
+			_rev:'',
+			status:'draft',
+			body:{}
+		};
+		function error(err) {
+			$log.error(err);
+		}
+
+		function get(res) {
+			if (!res.ok) {
+				return error(res);
+			}
+			return base.get(res.id);
+		}
+
+		function bind(res) {
+			$scope.doc = res;
+		}
+
+
 
 		$scope.$state = $state;
 

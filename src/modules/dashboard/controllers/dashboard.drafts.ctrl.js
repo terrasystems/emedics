@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('draftsCtrl', function (localStorageService, pouchDB, $scope, $log) {
+	.controller('draftsCtrl', function ($scope,localStorageService, pouchDB, $rootScope) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.page = {};
@@ -13,27 +13,18 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
 		};
 
-		var db = pouchDB('local');
-		var doc = { name: 'David' };
+		var base1 = $rootScope.db;
 
-		function error(err) {
-			$log.error(err);
-		}
 
-		function get(res) {
-			if (!res.ok) {
-				return error(res);
-			}
-			return db.get(res.id);
-		}
+		base1.allDocs({include_docs: true}).then(function(result){
+			console.log(result.rows);
+		});
 
-		function bind(res) {
-			$scope.doc = res;
-		}
-
-		db.post(doc)
-			.then(get)
-			.then(bind)
-			.catch(error);
+		base1.allDocs({include_docs: true, descending: true}, function(err, doc) {
+			$scope.$apply(function(){
+				vm.list = doc;
+				console.log(vm.list);
+			});
+		});
 
 	});

@@ -13,7 +13,6 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
-
 	$urlRouterProvider.otherwise('/login');
 
 	formlyConfigProvider.setWrapper({
@@ -44,7 +43,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 })
 
 
-.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth, /*$httpBackend,*/ constants, $translate) {
+.run(function($rootScope, $state, formlyConfig, formlyValidationMessages, checkUserAuth,$log, /*$httpBackend,*/ constants, $translate,pouchDB) {
 	$translate.use('en');
 
 	formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
@@ -54,6 +53,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 		if  ( (toState.name).indexOf('private')>-1 ) {
 			checkUserAuth();
 		}
+
 	});
 
 	//$httpBackend.whenGET(/^modules\//).passThrough();

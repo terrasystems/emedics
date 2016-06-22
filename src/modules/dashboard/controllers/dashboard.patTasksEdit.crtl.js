@@ -1,13 +1,8 @@
 'use strict';
 /*jshint -W117, -W097, -W116, -W089, -W061*/
-
 angular.module('modules.dash')
-
-	// $stateParams.id: id exists task
-	// $stateParams.type: 'tasks' / 'patients' / 'patients+' / 'tasks+'
-	// $stateParams.patId: id exists patient
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
-												  $scope, alertService, $timeout, $translate, $base64, confirmService) {
+												  $scope, alertService, $timeout, $translate, $base64, confirmService,$rootScope) {
 
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -15,6 +10,7 @@ angular.module('modules.dash')
 		}
 
 		var vm = this;
+		var base = $rootScope.db;
 
 		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
@@ -124,11 +120,61 @@ angular.module('modules.dash')
 			});
 		};
 
-		vm.onSaveDraft = function () {
-			console.log('..Save Draft!');
-			/* TODO */
-			$state.go(vm.mainState);
+
+		vm.onSaveDraft = function() {
+			var doc = {
+				_id:new Date().toISOString(),
+				_rev:'',
+				status:'draft',
+				draftName:vm.formInfo.name,
+				body:{
+					sections: vm.model
+				}
+			};
+
+			base.put(doc, function(err) {
+				if (err) { console.log(err);
+				}else{
+					console.log("ok");
+				}
+				base.allDocs({include_docs: true}).then(function(result){
+					console.log(result.rows);
+				});
+			});
+			//base.destroy().then(function () {
+			//	// database destroyed
+			//}).catch(function (err) {
+			//	// error occurred
+			//});
+
 		};
+
+		//db.allDocs({include_docs: true}).then(function(result){
+		//	console.log(result.rows);
+		//});
+
+		//$scope.recordlist = dataService.get();
+		//console.log($scope.recordlist);
+
+		//vm.onSaveDraft = function () {
+		//	var doc = {
+		//		_id:new Date().toISOString(),
+		//		_rev:'',
+		//		status:"draft",
+		//		body:{
+		//			sections: vm.model
+		//		}
+		//	};
+		//
+     //db.post(doc)
+		//		.then(get)
+		//		.then(bind)
+		//		.catch(error);
+		//
+		//
+		//
+		//	//$state.go(vm.mainState);
+		//};
 
 		vm.onSend = function() {
 			var config = {
