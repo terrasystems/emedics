@@ -10,12 +10,16 @@ angular.module('modules.dash')
 		}
 
 		var vm = this;
+		vm.editModel = {};
+		vm.user = localStorageService.get('userData');
 		var base = $rootScope.db;
 
 		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
-		} else {
+		} else if ($stateParams.type == 'patients' || $stateParams.type == 'patients+') {
 			vm.mainState = 'main.private.dashboard.abstract.patients';
+		} else if ($stateParams.type == 'tasksAdmin') {
+			vm.mainState = 'main.private.dashboard.abstract.tasks';
 		}
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
@@ -31,9 +35,14 @@ angular.module('modules.dash')
 			vm.viewButtons = true;
 		}
 
-		vm.user = localStorageService.get('userData');
-		vm.getUrl = 'private/dashboard/tasks/' + vm.id;
-		vm.setUrl = 'private/dashboard/tasks/edit';
+		if ($stateParams.type == 'tasksAdmin') {
+			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
+			vm.setUrl = 'private/dashboard/stuff/event/adminEdit';
+		} else {
+			vm.getUrl = 'private/dashboard/tasks/' + vm.id;
+			vm.setUrl = 'private/dashboard/tasks/edit';
+		}
+
 		vm.sections = [];
 		vm.options = [];
 		vm.model = [];
@@ -42,10 +51,11 @@ angular.module('modules.dash')
 		vm.selectedKey = '';
 
 		vm.getModelEdit = function (id) {
-			http.get('private/dashboard/tasks/' + id)
+			http.get(vm.getUrl)
 				.then(function (res) {
 					blockUI.stop();
 
+					vm.editModel = res.result;
 					vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
 
 					if (vm.checkArr) {
@@ -101,6 +111,11 @@ angular.module('modules.dash')
 		function save() {
 			var deferred = $q.defer();
 			var paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
+			paramsPOST.patient = vm.editModel.patient;
+			paramsPOST.template = vm.editModel.template;
+			paramsPOST.fromUser = vm.editModel.fromUser;
+			paramsPOST.toUser = vm.editModel.toUser;
+
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
 					blockUI.stop();

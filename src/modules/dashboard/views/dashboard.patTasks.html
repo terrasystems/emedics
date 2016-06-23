@@ -91,8 +91,8 @@
 									</uib-accordion-heading>
 
 									<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">
-										<button style="float: right" class="btn btn-success" ng-click="vm.onClose(item, hist)"><span translate="CLOSE_TASK"></span></button>
-										<button style="float: right" class="btn btn-info" ng-click="vm.onEdit(hist.id, patient.id)"><span translate="EDIT"></span></button>
+										<button style="float: right" class="btn btn-success" ng-click="vm.onCloseTask(hist.id,staf.id)"><span translate="CLOSE_TASK"></span></button>
+										<button style="float: right" class="btn btn-info" ng-click="vm.onEditAdminTask(hist.id)"><span translate="EDIT"></span></button>
 
 										<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDateTime(hist.date)}}</p>
 										<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username || '(none)'}}</p>

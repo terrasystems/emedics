@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal) {
+	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.page = {};
@@ -157,6 +157,22 @@ angular.module('modules.dash')
 						vm.tasks = res.result;
 					}
 				});
+		};
+
+		vm.onCloseTask = function(task_id, stuff_id) {
+			confirmService('Close task?')
+				.then(function(res) {
+					http.get('private/dashboard/stuff/event/adminClose/'+task_id)
+						.then(function (res) {
+							blockUI.stop();
+							alertService.add(0, res.state.message);
+							vm.onOpenStaff(stuff_id);
+						});
+				});
+		};
+
+		vm.onEditAdminTask = function (index) {
+			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasksAdmin', patId: null});
 		};
 
 		/*****************************/
