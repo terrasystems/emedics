@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, initParamsPOST) {
+	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
@@ -22,7 +22,7 @@ angular.module('modules.dash')
 			});
 		}
 
-		if(vm.user.org == 'true' || vm.user.org == true){
+		if (vm.user.org == 'true' || vm.user.org == true || vm.user.type == 'stuff') {
 			vm.tabData.push({heading: $translate.instant('STUFF'),
 				route:'main.private.dashboard.abstract.stafs',
 				disable: false});
