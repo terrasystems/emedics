@@ -141,11 +141,6 @@ angular.module('modules.dash')
 					console.log(result.rows);
 				});
 			});
-			//base.destroy().then(function () {
-			//	// database destroyed
-			//}).catch(function (err) {
-			//	// error occurred
-			//});
 
 		};
 

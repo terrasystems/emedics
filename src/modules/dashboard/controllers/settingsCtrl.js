@@ -3,13 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function (alertService, blockUI, $rootScope, http, settings_fields, auth) {
+	.controller('settingsCtrl', function ($state,alertService, blockUI, $rootScope, http, settings_fields, auth) {
 		var vm = this;
 		vm.settings_fields = settings_fields;
 		vm.settings_model = {};
 		vm.settings_options = {};
 		vm.changedPass = {oldPass: '', newPass: ''};
 		vm.PassConfirm = {confirm: ''};
+		var base = $rootScope.db;
 
 		http.get('private/userInfo')
 			.then(function (res) {
@@ -41,4 +42,15 @@ angular.module('modules.dash')
 				});
 		};
 
+
+vm.cleanCache = function (){
+
+	base.destroy().then(function (response) {
+		// success
+	}).catch(function (err) {
+		console.log(err);
+	});
+	window.location.reload();
+	$state.go('main.private.dashboard.abstract.drafts');
+};
 	});

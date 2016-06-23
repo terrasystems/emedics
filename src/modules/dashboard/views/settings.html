@@ -11,12 +11,14 @@
 										class="btn btn_submit btn-default login-button submit-button"
 										ng-disabled="vm.settingsForm.$invalid" translate="SAVE">
 								</button>
+								<button class="btn btn-primary" ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></button>
+								<button ng-click="vm.cleanCache()" class="btn btn-primary">Clean all Drafts</button>
 							</formly-form>
 						</form>
 
 				</div>
 			</div>
-			<a ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
+
 		</div>
 	</uib-tab>
 
