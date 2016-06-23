@@ -32,7 +32,6 @@ angular.module('modules.dash')
 		var base= $rootScope.db;
 		var doc = {
 			_id:new Date().toISOString(),
-			_rev:'',
 			status:'draft',
 			body:{}
 		};

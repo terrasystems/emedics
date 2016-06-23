@@ -49,8 +49,9 @@ vm.cleanCache = function (){
 		// success
 	}).catch(function (err) {
 		console.log(err);
+	}).then(function(){
+		$state.go('main.private.dashboard.abstract.drafts');
 	});
-	window.location.reload();
-	$state.go('main.private.dashboard.abstract.drafts');
+
 };
 	});
