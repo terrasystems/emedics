@@ -124,7 +124,6 @@ angular.module('modules.dash')
 		vm.onSaveDraft = function() {
 			var doc = {
 				_id:new Date().toISOString(),
-				_rev:'',
 				status:'draft',
 				draftName:vm.formInfo.name,
 				body:{
