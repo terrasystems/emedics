@@ -52,8 +52,6 @@ vm.cleanCache = function (){
 	}).then(function(){
 		window.location.reload();
 
-	}).then(function(){
-		$state.go('main.private.dashboard.abstract.drafts');
 	});
 
 
