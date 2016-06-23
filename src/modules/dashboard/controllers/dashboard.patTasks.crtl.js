@@ -9,6 +9,15 @@ angular.module('modules.dash')
 		vm.page = {};
 		vm.list = [];
 		vm.history = [];
+		vm.stafs = [];
+
+		if (!(vm.user.org == 'true' || vm.user.org == true)) {
+			vm.hideAdminTasks = false;
+		} else {
+			vm.hideAdminTasks = true;
+		}
+
+		/*********** << NEW >> ************/
 
 		vm.onRefreshNew = function() {
 			http.get('private/dashboard/tasks/all')
@@ -21,6 +30,35 @@ angular.module('modules.dash')
 		};
 		vm.onRefreshNew();
 
+		vm.onClickNew = function (index) {
+			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
+		};
+
+		vm.onAssignTask = function (id, stafs, $event) {
+			if($event){
+				$event.stopPropagation();
+				$event.preventDefault();
+			}
+			var config = {
+				templateUrl: 'modules/dashboard/views/modal.assignTask.html',
+				controller: 'modalAssignTaskCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function($q) {
+						var deferred = $q.defer();
+						deferred.resolve({data: {task_id: id, stafs: stafs}});
+						return deferred.promise;
+					}
+				}
+			};
+			var result = $uibModal.open(config);
+			result.result.then(function () {
+				vm.onRefreshNew();
+			});
+		};
+
+		/*********** << HISTORY >> *************/
+
 		vm.onRefreshHistory = function() {
 			http.get('private/dashboard/tasks/gethistory')
 				.then(function (res) {
@@ -31,12 +69,6 @@ angular.module('modules.dash')
 				});
 		};
 		vm.onRefreshHistory();
-
-		vm.onClickNew = function (index) {
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
-		};
-
-		/*****************************/
 
 		vm.onSendHistory = function (obj,hist) {
 			var model = { templ_id: obj.id, obj: obj };
@@ -96,9 +128,47 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.convertDate = function (d) {
+		/*********** << STUFF >> ************/
+
+		vm.onRefreshAdminTasks = function() {
+			http.get('private/dashboard/stuff')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result) {
+						if  (angular.isArray(res.result) && res.result.length>0) {
+							res.result.map(function (item) {
+								item.all = item.firstName + ' ' + item.lastName + ((item.email == null) ? '' : ', ' + item.email) + ((item.phone == null) ? '' : ', ' + item.phone);
+								return item;
+							});
+						}
+						vm.stafs = res.result;
+					}
+				});
+		};
+		if  (vm.hideAdminTasks) {
+			vm.onRefreshAdminTasks();
+		}
+
+		vm.onOpenStaff = function (id) {
+			http.get('private/dashboard/stuff/'+id+'/events')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result) {
+						vm.tasks = res.result;
+					}
+				});
+		};
+
+		/*****************************/
+
+		vm.convertDateTime = function (d) {
 			var y = new Date(d);
 			return y.toLocaleString().replace(',', ' / ');
+		};
+
+		vm.convertDate = function (d) {
+			var y = new Date(d);
+			return y.toLocaleString().slice(0, 10);
 		};
 
 });
