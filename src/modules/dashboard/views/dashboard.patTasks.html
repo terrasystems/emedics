@@ -26,7 +26,7 @@
 						dont have any tasks</h5></div>
 				</div>
 			</section>
-			<section ng-if="vm.user.type === 'doctor'">
+			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
 				<div class="container ui-list-view">
 					<table class="table table-hover header-fixed3">
 						<thead>
@@ -42,7 +42,7 @@
 
 						<tbody>
 						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
-							<td>{{vm.convertDate(form.date)}}</td>
+							<td>{{vm.convertDateTime(form.date)}}</td>
 							<td>{{form.template.number}}</td>
 							<td>{{form.patient.username}}</td>
 							<td>{{form.template.name}}</td>
@@ -157,7 +157,7 @@
 						You dont have history</h5></div>
 				</div>
 			</section>
-			<section ng-if="vm.user.type === 'doctor'">
+			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
 				<div class="container ui-list-view">
 					<table class="table table-hover header-fixed3">
 						<thead>
