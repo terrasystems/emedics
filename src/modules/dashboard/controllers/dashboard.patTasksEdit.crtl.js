@@ -198,24 +198,27 @@ angular.module('modules.dash')
 					}
 				}
 			};
-			confirmService('Save task?')
-				.then(function(res) {
-					save().then(function () {
-						var result = $uibModal.open(config);
-						result.result.then(function () {
-							$state.go(vm.mainState);
-						});
-					});
-				}, function() {
-					var result = $uibModal.open(config);
-					result.result.then(function() {
-						$state.go(vm.mainState);
-					});
+
+			save().then(function () {
+				var result = $uibModal.open(config);
+				result.result.then(function () {
+					$state.go(vm.mainState);
 				});
+			});
+
 		};
 
 		vm.onReturn = function () {
-			$state.go(vm.mainState);
+			confirmService('Save task?')
+				.then(function(res) {
+					save().then(function () {
+						$state.go(vm.mainState);
+					});
+				}, function() {
+					$state.go(vm.mainState);
+				});
+
+
 		};
 
 		vm.onCloseTask = function() {
