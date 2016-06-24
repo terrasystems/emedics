@@ -111,10 +111,10 @@ angular.module('modules.dash')
 		function save() {
 			var deferred = $q.defer();
 			var paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
-			paramsPOST.patient = vm.editModel.patient;
-			paramsPOST.template = vm.editModel.template;
-			paramsPOST.fromUser = vm.editModel.fromUser;
-			paramsPOST.toUser = vm.editModel.toUser;
+			paramsPOST.event.patient = vm.editModel.patient;
+			paramsPOST.event.template = vm.editModel.template;
+			paramsPOST.event.fromUser = vm.editModel.fromUser;
+			paramsPOST.event.toUser = vm.editModel.toUser;
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
