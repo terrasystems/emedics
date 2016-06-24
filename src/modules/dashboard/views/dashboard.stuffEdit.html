@@ -1,12 +1,13 @@
 <div class="container ui-list-view">
 	<form ng-submit="vm.onSave()" name="vm.form">
 
+		<button ui-sref="main.private.dashboard.abstract.stafs" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+
 		<formly-form model="vm.stuff" fields="vm.StuffFields" form="vm.form">
 			<button type="submit" class="pull-right btn btn-default" ng-click="" ng-disabled="vm.form.$invalid">Submit</button>
 		</formly-form>
 
 	</form>
-	<button ui-sref="main.private.dashboard.abstract.stafs" class="btn btn-primary">Back to Stuff</button>
 </div>
 
 <script type="text/ng-template" id="error-messages.html">

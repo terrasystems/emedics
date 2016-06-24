@@ -4,6 +4,7 @@
 		<div class="container form-list">
 			<div class="row">
 				<div class="col-md-12 form-group ">
+						<button class="btn btn-primary" ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;"></span></button>
 
 						<form ng-submit="vm.onSave()" name="vm.settingsForm" novalidate>
 							<formly-form  model="vm.settings_model" fields="vm.settings_fields" form="vm.settingsForm" options="vm.settings_options">
@@ -11,7 +12,6 @@
 										class="btn btn_submit btn-default login-button submit-button"
 										ng-disabled="vm.settingsForm.$invalid" translate="SAVE">
 								</button>
-								<button class="btn btn-primary" ui-sref="main.private.dashboard.abstract.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></button>
 								<button ng-click="vm.cleanCache()" class="btn btn-primary">Clean all Drafts</button>
 							</formly-form>
 						</form>
