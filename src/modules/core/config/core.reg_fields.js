@@ -404,6 +404,36 @@ angular.module('modules.core')
 				validation: {
 					show: true
 				}
+			},
+			{
+				className: 'col-md-12',
+				key: 'orgType',
+				type: 'select',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('ORG_TYPE'),
+					placeholder: $translate.instant('ORG_TYPE'),
+					options: []
+				},
+				validation: {
+					show: true
+				},
+				hideExpression: 'model.isHideOrgType'
+			},
+			{
+				className: 'col-md-12',
+				key: 'doctorType',
+				type: 'select',
+				templateOptions: {
+					required: true,
+					label: $translate.instant('DOC_TYPE'),
+					placeholder: $translate.instant('DOC_TYPE'),
+					options: []
+				},
+				validation: {
+					show: true
+				},
+				hideExpression: 'model.isHideDoctorType'
 			}
 		];
 		return arr;

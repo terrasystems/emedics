@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function ($state,alertService, blockUI, $rootScope, http, settings_fields, auth) {
+	.controller('settingsCtrl', function ($state,alertService, blockUI, $rootScope, http, settings_fields, auth, $translate) {
 		var vm = this;
 		vm.settings_fields = settings_fields;
 		vm.settings_model = {};
@@ -16,7 +16,45 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				vm.settings_model = res.user;
+				vm.settings_model.isHideOrgType = !res.user.org;
+				vm.settings_model.isHideDoctorType = res.user.type !== 'doctor';
 			});
+
+		vm.getTypesDoc = function() {
+			http.get('public/dashboard/doc_type/doctor')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result)) {
+						res.result.map(function (item) {
+							var x = angular.copy(item.id);
+							delete item.id;
+							item.value = x;
+							item.name = $translate.instant(item.name);
+							return item;
+						});
+						vm.settings_fields[6].templateOptions.options = res.result;
+					}
+				});
+		};
+		vm.getTypesDoc();
+
+		vm.getTypesOrg = function() {
+			http.get('public/dashboard/doc_type/organization')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.result && angular.isArray(res.result)) {
+						res.result.map(function (item) {
+							var x = angular.copy(item.id);
+							delete item.id;
+							item.value = x;
+							item.name = $translate.instant(item.name);
+							return item;
+						});
+						vm.settings_fields[5].templateOptions.options = res.result;
+					}
+				});
+		};
+		vm.getTypesOrg();
 
 		vm.onSave = function () {
 			http.post('private/user_edit', vm.settings_model)
@@ -42,18 +80,14 @@ angular.module('modules.dash')
 				});
 		};
 
+		vm.cleanCache = function (){
+			base.destroy().then(function (response) {
+			// success
+			}).catch(function (err) {
+				console.log(err);
+			}).then(function(){
+				window.location.reload();
+			});
+		};
 
-vm.cleanCache = function (){
-
-	base.destroy().then(function (response) {
-		// success
-	}).catch(function (err) {
-		console.log(err);
-	}).then(function(){
-		window.location.reload();
-
-	});
-
-
-};
 	});
