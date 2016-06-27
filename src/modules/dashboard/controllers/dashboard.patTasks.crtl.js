@@ -80,7 +80,7 @@ angular.module('modules.dash')
 				controllerAs: 'vm',
 				resolve: {
 					model: function () {
-						return {data:{}};
+						return {data: model};
 					}
 				}
 			}).result;
