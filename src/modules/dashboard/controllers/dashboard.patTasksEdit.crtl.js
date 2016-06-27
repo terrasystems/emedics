@@ -217,16 +217,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onReturn = function () {
-			confirmService('Save task?')
-				.then(function(res) {
-					save().then(function () {
-						$state.go(vm.mainState);
-					});
-				}, function() {
-					$state.go(vm.mainState);
-				});
-
-
+			$state.go(vm.mainState);
 		};
 
 		vm.onCloseTask = function() {
