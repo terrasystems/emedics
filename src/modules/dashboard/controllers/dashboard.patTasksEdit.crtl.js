@@ -159,6 +159,9 @@ angular.module('modules.dash')
 				base.allDocs({include_docs: true}).then(function(result){
 					console.log(result.rows);
 				});
+			}).then(function(){
+				alertService.add(0, 'Saved - Ok!');
+				$state.go(vm.mainState);
 			});
 
 		};

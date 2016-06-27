@@ -18,11 +18,9 @@
 </div>
 <div class="container">
 	<div class="row form-list">
-		<div ng-show="vm.references.length == 0" class="><h5 class="noData_msg">You don't
-		have any references</h5></div>
+		<div ng-show="vm.references.length == 0" class="><h5 class="noData_msg">You don't have any references</h5></div>
+
 		<ul ui-list-view="ref in vm.references | filter:vm.searchref" options="listOptions">
-
-
 			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span
 					translate="NAME"></span>:
 				<h4>{{ref.name}}</h4></li>
@@ -41,7 +39,49 @@
 					<i class="glyphicon glyphicon-trash"></i>
 				</button>
 			</div>
-
 		</ul>
+
+
+	<!--<uib-accordion>-->
+		<!--<uib-accordion-group ng-repeat="ref in vm.references"  is-open="ref.status.open">-->
+
+			<!--<uib-accordion-heading>-->
+				<!--<div ng-click="vm.onOpenStaff(staf.id)">-->
+					<!--<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>-->
+					<!--<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}-->
+					<!--<label class="control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}-->
+					<!--<label class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}-->
+				<!--</div>-->
+			<!--</uib-accordion-heading>-->
+
+			<!--<uib-accordion>-->
+				<!--<uib-accordion-group ng-repeat="item in vm.tasks" is-open="item.status.open">-->
+
+					<!--<uib-accordion-heading>-->
+						<!--<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></i>-->
+						<!--<label class="control-label"><span translate="NAME"></span>:</label>{{item.name}}-->
+					<!--</uib-accordion-heading>-->
+
+					<!--<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">-->
+						<!--<button style="float: right" class="btn btn-success" ng-click="vm.onCloseTask(hist.id,staf.id)"><span translate="CLOSE_TASK"></span></button>-->
+						<!--<button style="float: right" class="btn btn-info" ng-click="vm.onEditAdminTask(hist.id)"><span translate="EDIT"></span></button>-->
+
+						<!--<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDateTime(hist.date)}}</p>-->
+						<!--<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username || '(none)'}}</p>-->
+						<!--<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{hist.template.name}}</p>-->
+						<!--<p><label class="col-sm-3 control-label"><span translate="STATUS"></span>: </label>{{hist.status}}</p>-->
+					<!--</div>-->
+
+				<!--</uib-accordion-group>-->
+			<!--</uib-accordion>-->
+
+			<!--<div ng-if="vm.tasks.length==0" class="text-center">-->
+				<!--<span><h4><span translate="NO_DATA"></span></h4></span>-->
+			<!--</div>-->
+
+		<!--</uib-accordion-group>-->
+	<!--</uib-accordion>-->
+
+
 	</div>
 </div>
