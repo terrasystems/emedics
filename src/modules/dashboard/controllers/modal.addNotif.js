@@ -61,14 +61,14 @@ angular.module('modules.dash')
 					});
 			} else {
 				http.post('private/dashboard/tasks/send', vm.message)
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							alertService.add(0, res.state.message);
-						}
-						$uibModalInstance.close(res);
-					});
-			}
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.add(0, res.state.message);
+					}
+					$uibModalInstance.close(res);
+				});
+		}
 		};
 
 		vm.create_ = function () {

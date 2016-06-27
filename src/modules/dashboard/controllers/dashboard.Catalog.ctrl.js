@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q) {
 		var vm = this;
 		vm.userType = localStorageService.get('userData');
 		vm.FormTemplate = [];
@@ -193,11 +193,7 @@ angular.module('modules.dash')
 						},
 						patient: null
 					};
-					http.post('private/dashboard/tasks/create', paramsPOST)
-						.then(function (res) {
-							blockUI.stop();
-							alertService.add(0, res.state.message);
-						});
+					vm.Send(paramsPOST);
 				},
 				function (res) {
 					blockUI.stop();
@@ -233,14 +229,34 @@ angular.module('modules.dash')
 				},
 				patient: null
 			};
+			vm.Send(paramsPOST);
+		};
 
-			http.post('private/dashboard/tasks/create', paramsPOST)
-				.then(function (res) {
-					blockUI.stop();
-					alertService.add(0, res.state.message);
+		vm.Send = function(cfg) {
+			if (vm.user.type === 'patient') {
+				http.post('private/dashboard/tasks/create', cfg)
+					.then(function (res) {
+						blockUI.stop();
+						alertService.add(0, res.state.message);
+					});
+			} else {
+				var config = {
+					templateUrl: 'modules/dashboard/views/modal.sendTaskMulti.html',
+					controller: 'modalSendTaskMultiCtrl',
+					controllerAs: 'vm',
+					resolve: {
+						model: function($q) {
+							var deferred = $q.defer();
+							deferred.resolve({data: {template_id: cfg.template.id}});
+							return deferred.promise;
+						}
+					}
+				};
+				var result = $uibModal.open(config);
+				result.result.then(function () {
+					$state.go(vm.mainState);
 				});
-
-
+			}
 		};
 
 	});
