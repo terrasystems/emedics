@@ -31,8 +31,13 @@ angular.module('modules.dash')
 
 		if ($stateParams.type == 'patients+' || $stateParams.type == 'tasks+') {
 			vm.viewButtons = false;
+			vm.viewButtonSave = false;
+		} else if ($stateParams.type == 'tasksAdmin') {
+			vm.viewButtons = false;
+			vm.viewButtonSave = true;
 		} else {
 			vm.viewButtons = true;
+			vm.viewButtonSave = true;
 		}
 
 		if ($stateParams.type == 'tasksAdmin') {
