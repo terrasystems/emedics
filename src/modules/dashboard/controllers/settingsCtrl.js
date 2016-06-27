@@ -17,7 +17,7 @@ angular.module('modules.dash')
 				blockUI.stop();
 				vm.settings_model = res.user;
 				vm.settings_model.isHideOrgType = !res.user.org;
-				vm.settings_model.isHideDoctorType = res.user.type !== 'doctor';
+				vm.settings_model.isHideDoctorType = (res.user.type !== 'doctor') || res.user.org;
 			});
 
 		vm.getTypesDoc = function() {
