@@ -187,7 +187,7 @@ angular.module('modules.dash')
 					var paramsPOST = {
 						template: {
 							id: rest.result,
-							type: null,
+							type: vm.templateParams.typeEnum,
 							description: null,
 							templateDto: null
 						},
@@ -223,7 +223,7 @@ angular.module('modules.dash')
 			var paramsPOST = {
 				template: {
 					id: obj.templateDto.id,
-					type: null,
+					type: obj.templateDto.typeEnum,
 					description: null,
 					templateDto: null
 				},
@@ -233,7 +233,7 @@ angular.module('modules.dash')
 		};
 
 		vm.Send = function(cfg) {
-			if (vm.user.type === 'patient') {
+			if (vm.user.type === 'patient' || vm.user.type === 'stuff' || cfg.template.type === 'MEDICAL') {
 				http.post('private/dashboard/tasks/create', cfg)
 					.then(function (res) {
 						blockUI.stop();
@@ -254,7 +254,7 @@ angular.module('modules.dash')
 				};
 				var result = $uibModal.open(config);
 				result.result.then(function () {
-					$state.go(vm.mainState);
+					$state.go('main.private.dashboard.abstract.catalog');
 				});
 			}
 		};

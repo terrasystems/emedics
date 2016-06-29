@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('modalSendTaskMultiCtrl', function ($uibModalInstance, model, blockUI, alertService, $timeout, http, localStorageService, $scope, $q) {
+	.controller('modalSendTaskMultiCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService) {
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
@@ -13,10 +13,11 @@ angular.module('modules.dash')
 		http.get('private/dashboard/patients')
 			.then(function (res) {
 				blockUI.stop();
-				if (res.result && angular.isArray(res.result) ) {
+				if (res.result && angular.isArray(res.result)) {
 					vm.patients = res.result;
 				}
 			});
+
 
 		vm.onSend = function () {
 			http.post('private/dashboard/tasks/multipleSend', vm.message)
@@ -26,6 +27,9 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 					}
 					$uibModalInstance.close(res);
+				}, function (error) {
+					$uibModalInstance.close(error);
+					deferred.reject(error);
 				});
 		};
 
