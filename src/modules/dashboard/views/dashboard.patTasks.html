@@ -114,7 +114,6 @@
 			</section>
 		</uib-tab>
 
-
 		<uib-tab ng-click="vm.onRefreshHistory();" index="2" heading="History">
 
 			<section ng-if="vm.user.type === 'patient'">
@@ -202,5 +201,6 @@
 
 		</uib-tab>
 
+		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.onCreateTask();"><i class="glyphicon glyphicon-plus-sign"></i> Create</button>
 	</uib-tabset>
 </div>

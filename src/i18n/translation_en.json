@@ -47,6 +47,7 @@
 	"CONFIRM_PASS": "Confirm password",
 	"CONFIRM_PASS2": "Confirm your password, please",
 	"COPY_TASK": "Copy task",
+  	"CREATE": "Create",
 	"DOCTOR": "Doctor",
   	"DOC_TYPE": "Type doctor",
 	"DESCRIPTION":"Description",

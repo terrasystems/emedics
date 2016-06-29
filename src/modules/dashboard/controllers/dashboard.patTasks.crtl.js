@@ -17,6 +17,25 @@ angular.module('modules.dash')
 			vm.hideAdminTasks = true;
 		}
 
+		vm.onCreateTask = function() {
+			var config = {
+				templateUrl: 'modules/dashboard/views/modal.createTask.html',
+				controller: 'modalCreateTaskCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function($q) {
+						var deferred = $q.defer();
+						deferred.resolve({});
+						return deferred.promise;
+					}
+				}
+			};
+			var result = $uibModal.open(config);
+			result.result.then(function () {
+				vm.onRefreshNew();
+			});
+		};
+
 		/*********** << NEW >> ************/
 
 		vm.onRefreshNew = function() {
