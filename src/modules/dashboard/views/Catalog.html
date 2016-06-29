@@ -23,22 +23,28 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" >
+					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
 
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
 						<td>{{form.commercialEnum}}
-							<div class=" pull-right btn-group btn-group-xs">
+							<div class="pull-right btn-group btn-group-xs">
 								<button class="btn btn-danger btn-small"
-										ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;" ng-disabled="form.isPay" ng-if="form.commercialEnum==='PAID'" ng-hide="form.existPaid === true">
-									Buy
+										ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;"
+										ng-disabled="form.isPay"
+										ng-if="form.commercialEnum==='PAID'"
+										ng-hide="form.existPaid === true"
+										translate="BUY">
 								</button>
-								<button class="btn btn-success btn-small" ng-click="vm.onLoad(form.id);form.isLoad=true;"
-										ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');" translate="LOAD">
+								<button class="btn btn-success btn-small"
+										ng-click="vm.onLoad(form.id);form.isLoad=true;"
+										ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');"
+										translate="LOAD">
 								</button>
-								<button class="btn btn btn-info btn-small" ng-click="vm.onView(form.id);">
-									View
+								<button class="btn btn btn-info btn-small"
+										ng-click="vm.onView(form.id);"
+										translate="VIEW">
 								</button>
 							</div>
 						</td>

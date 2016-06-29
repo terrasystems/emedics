@@ -730,3 +730,7 @@ and (min-width: 1824px) {
 .s-fix-button {
 	width: 150px;
 }
+
+.s-row-yellow {
+	background: yellow;
+}
