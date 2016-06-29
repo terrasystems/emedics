@@ -704,3 +704,29 @@ and (min-width: 1824px) {
 	background-color: #fefbed;
 	border-color: #f1e7bc;
 }
+
+.sign-form {
+	width: 350px;
+	min-height: 250px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #E2E2E2;
+	border-radius: 10px;
+	margin-top: 24%;
+}
+
+.s-center {
+	margin: auto;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.s-fix-button {
+	width: 150px;
+}

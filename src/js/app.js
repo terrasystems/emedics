@@ -13,7 +13,7 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 	angular.forEach(statesList, function(state) {
 		$stateProvider.state(state.name, state);
 	});
-	$urlRouterProvider.otherwise('/login');
+	$urlRouterProvider.otherwise('/signup');
 
 	formlyConfigProvider.setWrapper({
 		name: 'validation',

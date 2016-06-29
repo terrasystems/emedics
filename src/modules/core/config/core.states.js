@@ -82,6 +82,15 @@ angular.module('modules.core')
 				console.log($stateParams.code);
 			}
 		},
+		{
+			name: 'main.public.signup',
+			url: 'signup',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/public/views/signup.html'
+				}
+			}
+		},
 		// private
 		{
 			name: 'main.private',
