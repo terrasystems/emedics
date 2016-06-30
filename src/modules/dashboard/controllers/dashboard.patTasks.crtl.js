@@ -39,7 +39,13 @@ angular.module('modules.dash')
 		/*********** << NEW >> ************/
 
 		vm.onRefreshNew = function() {
-			http.get('private/dashboard/tasks/all')
+			var params = {
+				period: null,
+				templateName: null,
+				patientName: null,
+				fromName: null
+			};
+			http.post('private/dashboard/tasks/all', params)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -79,7 +85,13 @@ angular.module('modules.dash')
 		/*********** << HISTORY >> *************/
 
 		vm.onRefreshHistory = function() {
-			http.get('private/dashboard/tasks/gethistory')
+			var params = {
+				period: null,
+				templateName: null,
+				patientName: null,
+				fromName: null
+		};
+			http.post('private/dashboard/tasks/gethistory', params)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {

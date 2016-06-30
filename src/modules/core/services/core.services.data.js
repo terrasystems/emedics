@@ -207,4 +207,76 @@ angular.module('modules.core')
 		return {
 			'params' :  paramsPOST
 		};
+	})
+
+//работа с базой pouchdb
+	.service('pouch_db', function($q, $rootScope, alertService, $translate) {
+		function save (base, id, info, model){
+			var deferred = $q.defer();
+			var doc = {
+				_id: (id === 'add') ? new Date().toISOString() : id,
+				status:	'draft',
+				draftName: info,
+				body: { sections: model }
+			};
+			base.put(doc, function(res) {
+				deferred.resolve(res);
+			});
+			return deferred.promise;
+		}
+
+		function load_all (base, scope) {
+			var deferred = $q.defer();
+			base.allDocs({include_docs: true, descending: true}, function(err, doc) {
+				scope.$apply(function(){
+					deferred.resolve(doc);
+				});
+			});
+			return deferred.promise;
+		}
+
+		function load (base, id) {
+			var deferred = $q.defer();
+			base.get(id).then(function(doc) {
+				deferred.resolve(doc);
+			}, function() {
+				deferred.reject(false);
+			});
+			return deferred.promise;
+		}
+
+		function del (base, id) {
+			var deferred = $q.defer();
+			base.get(id).then(function(doc) {
+				return base.remove(doc);
+			}, function() {
+				deferred.reject(false);
+			}).then(function(resp) {
+				deferred.resolve(resp);
+			});
+			return deferred.promise;
+		}
+		//******
+		return {
+			save: save,
+			load: load,
+			load_all: load_all,
+			del: del
+		};
+	})
+
+//
+	.service('getModelForEdit', function () {
+		var getModelForEdit = function (id) {
+			//var originalPath = $location.path();
+			//$location.path('/login');
+			//var authToken = localStorageService.get('token');
+			//if ((authToken !== undefined) && (authToken !== null)) {
+			//	$rootScope.token = authToken;
+			//	$rootScope.userData = localStorageService.get('userData');
+			//	$location.path(originalPath);
+			//	return;
+			//}
+		};
+		return getModelForEdit;
 	});

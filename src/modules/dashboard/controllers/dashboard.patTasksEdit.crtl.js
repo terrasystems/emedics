@@ -2,7 +2,8 @@
 /*jshint -W117, -W097, -W116, -W089, -W061*/
 angular.module('modules.dash')
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
-												  $scope, alertService, $timeout, $translate, $base64, confirmService,$rootScope) {
+												  $scope, alertService, $timeout, $translate, $base64, confirmService,
+												  $rootScope, pouch_db) {
 
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -140,58 +141,13 @@ angular.module('modules.dash')
 			});
 		};
 
-
 		vm.onSaveDraft = function() {
-			var doc = {
-				_id:new Date().toISOString(),
-				status:'draft',
-				draftName:vm.formInfo.name,
-				body:{
-					sections: vm.model
-				}
-			};
-
-			base.put(doc, function(err) {
-				if (err) { console.log(err);
-				}else{
-					console.log("ok");
-				}
-				base.allDocs({include_docs: true}).then(function(result){
-					console.log(result.rows);
+			pouch_db.save(base, 'add', vm.formInfo.name, vm.model)
+				.then(function() {
+					alertService.add(0, 'Saved - Ok!');
+					$state.go(vm.mainState);
 				});
-			}).then(function(){
-				alertService.add(0, 'Saved - Ok!');
-				$state.go(vm.mainState);
-			});
-
 		};
-
-		//db.allDocs({include_docs: true}).then(function(result){
-		//	console.log(result.rows);
-		//});
-
-		//$scope.recordlist = dataService.get();
-		//console.log($scope.recordlist);
-
-		//vm.onSaveDraft = function () {
-		//	var doc = {
-		//		_id:new Date().toISOString(),
-		//		_rev:'',
-		//		status:"draft",
-		//		body:{
-		//			sections: vm.model
-		//		}
-		//	};
-		//
-     //db.post(doc)
-		//		.then(get)
-		//		.then(bind)
-		//		.catch(error);
-		//
-		//
-		//
-		//	//$state.go(vm.mainState);
-		//};
 
 		vm.onSend = function() {
 			var config = {

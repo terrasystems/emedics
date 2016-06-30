@@ -50,8 +50,6 @@ angular.module('modules.dash')
 			$scope.doc = res;
 		}
 
-
-
 		$scope.$state = $state;
 
 		vm.logout = function () {

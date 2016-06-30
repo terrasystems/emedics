@@ -1,6 +1,5 @@
 <div class="container ui-list-view edit_form">
 	<div class="pad"></div>
-
 	<button type="submit" class="btn btn-primary"ng-click="vm.onReturn();"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
 
 	<form name="vm.form" novalidate >
@@ -23,9 +22,8 @@
 		</formly-form>
 
 	</form>
-
-
 </div>
+
 <div>
 	<button ng-click="vm.onSave();" ng-if="vm.viewButtonSave" type="submit" class="btn btn-primary submit-button" ng-disabled="vm.form.$invalid"><span translate="SUBMIT"></span></button>
 	<button ng-click="vm.onSend();" ng-if="vm.viewButtons"  style="float: right" class="btn btn-primary" ng-disabled="vm.form.$invalid"><span translate="ADDNOTIF"></span></button>
