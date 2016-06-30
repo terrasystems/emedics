@@ -270,6 +270,19 @@ angular.module('modules.core')
 					controller:'draftsCtrl as vm'
 				}
 			}
+		},
+		{
+			name:'main.private.dashboard.abstract.drafts.edit',
+			url:'/edit',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.draftEdit.html',
+					controller:'draftEditCtrl as vm'
+				}
+			},
+			params:{
+				id: ''
+			}
 		}
 
 	]);

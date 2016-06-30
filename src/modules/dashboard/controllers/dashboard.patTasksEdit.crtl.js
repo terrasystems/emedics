@@ -1,9 +1,9 @@
 'use strict';
-/*jshint -W117, -W097, -W116, -W089, -W061*/
+/*jshint -W117, -W097, -W116*/
 angular.module('modules.dash')
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService,
-												  $rootScope, pouch_db) {
+												  $rootScope, pouch_db, forEditTask) {
 
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -11,9 +11,7 @@ angular.module('modules.dash')
 		}
 
 		var vm = this;
-		vm.editModel = {};
 		vm.user = localStorageService.get('userData');
-		var base = $rootScope.db;
 
 		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
@@ -49,78 +47,28 @@ angular.module('modules.dash')
 			vm.setUrl = 'private/dashboard/tasks/edit';
 		}
 
-		vm.sections = [];
-		vm.options = [];
-		vm.model = [];
-		vm.sectionsName = [];
-		vm.selectedSection = '';
-		vm.selectedKey = '';
+		vm.data = { sections: [], options: [], model: [], sectionsName: [], selectedSection: '', selectedKey: '', editModel: {} };
 
-		vm.getModelEdit = function (id) {
-			http.get(vm.getUrl)
-				.then(function (res) {
-					blockUI.stop();
+		forEditTask.getModel(vm.getUrl, null)
+			.then(function(res) {
+				vm.data = res;
 
-					vm.editModel = res.result;
-					vm.checkArr = (res.result && res.result.template && res.result.template.body && res.result.template.body.sections && res.result.id);
-
-					if (vm.checkArr) {
-						vm.model = (res.result.data && res.result.data.sections) ? res.result.data.sections : undefined;
-						vm.formInfo = {};
-
-						vm.formInfo.id = res.result.id;
-						vm.formInfo.category = res.result.template.category;
-						vm.formInfo.name = res.result.template.name;
-						vm.formInfo.number = res.result.template.number;
-						vm.formInfo.descr = res.result.template.descr;
-						vm.sectionsName = [];
-						vm.sections = [];
-
-						vm.sections = eval($base64.decode(res.result.template.body.sections));
-						vm.sections.forEach(function (item) {
-							vm.sectionsName.push(Object.keys(item)[0]);
-						});
-
-						if (!vm.model) {
-							vm.model = [];
-							vm.sectionsName.forEach(function (item) {
-								var it = {};
-								it[item] = {};
-								vm.model.push(it);
-							});
+				$scope.$watch('vm.data.selectedSection', function (newValue) {
+					for (var key in vm.data.model) {
+						if (newValue == Object.keys(vm.data.model[key])[0]) {
+							vm.data.selectedKey = key;
 						}
-						vm.selectedSection = vm.sectionsName[0];
-						if (vm.sectionsName.length > 0) {
-							for (var key in  vm.model) {
-								var obj = vm.model[key][Object.keys(vm.model[key])[0]];
-								for (var prop in obj) {
-									if (obj.hasOwnProperty(prop) && prop.indexOf('_DATE') > 0 && obj[prop] !== null) {
-										obj[prop] = new Date(obj[prop]);
-									}
-								}
-							}
-						}
-
-						$scope.$watch('vm.selectedSection', function (newValue) {
-							for (var key in vm.model) {
-								if (newValue == Object.keys(vm.model[key])[0]) {
-									vm.selectedKey = key;
-								}
-							}
-						});
 					}
 				});
-		};
-
-		vm.getModelEdit(vm.id);
+		});
 
 		function save() {
 			var deferred = $q.defer();
-			var paramsPOST = {event: {id: vm.id, data: {sections: vm.model}}};
-			paramsPOST.event.patient = vm.editModel.patient;
-			paramsPOST.event.template = vm.editModel.template;
-			paramsPOST.event.fromUser = vm.editModel.fromUser;
-			paramsPOST.event.toUser = vm.editModel.toUser;
+			var paramsPOST = {event: {id: vm.id, data: {sections: vm.data.model}}};
+			paramsPOST.event.patient = vm.data.editModel.patient;
+			paramsPOST.event.template = vm.data.editModel.template;
+			paramsPOST.event.fromUser = vm.data.editModel.fromUser;
+			paramsPOST.event.toUser = vm.data.editModel.toUser;
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
@@ -142,7 +90,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onSaveDraft = function() {
-			pouch_db.save(base, 'add', vm.formInfo.name, vm.model)
+			pouch_db.save($rootScope.db, 'add', vm.data.formInfo, vm.data.model)
 				.then(function() {
 					alertService.add(0, 'Saved - Ok!');
 					$state.go(vm.mainState);
@@ -157,7 +105,7 @@ angular.module('modules.dash')
 				resolve: {
 					model: function($q) {
 						var deferred = $q.defer();
-						deferred.resolve({data: {task_id: vm.id, obj: vm.formInfo}});
+						deferred.resolve({data: {task_id: vm.id, obj: vm.data.formInfo}});
 						return deferred.promise;
 					}
 				}
