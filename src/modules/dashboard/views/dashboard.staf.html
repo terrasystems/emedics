@@ -1,25 +1,34 @@
-
 <div class="container">
-	<div class="row form-list">
-		<div ng-show="vm.stafs.length == 0" class=""> <h5 class="noData_msg"> You don't have any stuff</h5></div>
-		<button ng-click="vm.onEdit('add');" class="pull-right btn btn-primary" ng-show="vm.canEdit;">Add Stuff</button>
-		<ul ui-list-view="staf in vm.stafs" options="listOptions">
+	<div class="row">
+		<div ng-show="vm.stafs.length == 0"><h5 class="noData_msg">You don't have any stuff</h5></div>
+		<div class="container ui-list-view">
+			<!--<button ng-click="vm.onEdit('add');" class="pull-right btn btn-primary" ng-show="vm.canEdit;">Add Stuff</button>-->
+			<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.onEdit('add');" ng-show="vm.canEdit;"><i class="glyphicon glyphicon-plus-sign"></i>Create</button>
 
-			<li e-form="textBtnForm" editable-text="ref.name" class="col-md-3 col-sm-3 col-xs-3"><span
-					translate="NAME"></span>:
-				<h4>{{staf.firstName}} {{staf.lastName}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.type" class="col-md-3 col-sm-3 col-xs-3"><span
-					translate="BIRTH_DATE"></span>:
-				<h4>{{vm.convertDate(staf.birth)}}</h4></li>
-			<li e-form="textBtnForm" editable-text="ref.phone" class="col-md-3 col-sm-3 col-xs-3"><span
-					translate="PHONE"></span>:
-				<h5>{{staf.phone}}</h5></li>
+			<uib-accordion>
+				<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">
 
-			<div class="buttons pull-right btn-group btn-group-xs">
-				<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onEdit(staf.id)" ng-show="vm.canEdit;"><span translate="EDIT"></span></button>
-				<!--<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.onRemove(staf.id)"><span translate="DELETE"></span><i class="glyphicon glyphicon-trash"></i></button>-->
-			</div>
-		</ul>
+					<uib-accordion-heading>
+						<div ng-click="vm.onOpenStaff(staf.id)">
+							<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>
+							<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}
+							<label ng-if="!(staf.phone==='' || staf.phone===null)" class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}
+						</div>
+					</uib-accordion-heading>
 
+					<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
+						<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onEdit(staf.id)" ng-show="vm.canEdit;"><span translate="EDIT"></span></button>
+					</div>
+
+					<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{staf.firstName || ' - '}}</p>
+					<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{staf.lastName || ' - '}}</p>
+					<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{staf.phone || '(none)'}}</p>
+					<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{staf.email || '(none)'}}</p>
+					<p><label class="col-sm-3 control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}
+
+				</uib-accordion-group>
+			</uib-accordion>
+
+		</div>
 	</div>
 </div>
