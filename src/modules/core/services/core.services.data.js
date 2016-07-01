@@ -211,33 +211,33 @@ angular.module('modules.core')
 
 //работа с базой pouchdb
 	.service('pouch_db', function($q, $rootScope, alertService, $translate) {
-
-		//function retryUntilWritten(doc) {
-		//	return base.get(doc._id)
-		//		.then(function (origDoc) {
-		//			doc._rev = origDoc._rev;
-		//			return base.put(doc);
-		//		})
-		//		.catch(function (err) {
-		//		if (err.status === 409) {
-		//			return retryUntilWritten(doc);
-		//		} else { // new doc
-		//			return db.put(doc);
-		//		}
-		//	});
-		//}
-
 		function save (base, id, info, model){
 			var deferred = $q.defer();
-			var doc = {
-				_id: (id === 'add') ? new Date().toISOString() : id,
-				status:	'draft',
-				draftName: info.name,
-				body: { sections: model, formInfo: info }
-			};
-			base.put(doc, function(res) {
-				deferred.resolve(res);
-			});
+			if  (id === 'add') {
+				var doc = {
+					_id: new Date().toISOString(),
+					status: 'draft',
+					draftName: info.name,
+					body: {sections: model, formInfo: info}
+				};
+				base.put(doc, function(res) {
+					deferred.resolve(res);
+				});
+			}  else {
+				base.get(id).then(function(doc) {
+					doc.body = {sections: model, formInfo: info};
+					return doc;
+				}, function() {
+					deferred.reject(false);
+				}).then(function(doc) {
+					base.put(doc, function(res) {
+						deferred.resolve(res);
+					});
+				});
+			}
+
+
+
 			return deferred.promise;
 		}
 
