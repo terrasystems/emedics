@@ -1,0 +1,63 @@
+<!-- filters -->
+<div class="container">
+	<div class="pad row">
+		<div class="btn-group col-md-8 s-center-page">
+			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="1" uib-uncheckable="uncheckable" translate="TODAY"></label>
+			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="2" uib-uncheckable="uncheckable" translate="YESTERDAY"></label>
+			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="3" uib-uncheckable="uncheckable" translate="WEEK"></label>
+			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="4" uib-uncheckable="uncheckable" translate="MONTH"></label>
+		</div>
+		<div class="col-md-4">
+			<button type="button"
+					class="btn btn-default"
+					ng-model="vm.showFilter"
+					uib-btn-checkbox
+					btn-checkbox-true="true"
+					btn-checkbox-false="false"
+					translate="FILTERS">
+			</button>
+		</div>
+	</div>
+
+	<div uib-collapse="vm.showFilter">
+		<div class="well well-lg">
+			<form name="filterForm" novalidate>
+				<div class="row">
+					<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="From user"></span>: </label></p>
+					<input ng-model="vm.filterModel.fromName"
+						   type="text"
+						   class="col-md-8 col-sm-8 col-xs-8"
+						   id="userFromName"
+						   placeholder="Enter user name ...">
+				</div>
+
+				<div class="row">
+					<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="Patient name"></span>: </label></p>
+					<input ng-model="vm.filterModel.patientName"
+						   type="text"
+						   class="col-md-8 col-sm-8 col-xs-8"
+						   id="patientName"
+						   placeholder="Enter patient name ...">
+				</div>
+
+				<div class="row">
+					<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="Template name"></span>: </label></p>
+					<input ng-model="vm.filterModel.templateName"
+						   type="text"
+						   class="col-md-8 col-sm-8 col-xs-8"
+						   id="templateName"
+						   placeholder="Enter template name ...">
+				</div>
+
+				<button ng-click="vm.onApplyFilters();" type="submit" class="btn btn-primary" translate="APPLY">
+				</button>
+
+				<button ng-click="vm.onClearFilters();" type="submit" class="btn btn-primary pull-right" translate="CLEAR">
+				</button>
+
+			</form>
+		</div>
+	</div>
+	<hr>
+
+</div>

@@ -3,19 +3,31 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService) {
+	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.page = {};
 		vm.list = [];
 		vm.history = [];
 		vm.stafs = [];
+		vm.showFilter = true;
+		vm.showFilterH = true;
+		vm.filterModel = { period: 1, fromName: null, patientName: null, templateName: null };
+		vm.filterModelH= { period: 1, fromName: null, patientName: null, templateName: null };
 
 		if (!(vm.user.org == 'true' || vm.user.org == true)) {
 			vm.hideAdminTasks = false;
 		} else {
 			vm.hideAdminTasks = true;
 		}
+
+		$scope.$watch('vm.filterModel.period', function (newValue) {
+			vm.onRefreshNew();
+		});
+
+		$scope.$watch('vm.filterModelH.period', function (newValue) {
+			vm.onRefreshHistory();
+		});
 
 		vm.onCreateTask = function() {
 			var config = {
@@ -37,15 +49,16 @@ angular.module('modules.dash')
 		};
 
 		/*********** << NEW >> ************/
+		vm.onClearFilters = function() {
+			vm.filterModel = { period: 1, fromName: null, patientName: null, templateName: null };
+		};
+
+		vm.onApplyFilters = function() {
+			vm.onRefreshNew();
+		};
 
 		vm.onRefreshNew = function() {
-			var params = {
-				period: null,
-				templateName: null,
-				patientName: null,
-				fromName: null
-			};
-			http.post('private/dashboard/tasks/all', params)
+			http.post('private/dashboard/tasks/all', vm.filterModel)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -83,15 +96,16 @@ angular.module('modules.dash')
 		};
 
 		/*********** << HISTORY >> *************/
+		vm.onClearFiltersH = function() {
+			vm.filterModelH = { period: 1, fromName: null, patientName: null, templateName: null };
+		};
+
+		vm.onApplyFiltersH = function() {
+			vm.onRefreshNew();
+		};
 
 		vm.onRefreshHistory = function() {
-			var params = {
-				period: null,
-				templateName: null,
-				patientName: null,
-				fromName: null
-		};
-			http.post('private/dashboard/tasks/gethistory', params)
+			http.post('private/dashboard/tasks/gethistory', vm.filterModelH)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -127,7 +141,8 @@ angular.module('modules.dash')
 					id: taskObj.template.id,
 					templateDto: {id : taskObj.template.id}
 				},
-				patient: patientId
+				patient: patientId,
+				data: "{}"
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {

@@ -20,7 +20,8 @@ angular.module('modules.dash')
 					id: obj.doc.body.formInfo.rawData.template.id,
 					templateDto: null
 				},
-				patient: obj.doc.body.formInfo.rawData.patient.id
+				patient: obj.doc.body.formInfo.rawData.patient.id,
+				data: "{}"
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {

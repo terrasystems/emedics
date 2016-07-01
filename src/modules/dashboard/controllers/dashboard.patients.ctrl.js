@@ -27,7 +27,8 @@ angular.module('modules.dash')
 					id: taskObj.template.id,
 					templateDto: {id : taskObj.template.id}
 				},
-				patient: patientId
+				patient: patientId,
+				data: "{}"
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {

@@ -716,15 +716,21 @@ and (min-width: 1824px) {
 }
 
 .s-center {
+	 margin: auto;
+	 height: 50px;
+	 display: flex;
+	 justify-content: center;
+	 position: absolute;
+	 top: 0;
+	 right: 0;
+	 bottom: 0;
+	 left: 0;
+ }
+
+.s-center-page {
 	margin: auto;
-	height: 50px;
-	display: flex;
 	justify-content: center;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	text-align: center;
 }
 
 .s-fix-button {

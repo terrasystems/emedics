@@ -75,7 +75,8 @@ angular.module('modules.dash')
 			var deferred = $q.defer();
 			var paramsPOST = {
 				template: {id: vm.model.data.templ_id, type: '', description: '', templateDto: null},
-				patient: vm.patient2.id
+				patient: vm.patient2.id,
+				data: "{}"
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {

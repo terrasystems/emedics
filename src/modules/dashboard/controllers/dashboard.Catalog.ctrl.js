@@ -191,7 +191,8 @@ angular.module('modules.dash')
 							description: null,
 							templateDto: null
 						},
-						patient: null
+						patient: null,
+						data: "{}"
 					};
 					vm.Send(paramsPOST);
 				},
@@ -227,7 +228,8 @@ angular.module('modules.dash')
 					description: null,
 					templateDto: null
 				},
-				patient: null
+				patient: null,
+				data: "{}"
 			};
 			vm.Send(paramsPOST);
 		};

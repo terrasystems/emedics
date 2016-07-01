@@ -46,7 +46,8 @@ angular.module('modules.dash')
 			} else {
 				var paramsPOST = {
 					template: {id: vm.message.template, type: null, description: null, templateDto: null	},
-					patient: vm.user.id
+					patient: vm.user.id,
+					data: "{}"
 				};
 				http.post('private/dashboard/tasks/create', paramsPOST)
 					.then(function (res) {
