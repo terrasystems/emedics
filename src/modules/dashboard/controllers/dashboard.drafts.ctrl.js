@@ -15,12 +15,14 @@ angular.module('modules.dash')
 		};
 
 		vm.onSend = function (obj) {
+
 			var paramsPOST = {
 				template: {
 					id: obj.doc.body.formInfo.rawData.template.id,
 					templateDto: null
 				},
-				patient: obj.doc.body.formInfo.rawData.patient.id,
+				//patient: (obj.doc.body.formInfo.rawData.patient === null)? null :  obj.doc.body.formInfo.rawData.patient.id,
+				patient: obj.doc.body.formInfo.rawData.patient ? obj.doc.body.formInfo.rawData.patient.id : null,
 				data: "{}"
 			};
 			http.post('private/dashboard/tasks/create', paramsPOST)

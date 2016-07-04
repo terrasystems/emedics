@@ -3,7 +3,7 @@
 
 		<uib-tab ng-click="vm.onRefreshNew();" index="0" heading="New">
 			<!-- filters -->
-			<div class="pad" ng-include="'modules/dashboard/views/filters.tmpl.html'">
+			<div class="pad" ng-include="'modules/dashboard/views/filters.tmpl.html'" ng-if="vm.user.type !== 'patient'">
 				<!-- filters include here-->
 			</div>
 
@@ -121,7 +121,7 @@
 
 		<uib-tab ng-click="vm.onRefreshHistory();" index="2" heading="History">
 
-			<div class="pad" ng-include="'modules/dashboard/views/filters-history.tmpl.html'">
+			<div class="pad" ng-include="'modules/dashboard/views/filters-history.tmpl.html'" ng-if="vm.user.type !== 'patient'">
 				<!-- filters include here-->
 			</div>
 

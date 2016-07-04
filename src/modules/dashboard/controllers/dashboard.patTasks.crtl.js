@@ -10,10 +10,17 @@ angular.module('modules.dash')
 		vm.list = [];
 		vm.history = [];
 		vm.stafs = [];
+
 		vm.showFilter = true;
 		vm.showFilterH = true;
+
 		vm.filterModel = { period: 1, fromName: '', patientName: '', templateName: '' };
 		vm.filterModelH= { period: 1, fromName: '', patientName: '', templateName: '' };
+
+		if (vm.user.type === 'patient') {
+			vm.filterModel.period = 4;
+			vm.filterModelH.period = 4;
+		}
 
 		if (!(vm.user.org == 'true' || vm.user.org == true)) {
 			vm.hideAdminTasks = false;
