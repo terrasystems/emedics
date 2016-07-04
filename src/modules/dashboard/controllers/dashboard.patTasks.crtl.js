@@ -12,8 +12,8 @@ angular.module('modules.dash')
 		vm.stafs = [];
 		vm.showFilter = true;
 		vm.showFilterH = true;
-		vm.filterModel = { period: 1, fromName: null, patientName: null, templateName: null };
-		vm.filterModelH= { period: 1, fromName: null, patientName: null, templateName: null };
+		vm.filterModel = { period: 1, fromName: '', patientName: '', templateName: '' };
+		vm.filterModelH= { period: 1, fromName: '', patientName: '', templateName: '' };
 
 		if (!(vm.user.org == 'true' || vm.user.org == true)) {
 			vm.hideAdminTasks = false;
