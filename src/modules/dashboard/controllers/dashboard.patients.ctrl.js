@@ -60,6 +60,10 @@ angular.module('modules.dash')
 				});
 		};
 
+		vm.onEditTask = function(histId, patientId) {
+			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients', patId: patientId});
+		};
+
 		$scope.getFindPatients = function (val) {
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.search = val;
