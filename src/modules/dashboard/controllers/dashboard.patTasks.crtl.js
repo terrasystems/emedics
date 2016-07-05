@@ -14,8 +14,10 @@ angular.module('modules.dash')
 		vm.showFilter = true;
 		vm.showFilterH = true;
 
-		vm.filterModel = { period: 1, fromName: '', patientName: '', templateName: '' };
-		vm.filterModelH= { period: 1, fromName: '', patientName: '', templateName: '' };
+		vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
+
+		vm.filterModel = { period: 1, fromName: '', patientName: '', templateName: '', statusEnum: null };
+		vm.filterModelH= { period: 1, fromName: '', patientName: '', templateName: '', statusEnum: null };
 
 		if (vm.user.type === 'patient') {
 			vm.filterModel.period = 4;
@@ -57,7 +59,7 @@ angular.module('modules.dash')
 
 		/*********** << NEW >> ************/
 		vm.onClearFilters = function() {
-			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null };
+			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null, statusEnum: null };
 		};
 
 		vm.onApplyFilters = function() {
@@ -104,7 +106,7 @@ angular.module('modules.dash')
 
 		/*********** << HISTORY >> *************/
 		vm.onClearFiltersH = function() {
-			vm.filterModelH = { period: 1, fromName: null, patientName: null, templateName: null };
+			vm.filterModelH = { period: 1, fromName: null, patientName: null, templateName: null, statusEnum: null };
 		};
 
 		vm.onApplyFiltersH = function() {
