@@ -151,7 +151,8 @@ angular.module('modules.dash')
 		vm.onRefresh();
 
 		vm.convertDateTime = function (d) {
-			return d.slice(0, 19).replace('T', ' / ');
+			var y = new Date(d);
+			return y.toLocaleString().replace(',', ' / ');
 		};
 
 	});
