@@ -52,7 +52,7 @@ angular.module('modules.dash')
 		forEditTask.getModel(vm.getUrl, null)
 			.then(function(res) {
 				vm.data = res;
-
+				vm.originalModel = JSON.stringify(vm.data.model);
 				$scope.$watch('vm.data.selectedSection', function (newValue) {
 					for (var key in vm.data.model) {
 						if (newValue == Object.keys(vm.data.model[key])[0]) {
@@ -135,5 +135,16 @@ angular.module('modules.dash')
 					});
 				});
 		};
+
+		$scope.$on('$destroy', function() {
+			if  (!($stateParams.type == 'patients+' || $stateParams.type == 'tasks+')) {
+				if  (!angular.equals(vm.originalModel,JSON.stringify(vm.data.model))) {
+					confirmService('Save task?')
+						.then(function() {
+							save();
+						});
+					}
+				}
+		});
 
 	});
