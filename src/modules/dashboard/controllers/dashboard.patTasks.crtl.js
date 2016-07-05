@@ -57,7 +57,7 @@ angular.module('modules.dash')
 
 		/*********** << NEW >> ************/
 		vm.onClearFilters = function() {
-			vm.filterModel = { period: 1, fromName: null, patientName: null, templateName: null };
+			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null };
 		};
 
 		vm.onApplyFilters = function() {

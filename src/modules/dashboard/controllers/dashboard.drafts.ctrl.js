@@ -24,7 +24,9 @@ angular.module('modules.dash')
 				fromID: null, //vm.user.id,
 				data: JSON.stringify({sections: obj.doc.body.sections})   // !!!!!
 			};
-			if (vm.user.type === 'stuff' || vm.user.type === 'patient') {
+			if (vm.user.type === 'stuff' ||
+				vm.user.type === 'patient' ||
+				(vm.user.type === 'doctor' && obj.doc.body.formInfo.rawData.template.typeEnum === 'MEDICAL')) {
 				http.get('private/dashboard/tasks/findTask/'+obj.doc.body.formInfo.rawData.template.id)
 					.then(function (res) {
 						if  (res.result) {
