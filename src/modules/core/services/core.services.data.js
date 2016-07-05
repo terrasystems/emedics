@@ -185,6 +185,7 @@ angular.module('modules.core')
 				if ($rootScope.token) {
 					var authToken = $rootScope.token;
 					config.headers['X-Auth-Token'] = authToken;
+					$rootScope.$broadcast('change.username');
 				}
 				return config || $q.when(config);
 			}
