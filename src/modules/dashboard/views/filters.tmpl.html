@@ -62,11 +62,14 @@
 					<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="Template name"></span>: </label></p>
 					<div class="col-md-8 col-sm-8 col-xs-8">
 						<div class="input-group">
-								<input ng-model="vm.filterModel.templateName"
-									   type="text"
-									   class="form-control"
-									   id="templateName"
-									   placeholder="Enter template name ...">
+
+								<ui-select allow-clear ng-model="vm.filterModel.templateName" theme="bootstrap">
+									<ui-select-match placeholder="Select a template in the list...">{{$select.selected.name}}</ui-select-match>
+									<ui-select-choices repeat="item.id as item in vm.formTemplates">
+										<span ng-bind-html="item.name"></span>
+									</ui-select-choices>
+								</ui-select>
+
 								<span class="input-group-btn">
 									<button type="button" ng-click="vm.filterModel.templateName = ''" class="btn btn-default">
 									  <span class="glyphicon glyphicon-trash"></span>

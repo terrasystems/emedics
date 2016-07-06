@@ -57,6 +57,17 @@ angular.module('modules.dash')
 			});
 		};
 
+		vm.getAllTemplates = function() {
+			http.get('private/dashboard/template')
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						vm.formTemplates = res.result;
+					}
+				});
+		};
+		vm.getAllTemplates();
+
 		/*********** << NEW >> ************/
 		vm.onClearFilters = function() {
 			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null, statusEnum: null };
