@@ -14,7 +14,7 @@ angular.module('modules.dash')
 		}
 
 		vm.onRefresh = function() {
-			http.get('private/dashboard/stuff')
+			http.post('private/dashboard/stuff', {name: ''})
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -23,15 +23,6 @@ angular.module('modules.dash')
 				});
 		};
 		vm.onRefresh();
-
-		vm.onRemove = function (id) {
-			//http.get('private/dashboard/.../' + id)
-			//	.then(function (res) {
-			//		vm.Refresh();
-			//		blockUI.stop();
-			//		alertService.add(0, res.state.message);
-			//	});
-		};
 
 		vm.onEdit = function (index) {
 			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: index});

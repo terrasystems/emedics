@@ -1,21 +1,33 @@
 <div class="container">
-
 	<div class="row">
-	<div class="search_content">
-		<input  style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
-			   ng-model="doctor"
-			   placeholder="{{'SEARCH_REFS2' | translate}}"
-			   uib-typeahead="item as item.all for item in getFindRefs($viewValue)"
-			   typeahead-on-select="onSelect($item);"
-			   typeahead-loading="loadingLocations"
-			   typeahead-editable="true"
-			   class="form-control">
+		<div class="search_content">
 
-		<button style="float: right" type="submit" class="btn btn-success" ng-click="onApply()"><span
-				translate="APPLY"></span></button>
+			<p></p>
+			<p></p>
+			<h4>Filter references:</h4>
+
+			<div class="row">
+
+				<div class="col-md-8 col-sm-8 col-xs-8">
+					<ui-select ng-model="vm.temp_" theme="bootstrap" close-on-select="true" title="Choose a person" reset-search-input="false">
+						<ui-select-match placeholder="{{'SEARCH_REFS2' | translate}}...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+						<ui-select-choices refresh="vm.getFindMyRefs($select.search)"
+										   refresh-delay="1"
+										   repeat="person.id as person in vm.refs | filter:{name: $select.search}">
+						</ui-select-choices>
+					</ui-select>
+				</div>
+
+				<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+					<button style="margin-rigth:10px; margin-bottom: 10px;" class="col-md-3 col-sm-3 col-xs-3 btn btn-success" ng-click="vm.onAddRef();"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+				</div>
+
+			</div>
+			<p></p>
+		</div>
 	</div>
 </div>
-</div>
+
 <div class="container ui-list-view">
 	<div class="row form-list">
 		<div ng-show="vm.references.length == 0"><h5 class="noData_msg">You don't have any references</h5></div>

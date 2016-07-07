@@ -11,7 +11,7 @@ angular.module('modules.dash')
 		vm.templates = [];
 
 		vm.refresh = function () {
-			http.get('private/dashboard/patients')
+			http.post('private/dashboard/patients', {name: ''})
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result && angular.isArray(res.result) ) {

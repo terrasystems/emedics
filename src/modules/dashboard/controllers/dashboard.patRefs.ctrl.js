@@ -1,48 +1,12 @@
 'use strict';
-/*jshint	-W117, -W097*/
+/*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.run(function(editableOptions) {
-		editableOptions.theme = 'bs3';
-	})
-
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService, $uibModal, $q) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.searchref = '';
 		vm.references = [];
 
-		//*** add item in list
-		$scope.onApply = function (obj) {
-			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
-			/*	vm.paramsPOST = initParamsPOST.params;
-				vm.paramsPOST.criteria.list = [];
-				vm.paramsPOST.criteria.list.push($scope.doctor.id);*/
-				http.get('private/dashboard/' + vm.user.type + '/references/add/'+ $scope.doctor.id)
-					.then(function (res) {
-						blockUI.stop();
-						alertService.add(0, res.state.message);
-						vm.refresh();
-					});
-			}
-			$scope.doctor='';
-		};
-
-		//*** get all items
-		vm.refresh = function () {
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.list = [];
-			http.get('private/dashboard/' + vm.user.type + '/references', vm.paramsPOST)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result) {
-						vm.references = res.result;
-					}
-				});
-		};
-		vm.refresh();
-
-		//*** delete item
 		vm.onRemove = function (index, id) {
 			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
@@ -50,36 +14,6 @@ angular.module('modules.dash')
 					alertService.add(0, res.state.message);
 					vm.refresh();
 				});
-		};
-
-		//*** create item
-		vm.addFormList = function () {
-			$state.go('main.private.dashboard.abstract.refadd');
-		};
-
-		// Any function returning a promise object can be used to load values asynchronously
-		$scope.getFindRefs = function (val) {
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.search = val;
-			return http.post('private/dashboard/' + vm.user.type + '/references/search', vm.paramsPOST)
-				.then(function (res) {
-					blockUI.stop();
-					if  (angular.isArray(res.result) && res.result.length>0) {
-						res.result.map(function (item) {
-							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
-							return item;
-						});
-					} else {
-						res.result.push( { all: 'Add new reference...', id: 'add' } );
-					}
-					return res.result;
-				});
-		};
-
-		$scope.onSelect = function (item) {
-			if  (item.id && item.id == 'add') {
-				vm.addFormList();
-			}
 		};
 
 		vm.onInvite = function (id, $event) {
@@ -94,6 +28,34 @@ angular.module('modules.dash')
 						alertService.add(0, res.state.message);
 						vm.refresh();
 					}
+				});
+		};
+
+		vm.onAddRef = function () {
+			var config = {
+				templateUrl: 'modules/dashboard/views/modal.addExistsRef.html',
+				controller: 'modalAddExistsRefCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function($q) {
+						var deferred = $q.defer();
+						deferred.resolve({});
+						return deferred.promise;
+					}
+				}
+			};
+			var result = $uibModal.open(config);
+			result.result.then(function (){});
+		};
+
+		vm.getFindMyRefs = function (val) {
+			return http.post('private/dashboard/' + vm.user.type + '/references', {name: val, type: null})
+				.then(function (res) {
+					blockUI.stop();
+					if (angular.isArray(res.result)) {
+						vm.references = res.result;
+					}
+					return res.result;
 				});
 		};
 

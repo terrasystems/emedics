@@ -197,7 +197,7 @@ angular.module('modules.dash')
 		/*********** << STUFF >> ************/
 
 		vm.onRefreshAdminTasks = function() {
-			http.get('private/dashboard/stuff')
+			http.post('private/dashboard/stuff', {name: ''})
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {

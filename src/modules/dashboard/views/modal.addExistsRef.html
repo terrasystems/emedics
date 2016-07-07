@@ -1,0 +1,31 @@
+<div class="row ">
+	<div class="content_modal">
+		<p></p>
+		<p></p>
+		<h4>Search and add reference:</h4>
+		<ui-select ng-model="vm.temp_"
+				   theme="bootstrap"
+				   close-on-select="true"
+				   title="Choose a person"
+				   on-select="vm.onSelectCallback($item, $model)">
+			<ui-select-match placeholder="{{'SEARCH_REFS2' | translate}}...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
+			<ui-select-choices refresh="vm.getFindRefs($select.search)"
+							   refresh-delay="1"
+							   repeat="person.id as person in vm.refs">
+				<div ng-bind-html="person.name | highlight: $select.search"></div>
+				<small ng-if="vm.refs[0].id !== 'ADD'">email: {{person.email}}</small>
+			</ui-select-choices>
+		</ui-select>
+		<p></p>
+
+		<button class="btn btn-default"	ng-click="vm.onBack();">
+			<i class="glyphicon glyphicon-arrow-left">&nbsp;</i>
+		</button>
+
+		<p></p>
+		<p></p>
+		<!--<button ui-sref="main.private.dashboard.abstract.ref" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>-->
+	</div>
+</div>
+
+

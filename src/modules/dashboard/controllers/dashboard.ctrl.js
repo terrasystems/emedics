@@ -61,7 +61,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.$on('calc.notif', function () {
-				http.get('private/dashboard/events/notifications/all')
+				http.post('private/dashboard/events/notifications/all', { templateId: null, period: null, fromName: null, description: null, formType: null })
 					.then(function (res) {
 						blockUI.stop();
 						if (res.result) {
