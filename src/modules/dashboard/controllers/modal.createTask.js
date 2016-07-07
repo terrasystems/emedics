@@ -20,7 +20,7 @@ angular.module('modules.dash')
 			});
 
 		if (vm.user.type==='doctor') {
-			http.get('private/dashboard/patients')
+			http.post('private/dashboard/patients', {name: ''})
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result && angular.isArray(res.result)) {

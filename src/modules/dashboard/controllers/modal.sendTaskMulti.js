@@ -10,7 +10,7 @@ angular.module('modules.dash')
 		vm.message = {template: model.data.template_id, message: '', patients:[]};
 		vm.patients = [];
 
-		http.get('private/dashboard/patients')
+		http.post('private/dashboard/patients', {name: ''})
 			.then(function (res) {
 				blockUI.stop();
 				if (res.result && angular.isArray(res.result)) {
