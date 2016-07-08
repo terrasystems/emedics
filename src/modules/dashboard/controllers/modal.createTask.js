@@ -11,6 +11,32 @@ angular.module('modules.dash')
 		vm.patients = [];
 		vm.isMulti = false;
 
+		vm.getFindUsers = function (val) {
+			if  (val==='') { return []; }
+			return http.post('private/dashboard/patients', {name: val})
+				.then(function (res) {
+					blockUI.stop();
+					if  (angular.isArray(res.result) && res.result.length>0) {
+						res.result.unshift( { name: '<< To ALL PATIENTS >>', email: '', id: 'ALL' } );
+					}
+					vm.patients = res.result;
+					return res.result;
+				});
+		};
+
+		vm.onSelectCallback = function (item, model) {
+			if (model === 'ALL') {
+				vm.message.patients = ['ALL'];
+				vm.message.assignAll = true;
+			}
+		};
+
+		vm.onRemoveCallback= function (item, model) {
+			if (model === 'ALL') {
+				vm.message.assignAll = false;
+			}
+		};
+
 		http.get('private/dashboard/user/template')
 			.then(function (res) {
 				blockUI.stop();
@@ -25,22 +51,15 @@ angular.module('modules.dash')
 				}
 			});
 
-		if (vm.user.type==='doctor') {
-			http.post('private/dashboard/patients', {name: ''})
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result)) {
-						vm.patients = res.result;
-					}
-				});
-		}
-
 		vm.onSelected = function(item) {
 			vm.isMulti = vm.user.type==='doctor' &&  item.templateDto.typeEnum==='PATIENT';
 		};
 
 		vm.onCreate = function () {
 			if  (vm.isMulti) {
+				if  (vm.message.assignAll === true) {
+					vm.message.patients = [];
+				}
 				http.post('private/dashboard/tasks/multipleCreate', vm.message)
 					.then(function (res) {
 						blockUI.stop();
@@ -60,6 +79,9 @@ angular.module('modules.dash')
 						blockUI.stop();
 						alertService.add(0, res.state.message);
 						$uibModalInstance.close(res);
+					}, function (error) {
+						$uibModalInstance.close(error);
+						deferred.reject(error);
 					});
 			}
 		};
