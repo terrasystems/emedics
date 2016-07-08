@@ -6,13 +6,14 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.references = [];
+		vm.temp_ = '';
 
 		vm.onRemove = function (index, id) {
 			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
-					vm.refresh();
+					vm.getFindMyRefs(vm.temp_);
 				});
 		};
 
@@ -26,7 +27,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if  (res.state) {
 						alertService.add(0, res.state.message);
-						vm.refresh();
+						vm.getFindMyRefs(vm.temp_);
 					}
 				});
 		};
@@ -45,7 +46,9 @@ angular.module('modules.dash')
 				}
 			};
 			var result = $uibModal.open(config);
-			result.result.then(function (){});
+			result.result.then(function (){
+				vm.getFindMyRefs(vm.temp_);
+			});
 		};
 
 		vm.getFindMyRefs = function (val) {
@@ -58,6 +61,7 @@ angular.module('modules.dash')
 					return res.result;
 				});
 		};
+		vm.getFindMyRefs('');
 
 });
 

@@ -3,23 +3,12 @@
 
 angular.module('modules.dash')
 
-	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService){
+	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService, $q){
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.searchref = '';
 		vm.patients = [];
 		vm.templates = [];
-
-		vm.refresh = function () {
-			http.post('private/dashboard/patients', {name: ''})
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result) ) {
-						vm.patients = res.result;
-					}
-				});
-		};
-		vm.refresh();
+		vm.temp_ = '';
 
 		vm.onCopyTask = function(taskObj, patientId) {
 			var paramsPOST = {
@@ -64,44 +53,35 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients', patId: patientId});
 		};
 
-		$scope.getFindPatients = function (val) {
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.search = val;
-			return http.post('private/dashboard/patients/search', vm.paramsPOST)
+		vm.getFindPatients = function (val) {
+			return http.post('private/dashboard/patients', {name: val})
 				.then(function (res) {
 					blockUI.stop();
-					if  (angular.isArray(res.result) && res.result.length>0) {
-						res.result.map(function (item) {
-							item.all = item.name + ', ' + item.email + ( (item.type == null) ? '' : ', ' + item.type);
-							return item;
-						});
-					} else {
-						res.result.push( { all: 'Add new reference...', id: 'add' } );
+					if (angular.isArray(res.result)) {
+						vm.patients = res.result;
 					}
 					return res.result;
 				});
 		};
+		vm.getFindPatients('');
 
-		$scope.onApply = function (obj) {
-			if ($scope.doctor && $scope.doctor.id && $scope.doctor.id !==null && $scope.doctor.id !=='') {
-				vm.paramsPOST = initParamsPOST.params;
-				vm.paramsPOST.criteria.list = [];
-				vm.paramsPOST.criteria.search = '';
-				vm.paramsPOST.criteria.list.push({id: $scope.doctor.id, email: null, phone: null, name: null, history:[]});
-				http.post('private/dashboard/patients/add', vm.paramsPOST)
-					.then(function (res) {
-						blockUI.stop();
-						alertService.add(0, res.state.message);
-						$scope.doctor = '';
-						vm.refresh();
-					});
-			}
-		};
-
-		$scope.onSelect = function (item) {
-			if  (item.id && item.id == 'add') {
-				vm.addItemList();
-			}
+		vm.onAddPateint = function () {
+			var config = {
+				templateUrl: 'modules/dashboard/views/modal.addExistsRef.html',
+				controller: 'modalAddExistsPatCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function($q) {
+						var deferred = $q.defer();
+						deferred.resolve({});
+						return deferred.promise;
+					}
+				}
+			};
+			var result = $uibModal.open(config);
+			result.result.then(function (){
+				vm.getFindPatients(vm.temp_);
+			});
 		};
 
 		vm.addItemList = function () {
@@ -120,7 +100,7 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
-					vm.refresh();
+					vm.getFindPatients(vm.temp_);
 				});
 		};
 
@@ -134,7 +114,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if  (res.state) {
 						alertService.add(0, res.state.message);
-						vm.refresh();
+						vm.getFindPatients(vm.temp_);
 					}
 				});
 		};

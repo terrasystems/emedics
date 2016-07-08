@@ -2,16 +2,16 @@
 	<div class="content_modal">
 		<p></p>
 		<p></p>
-		<h4>Search and add reference:</h4>
+		<h4>{{vm.filterTitle}}:</h4>
 		<ui-select ng-model="vm.temp_"
 				   theme="bootstrap"
 				   close-on-select="true"
 				   title="Choose a person"
 				   on-select="vm.onSelectCallback($item, $model)">
-			<ui-select-match placeholder="{{'SEARCH_REFS2' | translate}}...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
-			<ui-select-choices refresh="vm.getFindRefs($select.search)"
+			<ui-select-match placeholder="{{vm.placeholder}}...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
+			<ui-select-choices refresh="vm.getFindUsers($select.search)"
 							   refresh-delay="1"
-							   repeat="person.id as person in vm.refs">
+							   repeat="person.id as person in vm.users">
 				<div ng-bind-html="person.name | highlight: $select.search"></div>
 				<small ng-if="vm.refs[0].id !== 'ADD'">email: {{person.email}}</small>
 			</ui-select-choices>

@@ -27,6 +27,7 @@
 	"F1_SBB_3CLIENT_HEALTH_INSURANCE": "Name of health insurance (basic insurance)",
 	"F1_SBB_3CLIENT_NAME_FUND": "Name of disease fund (insurance)",
 
+  	"ADD": "Add",
 	"ADDNOTIF": "Send",
 	"ADDPATIENT": "Add patient",
 	"ADDRESS": "Address",

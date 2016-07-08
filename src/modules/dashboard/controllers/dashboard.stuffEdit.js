@@ -95,7 +95,7 @@ angular.module('modules.dash')
 				type: 'input',
 				templateOptions: {
 					type:'password',
-					required: true,
+					required: false,
 					label: $translate.instant('PASSWORD')
 				},
 				validation: {

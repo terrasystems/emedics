@@ -8,21 +8,23 @@
 
 			<div class="row">
 
+				<p></p>
 				<div class="col-md-8 col-sm-8 col-xs-8">
-					<ui-select ng-model="vm.temp_" theme="bootstrap" close-on-select="true" title="Choose a person" reset-search-input="false">
-						<ui-select-match placeholder="{{'SEARCH_REFS2' | translate}}...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
-						<ui-select-choices refresh="vm.getFindMyRefs($select.search)"
-										   refresh-delay="1"
-										   repeat="person.id as person in vm.refs | filter:{name: $select.search}">
-						</ui-select-choices>
-					</ui-select>
+					<form name="xForm">
+						<input type="text"
+							   style="height: 35px"
+							   class="form-control"
+							   placeholder="{{'SEARCH_REFS2' | translate}}..."
+							   ng-model="vm.temp_"
+							   ng-change="vm.getFindMyRefs(vm.temp_);" />
+					</form>
 				</div>
-
+				<p></p>
 				<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
-					<button style="margin-rigth:10px; margin-bottom: 10px;" class="col-md-3 col-sm-3 col-xs-3 btn btn-success" ng-click="vm.onAddRef();"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+					<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddRef();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>
 				</div>
-
 			</div>
+			<p></p>
 			<p></p>
 		</div>
 	</div>
@@ -30,7 +32,7 @@
 
 <div class="container ui-list-view">
 	<div class="row form-list">
-		<div ng-show="vm.references.length == 0"><h5 class="noData_msg">You don't have any references</h5></div>
+		<div ng-show="vm.references.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any references</h5></div>
 		<div class="container ui-list-view">
 
 			<uib-accordion>
