@@ -4,8 +4,9 @@
 angular.module('modules.dash')
 	.controller('stafCtrl', function(http, blockUI, alertService, $state, localStorageService){
 		var vm = this;
-		vm.stafs = [];
 		vm.user = localStorageService.get('userData');
+		vm.stafs = [];
+		vm.temp_ = '';
 
 		if (vm.user.type === 'doctor' && (vm.user.org === 'true' || vm.user.org === true)) {
 			vm.canEdit = true;
@@ -13,16 +14,17 @@ angular.module('modules.dash')
 			vm.canEdit = false;
 		}
 
-		vm.onRefresh = function() {
-			http.post('private/dashboard/stuff', {name: ''})
+		vm.getFindStuffs = function (val) {
+			return http.post('private/dashboard/stuff', {name: val})
 				.then(function (res) {
 					blockUI.stop();
-					if (res.result) {
+					if (angular.isArray(res.result)) {
 						vm.stafs = res.result;
 					}
+					return res.result;
 				});
 		};
-		vm.onRefresh();
+		vm.getFindStuffs('');
 
 		vm.onEdit = function (index) {
 			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: index});

@@ -116,6 +116,8 @@
 	"SEARCH_REFS": "Select or search a references in the list...",
   	"SEARCH_REFS2": "Search a references in the database...",
   	"SEARCH_PATS": "Search a patients in the database...",
+  	"SEARCH_NOTIF": "Search a notifications in the database...",
+  	"SEARCH_STUFF": "Search a stuffs in the database...",
   	"SELECT_SECTION": "Select section",
     "STATUS":"Status",
     "STUFF":"Stuff",

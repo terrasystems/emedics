@@ -1,9 +1,33 @@
 <div class="container">
 	<div class="row">
-		<div ng-show="vm.stafs.length == 0"><h5 class="noData_msg">You don't have any stuff</h5></div>
-		<div class="container ui-list-view">
-			<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.onEdit('add');" ng-show="vm.canEdit;"><i class="glyphicon glyphicon-plus-sign"></i>Create</button>
+		<p></p>
+		<p></p>
+		<h4>Filter Stuff:</h4>
 
+		<div class="row">
+
+			<p></p>
+			<div class="col-md-8 col-sm-8 col-xs-8">
+				<form name="xForm">
+					<input type="text"
+						   style="height: 35px"
+						   class="form-control"
+						   placeholder="{{'SEARCH_STUFF'  | translate}}..."
+						   ng-model="vm.temp_"
+						   ng-change="vm.getFindStuffs(vm.temp_);" />
+				</form>
+			</div>
+			<p></p>
+			<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+				<button style="margin-right:10px;margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onEdit('add');" ng-show="vm.canEdit;"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="CREATE"></span></button>
+				<!--<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddPateint();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>-->
+			</div>
+		</div>
+		<p></p>
+		<p></p>
+
+		<div class="container ui-list-view">
+			<div ng-show="vm.stafs.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any stuff</h5></div>
 			<uib-accordion>
 				<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">
 

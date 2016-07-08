@@ -1,5 +1,27 @@
 <div class="container">
+
+	<p></p><p></p><h4>Filter Notifications:</h4>
+	<div class="row">
+
+		<p></p>
+		<div class="col-md-8 col-sm-8 col-xs-8">
+			<form name="xForm">
+				<input type="text"
+					   style="height: 35px"
+					   class="form-control"
+					   placeholder="{{'SEARCH_NOTIF'  | translate}}..."
+					   ng-model="vm.temp_"
+					   ng-change="vm.onRefreshNotif(vm.temp_);" />
+			</form>
+		</div>
+		<p></p>
+		<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+		</div>
+	</div>
+	<p></p><p></p>
+
 <div class=" row form-list">
+
 	<div ng-show="vm.UnreadNotifications.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any messages</h5></div>
 	<ul class="" ui-list-view="notification in vm.UnreadNotifications | filter:vm.searchnotif" options="listOptions">
 
@@ -13,5 +35,6 @@
 			<button style="float: right" class="btn btn-success blue" ng-click="vm.onAccept(notification.id)"><span translate="ACCEPT"></span></button>
 		</div>
 	</ul>
+
 </div>
 </div>

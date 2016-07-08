@@ -7,19 +7,39 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
-		vm.message = {template: model.data.template_id, message: '', patients:[]};
+		vm.message = {template: model.data.template_id, message: '', patients:[], assignAll: false};
 		vm.patients = [];
 
-		http.post('private/dashboard/patients', {name: ''})
-			.then(function (res) {
-				blockUI.stop();
-				if (res.result && angular.isArray(res.result)) {
+		vm.getFindUsers = function (val) {
+			if  (val==='') { return []; }
+			return http.post('private/dashboard/patients', {name: val})
+				.then(function (res) {
+					blockUI.stop();
+					if  (angular.isArray(res.result) && res.result.length>0) {
+						res.result.unshift( { name: '<< To ALL PATIENTS >>', email: '', id: 'ALL' } );
+					}
 					vm.patients = res.result;
-				}
-			});
+					return res.result;
+				});
+		};
 
+		vm.onSelectCallback = function (item, model) {
+			if (model === 'ALL') {
+				vm.message.patients = ['ALL'];
+				vm.message.assignAll = true;
+			}
+		};
+
+		vm.onRemoveCallback= function (item, model) {
+			if (model === 'ALL') {
+				vm.message.assignAll = false;
+			}
+		};
 
 		vm.onSend = function () {
+			if  (vm.message.assignAll === true) {
+				vm.message.patients = [];
+			}
 			http.post('private/dashboard/tasks/multipleCreate', vm.message)
 				.then(function (res) {
 					blockUI.stop();

@@ -6,7 +6,7 @@ angular.module('modules.dash')
 	.controller('modalCreateTaskCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.message = {template: '', message: '', patients:[]};
+		vm.message = {template: '', message: '', patients:[], assignAll: false};
 		vm.myForms = [];
 		vm.patients = [];
 		vm.isMulti = false;

@@ -6,15 +6,15 @@ angular.module('modules.dash')
 	.controller('patientNotifCtrl', function (http,$scope,blockUI, alertService, $rootScope) {
 		var vm = this;
 		vm.UnreadNotifications = [];
-		vm.searchnotif = '';
 
-		vm.onRefreshNotif = function() {
-			http.post('private/dashboard/events/notifications/all', { templateId: null, period: null, fromName: null, description: null, formType: null })
+		vm.onRefreshNotif = function(val) {
+			return http.post('private/dashboard/events/notifications/all', {templateId: null, period: null, fromName: val, description: null, formType: null})
 				.then(function (res) {
 					blockUI.stop();
-					if (res.result) {
+					if (angular.isArray(res.result)) {
 						vm.UnreadNotifications = res.result;
 					}
+					return res.result;
 				});
 		};
 		vm.onRefreshNotif();
