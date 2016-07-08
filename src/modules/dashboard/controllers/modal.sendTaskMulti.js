@@ -20,7 +20,7 @@ angular.module('modules.dash')
 
 
 		vm.onSend = function () {
-			http.post('private/dashboard/tasks/multipleSend', vm.message)
+			http.post('private/dashboard/tasks/multipleCreate', vm.message)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {

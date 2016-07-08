@@ -15,6 +15,12 @@ angular.module('modules.dash')
 			.then(function (res) {
 				blockUI.stop();
 				if (res.state) {
+					if (angular.isArray(res.result) && res.result.length > 0) {
+						res.result.map(function (item) {
+							item.name = item.templateDto.name;
+							return item;
+						});
+					}
 					vm.myForms = res.result;
 				}
 			});
@@ -35,7 +41,7 @@ angular.module('modules.dash')
 
 		vm.onCreate = function () {
 			if  (vm.isMulti) {
-				http.post('private/dashboard/tasks/multipleSend', vm.message)
+				http.post('private/dashboard/tasks/multipleCreate', vm.message)
 					.then(function (res) {
 						blockUI.stop();
 						if (res.state) {
