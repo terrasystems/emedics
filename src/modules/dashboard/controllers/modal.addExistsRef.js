@@ -28,6 +28,7 @@ angular.module('modules.dash')
 		vm.getFindUsers = function (val) {
 			vm.paramsPOST = initParamsPOST.params;
 			vm.paramsPOST.criteria.search = val;
+			vm.paramsPOST.criteria.list = [];
 			return http.post('private/dashboard/' + vm.user.type + '/references/search', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
