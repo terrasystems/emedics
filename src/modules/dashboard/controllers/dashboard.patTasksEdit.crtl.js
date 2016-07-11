@@ -12,6 +12,7 @@ angular.module('modules.dash')
 
 		var vm = this;
 		vm.user = localStorageService.get('userData');
+		vm.onNeedSave = true;
 
 		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
 			vm.mainState = 'main.private.dashboard.abstract.tasks';
@@ -63,6 +64,7 @@ angular.module('modules.dash')
 		});
 
 		function save() {
+			vm.onNeedSave = false;
 			var deferred = $q.defer();
 			var paramsPOST = {event: {id: vm.id, data: {sections: vm.data.model}}};
 			paramsPOST.event.patient = vm.data.editModel.patient;
@@ -127,6 +129,7 @@ angular.module('modules.dash')
 		vm.onCloseTask = function() {
 			confirmService('Close task?')
 				.then(function(res) {
+				vm.onNeedSave = false;
 				http.get('private/dashboard/tasks/close/'+vm.id)
 					.then(function (res) {
 						blockUI.stop();
@@ -137,7 +140,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.$on('$destroy', function() {
-			if  (!($stateParams.type == 'patients+' || $stateParams.type == 'tasks+')) {
+			if  (!($stateParams.type == 'patients+' || $stateParams.type == 'tasks+' || !vm.onNeedSave)) {
 				if  (!angular.equals(vm.originalModel,JSON.stringify(vm.data.model))) {
 					confirmService('Save task?')
 						.then(function() {
