@@ -122,7 +122,7 @@ angular.module('modules.core')
 			}
 		},
 		{
-		name:'main.private.dashboard.abstract.patients',
+			name:'main.private.dashboard.abstract.patients',
 			url:'/patients',
 			views:{
 				'forms@dashboard':{
@@ -282,6 +282,36 @@ angular.module('modules.core')
 			},
 			params:{
 				id: ''
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.patients.templates',
+			url: '/templates',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/pTemplates.html',
+					controller:'pTemplatesCtrl as vm'
+				}
+			},
+			params:{
+				id: '',
+				name: '',
+				email: '',
+				phone: ''
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.patients.history',
+			url: '/history',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/pHistory.html',
+					controller:'pHistoryCtrl as vm'
+				}
+			},
+			params:{
+				patient: null,
+				obj: null
 			}
 		}
 

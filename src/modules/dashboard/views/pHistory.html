@@ -1,0 +1,48 @@
+<div class="pad"></div>
+<button type="submit" ng-click="vm.onReturn();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+
+<p></p><p></p>
+
+<div class="row">
+	<p class="col-md-4 col-sm-4"><label><span translate="NAME"></span></label>: {{vm.patient.name}}</p>
+	<p class="col-md-4 col-sm-4"><label><span translate="EMAIL"></span></label>: {{vm.patient.email}}</p>
+	<p class="col-md-4 col-sm-4"><label><span translate="PHONE"></span></label>: {{vm.patient.phone || ' -'}}</p>
+</div>
+
+<div class="row">
+	<p class="col-md-4 col-sm-4"><label><span translate="FORM"></span></label>: {{vm.item.name}}</p>
+	<p class="col-md-4 col-sm-4"><label><span translate="COUNT"></span></label>: {{vm.item.events.length || '-'}}</p>
+</div>
+
+<div class="container ui-list-view">
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th translate="DATE"></th>
+			<th translate="FROM"></th>
+			<th translate="DESCR"></th>
+			<th translate="STATUS"></th>
+			<th translate="ACTION"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-click="" ng-repeat="hist in vm.item.events">
+			<td>{{vm.convertDate(hist.date)}}</td>
+			<td>{{hist.fromUser.username}}</td>
+			<td>{{hist.descr}}</td>
+			<td>{{hist.status}}</td>
+			<td>
+				<div class="btn-group btn-group-xs">
+					<button style="float: right" class="btn btn-success" ng-click="vm.onSend(vm.item, hist)"><span translate="SEND"></span></button>
+					<button style="float: right" class="btn btn-info" ng-click="vm.onView(hist.id, vm.patient.id)"><span translate="VIEW"></span></button>
+					<button style="float: right" class="btn btn-info" ng-click="vm.onCopyTask(hist, vm.patient.id)"><span translate="COPY_TASK"></span></button>
+					<button style="float: right" class="btn btn-success" ng-click="vm.onEditTask(hist.id, vm.patient.id)" ng-disabled="hist.status==='CLOSED'"><span translate="EDIT"></span></button>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div ng-if="vm.item.events.length==0" class="text-center"><span><h4><span translate="NO_DATA"></span></h4></span></div>
+
+</div>
