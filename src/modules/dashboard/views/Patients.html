@@ -2,12 +2,9 @@
 	<div class="row">
 		<div class="search_content">
 
-			<p></p>
-			<p></p>
-			<h4>Filter patients:</h4>
+			<p></p><p></p><h4>Filter patients:</h4>
 
 			<div class="row">
-
 				<p></p>
 				<div class="col-md-8 col-sm-8 col-xs-8">
 					<form name="xForm">
@@ -24,87 +21,37 @@
 					<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddPateint();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>
 				</div>
 			</div>
-			<p></p>
-			<p></p>
+			<p></p><p></p>
 		</div>
 
-	<div class="ui-list-view ">
-
-		<div class="container ui-list-view">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th translate="NAME"></th>
-						<th translate="EMAIL"></th>
-						<th translate="PHONE"></th>
-						<th translate="ACTION"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-click="vm.onOpenPatientSS(patient.id, patient.name, patient.email, patient.phone)"  ng-repeat="patient in vm.patients track by $index">
-						<td>{{patient.name}}</td>
-						<td>{{patient.email}}</td>
-						<td>{{patient.phone}}</td>
-						<td>
-							<div class="btn-group btn-group-xs">
-								<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
-								<button ng-if="patient.enabled == false" ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You dont have any tasks</h5>
+		<div class="ui-list-view ">
+			<div class="container ui-list-view">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th translate="NAME"></th>
+							<th translate="EMAIL"></th>
+							<th translate="PHONE"></th>
+							<th translate="ACTION"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-click="vm.onOpenPatientSS(patient.id, patient.name, patient.email, patient.phone)"  ng-repeat="patient in vm.patients track by $index">
+							<td>{{patient.name}}</td>
+							<td>{{patient.email}}</td>
+							<td>{{patient.phone}}</td>
+							<td>
+								<div class="btn-group btn-group-xs">
+									<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
+									<button ng-if="patient.enabled == false" ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-show="vm.patients.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 			</div>
 		</div>
 
-
-
-		<!--<uib-accordion>-->
-			<!--<uib-accordion-group ng-repeat="patient in vm.patients"  is-open="patient.status.open">-->
-
-				<!--<uib-accordion-heading>-->
-					<!--<div ng-click="vm.onOpenPatientSS(patient.id)">-->
-						<!--&lt;!&ndash;<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': patient.status.open, 'glyphicon-chevron-right': !patient.status.open}"></i>&ndash;&gt;-->
-						<!--&lt;!&ndash;<span translate="NAME"></span>: {{patient.name}}&ndash;&gt;-->
-						<!--&lt;!&ndash;<span translate="EMAIL"></span>: {{patient.email}}&ndash;&gt;-->
-						<!--&lt;!&ndash;<span translate="PHONE"></span>: {{patient.phone}}&ndash;&gt;-->
-						<!--&lt;!&ndash;<div class="pull-right btn-group btn-group-xs">&ndash;&gt;-->
-							<!--&lt;!&ndash;<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>&ndash;&gt;-->
-							<!--&lt;!&ndash;<button ng-if="patient.enabled == false" ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>&ndash;&gt;-->
-						<!--&lt;!&ndash;</div>&ndash;&gt;-->
-					<!--</div>-->
-				<!--</uib-accordion-heading>-->
-
-				<!--<uib-accordion>-->
-					<!--<uib-accordion-group ng-repeat="item in vm.templates" is-open="item.status.open">-->
-
-						<!--<uib-accordion-heading>-->
-							<!--<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></i>-->
-							<!--<span translate="NAME"></span>: {{item.name}}-->
-						<!--</uib-accordion-heading>-->
-
-						<!--<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">-->
-							<!--<button style="float: right" class="btn btn-success" ng-click="vm.onSend(item, hist)"><span translate="SEND"></span></button>-->
-							<!--<button style="float: right" class="btn btn-info" ng-click="vm.onView(hist.id, patient.id)"><span translate="VIEW"></span></button>-->
-							<!--<button style="float: right" class="btn btn-info" ng-click="vm.onCopyTask(hist, patient.id)"><span translate="COPY_TASK"></span></button>-->
-							<!--<button style="float: right" class="btn btn-success" ng-click="vm.onEditTask(hist.id, patient.id)" ng-disabled="hist.status==='CLOSED'"><span translate="EDIT"></span></button>-->
-
-							<!--<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDate(hist.date)}}</p>-->
-							<!--<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username}}</p>-->
-							<!--<p><label class="col-sm-3 control-label"><span translate="DESCR"></span>: </label>{{hist.descr}}</p>-->
-							<!--<p><label class="col-sm-3 control-label"><span translate="STATUS"></span>: </label>{{hist.status}}</p>-->
-						<!--</div>-->
-
-					<!--</uib-accordion-group>-->
-				<!--</uib-accordion>-->
-
-				<!--<div ng-if="vm.templates.length==0" class="text-center">-->
-					<!--<span><h4><span translate="NO_DATA"></span></h4></span>-->
-				<!--</div>-->
-
-			<!--</uib-accordion-group>-->
-		<!--</uib-accordion>-->
-	</div>
 	</div>
 </div>

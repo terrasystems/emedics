@@ -36,7 +36,7 @@
 				<thead>
 				<tr>
 					<th translate="NAME"></th>
-					<th translate="PHONE"></th>
+					<!--<th translate="PHONE"></th>-->
 					<th translate="EMAIL"></th>
 					<th translate="TYPE"></th>
 					<th translate="ACTION"></th>
@@ -45,13 +45,13 @@
 				<tbody>
 				<tr ng-click="vm.onRefInfo(ref);" ng-repeat="ref in vm.references">
 					<td>{{ref.name}}</td>
-					<td>{{ref.phone}}</td>
+					<!--<td>{{ref.phone}}</td>-->
 					<td>{{ref.email}}</td>
 					<td>{{ref.type}}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-							<button class="btn btn-danger" ng-click="vm.onRemove(ref.id)">x</button>
-							<button ng-if="ref.enabled == false || ref.enebled == 'false' " class="btn btn-info" ng-click="vm.onInvite(ref.id)">
+							<button class="btn btn-danger" ng-click="vm.onRemove(ref.id, $event)">x</button>
+							<button ng-if="ref.enabled == false || ref.enebled == 'false' " class="btn btn-info" ng-click="vm.onInvite(ref.id, $event)">
 								<span translate="INVITE"></span>
 							</button>
 

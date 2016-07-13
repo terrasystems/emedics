@@ -8,7 +8,11 @@ angular.module('modules.dash')
 		vm.references = [];
 		vm.temp_ = '';
 
-		vm.onRemove = function (id) {
+		vm.onRemove = function (id, $event) {
+			if($event){
+				$event.stopPropagation();
+				$event.preventDefault();
+			}
 			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
 					blockUI.stop();
@@ -17,7 +21,11 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onInvite = function (id) {
+		vm.onInvite = function (id, $event) {
+			if($event){
+				$event.stopPropagation();
+				$event.preventDefault();
+			}
 			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
 				.then(function (res) {
 					blockUI.stop();

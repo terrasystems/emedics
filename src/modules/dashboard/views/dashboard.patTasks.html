@@ -29,8 +29,7 @@
 						</tr>
 						</tbody>
 					</table>
-					<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
-						dont have any tasks</h5></div>
+					<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 				</div>
 			</section>
 			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
@@ -67,8 +66,7 @@
 						</tbody>
 
 					</table>
-					<div ng-show="vm.list.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
-						dont have any tasks</h5></div>
+					<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 				</div>
 			</section>
 
@@ -165,8 +163,7 @@
 						</tr>
 						</tbody>
 					</table>
-					<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">
-						You dont have history</h5></div>
+					<div ng-show="vm.history.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 				</div>
 			</section>
 			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
@@ -207,8 +204,7 @@
 						</tbody>
 
 					</table>
-					<div ng-show="vm.history.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">
-						You dont have history</h5></div>
+					<div ng-show="vm.history.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 				</div>
 			</section>
 
