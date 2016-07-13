@@ -1,0 +1,44 @@
+
+<div class="container">
+	<div class="row">
+		<div class="search_content">
+
+			<button type="submit" ng-click="vm.onReturn();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+
+			<p></p><p></p>
+			<h4>Reference info:</h4>
+			<p></p><p></p>
+			<div class="container ui-list-view">
+				<p></p><p></p>
+				<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{vm.ref.name || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{vm.ref.firstName || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{vm.ref.lastName || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{vm.ref.phone || '(none)'}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{vm.ref.email || '(none)'}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="TYPE"></span>: </label>{{vm.ref.type || ' - '}}</p>
+
+			<!--<div class="row">-->
+				<!--<p></p>-->
+				<!--<div class="col-md-8 col-sm-8 col-xs-8">-->
+					<!--<form name="xForm">-->
+						<!--<input type="text"-->
+							   <!--style="height: 35px"-->
+							   <!--class="form-control"-->
+							   <!--placeholder="{{'SEARCH_REFS2' | translate}}..."-->
+							   <!--ng-model="vm.temp_"-->
+							   <!--ng-change="vm.getFindMyRefs(vm.temp_);" />-->
+					<!--</form>-->
+				<!--</div>-->
+				<!--<p></p>-->
+				<!--<div class="col-md-3 col-sm-3 col-xs-3 pull-right">-->
+					<!--<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddRef();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>-->
+				<!--</div>-->
+			<!--</div>-->
+
+			<p></p>
+			<p></p>
+				</div>
+		</div>
+	</div>
+</div>
+

@@ -57,17 +57,6 @@ angular.module('modules.dash')
 			});
 		};
 
-		vm.getAllTemplates = function() {
-			http.get('private/dashboard/template')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						vm.formTemplates = res.result;
-					}
-				});
-		};
-		vm.getAllTemplates();
-
 		/*********** << NEW >> ************/
 		vm.onClearFilters = function() {
 			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null, statusEnum: null };
@@ -86,7 +75,6 @@ angular.module('modules.dash')
 					}
 				});
 		};
-		vm.onRefreshNew();
 
 		vm.onClickNew = function (index) {
 			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
@@ -133,7 +121,6 @@ angular.module('modules.dash')
 					}
 				});
 		};
-		vm.onRefreshHistory();
 
 		vm.onSendHistory = function (obj,hist) {
 			var model = { templ_id: obj.id, obj: obj };

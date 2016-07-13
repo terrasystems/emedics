@@ -313,6 +313,19 @@ angular.module('modules.core')
 				patient: null,
 				obj: null
 			}
+		},
+		{
+			name:'main.private.dashboard.abstract.ref.info',
+			url:'/info',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.patRefInfo.html',
+					controller:'patientRefInfoCtrl as vm'
+				}
+			},
+			params:{
+				ref: null
+			}
 		}
 
 	]);

@@ -2,13 +2,13 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, $scope, localStorageService, initParamsPOST, alertService, $uibModal, $q) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.references = [];
 		vm.temp_ = '';
 
-		vm.onRemove = function (index, id) {
+		vm.onRemove = function (id) {
 			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
 				.then(function (res) {
 					blockUI.stop();
@@ -17,11 +17,7 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onInvite = function (id, $event) {
-			if($event){
-				$event.stopPropagation();
-				$event.preventDefault();
-			}
+		vm.onInvite = function (id) {
 			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
 				.then(function (res) {
 					blockUI.stop();
@@ -56,6 +52,18 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
+						res.result.map(function(item) {
+							if  (item.orgType !==null) {
+								item.type = item.docType + ' ' + item.orgType;
+							} else {
+								if (item.docType!==null) {
+									item.type = item.userType + ' ' + item.docType;
+								} else {
+									item.type = item.userType;
+								}
+							}
+							return item;
+						});
 						vm.references = res.result;
 					}
 					return res.result;
@@ -63,6 +71,9 @@ angular.module('modules.dash')
 		};
 		vm.getFindMyRefs('');
 
+		vm.onRefInfo = function(ref) {
+			$state.go('main.private.dashboard.abstract.ref.info', {ref: ref});
+		};
 });
 
 

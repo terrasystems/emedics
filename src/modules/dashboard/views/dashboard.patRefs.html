@@ -2,12 +2,10 @@
 	<div class="row">
 		<div class="search_content">
 
-			<p></p>
-			<p></p>
+			<p></p><p></p>
 			<h4>Filter references:</h4>
 
 			<div class="row">
-
 				<p></p>
 				<div class="col-md-8 col-sm-8 col-xs-8">
 					<form name="xForm">
@@ -30,39 +28,40 @@
 	</div>
 </div>
 
-<div class="container ui-list-view">
+<div class="ui-list-view">
 	<div class="row form-list">
-		<div ng-show="vm.references.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any references</h5></div>
 		<div class="container ui-list-view">
 
-			<uib-accordion>
-				<uib-accordion-group ng-repeat="ref in vm.references"  is-open="ref.status.open">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th translate="NAME"></th>
+					<th translate="PHONE"></th>
+					<th translate="EMAIL"></th>
+					<th translate="TYPE"></th>
+					<th translate="ACTION"></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-click="vm.onRefInfo(ref);" ng-repeat="ref in vm.references">
+					<td>{{ref.name}}</td>
+					<td>{{ref.phone}}</td>
+					<td>{{ref.email}}</td>
+					<td>{{ref.type}}</td>
+					<td>
+						<div class="btn-group btn-group-xs">
+							<button class="btn btn-danger" ng-click="vm.onRemove(ref.id)">x</button>
+							<button ng-if="ref.enabled == false || ref.enebled == 'false' " class="btn btn-info" ng-click="vm.onInvite(ref.id)">
+								<span translate="INVITE"></span>
+							</button>
 
-					<uib-accordion-heading>
-						<div ng-click="vm.onOpenStaff(staf.id)">
-							<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': ref.status.open, 'glyphicon-chevron-right': !ref.status.open}"></i>
-							<label class="control-label"><span translate="NAME"></span>:</label>{{ref.name}}
-							<label ng-if="!(ref.phone==='' || ref.phone===null)" class="control-label"><span translate="PHONE"></span>:</label>{{ref.phone}}
 						</div>
-					</uib-accordion-heading>
+					</td>
+				</tr>
+				</tbody>
+			</table>
 
-					<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-						<button ng-if="ref.enabled == false || ref.enebled == 'false' " style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onInvite(ref.id, $event)">
-							<span translate="INVITE"></span>
-						</button>
-						<button style="margin-top: 10px;" class="btn btn-danger red" ng-click="vm.onRemove($index, ref.id)">
-							<i class="glyphicon glyphicon-trash"></i>
-						</button>
-					</div>
-
-					<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{ref.firstName || ' - '}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{ref.lastName || ' - '}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{ref.phone || '(none)'}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{ref.email || '(none)'}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="TYPE"></span>: </label>{{ref.docType || ' - '}}</p>
-
-				</uib-accordion-group>
-			</uib-accordion>
+			<div ng-if="vm.references.length==0" class="text-center"><span><h4><span translate="NO_DATA"></span></h4></span></div>
 
 		</div>
 	</div>
