@@ -7,7 +7,7 @@ angular.module('modules.dash')
 		vm.ref = $stateParams.ref;
 
 		if (!$stateParams.ref || $stateParams.ref === '' || $stateParams.ref === null) {
-			$state.go('main.private.dashboard.abstract.tasks');
+			$state.go('main.private.dashboard.abstract.ref');
 			return;
 		}
 

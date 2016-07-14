@@ -1,7 +1,8 @@
 <div class="container">
 	<div class="row">
-		<p></p>
-		<p></p>
+
+		<p></p><p></p>
+
 		<h4>Filter Stuff:</h4>
 
 		<div class="row">
@@ -20,38 +21,34 @@
 			<p></p>
 			<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
 				<button style="margin-right:10px;margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onEdit('add');" ng-show="vm.canEdit;"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="CREATE"></span></button>
-				<!--<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddPateint();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>-->
 			</div>
 		</div>
-		<p></p>
-		<p></p>
 
-		<div class="container ui-list-view">
-			<div ng-show="vm.stafs.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You don't have any stuff</h5></div>
-			<uib-accordion>
-				<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">
+		<p></p><p></p>
 
-					<uib-accordion-heading>
-						<div ng-click="vm.onOpenStaff(staf.id)">
-							<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>
-							<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}
-							<label ng-if="!(staf.phone==='' || staf.phone===null)" class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}
-						</div>
-					</uib-accordion-heading>
-
-					<div class="buttons pull-right btn-group btn-group-xs" ng-show="!textBtnForm.$visible">
-						<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onEdit(staf.id)" ng-show="vm.canEdit;"><span translate="EDIT"></span></button>
-					</div>
-
-					<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{staf.firstName || ' - '}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{staf.lastName || ' - '}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{staf.phone || '(none)'}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{staf.email || '(none)'}}</p>
-					<p><label class="col-sm-3 control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}
-
-				</uib-accordion-group>
-			</uib-accordion>
-
+		<div class="ui-list-view ">
+			<div class="container ui-list-view">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th translate="FIRST_NAME"></th>
+						<th translate="LAST_NAME"></th>
+						<th translate="EMAIL"></th>
+						<th translate="PHONE"></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-click="vm.onOpenStuf(staf);"  ng-repeat="staf in vm.stafs track by $index">
+						<td>{{staf.firstName}}</td>
+						<td>{{staf.lastName}}</td>
+						<td>{{staf.email}}</td>
+						<td>{{staf.phone}}</td>
+					</tr>
+					</tbody>
+				</table>
+				<div ng-show="vm.stafs.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
+			</div>
 		</div>
+
 	</div>
 </div>

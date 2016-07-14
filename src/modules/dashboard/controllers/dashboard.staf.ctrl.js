@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('stafCtrl', function(http, blockUI, alertService, $state, localStorageService){
+	.controller('stafCtrl', function(http, blockUI, $state, localStorageService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.stafs = [];
@@ -26,13 +26,12 @@ angular.module('modules.dash')
 		};
 		vm.getFindStuffs('');
 
-		vm.onEdit = function (index) {
-			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: index});
+		vm.onOpenStuf = function (staf_) {
+			$state.go('main.private.dashboard.abstract.stafs.info', {staf: staf_});
 		};
 
-		vm.convertDate = function (d) {
-			var y = new Date(d);
-			return y.toLocaleString().slice(0,10);
+		vm.onEdit = function (id_) {
+			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: id_});
 		};
 
 	});

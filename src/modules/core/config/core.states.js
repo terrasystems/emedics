@@ -326,6 +326,19 @@ angular.module('modules.core')
 			params:{
 				ref: null
 			}
+		},
+		{
+			name:'main.private.dashboard.abstract.stafs.info',
+			url:'/info',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/views/dashboard.stafInfo.html',
+					controller:'stafInfoCtrl as vm'
+				}
+			},
+			params:{
+				staf: null
+			}
 		}
 
 	]);
