@@ -235,7 +235,7 @@ angular.module('modules.dash')
 		};
 
 		vm.Send = function(cfg) {
-			if (vm.user.type === 'patient' || vm.user.type === 'stuff' || cfg.template.type === 'MEDICAL') {
+			if (vm.user.type === 'patient' || cfg.template.type === 'MEDICAL') {
 				http.post('private/dashboard/tasks/create', cfg)
 					.then(function (res) {
 						blockUI.stop();

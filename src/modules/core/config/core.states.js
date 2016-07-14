@@ -342,4 +342,3 @@ angular.module('modules.core')
 		}
 
 	]);
-

@@ -14,17 +14,16 @@
 			<uib-tab ng-click="vm.onRefresh();" index="0" heading="Main">
 				<table class="table table-hover header-fixed1">
 					<thead>
-					<tr>
-						<th translate="NUMBER"></th>
-						<th translate="NAME"></th>
-						<th translate="DESCR"></th>
-						<th translate="STATUS"></th>
-
-					</tr>
+						<tr>
+							<th translate="NUMBER"></th>
+							<th translate="NAME"></th>
+							<th translate="DESCR"></th>
+							<th translate="STATUS"></th>
+						</tr>
 					</thead>
+
 					<tbody>
 					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
-
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
@@ -55,67 +54,43 @@
 			</uib-tab>
 
 			<uib-tab ng-click="vm.Refresh();" index="1" heading="My">
-				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
-					dont have
-					any forms</h5></div>
-
+				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You	dont have any forms</h5></div>
 
 				<table class="table table-hover header-fixed1">
 					<thead>
-					<tr>
-						<th translate="NUMBER"></th>
-						<th translate="NAME"></th>
-						<th translate="DESCR"></th>
-						<th translate="STATUS"></th>
-
-					</tr>
+						<tr>
+							<th translate="NUMBER"></th>
+							<th translate="NAME"></th>
+							<th translate="DESCR"></th>
+							<th translate="STATUS"></th>
+						</tr>
 					</thead>
+
 					<tbody>
-					<tr ng-repeat="forms in vm.myForms | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
-
-						<td>{{forms.templateDto.number}}</td>
-						<td>{{forms.templateDto.name}}</td>
-						<td>{{forms.templateDto.descr}}</td>
-						<td>{{forms.type}}
-							<div class=" pull-right btn-group btn-group-xs">
-							<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"
-							ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>
-							<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onAddTask(forms);"><span
-							translate="LOAD"></span></button>
-							</div>
-						</td>
-					</tr>
-
+						<tr ng-repeat="forms in vm.myForms | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
+							<td>{{forms.templateDto.number}}</td>
+							<td>{{forms.templateDto.name}}</td>
+							<td>{{forms.templateDto.descr}}</td>
+							<td>{{forms.type}}
+								<div class=" pull-right btn-group btn-group-xs">
+									<button class="btn btn-danger  btn-small"
+											ng-click="vm.onRemove(forms.id);"
+											ng-if="!(forms.type=='PAID')">
+										<i class="glyphicon glyphicon-trash"></i>
+									</button>
+									<button style="float: right"
+											class="btn btn-success btn-small"
+											ng-click="vm.onAddTask(forms);">
+										<span translate="LOAD"></span>
+									</button>
+								</div>
+							</td>
+						</tr>
 					</tbody>
+
 				</table>
 
-
-				<!--<div  ui-list-view="forms in vm.myForms | filter:vm.filterByCategoryMy" options="listOptions0">-->
-
-					<!--<div class=" pull-right btn-group btn-group-xs delete_myForm">-->
-						<!--<button class="btn btn-danger  btn-small" ng-click="vm.onRemove(forms.id);"-->
-								<!--ng-if="!(forms.type=='PAID')"><i class="glyphicon glyphicon-trash"></i></button>-->
-						<!--<button style="float: right" class="btn btn-success btn-small" ng-click="vm.onAddTask(forms);"><span-->
-								<!--translate="LOAD"></span></button>-->
-					<!--</div>-->
-
-					<!--<p class=" col-md-3"><label class="control-label "><span translate="NUMBER"></span>: </label>{{forms.templateDto.number}}-->
-					<!--</p>-->
-
-					<!--<p class=" col-md-3"><label class="control-label "><span translate="NAME"></span>: </label>{{forms.templateDto.name}}-->
-					<!--</p>-->
-
-					<!--<p class=" col-md-3"><label class="control-label "><span translate="DESCR"></span>: </label>{{forms.templateDto.descr}}-->
-					<!--</p>-->
-
-					<!--<p class=" col-md-1"><label class="control-label "><span></span> </label>{{forms.type}}-->
-					<!--</p>-->
-				<!--</div>-->
-
 			</uib-tab>
-
 		</uib-tabset>
-
-
 	</div>
 </div>
