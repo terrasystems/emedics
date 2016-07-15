@@ -214,28 +214,48 @@ angular.module('modules.core')
 	.service('pouch_db', function($q, $rootScope, alertService, $translate) {
 		function save (base, id, info, model){
 			var deferred = $q.defer();
-			if  (id === 'add') {
-				var doc = {
-					_id: new Date().toISOString(),
-					status: 'draft',
-					draftName: info.name,
-					body: {sections: model, formInfo: info}
-				};
-				base.put(doc, function(res) {
-					deferred.resolve(res);
-				});
-			}  else {
+			//if  (id === 'add') {
+			//	var doc = {
+			//		_id: new Date().toISOString(),
+			//		status: 'draft',
+			//		draftName: info.name,
+			//		body: {sections: model, formInfo: info}
+			//	};
+			//	base.put(doc, function(res) {
+			//		deferred.resolve(res);
+			//	});
+			//}  else {
 				base.get(id).then(function(doc) {
-					doc.body = {sections: model, formInfo: info};
-					return doc;
-				}, function() {
-					deferred.reject(false);
-				}).then(function(doc) {
+					var x = new Date().toISOString();
+					doc.body = {sections: model, formInfo: info, changeDateTime: x };
+					console.log('run then: ' +doc.body);
 					base.put(doc, function(res) {
 						deferred.resolve(res);
 					});
+					//return doc;
+				}, function(res) {
+					console.log('error then: '+res);
+					var x = new Date().toISOString();
+					var doc = {
+						_id: id,
+						status: 'draft',
+						draftName: info.name,
+						body: {sections: model, formInfo: info, changeDateTime: x}
+					};
+					base.put(doc, function(res) {
+						deferred.resolve(res);
+					}, function(error) {
+						deferred.reject(error);
+					});
+				}).catch(function(error) {
+					// Do something with the error
+					console.log('run catch');
+				}).finally(function() {
+					// Do something when everything is done
+					console.log('run finally');
+					deferred.resolve(true);
 				});
-			}
+			//}
 			return deferred.promise;
 		}
 

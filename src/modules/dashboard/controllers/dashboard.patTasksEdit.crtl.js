@@ -78,6 +78,7 @@ angular.module('modules.dash')
 					deferred.resolve(res);
 					if (res.state) {
 						alertService.add(0, res.state.message);
+
 					}
 				}, function (error) {
 					deferred.reject(error);
@@ -87,17 +88,21 @@ angular.module('modules.dash')
 
 		vm.onSave = function () {
 			save().then(function () {
-				$state.go(vm.mainState);
+				pouch_db.save($rootScope.db, vm.data.formInfo.rawData.template.id, vm.data.formInfo, vm.data.model)
+					.then(function() {
+						alertService.add(0, 'Saved - Ok!');
+						$state.go(vm.mainState);
+					});
 			});
 		};
 
-		vm.onSaveDraft = function() {
-			pouch_db.save($rootScope.db, 'add', vm.data.formInfo, vm.data.model)
-				.then(function() {
-					alertService.add(0, 'Saved - Ok!');
-					$state.go(vm.mainState);
-				});
-		};
+		//vm.onSaveDraft = function() {
+			//pouch_db.save($rootScope.db, 'add', vm.data.formInfo, vm.data.model)
+			//	.then(function() {
+			//		alertService.add(0, 'Saved - Ok!');
+			//		$state.go(vm.mainState);
+			//	});
+		//};
 
 		vm.onSend = function() {
 			var config = {

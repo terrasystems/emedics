@@ -17,7 +17,7 @@
 					<tbody>
 					<tr ng-click=""  ng-repeat="draft in vm.list.rows track by $index">
 						<td>{{draft.doc.draftName}}</td>
-						<td>{{vm.convertDateTime(draft.doc._id)}}</td>
+						<td>{{vm.convertDateTime(draft.doc.body.changeDateTime)}}</td>
 						<td>
 							<div class="btn-group btn-group-xs">
 								<button style="margin-top: 10px;" class="btn btn-danger red green" ng-click="vm.onDelete(draft.doc._id)">x</button>
