@@ -52,7 +52,7 @@ angular.module('modules.dash')
 			});
 
 		vm.onSelected = function(item) {
-			vm.isMulti = vm.user.type==='doctor' &&  item.templateDto.typeEnum==='PATIENT';
+			vm.isMulti = (vm.user.type==='doctor' || vm.user.type==='stuff') &&  item.templateDto.typeEnum==='PATIENT';
 		};
 
 		vm.onCreate = function () {
@@ -81,7 +81,6 @@ angular.module('modules.dash')
 						$uibModalInstance.close(res);
 					}, function (error) {
 						$uibModalInstance.close(error);
-						deferred.reject(error);
 					});
 			}
 		};
