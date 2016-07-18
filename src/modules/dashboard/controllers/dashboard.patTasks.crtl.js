@@ -16,15 +16,15 @@ angular.module('modules.dash')
 
 		vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
 
-		vm.filterModel = { period: 1, fromName: '', patientName: '', templateName: '', statusEnum: null };
-		vm.filterModelH= { period: 1, fromName: '', patientName: '', templateName: '', statusEnum: null };
+		vm.filterModel = { period: 1, patientName: '', templateName: '', statusEnum: null };
+		vm.filterModelH= { period: 1, patientName: '', templateName: '', statusEnum: null };
 
 		if (vm.user.type === 'patient') {
 			vm.filterModel.period = 4;
 			vm.filterModelH.period = 4;
 		}
 
-		if (!(vm.user.org == 'true' || vm.user.org == true)) {
+		if (!(vm.user.org === 'true' || vm.user.org === true)) {
 			vm.hideAdminTasks = false;
 		} else {
 			vm.hideAdminTasks = true;
@@ -59,7 +59,7 @@ angular.module('modules.dash')
 
 		/*********** << NEW >> ************/
 		vm.onClearFilters = function() {
-			vm.filterModel = { period: null, fromName: null, patientName: null, templateName: null, statusEnum: null };
+			vm.filterModel = { period: null, patientName: null, templateName: null, statusEnum: null };
 		};
 
 		vm.onApplyFilters = function() {
@@ -105,7 +105,7 @@ angular.module('modules.dash')
 
 		/*********** << HISTORY >> *************/
 		vm.onClearFiltersH = function() {
-			vm.filterModelH = { period: 1, fromName: null, patientName: null, templateName: null, statusEnum: null };
+			vm.filterModelH = { period: 1, patientName: null, templateName: null, statusEnum: null };
 		};
 
 		vm.onApplyFiltersH = function() {
@@ -190,7 +190,7 @@ angular.module('modules.dash')
 					if (res.result) {
 						if  (angular.isArray(res.result) && res.result.length>0) {
 							res.result.map(function (item) {
-								item.all = item.firstName + ' ' + item.lastName + ((item.email == null) ? '' : ', ' + item.email) + ((item.phone == null) ? '' : ', ' + item.phone);
+								item.all = item.firstName + ' ' + item.lastName + ((item.email === null) ? '' : ', ' + item.email) + ((item.phone === null) ? '' : ', ' + item.phone);
 								return item;
 							});
 						}
