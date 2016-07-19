@@ -3,7 +3,7 @@
 angular.module('modules.dash')
 	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService,
-												  $rootScope, pouch_db, forEditTask) {
+												  $rootScope, pouch_db, forEditTask, DTO) {
 
 		if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 			$state.go('main.private.dashboard.abstract.tasks');
@@ -66,11 +66,13 @@ angular.module('modules.dash')
 		function save() {
 			vm.onNeedSave = false;
 			var deferred = $q.defer();
-			var paramsPOST = {event: {id: vm.id, data: {sections: vm.data.model}}};
-			paramsPOST.event.patient = vm.data.editModel.patient;
-			paramsPOST.event.template = vm.data.editModel.template;
-			paramsPOST.event.fromUser = vm.data.editModel.fromUser;
-			paramsPOST.event.toUser = vm.data.editModel.toUser;
+			var paramsPOST = DTO.editTask;
+
+			//var paramsPOST = {event: {id: vm.id, data: {sections: vm.data.model}}};
+			//paramsPOST.event.patient = vm.data.editModel.patient;
+			//paramsPOST.event.template = vm.data.editModel.template;
+			//paramsPOST.event.fromUser = vm.data.editModel.fromUser;
+			//paramsPOST.event.toUser = vm.data.editModel.toUser;
 
 			http.post(vm.setUrl, paramsPOST)
 				.then(function (res) {
