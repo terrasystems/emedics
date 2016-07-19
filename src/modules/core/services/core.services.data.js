@@ -210,6 +210,36 @@ angular.module('modules.core')
 		};
 	})
 
+
+//инициализация параметров для $http запроса
+	.service('DTO', function () {
+		var paramsPOST = {
+			page: {
+				start: 0,
+				count: 20,
+				size: 0
+			},
+			criteria: {
+				search: '',
+				list: []
+			}
+		};
+		var paramsSend = {
+			template: {
+				id: null,
+				type: null,
+				description: null,
+				templateDto: null
+			},
+			patient: null,
+			data: "{}"
+		};
+		return {
+			default :  paramsPOST,
+			createTask: paramsSend
+		};
+	})
+
 //работа с базой pouchdb
 	.service('pouch_db', function($q, $rootScope, alertService, $translate) {
 		function save (base, id, info, model){
@@ -234,7 +264,6 @@ angular.module('modules.core')
 					});
 					//return doc;
 				}, function(res) {
-					console.log('error then: '+res);
 					var x = new Date().toISOString();
 					var doc = {
 						_id: id,
@@ -249,10 +278,8 @@ angular.module('modules.core')
 					});
 				}).catch(function(error) {
 					// Do something with the error
-					console.log('run catch');
 				}).finally(function() {
 					// Do something when everything is done
-					console.log('run finally');
 					deferred.resolve(true);
 				});
 			//}

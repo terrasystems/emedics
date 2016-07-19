@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q) {
+	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
 		var vm = this;
 		vm.userType = localStorageService.get('userData');
 		vm.FormTemplate = [];
@@ -184,16 +184,19 @@ angular.module('modules.dash')
 					vm.templateParams = vm.FormTemplate.find(function (form) {
 						return form.id === id;
 					});
-					var paramsPOST = {
-						template: {
-							id: rest.result,
-							type: vm.templateParams.typeEnum,
-							description: null,
-							templateDto: null
-						},
-						patient: null,
-						data: "{}"
-					};
+					var paramsPOST = DTO.createTask;
+					paramsPOST.id = rest.result;
+					paramsPOST.type = vm.templateParams.typeEnum;
+					//var paramsPOST = {
+					//	template: {
+					//		id: rest.result,
+					//		type: vm.templateParams.typeEnum,
+					//		description: null,
+					//		templateDto: null
+					//	},
+					//	patient: null,
+					//	data: "{}"
+					//};
 					vm.Send(paramsPOST);
 				},
 				function (res) {
@@ -221,16 +224,19 @@ angular.module('modules.dash')
 		};
 
 		vm.onAddTask = function (obj) {
-			var paramsPOST = {
-				template: {
-					id: obj.templateDto.id,
-					type: obj.templateDto.typeEnum,
-					description: null,
-					templateDto: null
-				},
-				patient: null,
-				data: "{}"
-			};
+			var paramsPOST = DTO.createTask;
+			paramsPOST.id = obj.templateDto.id;
+			paramsPOST.type = obj.templateDto.typeEnum;
+			//var paramsPOST = {
+			//	template: {
+			//		id: obj.templateDto.id,
+			//		type: obj.templateDto.typeEnum,
+			//		description: null,
+			//		templateDto: null
+			//	},
+			//	patient: null,
+			//	data: "{}"
+			//};
 			vm.Send(paramsPOST);
 		};
 
