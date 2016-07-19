@@ -3,41 +3,45 @@
 
 angular.module('modules.dash')
 
-	.controller('patientReferencesAddCtrl', function ($scope,$translate,$state, localStorageService, initParamsPOST, http, blockUI, $timeout, alertService) {
+	.controller('patientReferencesAddCtrl', function ($scope,$translate,$state, localStorageService, http, blockUI, $timeout, alertService, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.paramsPOST = initParamsPOST.params;
 
-		vm.addRef = {
-			'email':'',
-			'type':'',
-			'firstName':null,
-			'lastName': null,
-			'birth': null,
-			'docType':''
-		};
+		vm.addRef = DTO.refAdd;
+		//vm.addRef = {
+		//	'email':'',
+		//	'type':'',
+		//	'firstName':null,
+		//	'lastName': null,
+		//	'birth': null,
+		//	'docType':''
+		//};
 
 		vm.type1 = function() {
-			vm.addRef = {
-				'email':'',
-				'type':'pat',
-				'firstName':null,
-				'lastName': null,
-				'birth': null,
-				'docType':''
-			};
+			vm.addRef = DTO.refAdd;
+			vm.addRef.type = 'pat';
+			//vm.addRef = {
+			//	'email':'',
+			//	'type':'pat',
+			//	'firstName':null,
+			//	'lastName': null,
+			//	'birth': null,
+			//	'docType':''
+			//};
 		};
 		vm.type1();
 
 		vm.type2=function(){
-			vm.addRef = {
-				'email':'',
-				'type':'doc',
-				'firstName':null,
-				'lastName': null,
-				'birth': null,
-				'docType':''
-			};
+			vm.addRef = DTO.refAdd;
+			vm.addRef.type = 'doc';
+			//vm.addRef = {
+			//	'email':'',
+			//	'type':'doc',
+			//	'firstName':null,
+			//	'lastName': null,
+			//	'birth': null,
+			//	'docType':''
+			//};
 		};
 		vm.type2();
 

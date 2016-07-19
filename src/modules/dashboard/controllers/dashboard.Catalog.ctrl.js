@@ -185,8 +185,8 @@ angular.module('modules.dash')
 						return form.id === id;
 					});
 					var paramsPOST = DTO.createTask;
-					paramsPOST.id = rest.result;
-					paramsPOST.type = vm.templateParams.typeEnum;
+					paramsPOST.template.id = rest.result;
+					paramsPOST.template.type = vm.templateParams.typeEnum;
 					//var paramsPOST = {
 					//	template: {
 					//		id: rest.result,
@@ -225,8 +225,8 @@ angular.module('modules.dash')
 
 		vm.onAddTask = function (obj) {
 			var paramsPOST = DTO.createTask;
-			paramsPOST.id = obj.templateDto.id;
-			paramsPOST.type = obj.templateDto.typeEnum;
+			paramsPOST.template.id = obj.templateDto.id;
+			paramsPOST.template.type = obj.templateDto.typeEnum;
 			//var paramsPOST = {
 			//	template: {
 			//		id: obj.templateDto.id,

@@ -16,5 +16,3 @@ angular.module('modules.dash')
 		};
 
 	});
-
-

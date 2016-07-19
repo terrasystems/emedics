@@ -223,20 +223,50 @@ angular.module('modules.core')
 				search: '',
 				list: []
 			}
-		};
-		var paramsSend = {
+			},
+		paramsSend = {
 			template: {
 				id: null,
 				type: null,
 				description: null,
 				templateDto: null
 			},
+			fromID: null,
 			patient: null,
 			data: "{}"
+		},
+		paramsNotif = { templateId: null,
+			period: null,
+			fromName: null,
+			description: null,
+			formType: null},
+		paramsEditTask = { event:
+			{	id: null,
+				patient: null,
+				template: null,
+				data: {sections: null},
+				fromUser: null,
+				toUser: null,
+				descr: null
+			}
+		},
+		paramsFilter = {name: '',
+			type: null},
+		paramsRefAdd = {
+			email:'',
+			type:'',
+			firstName:null,
+			lastName: null,
+			birth: null,
+			docType:''
 		};
 		return {
 			default :  paramsPOST,
-			createTask: paramsSend
+			createTask: paramsSend,
+			getNotif: paramsNotif,
+			editTask: paramsEditTask,
+			filters: paramsFilter,
+			refAdd: paramsRefAdd
 		};
 	})
 

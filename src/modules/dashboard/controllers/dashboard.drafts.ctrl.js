@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 
 	.controller('draftsCtrl', function ($scope, pouchDB, $rootScope, $state, pouch_db, confirmService, alertService,
-										http, blockUI, localStorageService, $q, $uibModal) {
+										http, blockUI, localStorageService, $q, $uibModal, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.list = [];
@@ -15,15 +15,19 @@ angular.module('modules.dash')
 		};
 
 		vm.onSend = function (obj) {
-			var paramsCreate = {
-				template: {
-					id: obj.doc.body.formInfo.rawData.template.id,
-					templateDto: null
-				},
-				patient: obj.doc.body.formInfo.rawData.patient ? obj.doc.body.formInfo.rawData.patient.id : null,
-				fromID: null, //vm.user.id,
-				data: JSON.stringify({sections: obj.doc.body.sections})   // !!!!!
-			};
+			var paramsCreate = DTO.createTask;
+			paramsCreate.template.id = obj.doc.body.formInfo.rawData.template.id;
+			paramsCreate.patient = obj.doc.body.formInfo.rawData.patient ? obj.doc.body.formInfo.rawData.patient.id : null;
+			paramsCreate.data = JSON.stringify({sections: obj.doc.body.sections});
+			//var paramsCreate = {
+			//	template: {
+			//		id: obj.doc.body.formInfo.rawData.template.id,
+			//		templateDto: null
+			//	},
+			//	patient: obj.doc.body.formInfo.rawData.patient ? obj.doc.body.formInfo.rawData.patient.id : null,
+			//	fromID: null, //vm.user.id,
+			//	data: JSON.stringify({sections: obj.doc.body.sections})   // !!!!!
+			//};
 			if (vm.user.type === 'stuff' ||
 				vm.user.type === 'patient' ||
 				(vm.user.type === 'doctor' && obj.doc.body.formInfo.rawData.template.typeEnum === 'MEDICAL')) {
@@ -32,16 +36,23 @@ angular.module('modules.dash')
 						if  (res.result) {
 							//edit promis
 							var newTaskID = res.result.id;
-							var paramsEdit = { event:
-								{	id: newTaskID,
-									patient: res.result.patient,
-									template: res.result.template,
-									data: {sections: obj.doc.body.sections}, // !!!!!
-									fromUser: res.result.fromUser,
-									toUser: null,
-									descr: res.result.descr
-								}
-							};
+							var paramsEdit = DTO.editTask;
+							paramsEdit.event.id = newTaskID;
+							paramsEdit.event.patient = res.result.patient;
+							paramsEdit.event.template = res.result.template;
+							paramsEdit.event.data.sections = obj.doc.body.sections;
+							paramsEdit.event.fromUser = res.result.fromUser;
+							paramsEdit.event.descr = res.result.descr;
+							//var paramsEdit = { event:
+							//	{	id: newTaskID,
+							//		patient: res.result.patient,
+							//		template: res.result.template,
+							//		data: {sections: obj.doc.body.sections}, // !!!!!
+							//		fromUser: res.result.fromUser,
+							//		toUser: null,
+							//		descr: res.result.descr
+							//	}
+							//};
 							http.post('private/dashboard/tasks/edit', paramsEdit)
 								.then(function (res) {
 									blockUI.stop();

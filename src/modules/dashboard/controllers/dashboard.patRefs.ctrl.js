@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q) {
+	.controller('patientReferencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.references = [];
@@ -56,7 +56,9 @@ angular.module('modules.dash')
 		};
 
 		vm.getFindMyRefs = function (val) {
-			return http.post('private/dashboard/' + vm.user.type + '/references', {name: val, type: null})
+			var paramPOST = DTO.filters;
+			paramPOST.name = val;
+			return http.post('private/dashboard/' + vm.user.type + '/references',  paramPOST /*{name: val, type: null}*/)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {

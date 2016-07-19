@@ -3,12 +3,12 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http,$scope,blockUI, alertService, $rootScope) {
+	.controller('patientNotifCtrl', function (http,$scope,blockUI, alertService, $rootScope, DTO) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 
 		vm.onRefreshNotif = function(val) {
-			return http.post('private/dashboard/events/notifications/all', {templateId: null, period: null, fromName: val, description: null, formType: null})
+			return http.post('private/dashboard/events/notifications/all', DTO.getNotif)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {

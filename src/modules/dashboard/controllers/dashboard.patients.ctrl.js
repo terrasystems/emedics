@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService, $q,$stateParams){
+	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService, $q,$stateParams, DTO){
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.patients = [];
@@ -54,7 +54,9 @@ angular.module('modules.dash')
 		//};
 
 		vm.getFindPatients = function (val) {
-			return http.post('private/dashboard/patients', {name: val})
+			var paramPOST = DTO.filters;
+			paramPOST.name = val;
+			return http.post('private/dashboard/patients', paramPOST /*{name: val}*/)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -133,31 +135,5 @@ angular.module('modules.dash')
 		vm.onOpenPatientSS = function (id_, name_, email_, phone_) {
 			$state.go('main.private.dashboard.abstract.patients.templates', {id: id_, name: name_, email: email_, phone: phone_});
 		};
-
-		//vm.onView = function (histId, patientId) {
-		//	$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients+', patId: patientId});
-		//};
-        //
-		//vm.onSend = function (obj,hist) {
-		//	var model = { templ_id: obj.id, obj: obj };
-        //
-		//	blockUI.start();
-		//	var result = $uibModal.open({
-		//		templateUrl: 'modules/dashboard/views/modal.addNotif.html',
-		//		controller: 'modalAddNotifCtrl',
-		//		controllerAs: 'vm',
-		//		resolve: {
-		//			model: function ($q) {
-		//				var deferred = $q.defer();
-		//				deferred.resolve({data: model,patient:{
-		//					'name':hist.patient.username,
-		//					'email':hist.patient.email,
-		//					'id':hist.patient.id
-		//				}});
-		//				return deferred.promise;
-		//			}
-		//		}
-		//	}).result;
-		//};
 
 	});
