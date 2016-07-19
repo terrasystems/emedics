@@ -8,40 +8,18 @@ angular.module('modules.dash')
 		vm.user = localStorageService.get('userData');
 
 		vm.addRef = DTO.refAdd;
-		//vm.addRef = {
-		//	'email':'',
-		//	'type':'',
-		//	'firstName':null,
-		//	'lastName': null,
-		//	'birth': null,
-		//	'docType':''
-		//};
+
 
 		vm.type1 = function() {
 			vm.addRef = DTO.refAdd;
 			vm.addRef.type = 'pat';
-			//vm.addRef = {
-			//	'email':'',
-			//	'type':'pat',
-			//	'firstName':null,
-			//	'lastName': null,
-			//	'birth': null,
-			//	'docType':''
-			//};
 		};
 		vm.type1();
 
 		vm.type2=function(){
 			vm.addRef = DTO.refAdd;
 			vm.addRef.type = 'doc';
-			//vm.addRef = {
-			//	'email':'',
-			//	'type':'doc',
-			//	'firstName':null,
-			//	'lastName': null,
-			//	'birth': null,
-			//	'docType':''
-			//};
+
 		};
 		vm.type2();
 

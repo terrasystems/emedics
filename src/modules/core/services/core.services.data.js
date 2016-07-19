@@ -260,14 +260,23 @@ angular.module('modules.core')
 			lastName: null,
 			birth: null,
 			docType:''
-		};
+		},
+			paramsChengedPass={
+				oldPass: null,
+				newPass: null
+			},
+			paramsConfirmPass={
+				confirm: ''
+			};
 		return {
 			default :  paramsPOST,
 			createTask: paramsSend,
 			getNotif: paramsNotif,
 			editTask: paramsEditTask,
 			filters: paramsFilter,
-			refAdd: paramsRefAdd
+			refAdd: paramsRefAdd,
+			changedPass:paramsChengedPass,
+			confirmPass:paramsConfirmPass
 		};
 	})
 

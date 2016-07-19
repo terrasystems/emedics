@@ -3,13 +3,13 @@
 
 angular.module('modules.dash')
 
-	.controller('settingsCtrl', function ($state,alertService, blockUI, $rootScope, http, settings_fields, auth, $translate) {
+	.controller('settingsCtrl', function ($state,DTO,alertService, blockUI, $rootScope, http, settings_fields, auth, $translate) {
 		var vm = this;
 		vm.settings_fields = settings_fields;
 		vm.settings_model = {};
 		vm.settings_options = {};
-		vm.changedPass = {oldPass: '', newPass: ''};
-		vm.PassConfirm = {confirm: ''};
+		vm.changedPass = DTO.changedPass;
+		vm.PassConfirm = DTO.confirmPass;
 		var base = $rootScope.db;
 
 		http.get('private/userInfo')
