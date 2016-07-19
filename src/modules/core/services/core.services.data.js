@@ -250,7 +250,8 @@ angular.module('modules.core')
 				descr: null
 			}
 		},
-		paramsFilter = {name: '',
+		paramsFilter = {
+			name: '',
 			type: null},
 		paramsRefAdd = {
 			email:'',

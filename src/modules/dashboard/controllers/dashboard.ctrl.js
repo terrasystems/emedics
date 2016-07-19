@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI) {
+	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
@@ -61,7 +61,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.$on('calc.notif', function () {
-				http.post('private/dashboard/events/notifications/all', { templateId: null, period: null, fromName: null, description: null, formType: null })
+				http.post('private/dashboard/events/notifications/all', DTO.getNotif)
 					.then(function (res) {
 						blockUI.stop();
 						if (res.result) {

@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope) {
+	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.page = {};
@@ -143,29 +143,41 @@ angular.module('modules.dash')
 		};
 
 		vm.onCopyHistory = function(taskObj, patientId) {
-			var paramsPOST = {
-				template: {
-					id: taskObj.template.id,
-					templateDto: {id : taskObj.template.id}
-				},
-				patient: patientId,
-				data: "{}"
-			};
+			var paramsPOST = DTO.createTask;
+			paramsPOST.template.id = taskObj.template.id;
+			paramsPOST.template.templateDto.id = taskObj.template.id;
+			paramsPOST.patient = patientId;
+			//var paramsPOST = {
+			//	template: {
+			//		id: taskObj.template.id,
+			//		templateDto: {id : taskObj.template.id}
+			//	},
+			//	patient: patientId,
+			//	data: "{}"
+			//};
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state && res.state.value && !!res.state.value) {
 						var newTaskID = res.result.id;
-						paramsPOST = {event:
-						{	id: newTaskID,
-							patient: taskObj.patient,
-							template: taskObj.template,
-							data: taskObj.data,
-							fromUser: taskObj.fromUser,
-							toUser: taskObj.toUser,
-							descr: taskObj.descr
-						}
-						};
+						paramsPOST = DTO.editTask;
+						paramsPOST.event.id = newTaskID;
+						paramsPOST.event.patient = taskObj.patient;
+						paramsPOST.event.template = taskObj.template;
+						paramsPOST.event.data = taskObj.data;
+						paramsPOST.event.fromUser = taskObj.fromUser;
+						paramsPOST.event.toUser = taskObj.toUser;
+						paramsPOST.event.descr = taskObj.descr;
+						//paramsPOST = {event:
+						//{	id: newTaskID,
+						//	patient: taskObj.patient,
+						//	template: taskObj.template,
+						//	data: taskObj.data,
+						//	fromUser: taskObj.fromUser,
+						//	toUser: taskObj.toUser,
+						//	descr: taskObj.descr
+						//}
+						//};
 						http.post('private/dashboard/tasks/edit', paramsPOST)
 							.then(function (res) {
 								blockUI.stop();
@@ -184,7 +196,7 @@ angular.module('modules.dash')
 		/*********** << STUFF >> ************/
 
 		vm.onRefreshAdminTasks = function() {
-			http.post('private/dashboard/stuff', {name: ''})
+			http.post('private/dashboard/stuff', DTO.filters /*{name: ''}*/ )
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
