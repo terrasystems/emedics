@@ -3,8 +3,8 @@
 
 angular.module('modules.core')
 
-	.service('confirmService', function($q, $confirm, $translate){
-		return function(text){
+	.service('confirmService', function ($q, $confirm, $translate) {
+		return function (text) {
 			var deferred = $q.defer();
 			$confirm({
 				text: $translate.instant(text)
@@ -12,7 +12,7 @@ angular.module('modules.core')
 				templateUrl: 'modules/core/views/modalconfirm.tmpl.html'
 			}).then(function () {
 				deferred.resolve(true);
-			}, function(){
+			}, function () {
 				deferred.reject(false);
 			});
 			return deferred.promise;
@@ -44,7 +44,7 @@ angular.module('modules.core')
 		return alertService;
 	})
 
-	.service('auth', function($rootScope, localStorageService){
+	.service('auth', function ($rootScope, localStorageService) {
 		return {
 			saveUserData: function (data) {
 				if (data.token) {
@@ -59,13 +59,13 @@ angular.module('modules.core')
 		};
 	})
 
-	.service('http', function($http, $q, constants, alertService, $translate) {
-		function get (url, filter){
+	.service('http', function ($http, $q, constants, alertService, $translate) {
+		function get(url, filter) {
 			var deferred = $q.defer();
 			$http.get(constants.restUrl + url, filter).then(function (resp) {
 				resp.data.state.message = $translate.instant(resp.data.state.message);
-				if  (resp.data && resp.data.state) {
-					if  (resp.data.state.value===true) {
+				if (resp.data && resp.data.state) {
+					if (resp.data.state.value === true) {
 						deferred.resolve(resp.data);
 					}
 					else {
@@ -79,7 +79,7 @@ angular.module('modules.core')
 				}
 			}, function (error) {
 				deferred.reject(error);
-				if  (error.status == '401') {
+				if (error.status == '401') {
 					alertService.add(2, $translate.instant(error.data.state.message));
 				}
 				else {
@@ -89,13 +89,13 @@ angular.module('modules.core')
 			return deferred.promise;
 		}
 
-		function post (url, params) {
+		function post(url, params) {
 			//console.log('post: '+ url);
 			var deferred = $q.defer();
 			$http.post(constants.restUrl + url, params).then(function (resp) {
 				resp.data.state.message = $translate.instant(resp.data.state.message);
-				if  (resp.data && resp.data.state) {
-					if  (resp.data.state.value===true) {
+				if (resp.data && resp.data.state) {
+					if (resp.data.state.value === true) {
 						deferred.resolve(resp.data);
 					}
 					else {
@@ -109,7 +109,7 @@ angular.module('modules.core')
 				}
 			}, function (error) {
 				deferred.reject(error);
-				if  (error.status == '401') {
+				if (error.status == '401') {
 					alertService.add(2, $translate.instant(error.data.state.message));
 				}
 				else {
@@ -142,7 +142,7 @@ angular.module('modules.core')
 				switch (rejection.status) {
 					case 401:
 					{
-						$injector.get('$state').go('main.public.login',{reload: true});
+						$injector.get('$state').go('main.public.login', {reload: true});
 						break;
 					}
 					case 404:
@@ -206,7 +206,7 @@ angular.module('modules.core')
 			}
 		};
 		return {
-			'params' :  paramsPOST
+			'params': paramsPOST
 		};
 	})
 
@@ -214,75 +214,101 @@ angular.module('modules.core')
 //инициализация параметров для $http запроса
 	.service('DTO', function () {
 		var paramsPOST = {
-			page: {
-				start: 0,
-				count: 20,
-				size: 0
+				page: {
+					start: 0,
+					count: 20,
+					size: 0
+				},
+				criteria: {
+					search: '',
+					list: []
+				}
 			},
-			criteria: {
-				search: '',
-				list: []
-			}
-			},
-		paramsSend = {
-			template: {
-				id: null,
-				type: null,
-				description: null,
-				templateDto: null
-			},
-			fromID: null,
-			patient: null,
-			data: "{}"
-		},
-		paramsNotif = { templateId: null,
-			period: null,
-			fromName: null,
-			description: null,
-			formType: null},
-		paramsEditTask = { event:
-			{	id: null,
+			paramsSend = {
+				template: {
+					id: null,
+					type: null,
+					description: null,
+					templateDto: null
+				},
+				fromID: null,
 				patient: null,
-				template: null,
-				data: {sections: null},
-				fromUser: null,
-				toUser: null,
-				descr: null
-			}
-		},
-		paramsFilter = {
-			name: '',
-			type: null},
-		paramsRefAdd = {
-			email:'',
-			type:'',
-			firstName:null,
-			lastName: null,
-			birth: null,
-			docType:''
-		},
-			paramsChengedPass={
+				data: "{}"
+			},
+			paramsNotif = {
+				templateId: null,
+				period: null,
+				fromName: null,
+				description: null,
+				formType: null
+			},
+			paramsEditTask = {
+				event: {
+					id: null,
+					patient: null,
+					template: null,
+					data: {sections: null},
+					fromUser: null,
+					toUser: null,
+					descr: null
+				}
+			},
+			paramsFilter = {
+				name: '',
+				type: null
+			},
+			paramsRefAdd = {
+				email: '',
+				type: '',
+				firstName: null,
+				lastName: null,
+				birth: null,
+				docType: ''
+			},
+			paramsChengedPass = {
 				oldPass: null,
 				newPass: null
 			},
-			paramsConfirmPass={
+			paramsConfirmPass = {
 				confirm: ''
+			},
+			paramsCopyTask = {
+				template: {
+					id: null,
+					templateDto: {}
+				},
+				patient: null,
+				data: null
+			},
+			paramsTaskEdit = {
+				event: {
+					id: null,
+					patient: null,
+					template: null,
+					data: null,
+					fromUser: null,
+					toUser: null,
+					descr: null
+				}
 			};
+
 		return {
-			default :  paramsPOST,
+			default: paramsPOST,
 			createTask: paramsSend,
 			getNotif: paramsNotif,
 			editTask: paramsEditTask,
 			filters: paramsFilter,
 			refAdd: paramsRefAdd,
-			changedPass:paramsChengedPass,
-			confirmPass:paramsConfirmPass
+			changedPass: paramsChengedPass,
+			confirmPass: paramsConfirmPass,
+			copyTask: paramsCopyTask,
+			taskEdit: paramsTaskEdit
 		};
 	})
 
 //работа с базой pouchdb
-	.service('pouch_db', function($q, $rootScope, alertService, $translate) {
-		function save (base, id, info, model){
+	.service('pouch_db', function ($q, $rootScope, alertService, $translate) {
+		function save(base, id, info, model) {
 			var deferred = $q.defer();
 			//if  (id === 'add') {
 			//	var doc = {
@@ -295,68 +321,69 @@ angular.module('modules.core')
 			//		deferred.resolve(res);
 			//	});
 			//}  else {
-				base.get(id).then(function(doc) {
-					var x = new Date().toISOString();
-					doc.body = {sections: model, formInfo: info, changeDateTime: x };
-					console.log('run then: ' +doc.body);
-					base.put(doc, function(res) {
-						deferred.resolve(res);
-					});
-					//return doc;
-				}, function(res) {
-					var x = new Date().toISOString();
-					var doc = {
-						_id: id,
-						status: 'draft',
-						draftName: info.name,
-						body: {sections: model, formInfo: info, changeDateTime: x}
-					};
-					base.put(doc, function(res) {
-						deferred.resolve(res);
-					}, function(error) {
-						deferred.reject(error);
-					});
-				}).catch(function(error) {
-					// Do something with the error
-				}).finally(function() {
-					// Do something when everything is done
-					deferred.resolve(true);
+			base.get(id).then(function (doc) {
+				var x = new Date().toISOString();
+				doc.body = {sections: model, formInfo: info, changeDateTime: x};
+				console.log('run then: ' + doc.body);
+				base.put(doc, function (res) {
+					deferred.resolve(res);
 				});
+				//return doc;
+			}, function (res) {
+				var x = new Date().toISOString();
+				var doc = {
+					_id: id,
+					status: 'draft',
+					draftName: info.name,
+					body: {sections: model, formInfo: info, changeDateTime: x}
+				};
+				base.put(doc, function (res) {
+					deferred.resolve(res);
+				}, function (error) {
+					deferred.reject(error);
+				});
+			}).catch(function (error) {
+				// Do something with the error
+			}).finally(function () {
+				// Do something when everything is done
+				deferred.resolve(true);
+			});
 			//}
 			return deferred.promise;
 		}
 
-		function load_all (base, scope) {
+		function load_all(base, scope) {
 			var deferred = $q.defer();
-			base.allDocs({include_docs: true, descending: true}, function(err, doc) {
-				scope.$apply(function(){
+			base.allDocs({include_docs: true, descending: true}, function (err, doc) {
+				scope.$apply(function () {
 					deferred.resolve(doc);
 				});
 			});
 			return deferred.promise;
 		}
 
-		function load (base, id) {
+		function load(base, id) {
 			var deferred = $q.defer();
-			base.get(id).then(function(doc) {
+			base.get(id).then(function (doc) {
 				deferred.resolve(doc);
-			}, function() {
+			}, function () {
 				deferred.reject(false);
 			});
 			return deferred.promise;
 		}
 
-		function del (base, id) {
+		function del(base, id) {
 			var deferred = $q.defer();
-			base.get(id).then(function(doc) {
+			base.get(id).then(function (doc) {
 				return base.remove(doc);
-			}, function() {
+			}, function () {
 				deferred.reject(false);
-			}).then(function(resp) {
+			}).then(function (resp) {
 				deferred.resolve(resp);
 			});
 			return deferred.promise;
 		}
+
 		//******
 		return {
 			save: save,
@@ -370,9 +397,18 @@ angular.module('modules.core')
 	.service('forEditTask', function ($q, http, blockUI, $base64, $translate, pouch_db, $rootScope) {
 		var getModelForEdit = function (getUrl, id) {
 			var deferred = $q.defer();
-			var data = { sections: [], options: [], model: [], sectionsName: [], selectedSection: '', selectedKey: '', editModel: {}, formInfo: {} };
+			var data = {
+				sections: [],
+				options: [],
+				model: [],
+				sectionsName: [],
+				selectedSection: '',
+				selectedKey: '',
+				editModel: {},
+				formInfo: {}
+			};
 
-			var convertModel = function() {
+			var convertModel = function () {
 				if (!data.model) {
 					data.model = [];
 					data.sectionsName.forEach(function (item) {
@@ -394,9 +430,9 @@ angular.module('modules.core')
 				}
 			};
 
-			if  (getUrl==='' && id !==  null) {
+			if (getUrl === '' && id !== null) {
 				pouch_db.load($rootScope.db, id)
-					.then(function(res) {
+					.then(function (res) {
 						data.x = res;
 						data.formInfo = res.body.formInfo;
 						data.sections = eval($base64.decode(data.formInfo.body.sections));
@@ -406,7 +442,7 @@ angular.module('modules.core')
 						data.model = (res.body && res.body.sections) ? res.body.sections : undefined;
 						convertModel();
 						deferred.resolve(data);
-					}, function() {
+					}, function () {
 						deferred.reject(false);
 					});
 			} else {
@@ -435,7 +471,7 @@ angular.module('modules.core')
 						} else {
 							deferred.reject(false);
 						}
-					}, function() {
+					}, function () {
 						deferred.reject(false);
 					});
 			}
