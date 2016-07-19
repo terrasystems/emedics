@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 
 	.controller('modalAddExistsRefCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService, $scope, $q,
-												   initParamsPOST, $state, $translate) {
+												   DTO, $state, $translate) {
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
@@ -26,7 +26,7 @@ angular.module('modules.dash')
 		};
 
 		vm.getFindUsers = function (val) {
-			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST = DTO.default;
 			vm.paramsPOST.criteria.search = val;
 			vm.paramsPOST.criteria.list = [];
 			return http.post('private/dashboard/' + vm.user.type + '/references/search', vm.paramsPOST)
@@ -48,7 +48,7 @@ angular.module('modules.dash')
 
 
 	.controller('modalAddExistsPatCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService, $scope, $q,
-												   initParamsPOST, $state, $translate) {
+												   DTO, $state, $translate) {
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');
@@ -62,7 +62,7 @@ angular.module('modules.dash')
 				$uibModalInstance.close();
 				return;
 			}
-			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST = DTO.default;
 			vm.paramsPOST.criteria.list = [];
 			vm.paramsPOST.criteria.search = '';
 			vm.paramsPOST.criteria.list.push({id: model, email: null, phone: null, name: null, history: []});
@@ -74,7 +74,7 @@ angular.module('modules.dash')
 		};
 
 		vm.getFindUsers = function (val) {
-			vm.paramsPOST = initParamsPOST.params;
+			vm.paramsPOST = DTO.default;
 			vm.paramsPOST.criteria.search = val;
 			return http.post('private/dashboard/patients/search', vm.paramsPOST)
 				.then(function (res) {

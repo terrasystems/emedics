@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('stafCtrl', function(http, blockUI, $state, localStorageService) {
+	.controller('stafCtrl', function(http, blockUI, $state, localStorageService, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.stafs = [];
@@ -15,7 +15,9 @@ angular.module('modules.dash')
 		}
 
 		vm.getFindStuffs = function (val) {
-			return http.post('private/dashboard/stuff', {name: val})
+			var paramPOST = DTO.filters;
+			paramPOST.name = val;
+			return http.post('private/dashboard/stuff', paramPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {

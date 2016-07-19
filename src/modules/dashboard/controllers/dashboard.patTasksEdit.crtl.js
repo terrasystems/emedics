@@ -67,7 +67,12 @@ angular.module('modules.dash')
 			vm.onNeedSave = false;
 			var deferred = $q.defer();
 			var paramsPOST = DTO.editTask;
-
+			paramsPOST.event.id = vm.id;
+			paramsPOST.event.data.sections = vm.data.model;
+			paramsPOST.event.patient = vm.data.editModel.patient;
+			paramsPOST.event.template = vm.data.editModel.template;
+			paramsPOST.event.fromUser = vm.data.editModel.fromUser;
+			paramsPOST.event.toUser = vm.data.editModel.toUser;
 			//var paramsPOST = {event: {id: vm.id, data: {sections: vm.data.model}}};
 			//paramsPOST.event.patient = vm.data.editModel.patient;
 			//paramsPOST.event.template = vm.data.editModel.template;
@@ -80,7 +85,6 @@ angular.module('modules.dash')
 					deferred.resolve(res);
 					if (res.state) {
 						alertService.add(0, res.state.message);
-
 					}
 				}, function (error) {
 					deferred.reject(error);
@@ -97,14 +101,6 @@ angular.module('modules.dash')
 					});
 			});
 		};
-
-		//vm.onSaveDraft = function() {
-			//pouch_db.save($rootScope.db, 'add', vm.data.formInfo, vm.data.model)
-			//	.then(function() {
-			//		alertService.add(0, 'Saved - Ok!');
-			//		$state.go(vm.mainState);
-			//	});
-		//};
 
 		vm.onSend = function() {
 			var config = {

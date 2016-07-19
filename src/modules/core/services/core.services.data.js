@@ -290,7 +290,14 @@ angular.module('modules.core')
 					toUser: null,
 					descr: null
 				}
-			};
+			},
+			paramStaff = { firstName: null,
+				lastName: '',
+				birth: null,
+				email: '',
+				password: '',
+				typeExp: '',
+				phone: '' };
 
 		return {
 			default: paramsPOST,
@@ -302,7 +309,8 @@ angular.module('modules.core')
 			changedPass: paramsChengedPass,
 			confirmPass: paramsConfirmPass,
 			copyTask: paramsCopyTask,
-			taskEdit: paramsTaskEdit
+			taskEdit: paramsTaskEdit,
+			staffInfo: paramStaff
 		};
 	})
 

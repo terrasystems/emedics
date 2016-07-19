@@ -10,7 +10,7 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.stafs');
 			return;
 		}
-	    vm.stuff = {firstName: null, lastName: '', birth: null, email: '', password: '', typeExp: '', phone: ''};
+	    vm.stuff = DTO.staffInfo /*{firstName: null, lastName: '', birth: null, email: '', password: '', typeExp: '', phone: ''}*/;
 
 		if ($stateParams.id !=='add') {
 			http.get('private/dashboard/stuff/' + $stateParams.id)
