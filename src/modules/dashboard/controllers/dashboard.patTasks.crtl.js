@@ -145,6 +145,7 @@ angular.module('modules.dash')
 		vm.onCopyHistory = function(taskObj, patientId) {
 			var paramsPOST = DTO.createTask;
 			paramsPOST.template.id = taskObj.template.id;
+			paramsPOST.template.templateDto = {};
 			paramsPOST.template.templateDto.id = taskObj.template.id;
 			paramsPOST.patient = patientId;
 			//var paramsPOST = {
