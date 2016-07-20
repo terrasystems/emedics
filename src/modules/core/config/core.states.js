@@ -227,7 +227,7 @@ angular.module('modules.core')
 			url:'/catalog',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/Catalog.html',
+					templateUrl:'modules/dashboard/catalog/views/Catalog.html',
 					controller:'CatalogCtrl as vm'
 				}
 			},
