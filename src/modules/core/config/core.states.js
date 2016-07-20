@@ -159,7 +159,6 @@ angular.module('modules.core')
 		{
 			name:'main.private.dashboard.abstract.references',
 			url:'/references',
-			//parent:'main.private.dashboard',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/references/views/references.html',
@@ -170,7 +169,6 @@ angular.module('modules.core')
 		{
 			name:'main.private.dashboard.abstract.references.editor',
 			url:'/add',
-			//parent:'main.private.dashboard',
 			views:{
 				'forms@dashboard':{
 					templateUrl:'modules/dashboard/references/views/references.editor.html',

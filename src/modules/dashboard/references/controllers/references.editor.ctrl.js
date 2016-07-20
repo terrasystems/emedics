@@ -2,19 +2,14 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-
-	.controller('referencesEditorCtrl', function ($scope,$translate,$state, localStorageService, http, blockUI, $timeout, alertService, DTO) {
+	.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
-		vm.addRef = DTO.refAdd;
-
-
 		vm.type1 = function() {
-			vm.addRef = DTO.refAdd;
-			vm.addRef.type = 'pat';
+			vm.referencesDTO = DTO.referencesDTO();
+			vm.referencesDTO.userType = 'patient';
 		};
-		vm.type1();
 
 		vm.type2 = function(){
 			vm.referencesDTO = DTO.referencesDTO();
@@ -26,17 +21,14 @@ angular.module('modules.dash')
 			http.post('/references/create', vm.referencesDTO)
 				.then(function () {
 					blockUI.stop();
-
-					$timeout(function () {
-						$state.go('main.private.dashboard.abstract.references');
-					}, 500);
+					$state.go('main.private.dashboard.abstract.references');
 				});
 		};
 
 		vm.getTypes = function() {
 			vm.criteriaDTO = DTO.criteriaDTO();
 			vm.criteriaDTO.type = 'doctor';
-			 http.post('types/all', vm.criteriaDTO)
+			 http.post('/types/all', vm.criteriaDTO)
 				 .then(function (res) {
 					 blockUI.stop();
 					 if (res.result) {
@@ -46,7 +38,7 @@ angular.module('modules.dash')
 		};
 		vm.getTypes();
 
-//Datepicker
+	//Datepicker
 		$scope.today = function() {
 			$scope.dt = new Date();
 		};
@@ -102,6 +94,7 @@ angular.module('modules.dash')
 
 		var tomorrow = new Date();
 		tomorrow.setDate(tomorrow.getDate() + 1);
+
 		var afterTomorrow = new Date();
 		afterTomorrow.setDate(tomorrow.getDate() + 1);
 		$scope.events = [
