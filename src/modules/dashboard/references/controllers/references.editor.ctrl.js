@@ -16,10 +16,9 @@ angular.module('modules.dash')
 		};
 		vm.type1();
 
-		vm.type2=function(){
+		vm.type2 = function(){
 			vm.referencesDTO = DTO.referencesDTO();
 			vm.referencesDTO.userType = 'doctor';
-
 		};
 		vm.type2();
 
