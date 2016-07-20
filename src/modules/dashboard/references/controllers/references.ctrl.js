@@ -38,7 +38,7 @@ angular.module('modules.dash')
 
 		vm.onAddRef = function () {
 			var config = {
-				templateUrl: 'modules/dashboard/views/modal.addExistsRef.html',
+				templateUrl: 'modules/modal/views/modal.addExistsRef.html',
 				controller: 'modalAddExistsRefCtrl',
 				controllerAs: 'vm',
 				resolve: {
@@ -62,18 +62,6 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
-					/*	res.result.map(function(item) {
-							if  (item.orgType !==null) {
-								item.type = item.docType + ' ' + item.orgType;
-							} else {
-								if (item.docType!==null) {
-									item.type = item.userType + ' ' + item.docType;
-								} else {
-									item.type = item.userType;
-								}
-							}
-							return item;
-						});  */
 						vm.references = res.result;
 					}
 					return res.result;

@@ -12,24 +12,28 @@ angular.module('modules.dash')
 		vm.filterTitle = $translate.instant('Search and add reference');
 		vm.placeholder = $translate.instant('SEARCH_REFS2');
 
-		vm.onSelectCallback = function (item, model) {
-			if (model === 'ADD') {
+		vm.onSelectCallback = function (item, id) {
+			if ('ADD' === id) {
 				$state.go('main.private.dashboard.abstract.references.editor');
 				$uibModalInstance.close();
 				return;
 			}
-			http.get('private/dashboard/' + vm.user.type + '/references/add/'+ model)
+			http.get('/references/add/'+ id)
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
+					return res.state.message;
+					//alertService.add(0, res.state.message);
 				});
 		};
 
 		vm.getFindUsers = function (val) {
-			vm.paramsPOST = DTO.default;
-			vm.paramsPOST.criteria.search = val;
-			vm.paramsPOST.criteria.list = [];
-			return http.post('private/dashboard/' + vm.user.type + '/references/search', vm.paramsPOST)
+
+			vm.criteriaDTO = DTO.criteriaDTO();
+
+			vm.criteriaDTO.search = val;
+
+
+			return http.post('/references/all', vm.criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if  (angular.isArray(res.result) && res.result.length===0) {
@@ -66,7 +70,7 @@ angular.module('modules.dash')
 			vm.paramsPOST.criteria.list = [];
 			vm.paramsPOST.criteria.search = '';
 			vm.paramsPOST.criteria.list.push({id: model, email: null, phone: null, name: null, history: []});
-			http.post('private/dashboard/patients/add', vm.paramsPOST)
+			http.post('patients/add', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
@@ -76,7 +80,7 @@ angular.module('modules.dash')
 		vm.getFindUsers = function (val) {
 			vm.paramsPOST = DTO.default;
 			vm.paramsPOST.criteria.search = val;
-			return http.post('private/dashboard/patients/search', vm.paramsPOST)
+			return http.post('patients/search', vm.paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if  (angular.isArray(res.result) && res.result.length===0) {
