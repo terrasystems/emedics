@@ -58,7 +58,7 @@ angular.module('modules.dash')
 		vm.getFindMyRefs = function (val) {
 			var paramPOST = DTO.criteriaDTO();
 			paramPOST.search = val;
-			return http.post('/references/all',  paramPOST /*{name: val, type: null}*/)
+			return http.post('/references/all',  paramPOST)
 				.then(function (res) {
 					blockUI.stop();
 /*					if (angular.isArray(res.result)) {

@@ -209,8 +209,9 @@ angular.module('modules.core')
 				start: 0,
 				count: constants.pagination,
 				type:null
-			}
-		};
+			};
+		}
+
 		function referencesDTO() {
 			return {
 				id: null,
@@ -222,8 +223,8 @@ angular.module('modules.core')
 				type: null,
 				email: null,
 				active: null
-			}
-		};
+			};
+		}
 	return {
 		criteriaDTO:criteriaDTO,
 		referencesDTO:referencesDTO
