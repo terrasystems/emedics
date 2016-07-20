@@ -14,7 +14,7 @@ angular.module('modules.dash')
 
 		vm.onSelectCallback = function (item, model) {
 			if (model === 'ADD') {
-				$state.go('main.private.dashboard.abstract.refadd');
+				$state.go('main.private.dashboard.abstract.references.editor');
 				$uibModalInstance.close();
 				return;
 			}

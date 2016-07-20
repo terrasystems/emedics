@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientReferencesAddCtrl', function ($scope,$translate,$state, localStorageService, http, blockUI, $timeout, alertService, DTO) {
+	.controller('referencesEditorCtrl', function ($scope,$translate,$state, localStorageService, http, blockUI, $timeout, alertService, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
@@ -17,27 +17,27 @@ angular.module('modules.dash')
 		vm.type1();
 
 		vm.type2=function(){
-			vm.addRef = DTO.refAdd;
-			vm.addRef.type = 'doc';
+			vm.referencesDTO = DTO.referencesDTO();
+			vm.referencesDTO.userType = 'doctor';
 
 		};
 		vm.type2();
 
 		vm.onSubmit = function () {
-			http.post('private/dashboard/' + vm.user.type + '/references/create', vm.addRef)
-				.then(function (res) {
+			http.post('/references/create', vm.referencesDTO)
+				.then(function () {
 					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-					}
+
 					$timeout(function () {
-						$state.go('main.private.dashboard.abstract.ref');
+						$state.go('main.private.dashboard.abstract.references');
 					}, 500);
 				});
 		};
 
 		vm.getTypes = function() {
-			 http.get('public/dashboard/doc_type/doctor')
+			vm.criteriaDTO = DTO.criteriaDTO();
+			vm.criteriaDTO.type = 'doctor';
+			 http.post('types/all', vm.criteriaDTO)
 				 .then(function (res) {
 					 blockUI.stop();
 					 if (res.result) {

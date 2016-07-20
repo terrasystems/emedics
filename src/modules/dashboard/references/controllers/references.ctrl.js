@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientReferencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q, DTO) {
+	.controller('referencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.references = [];
@@ -56,12 +56,12 @@ angular.module('modules.dash')
 		};
 
 		vm.getFindMyRefs = function (val) {
-			var paramPOST = DTO.filters;
-			paramPOST.name = val;
-			return http.post('private/dashboard/' + vm.user.type + '/references',  paramPOST /*{name: val, type: null}*/)
+			var paramPOST = DTO.criteriaDTO();
+			paramPOST.search = val;
+			return http.post('/references/all',  paramPOST /*{name: val, type: null}*/)
 				.then(function (res) {
 					blockUI.stop();
-					if (angular.isArray(res.result)) {
+/*					if (angular.isArray(res.result)) {
 						res.result.map(function(item) {
 							if  (item.orgType !==null) {
 								item.type = item.docType + ' ' + item.orgType;
@@ -75,14 +75,14 @@ angular.module('modules.dash')
 							return item;
 						});
 						vm.references = res.result;
-					}
+					}*/
 					return res.result;
 				});
 		};
 		vm.getFindMyRefs('');
 
 		vm.onRefInfo = function(ref) {
-			$state.go('main.private.dashboard.abstract.ref.info', {ref: ref});
+			$state.go('main.private.dashboard.abstract.references.info', {ref: ref});
 		};
 });
 

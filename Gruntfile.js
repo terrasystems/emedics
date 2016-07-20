@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 		bowercomp: 'lib',
 		oneSkyId: '103909',
 		proxy: {
-			context: '/rest',
+			context: '/api',
 			//host: 'ec2-52-28-6-207.eu-central-1.compute.amazonaws.com',
 			host: 'testweb.ts-dns.eu',
 			port: '8080'
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 					//xforward: false,
 					//changeOrigin: true,
 					rewrite: {
-						'/rest':  '/emedics-0.1.0/rest'
+						'/api':  '/emedics-0.1.0/api'
 						//'/rest':  '/rest'
 					}
 				}

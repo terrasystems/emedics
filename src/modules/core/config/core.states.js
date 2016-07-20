@@ -157,14 +157,38 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name:'main.private.dashboard.abstract.ref',
+			name:'main.private.dashboard.abstract.references',
 			url:'/references',
 			//parent:'main.private.dashboard',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefs.html',
-					controller:'patientReferencesCtrl as vm'
+					templateUrl:'modules/dashboard/references/views/references.html',
+					controller:'referencesCtrl as vm'
 				}
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.references.editor',
+			url:'/add',
+			//parent:'main.private.dashboard',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/references/views/references.editor.html',
+					controller:'referencesEditorCtrl as vm'
+				}
+			}
+		},
+		{
+			name:'main.private.dashboard.abstract.references.info',
+			url:'/info',
+			views:{
+				'forms@dashboard':{
+					templateUrl:'modules/dashboard/references/views/references.info.html',
+					controller:'referencesInfoCtrl as vm'
+				}
+			},
+			params:{
+				ref: null
 			}
 		},
 		{
@@ -190,17 +214,7 @@ angular.module('modules.core')
 				id: ''
 			}
 		},
-		{
-			name:'main.private.dashboard.abstract.refadd',
-			url:'/references/add',
-			//parent:'main.private.dashboard',
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefsAdd.html',
-					controller:'patientReferencesAddCtrl as vm'
-				}
-			}
-		},
+
 		{
 			name:'main.private.dashboard.abstract.notifications',
 			url:'/notifications',
@@ -312,19 +326,6 @@ angular.module('modules.core')
 			params:{
 				patient: null,
 				obj: null
-			}
-		},
-		{
-			name:'main.private.dashboard.abstract.ref.info',
-			url:'/info',
-			views:{
-				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patRefInfo.html',
-					controller:'patientRefInfoCtrl as vm'
-				}
-			},
-			params:{
-				ref: null
 			}
 		},
 		{

@@ -41,7 +41,23 @@ angular.module('modules.core')
 					break;
 			}
 		};
-		return alertService;
+		return {
+			success: function(msg, titleText, msgParam){
+				toastr.success(msg, titleText, msgParam);
+			},
+			warning: function(msg, titleText, msgParam){
+				toastr.warning(msg, titleText, msgParam);
+			},
+			error: function(msg, titleText, msgParam){
+				toastr.error(msg, titleText, msgParam);
+			},
+			info: function(msg, titleText, msgParam){
+				toastr.info(msg, titleText, msgParam);
+			},
+			add: function (type, titleText, msg, msgParam) {
+				alertService.add(type, titleText, msg, msgParam);
+			}
+		};
 	})
 
 	.service('auth', function ($rootScope, localStorageService) {
@@ -60,75 +76,66 @@ angular.module('modules.core')
 	})
 
 	.service('http', function ($http, $q, constants, alertService, $translate) {
-		function get(url, filter) {
-			var deferred = $q.defer();
-			$http.get(constants.restUrl + url, filter).then(function (resp) {
-				resp.data.state.message = $translate.instant(resp.data.state.message);
-				if (resp.data && resp.data.state) {
-					if (resp.data.state.value === true) {
-						deferred.resolve(resp.data);
-					}
-					else {
-						deferred.reject(false);
-						alertService.add(2, resp.data.state.message);
-					}
-				}
-				else {
-					deferred.reject(false);
-					alertService.add(2, $translate.instant(MSG_NO_DATA));
-				}
-			}, function (error) {
-				deferred.reject(error);
-				if (error.status == '401') {
-					alertService.add(2, $translate.instant(error.data.state.message));
-				}
-				else {
-					alertService.add(2, error.status + ' ' + error.statusText);
-				}
-			});
-			return deferred.promise;
-		}
-
-		function post(url, params) {
-			//console.log('post: '+ url);
-			var deferred = $q.defer();
-			$http.post(constants.restUrl + url, params).then(function (resp) {
-				resp.data.state.message = $translate.instant(resp.data.state.message);
-				if (resp.data && resp.data.state) {
-					if (resp.data.state.value === true) {
-						deferred.resolve(resp.data);
-					}
-					else {
-						deferred.reject(false);
-						alertService.add(2, resp.data.state.message);
-					}
-				}
-				else {
-					deferred.reject(false);
-					alertService.add(2, $translate.instant(MSG_NO_DATA));
-				}
-			}, function (error) {
-				deferred.reject(error);
-				if (error.status == '401') {
-					alertService.add(2, $translate.instant(error.data.state.message));
-				}
-				else {
-					alertService.add(2, error.status + ' ' + error.statusText);
-				}
-			});
-			return deferred.promise;
-		}
-
-		//******
-		return {
-			get: get,
-			post: post
+		//Call if all good
+		function successListener(resp, deferred) {
+			if (resp.data.msg)
+				resp.data.msg = $translate.instant(resp.data.msg);
+			if (resp.data && resp.data.state) {
+				deferred.resolve(resp.data);
+			}
+			else {
+				deferred.reject(false);
+					alertService.warning($translate.instant('MSG_NO_DATA'));
+			}
 		};
+		//Call if error
+		function errorListener(error, deferred) {
+			deferred.reject(error);
+			if (error.status == '401') {
+				alertService.error($translate.instant(error.data.state.message));
+			}
+			else {
+				alertService.error(error.status + ' ' + error.statusText);
+			}
+		};
+		//Function wrapper on $http service
+		function H(url, params, method) {
+			var deferred = $q.defer();
+				$http[method](constants.restUrl + url, params).then(function (resp) {
+						successListener(resp, deferred);
+					},
+					function (error) {
+						errorListener(error, deferred);
+					});
+			return deferred.promise;
+		}
+		return {
+			get: function (url, params) {
+				return H(url, params, 'get');
+			},
+			post: function (url, params) {
+				return H(url, params, 'post');
+			}
+		}
 	})
 
 
+//Сервис интерцептора запроса, вставляет токен в хедер
+	.service('requestInterceptor', function ($rootScope, $q) {
+		return {
+			'request': function (config) {
+				if ($rootScope.token) {
+					var authToken = $rootScope.token;
+					config.headers['X-Auth-Token'] = authToken;
+					$rootScope.$broadcast('change.username');
+				}
+				return config || $q.when(config);
+			}
+		};
+	})
+
 // Интерцептор для перехвата ошибок
-	.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI) {
+	.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI, $log) {
 		return {
 			'response': function (response) {
 				//console.log('int.responce: '+response);
@@ -145,9 +152,8 @@ angular.module('modules.core')
 						$injector.get('$state').go('main.public.login', {reload: true});
 						break;
 					}
-					case 404:
-					{
-						//$injector.get('$state').go('main.public.login',{reload: true});
+					case 404:{
+						$log.debug(rejection.statusText);
 						break;
 					}
 					default:
@@ -176,22 +182,6 @@ angular.module('modules.core')
 		};
 		return checkUserAuth;
 	})
-
-
-//Сервис интерцептора запроса, вставляет токен в хедер
-	.service('requestInterceptor', function ($rootScope, $q) {
-		return {
-			'request': function (config) {
-				if ($rootScope.token) {
-					var authToken = $rootScope.token;
-					config.headers['X-Auth-Token'] = authToken;
-					$rootScope.$broadcast('change.username');
-				}
-				return config || $q.when(config);
-			}
-		};
-	})
-
 //инициализация параметров для $http запроса
 	.service('initParamsPOST', function () {
 		var paramsPOST = {
@@ -212,106 +202,32 @@ angular.module('modules.core')
 
 
 //инициализация параметров для $http запроса
-	.service('DTO', function () {
-		var paramsPOST = {
-				page: {
-					start: 0,
-					count: 20,
-					size: 0
-				},
-				criteria: {
-					search: '',
-					list: []
-				}
-			},
-			paramsSend = {
-				template: {
-					id: null,
-					type: null,
-					description: null,
-					templateDto: null
-				},
-				fromID: null,
-				patient: null,
-				data: "{}"
-			},
-			paramsNotif = {
-				templateId: null,
-				period: null,
-				fromName: null,
-				description: null,
-				formType: null
-			},
-			paramsEditTask = {
-				event: {
-					id: null,
-					patient: null,
-					template: null,
-					data: {sections: null},
-					fromUser: null,
-					toUser: null,
-					descr: null
-				}
-			},
-			paramsFilter = {
-				name: '',
-				type: null
-			},
-			paramsRefAdd = {
-				email: '',
-				type: '',
+	.factory('DTO', function (constants) {
+		function criteriaDTO() {
+			return  {
+				search: '',
+				start: 0,
+				count: constants.pagination,
+				type:null
+			}
+		};
+		function referencesDTO() {
+			return {
+				id: null,
+				name: null,
 				firstName: null,
 				lastName: null,
-				birth: null,
-				docType: ''
-			},
-			paramsChengedPass = {
-				oldPass: null,
-				newPass: null
-			},
-			paramsConfirmPass = {
-				confirm: ''
-			},
-			paramsCopyTask = {
-				template: {
-					id: null,
-					templateDto: {}
-				},
-				patient: null,
-				data: null
-			},
-			paramsTaskEdit = {
-				event: {
-					id: null,
-					patient: null,
-					template: null,
-					data: null,
-					fromUser: null,
-					toUser: null,
-					descr: null
-				}
-			},
-			paramStaff = { firstName: null,
-				lastName: '',
-				birth: null,
-				email: '',
-				password: '',
-				typeExp: '',
-				phone: '' };
-
-		return {
-			default: paramsPOST,
-			createTask: paramsSend,
-			getNotif: paramsNotif,
-			editTask: paramsEditTask,
-			filters: paramsFilter,
-			refAdd: paramsRefAdd,
-			changedPass: paramsChengedPass,
-			confirmPass: paramsConfirmPass,
-			copyTask: paramsCopyTask,
-			taskEdit: paramsTaskEdit,
-			staffInfo: paramStaff
+				userType: null,
+				dob: null,
+				type: null,
+				email: null,
+				active: null
+			}
 		};
+	return {
+		criteriaDTO:criteriaDTO,
+		referencesDTO:referencesDTO
+	};
 	})
 
 //работа с базой pouchdb

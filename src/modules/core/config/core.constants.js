@@ -4,6 +4,7 @@
 angular.module('modules.core')
 
 	.constant('constants', {
-		restUrl: '/rest/'
+		restUrl: '/api/v2',
+		pagination:10
 
 	});
