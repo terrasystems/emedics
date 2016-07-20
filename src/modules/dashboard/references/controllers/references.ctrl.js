@@ -61,8 +61,8 @@ angular.module('modules.dash')
 			return http.post('/references/all',  paramPOST)
 				.then(function (res) {
 					blockUI.stop();
-/*					if (angular.isArray(res.result)) {
-						res.result.map(function(item) {
+					if (angular.isArray(res.result)) {
+					/*	res.result.map(function(item) {
 							if  (item.orgType !==null) {
 								item.type = item.docType + ' ' + item.orgType;
 							} else {
@@ -73,9 +73,9 @@ angular.module('modules.dash')
 								}
 							}
 							return item;
-						});
+						});  */
 						vm.references = res.result;
-					}*/
+					}
 					return res.result;
 				});
 		};

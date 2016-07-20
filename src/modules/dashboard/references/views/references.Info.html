@@ -13,6 +13,7 @@
 				<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{vm.ref.name || ' - '}}</p>
 				<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{vm.ref.firstName || ' - '}}</p>
 				<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{vm.ref.lastName || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="BIRTH_DATE"></span>: </label>{{vm.convertDate(vm.ref.dob)}}</p>
 				<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{vm.ref.phone || '(none)'}}</p>
 				<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{vm.ref.email || '(none)'}}</p>
 				<p><label class="col-sm-3 control-label"><span translate="TYPE"></span>: </label>{{vm.ref.type || ' - '}}</p>

@@ -15,4 +15,9 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.references');
 		};
 
+		vm.convertDate = function (d) {
+			var y = new Date(d);
+			return y.toLocaleString().slice(0,10);
+		};
+
 	});
