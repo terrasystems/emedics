@@ -4,14 +4,15 @@
 angular.module('modules.dash')
 	.controller('patientsAddCtrl', function($state, http, blockUI, $timeout, alertService, $scope){
 		var vm = this;
-		vm.addPat = {
-			'email':'',
-			'type':'pat',
-			'firstName':null,
-			'lastName': null,
-			'birth': null,
-			'docType':''
-		};
+		vm.addPat=DTO.addPat;
+		//vm.addPat = {
+		//	'email':'',
+		//	'type':'pat',
+		//	'firstName':null,
+		//	'lastName': null,
+		//	'birth': null,
+		//	'docType':''
+		//};
 
 
 		vm.addPatients = function () {

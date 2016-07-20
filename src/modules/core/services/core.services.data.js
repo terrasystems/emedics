@@ -211,6 +211,7 @@ angular.module('modules.core')
 				type:null
 			};
 		}
+
 		function referencesDTO() {
 			return {
 				id: null,
