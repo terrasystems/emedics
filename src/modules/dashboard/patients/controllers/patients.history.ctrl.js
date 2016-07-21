@@ -30,7 +30,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onView = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients+', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients+', patId: patientId});
 		};
 
 		vm.onSend = function (obj, hist) {
@@ -87,7 +87,7 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.add(0, res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.edit', {
+									$state.go('main.private.dashboard.abstract.patients.editor', {
 										id: newTaskID,
 										type: 'patients',
 										patId: patientId
@@ -101,7 +101,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEditTask = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients', patId: patientId});
 		};
 
 	});

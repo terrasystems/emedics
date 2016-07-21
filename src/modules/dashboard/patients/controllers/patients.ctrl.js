@@ -40,7 +40,7 @@ angular.module('modules.dash')
 		//						if (res.result) {
 		//							alertService.add(0, res.state.message);
 		//							newTaskID = res.result.id;
-		//							$state.go('main.private.dashboard.abstract.patients.edit', {id: newTaskID, type: 'patients', patId: patientId});
+		//							$state.go('main.private.dashboard.abstract.patients.editor', {id: newTaskID, type: 'patients', patId: patientId});
 		//						}
 		//					});
 		//			} else {
@@ -50,7 +50,7 @@ angular.module('modules.dash')
 		//};
         //
 		//vm.onEditTask = function(histId, patientId) {
-		//	$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients', patId: patientId});
+		//	$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients', patId: patientId});
 		//};
 
 		vm.getFindPatients = function (val) {
