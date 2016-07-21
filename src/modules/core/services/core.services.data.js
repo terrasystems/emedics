@@ -78,8 +78,9 @@ angular.module('modules.core')
 	.service('http', function ($http, $q, constants, alertService, $translate) {
 		//Call if all good
 		function successListener(resp, deferred) {
-			if (resp.data.msg)
+			if (resp.data.msg) {
 				resp.data.msg = $translate.instant(resp.data.msg);
+			}
 			if (resp.data && resp.data.state) {
 				deferred.resolve(resp.data);
 			}
@@ -87,17 +88,17 @@ angular.module('modules.core')
 				deferred.reject(false);
 					alertService.warning($translate.instant('MSG_NO_DATA'));
 			}
-		};
+		}
 		//Call if error
 		function errorListener(error, deferred) {
 			deferred.reject(error);
-			if (error.status == '401') {
+			if (error.status === '401') {
 				alertService.error($translate.instant(error.data.state.message));
 			}
 			else {
 				alertService.error(error.status + ' ' + error.statusText);
 			}
-		};
+		}
 		//Function wrapper on $http service
 		function H(url, params, method) {
 			var deferred = $q.defer();
@@ -116,7 +117,7 @@ angular.module('modules.core')
 			post: function (url, params) {
 				return H(url, params, 'post');
 			}
-		}
+		};
 	})
 
 
@@ -225,9 +226,24 @@ angular.module('modules.core')
 				active: null
 			};
 		}
+
+		function staffDTO() {
+			return {
+				id: null,
+				name: null,
+				firstName: null,
+				lastName: null,
+				dob: null,
+				email: null,
+				address: null,
+				phone: null
+			};
+		}
+
 	return {
 		criteriaDTO: criteriaDTO,
-		referencesDTO: referencesDTO
+		referencesDTO: referencesDTO,
+		staffDTO: staffDTO
 	};
 	})
 

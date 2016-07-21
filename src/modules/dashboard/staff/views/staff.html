@@ -15,7 +15,7 @@
 						   class="form-control"
 						   placeholder="{{'SEARCH_STUFF'  | translate}}..."
 						   ng-model="vm.search"
-						   ng-change="vm.getFindStuffs(vm.search);" />
+						   ng-change="vm.getStaff(vm.search);" />
 				</form>
 			</div>
 			<p></p>
@@ -31,22 +31,28 @@
 				<table class="table table-hover">
 					<thead>
 					<tr>
-						<th translate="FIRST_NAME"></th>
-						<th translate="LAST_NAME"></th>
+						<th translate="NAME"></th>
+						<!--<th translate="FIRST_NAME"></th>-->
+						<!--<th translate="LAST_NAME"></th>-->
+						<!--<th translate="BIRTH_DATE"></th>-->
 						<th translate="EMAIL"></th>
 						<th translate="PHONE"></th>
+						<!--<th translate="ADDRESS"></th>-->
 					</tr>
 					</thead>
 					<tbody>
-					<tr ng-click="vm.onOpenStuf(staff);"  ng-repeat="staf in vm.staffs track by $index">
-						<td>{{staff.firstName}}</td>
-						<td>{{staff.lastName}}</td>
+					<tr ng-click="vm.onOpenStuf(staff);"  ng-repeat="staff in vm.staff track by $index">
+						<td>{{staff.name}}</td>
+						<!--<td>{{staff.firstName}}</td>-->
+						<!--<td>{{staff.lastName}}</td>-->
+						<!--<td>{{vm.convertDate(staff.dob);}}</td>-->
 						<td>{{staff.email}}</td>
 						<td>{{staff.phone}}</td>
+						<!--<td>{{staff.address}}</td>-->
 					</tr>
 					</tbody>
 				</table>
-				<div ng-show="vm.staffs.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
+				<div ng-show="vm.staff.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 			</div>
 		</div>
 

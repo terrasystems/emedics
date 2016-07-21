@@ -2,25 +2,26 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('stuffEditCtrl', function(http, blockUI, alertService, $state, $stateParams,$translate){
+	.controller('staffEditorCtrl', function(http, blockUI, alertService, $state, $stateParams, $translate, DTO){
 		var vm = this;
-		console.log($stateParams.id);
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.abstract.staffs');
+			$state.go('main.private.dashboard.abstract.staff');
 			return;
 		}
-	    vm.stuff = DTO.staffInfo /*{firstName: null, lastName: '', birth: null, email: '', password: '', typeExp: '', phone: ''}*/;
+	    vm.staffDTO = DTO.staffDTO();
 
-		if ($stateParams.id !=='add') {
-			http.get('private/dashboard/stuff/' + $stateParams.id)
+		if ($stateParams.id !== 'add') {
+			http.get('/staff/get/' + $stateParams.id)
 				.then(function (res) {
 					blockUI.stop();
-					vm.stuff = res.result;
+					if (res.state) {
+						vm.staffDTO = res.result;
+					}
 				});
 		}
 
-		vm.StuffFields = [
+		vm.staffFields = [
 			{
 				className: 'col-md-12',
 				key: 'firstName',
@@ -135,26 +136,20 @@ angular.module('modules.dash')
 		];
 
 		vm.onSave = function() {
-			if ($stateParams.id == 'add') {
-				vm.stuff.id = null;
-				http.post('private/dashboard/stuff/create', vm.stuff)
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							alertService.add(0, res.state.message);
-							$state.go('main.private.dashboard.abstract.staffs');
-						}
-					});
+			if ($stateParams.id === 'add') {
+				vm.staffDTO.id = null;
+				vm.url = '/staff/create';
 			} else {
-				http.post('private/dashboard/stuff/edit', vm.stuff)
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							alertService.add(0, res.state.message);
-							$state.go('main.private.dashboard.abstract.staffs');
-						}
-					});
+				vm.url = '/staff/edit';
 			}
+			http.post(vm.url, vm.staffDTO)
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						alertService.success(res.state.msg);
+						$state.go('main.private.dashboard.abstract.staff');
+					}
+				});
 		};
 
 	});

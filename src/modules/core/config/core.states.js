@@ -190,22 +190,22 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.staffs',
-			url: '/staffs',
+			name: 'main.private.dashboard.abstract.staff',
+			url: '/staff',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/staffs/views/staffs.html',
-					controller: 'staffsCtrl as vm'
+					templateUrl: 'modules/dashboard/staff/views/staff.html',
+					controller: 'staffCtrl as vm'
 				}
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.staffs.editor',
+			name: 'main.private.dashboard.abstract.staff.editor',
 			url: '/editor',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/staffs/views/staffs.editor.html',
-					controller: 'staffsEditorCtrl as vm'
+					templateUrl: 'modules/dashboard/staff/views/staff.editor.html',
+					controller: 'staffEditorCtrl as vm'
 				}
 			},
 			params: {
@@ -213,12 +213,12 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.staffs.info',
+			name: 'main.private.dashboard.abstract.staff.info',
 			url: '/info',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/staffs/views/staffs.info.html',
-					controller: 'staffsInfoCtrl as vm'
+					templateUrl: 'modules/dashboard/staff/views/staff.info.html',
+					controller: 'staffInfoCtrl as vm'
 				}
 			},
 			params: {

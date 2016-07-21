@@ -1,0 +1,29 @@
+
+<div class="container">
+	<div class="row">
+		<div class="search_content">
+
+			<button type="submit" ng-click="vm.onReturn();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+
+			<p></p><p></p>
+			<h4>Staff info:</h4>
+			<p></p><p></p>
+			<div class="container ui-list-view">
+				<p></p><p></p>
+				<div class="buttons pull-right btn-group btn-group-xs">
+					<button style="margin-top: 10px;" class="btn btn-info" ng-click="vm.onEdit(vm.staff.id)" ng-show="vm.canEdit;"><span translate="EDIT"></span></button>
+				</div>
+				<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{vm.staff.name || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="FIRST_NAME"></span>: </label>{{vm.staff.firstName || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="LAST_NAME"></span>: </label>{{vm.staff.lastName || ' - '}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(vm.staff.dob)}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="PHONE"></span>: </label>{{vm.staff.phone || '(none)'}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="EMAIL"></span>: </label>{{vm.staff.email || '(none)'}}</p>
+				<p><label class="col-sm-3 control-label"><span translate="ADDRESS"></span>: </label>{{vm.staff.address || '(none)'}}</p>
+				<p></p><p></p>
+			</div>
+
+		</div>
+	</div>
+</div>
+

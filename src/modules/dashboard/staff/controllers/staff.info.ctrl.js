@@ -2,13 +2,13 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('stafInfoCtrl', function ($stateParams, $state, localStorageService) {
+	.controller('staffInfoCtrl', function ($stateParams, $state, localStorageService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.staf = $stateParams.staf;
+		vm.staff = $stateParams.staff;
 
-		if (!$stateParams.staf || $stateParams.staf === '' || $stateParams.staf === null) {
-			$state.go('main.private.dashboard.abstract.staffs');
+		if (!$stateParams.staff || $stateParams.staff === '' || $stateParams.staff === null) {
+			$state.go('main.private.dashboard.abstract.staff');
 			return;
 		}
 
@@ -19,7 +19,7 @@ angular.module('modules.dash')
 		}
 
 		vm.onReturn = function() {
-			$state.go('main.private.dashboard.abstract.staffs');
+			$state.go('main.private.dashboard.abstract.staff');
 		};
 
 		vm.convertDate = function (d) {
@@ -28,7 +28,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEdit = function () {
-			$state.go('main.private.dashboard.abstract.staffs.editor', {id: vm.staf.id});
+			$state.go('main.private.dashboard.abstract.staff.editor', {id: vm.staff.id});
 		};
 
 	});
