@@ -7,7 +7,7 @@ angular.module('modules.dash')
 		console.log($stateParams.id);
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.abstract.stafs');
+			$state.go('main.private.dashboard.abstract.staffs');
 			return;
 		}
 	    vm.stuff = DTO.staffInfo /*{firstName: null, lastName: '', birth: null, email: '', password: '', typeExp: '', phone: ''}*/;
@@ -142,7 +142,7 @@ angular.module('modules.dash')
 						blockUI.stop();
 						if (res.state) {
 							alertService.add(0, res.state.message);
-							$state.go('main.private.dashboard.abstract.stafs');
+							$state.go('main.private.dashboard.abstract.staffs');
 						}
 					});
 			} else {
@@ -151,7 +151,7 @@ angular.module('modules.dash')
 						blockUI.stop();
 						if (res.state) {
 							alertService.add(0, res.state.message);
-							$state.go('main.private.dashboard.abstract.stafs');
+							$state.go('main.private.dashboard.abstract.staffs');
 						}
 					});
 			}

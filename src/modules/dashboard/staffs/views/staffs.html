@@ -14,8 +14,8 @@
 						   style="height: 35px"
 						   class="form-control"
 						   placeholder="{{'SEARCH_STUFF'  | translate}}..."
-						   ng-model="vm.temp_"
-						   ng-change="vm.getFindStuffs(vm.temp_);" />
+						   ng-model="vm.search"
+						   ng-change="vm.getFindStuffs(vm.search);" />
 				</form>
 			</div>
 			<p></p>
@@ -38,15 +38,15 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr ng-click="vm.onOpenStuf(staf);"  ng-repeat="staf in vm.stafs track by $index">
-						<td>{{staf.firstName}}</td>
-						<td>{{staf.lastName}}</td>
-						<td>{{staf.email}}</td>
-						<td>{{staf.phone}}</td>
+					<tr ng-click="vm.onOpenStuf(staff);"  ng-repeat="staf in vm.staffs track by $index">
+						<td>{{staff.firstName}}</td>
+						<td>{{staff.lastName}}</td>
+						<td>{{staff.email}}</td>
+						<td>{{staff.phone}}</td>
 					</tr>
 					</tbody>
 				</table>
-				<div ng-show="vm.stafs.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
+				<div ng-show="vm.staffs.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
 			</div>
 		</div>
 

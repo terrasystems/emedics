@@ -8,7 +8,7 @@ angular.module('modules.dash')
 		vm.staf = $stateParams.staf;
 
 		if (!$stateParams.staf || $stateParams.staf === '' || $stateParams.staf === null) {
-			$state.go('main.private.dashboard.abstract.stafs');
+			$state.go('main.private.dashboard.abstract.staffs');
 			return;
 		}
 
@@ -19,7 +19,7 @@ angular.module('modules.dash')
 		}
 
 		vm.onReturn = function() {
-			$state.go('main.private.dashboard.abstract.stafs');
+			$state.go('main.private.dashboard.abstract.staffs');
 		};
 
 		vm.convertDate = function (d) {
@@ -28,7 +28,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEdit = function () {
-			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: vm.staf.id});
+			$state.go('main.private.dashboard.abstract.staffs.editor', {id: vm.staf.id});
 		};
 
 	});

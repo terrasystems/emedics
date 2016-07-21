@@ -190,26 +190,39 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.stafs',
-			url: '/stuff',
+			name: 'main.private.dashboard.abstract.staffs',
+			url: '/staffs',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.staf.html',
-					controller: 'stafCtrl as vm'
+					templateUrl: 'modules/dashboard/staffs/views/staffs.html',
+					controller: 'staffsCtrl as vm'
 				}
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.stafs.stuffedit',
-			url: '/stuffedit',
+			name: 'main.private.dashboard.abstract.staffs.editor',
+			url: '/editor',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.stuffEdit.html',
-					controller: 'stuffEditCtrl as vm'
+					templateUrl: 'modules/dashboard/staffs/views/staffs.editor.html',
+					controller: 'staffsEditorCtrl as vm'
 				}
 			},
 			params: {
 				id: ''
+			}
+		},
+		{
+			name: 'main.private.dashboard.abstract.staffs.info',
+			url: '/info',
+			views: {
+				'forms@dashboard': {
+					templateUrl: 'modules/dashboard/staffs/views/staffs.info.html',
+					controller: 'staffsInfoCtrl as vm'
+				}
+			},
+			params: {
+				staff: null
 			}
 		},
 		{
@@ -324,19 +337,7 @@ angular.module('modules.core')
 				patient: null,
 				obj: null
 			}
-		},
-		{
-			name: 'main.private.dashboard.abstract.stafs.info',
-			url: '/info',
-			views: {
-				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.stafInfo.html',
-					controller: 'stafInfoCtrl as vm'
-				}
-			},
-			params: {
-				staf: null
-			}
 		}
+
 
 	]);
