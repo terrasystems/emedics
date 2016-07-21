@@ -61,7 +61,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.$on('calc.notif', function () {
-				http.post('private/dashboard/events/notifications/all', DTO.getNotif)
+				http.post('/notifications/all', DTO.criteriaDTO())
 					.then(function (res) {
 						blockUI.stop();
 						if (res.result) {

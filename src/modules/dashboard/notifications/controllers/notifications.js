@@ -7,8 +7,8 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.UnreadNotifications = [];
 
-		vm.onRefreshNotif = function(val) {
-			return http.post('private/dashboard/events/notifications/all', DTO.getNotif)
+		vm.allNotifications = function() {
+			return http.post('/notifications/all', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -17,31 +17,31 @@ angular.module('modules.dash')
 					return res.result;
 				});
 		};
-		vm.onRefreshNotif();
+		vm.allNotifications();
 
-		vm.onAccept = function (id) {
-			http.get('private/dashboard/events/notifications/accept/'+id)
+		vm.Accept = function (id) {
+			http.get('/notifications/accept/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
 						alertService.add(0, res.state.message);
 						$rootScope.$broadcast('calc.notif');
 					}
-					vm.onRefreshNotif();
+					vm.allNotifications();
 				});
 		};
 
 		$rootScope.$broadcast('calc.notif');
 
-		vm.onDecline = function (id) {
-			http.get('private/dashboard/events/notifications/decline/'+id)
+		vm.Decline = function (id) {
+			http.get('/notifications/decline/'+id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
 						alertService.add(0, res.state.message);
 						$rootScope.$broadcast('calc.notif');
 					}
-					vm.onRefreshNotif();
+					vm.allNotifications();
 				});
 		};
 
