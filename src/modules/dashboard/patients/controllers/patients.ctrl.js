@@ -2,17 +2,15 @@
 /*jshint -W117, -W097, -W116*/
 
 angular.module('modules.dash')
-	.controller('patientsCtrl', function($scope, http, blockUI, initParamsPOST, $state, alertService, $uibModal, localStorageService, $q,$stateParams, DTO){
+	.controller('patientsCtrl', function(http, blockUI, $state, alertService, $uibModal, $q, DTO){
 		var vm = this;
-		vm.user = localStorageService.get('userData');
 		vm.patients = [];
-		vm.templates = [];
-		vm.temp_ = '';
+		vm.search = '';
 
-		vm.getFindPatients = function (val) {
-			var paramPOST = DTO.filters;
-			paramPOST.name = val;
-			return http.post('private/dashboard/patients', paramPOST)
+		vm.getPatients = function (val) {
+			var criteriaDTO = DTO.criteriaDTO();
+			criteriaDTO.search = val;
+			return http.post('/patients/all', criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -21,11 +19,11 @@ angular.module('modules.dash')
 					return res.result;
 				});
 		};
-		vm.getFindPatients('');
+		vm.getPatients('');
 
 		vm.onAddPateint = function () {
 			var config = {
-				templateUrl: 'modules/dashboard/views/modal.addExistsRef.html',
+				templateUrl: 'modules/modal/views/modal.addExistsRef.html',
 				controller: 'modalAddExistsPatCtrl',
 				controllerAs: 'vm',
 				resolve: {
@@ -38,12 +36,8 @@ angular.module('modules.dash')
 			};
 			var result = $uibModal.open(config);
 			result.result.then(function (){
-				vm.getFindPatients(vm.temp_);
+				vm.getPatients(vm.search);
 			});
-		};
-
-		vm.addItemList = function () {
-			$state.go('main.private.dashboard.abstract.patients.create');
 		};
 
 		vm.onRemove = function (id_,$event) {
@@ -51,14 +45,11 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			vm.paramsPOST = initParamsPOST.params;
-			vm.paramsPOST.criteria.list = [];
-			vm.paramsPOST.criteria.list.push({id: id_});
-			http.post('private/dashboard/patients/remove', vm.paramsPOST)
+			http.get('/patients/remove/'+id_)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
-					vm.getFindPatients(vm.temp_);
+					vm.getPatients(vm.temp_);
 				});
 		};
 
@@ -67,23 +58,12 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
+			http.get('/patients/invite/' + id)
 				.then(function (res) {
 					blockUI.stop();
 					if  (res.state) {
-						alertService.add(0, res.state.message);
-						vm.getFindPatients(vm.temp_);
-					}
-				});
-		};
-
-		vm.onOpenPatient = function (id) {
-			vm.templates = [];
-			http.get('private/dashboard/patients/' + id + '/events')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result) ) {
-						vm.templates = res.result;
+						alertService.success(res.msg);
+						vm.getPatients(vm.temp_);
 					}
 				});
 		};
