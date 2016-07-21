@@ -12,7 +12,7 @@ angular.module('modules.dash')
 		vm.getFindPatients = function (val) {
 			var paramPOST = DTO.filters;
 			paramPOST.name = val;
-			return http.post('private/dashboard/patients', paramPOST /*{name: val}*/)
+			return http.post('private/dashboard/patients', paramPOST)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
