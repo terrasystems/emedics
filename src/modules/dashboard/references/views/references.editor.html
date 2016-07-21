@@ -4,7 +4,7 @@
 		<uib-tabset>
 
 			<!-- FIRST TAB-->
-			<uib-tab ng-if="'patient'!==vm.user.type" ng-click="vm.type1()" heading="Patient">
+			<uib-tab ng-if="'patient'!==vm.user.type" ng-click="vm.tabPatient()" heading="Patient">
 				<form name="userForm" class="elegant-aero" ng-submit="" novalidate>
 
 					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
@@ -45,7 +45,7 @@
 			</uib-tab>
 
 			<!-- SECOND TAB-->
-			<uib-tab ng-click="vm.type2();" heading="Doctor">
+			<uib-tab ng-click="vm.tabDoctor();" heading="Doctor">
 				<form name="doctorForm" class="elegant-aero" ng-submit="" novalidate>
 
 					<div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">

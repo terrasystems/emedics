@@ -6,18 +6,17 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.references = [];
-		vm.temp_ = '';
+		vm.search = '';
 
 		vm.onRemove = function (id, $event) {
 			if($event){
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('private/dashboard/' + vm.user.type + '/references/remove/'+id)
-				.then(function (res) {
+			http.get('/references/remove/'+id)
+				.then(function () {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
-					vm.getFindMyRefs(vm.temp_);
+					vm.getReferences(vm.search);
 				});
 		};
 
@@ -26,12 +25,11 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('private/dashboard/' + vm.user.type + '/references/invite/' + id)
+			http.get('/references/invite/' + id)
 				.then(function (res) {
 					blockUI.stop();
 					if  (res.state) {
-						alertService.add(0, res.state.message);
-						vm.getFindMyRefs(vm.temp_);
+						vm.getReferences(vm.search);
 					}
 				});
 		};
@@ -49,16 +47,16 @@ angular.module('modules.dash')
 					}
 				}
 			};
-			var result = $uibModal.open(config);
-			result.result.then(function (){
-				vm.getFindMyRefs(vm.temp_);
+			var modal = $uibModal.open(config);
+			modal.result.then(function (){
+				vm.getReferences(vm.search);
 			});
 		};
 
-		vm.getFindMyRefs = function (val) {
-			var paramPOST = DTO.criteriaDTO();
-			paramPOST.search = val;
-			return http.post('/references/all',  paramPOST)
+		vm.getReferences = function (val) {
+			var criteriaDTO = DTO.criteriaDTO();
+			criteriaDTO.search = val;
+			return http.post('/references/all',  criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -67,7 +65,7 @@ angular.module('modules.dash')
 					return res.result;
 				});
 		};
-		vm.getFindMyRefs('');
+		vm.getReferences('');
 
 		vm.onRefInfo = function(ref) {
 			$state.go('main.private.dashboard.abstract.references.info', {ref: ref});

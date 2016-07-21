@@ -6,16 +6,16 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
-		vm.type1 = function() {
+		vm.tabPatient = function() {
 			vm.referencesDTO = DTO.referencesDTO();
 			vm.referencesDTO.userType = 'patient';
 		};
 
-		vm.type2 = function(){
+		vm.tabDoctor = function(){
 			vm.referencesDTO = DTO.referencesDTO();
 			vm.referencesDTO.userType = 'doctor';
 		};
-		vm.type2();
+		vm.tabDoctor();
 
 		vm.onSubmit = function () {
 			http.post('/references/create', vm.referencesDTO)
@@ -38,10 +38,12 @@ angular.module('modules.dash')
 		};
 		vm.getTypes();
 
+	//TODO: Guys please move this dtpicker to service!!!!!!!
 	//Datepicker
 		$scope.today = function() {
 			$scope.dt = new Date();
 		};
+
 		$scope.today();
 
 		$scope.clear = function() {
@@ -67,6 +69,7 @@ angular.module('modules.dash')
 		};
 
 		$scope.toggleMin();
+
 
 		$scope.open1 = function() {
 			$scope.popup1.opened = true;
