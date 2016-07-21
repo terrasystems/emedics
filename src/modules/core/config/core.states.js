@@ -212,17 +212,15 @@ angular.module('modules.core')
 				id: ''
 			}
 		},
-
 		{
 			name:'main.private.dashboard.abstract.notifications',
 			url:'/notifications',
 			views:{
 				'forms@dashboard':{
-					templateUrl:'modules/dashboard/views/dashboard.patNotif.html',
-					controller:'patientNotifCtrl as vm'
+					templateUrl:'modules/dashboard/views/notifications.html',
+					controller:'notificationsCtrl as vm'
 				}
 			}
-			//parent: 'main.private.dashboard'
 		},
 		{
 			name:'main.private.dashboard.abstract.tasks',

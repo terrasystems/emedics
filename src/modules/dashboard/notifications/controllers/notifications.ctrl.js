@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('patientNotifCtrl', function (http,$scope,blockUI, alertService, $rootScope, DTO) {
+	.controller('notificationsCtrl', function (http,$scope,blockUI, alertService, $rootScope, DTO) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 
