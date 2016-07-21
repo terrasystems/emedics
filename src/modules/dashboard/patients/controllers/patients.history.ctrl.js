@@ -2,8 +2,7 @@
 /*jshint -W117, -W097, -W116*/
 
 angular.module('modules.dash')
-
-	.controller('pHistoryCtrl', function (localStorageService, DTO, $stateParams, $state, blockUI, http, $q, $uibModal, alertService) {
+	.controller('patientsHistoryCtrl', function (localStorageService, DTO, $stateParams, $state, blockUI, http, $q, $uibModal, alertService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.templates = [];
