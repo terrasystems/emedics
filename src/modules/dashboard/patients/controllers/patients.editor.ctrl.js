@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientsAddCtrl', function($state, http, blockUI, $timeout, alertService, $scope){
+	.controller('patientsEditorCtrl', function($state, http, blockUI, $timeout, alertService, $scope){
 		var vm = this;
 		vm.addPat=DTO.addPat;
 		//vm.addPat = {

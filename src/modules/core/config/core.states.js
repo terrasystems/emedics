@@ -126,34 +126,54 @@ angular.module('modules.core')
 			url: '/patients',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/Patients.html',
+					templateUrl: 'modules/dashboard/patients/views/patients.html',
 					controller: 'patientsCtrl as vm'
 				}
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.patients.create',
-			url: '/create',
+			name: 'main.private.dashboard.abstract.patients.editor',
+			url: '/editor',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/PatientsAdd.html',
-					controller: 'patientsAddCtrl as vm'
-				}
-			}
-		},
-		{
-			name: 'main.private.dashboard.abstract.patients.edit',
-			url: '/edit',
-			views: {
-				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.patTasksEdit.html',
-					controller: 'patientTasksEditCtrl as vm'
+					templateUrl: 'modules/dashboard/patients/views/patients.editor.html',
+					controller: 'patientsEditorCtrl as vm'
 				}
 			},
 			params: {
 				id: '',
 				type: '',
 				patId: null
+			}
+		},
+		{
+			name: 'main.private.dashboard.abstract.patients.templates',
+			url: '/templates',
+			views: {
+				'forms@dashboard': {
+					templateUrl: 'modules/dashboard/patients/views/patients.templates.html',
+					controller: 'patientsTemplatesCtrl as vm'
+				}
+			},
+			params: {
+				id: '',
+				name: '',
+				email: '',
+				phone: ''
+			}
+		},
+		{
+			name: 'main.private.dashboard.abstract.patients.history',
+			url: '/history',
+			views: {
+				'forms@dashboard': {
+					templateUrl: 'modules/dashboard/patients/views/patients.history.html',
+					controller: 'patientsHistoryCtrl as vm'
+				}
+			},
+			params: {
+				patient: null,
+				obj: null
 			}
 		},
 		{
@@ -307,37 +327,6 @@ angular.module('modules.core')
 			params: {
 				id: ''
 			}
-		},
-		{
-			name: 'main.private.dashboard.abstract.patients.templates',
-			url: '/templates',
-			views: {
-				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/pTemplates.html',
-					controller: 'pTemplatesCtrl as vm'
-				}
-			},
-			params: {
-				id: '',
-				name: '',
-				email: '',
-				phone: ''
-			}
-		},
-		{
-			name: 'main.private.dashboard.abstract.patients.history',
-			url: '/history',
-			views: {
-				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/pHistory.html',
-					controller: 'pHistoryCtrl as vm'
-				}
-			},
-			params: {
-				patient: null,
-				obj: null
-			}
 		}
-
 
 	]);

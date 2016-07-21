@@ -140,7 +140,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onViewHistory = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'tasks+', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'tasks+', patId: patientId});
 		};
 
 		vm.onCopyHistory = function(taskObj, patientId) {
@@ -167,7 +167,7 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.add(0, res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.edit', {id: newTaskID, type: 'tasks', patId: patientId});
+									$state.go('main.private.dashboard.abstract.patients.editor', {id: newTaskID, type: 'tasks', patId: patientId});
 								}
 							});
 					} else {

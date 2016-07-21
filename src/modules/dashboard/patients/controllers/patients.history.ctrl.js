@@ -2,8 +2,7 @@
 /*jshint -W117, -W097, -W116*/
 
 angular.module('modules.dash')
-
-	.controller('pHistoryCtrl', function (localStorageService, DTO, $stateParams, $state, blockUI, http, $q, $uibModal, alertService) {
+	.controller('patientsHistoryCtrl', function (localStorageService, DTO, $stateParams, $state, blockUI, http, $q, $uibModal, alertService) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.templates = [];
@@ -30,7 +29,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onView = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients+', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients+', patId: patientId});
 		};
 
 		vm.onSend = function (obj, hist) {
@@ -87,7 +86,7 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.add(0, res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.edit', {
+									$state.go('main.private.dashboard.abstract.patients.editor', {
 										id: newTaskID,
 										type: 'patients',
 										patId: patientId
@@ -101,7 +100,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEditTask = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.edit', {id: histId, type: 'patients', patId: patientId});
+			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients', patId: patientId});
 		};
 
 	});
