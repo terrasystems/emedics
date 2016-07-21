@@ -3,71 +3,71 @@
 
 angular.module('modules.dash')
 
-	.controller('patientTasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope, DTO) {
+	.controller('tasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		vm.page = {};
-		vm.list = [];
-		vm.history = [];
-		vm.stafs = [];
+		//vm.page = {};
+		//vm.list = [];
+		//vm.history = [];
+		//vm.stafs = [];
+		//
+		//vm.showFilter = true;
+		//vm.showFilterH = true;
+		//
+		//vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
+		//
+		//vm.filterModel = { period: 1, patientName: '', templateName: '', statusEnum: null };
+		//vm.filterModelH= { period: 1, patientName: '', templateName: '', statusEnum: null };
+		//
+		//if (vm.user.type === 'patient') {
+		//	vm.filterModel.period = 4;
+		//	vm.filterModelH.period = 4;
+		//}
+		//
+		//if (!(vm.user.org === 'true' || vm.user.org === true)) {
+		//	vm.hideAdminTasks = false;
+		//} else {
+		//	vm.hideAdminTasks = true;
+		//}
+		//
+		//$scope.$watch('vm.filterModel.period', function (newValue) {
+		//	vm.onRefreshNew();
+		//});
+		//
+		//$scope.$watch('vm.filterModelH.period', function (newValue) {
+		//	vm.onRefreshHistory();
+		//});
+		//
+		//vm.onCreateTask = function() {
+		//	var config = {
+		//		templateUrl: 'modules/dashboard/views/modal.createTask.html',
+		//		controller: 'modalCreateTaskCtrl',
+		//		controllerAs: 'vm',
+		//		resolve: {
+		//			model: function($q) {
+		//				var deferred = $q.defer();
+		//				deferred.resolve({});
+		//				return deferred.promise;
+		//			}
+		//		}
+		//	};
+		//	var result = $uibModal.open(config);
+		//	result.result.then(function () {
+		//		vm.onRefreshNew();
+		//	});
+		//};
+		//
+		///*********** << NEW >> ************/
+		//vm.onClearFilters = function() {
+		//	vm.filterModel = { period: null, patientName: null, templateName: null, statusEnum: null };
+		//};
+		//
+		//vm.onApplyFilters = function() {
+		//	vm.onRefreshNew();
+		//};
 
-		vm.showFilter = true;
-		vm.showFilterH = true;
-
-		vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
-
-		vm.filterModel = { period: 1, patientName: '', templateName: '', statusEnum: null };
-		vm.filterModelH= { period: 1, patientName: '', templateName: '', statusEnum: null };
-
-		if (vm.user.type === 'patient') {
-			vm.filterModel.period = 4;
-			vm.filterModelH.period = 4;
-		}
-
-		if (!(vm.user.org === 'true' || vm.user.org === true)) {
-			vm.hideAdminTasks = false;
-		} else {
-			vm.hideAdminTasks = true;
-		}
-
-		$scope.$watch('vm.filterModel.period', function (newValue) {
-			vm.onRefreshNew();
-		});
-
-		$scope.$watch('vm.filterModelH.period', function (newValue) {
-			vm.onRefreshHistory();
-		});
-
-		vm.onCreateTask = function() {
-			var config = {
-				templateUrl: 'modules/dashboard/views/modal.createTask.html',
-				controller: 'modalCreateTaskCtrl',
-				controllerAs: 'vm',
-				resolve: {
-					model: function($q) {
-						var deferred = $q.defer();
-						deferred.resolve({});
-						return deferred.promise;
-					}
-				}
-			};
-			var result = $uibModal.open(config);
-			result.result.then(function () {
-				vm.onRefreshNew();
-			});
-		};
-
-		/*********** << NEW >> ************/
-		vm.onClearFilters = function() {
-			vm.filterModel = { period: null, patientName: null, templateName: null, statusEnum: null };
-		};
-
-		vm.onApplyFilters = function() {
-			vm.onRefreshNew();
-		};
-
-		vm.onRefreshNew = function() {
-			http.post('private/dashboard/tasks/all', vm.filterModel)
+		vm.allTasks = function() {
+			http.post('/tasks/all', DTO.tasksCriteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -75,6 +75,7 @@ angular.module('modules.dash')
 					}
 				});
 		};
+		vm.allTasks();
 
 		vm.onClickNew = function (index) {
 			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
@@ -148,14 +149,7 @@ angular.module('modules.dash')
 			paramsPOST.template.templateDto = {};
 			paramsPOST.template.templateDto.id = taskObj.template.id;
 			paramsPOST.patient = patientId;
-			//var paramsPOST = {
-			//	template: {
-			//		id: taskObj.template.id,
-			//		templateDto: {id : taskObj.template.id}
-			//	},
-			//	patient: patientId,
-			//	data: "{}"
-			//};
+
 			http.post('private/dashboard/tasks/create', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
@@ -169,16 +163,7 @@ angular.module('modules.dash')
 						paramsPOST.event.fromUser = taskObj.fromUser;
 						paramsPOST.event.toUser = taskObj.toUser;
 						paramsPOST.event.descr = taskObj.descr;
-						//paramsPOST = {event:
-						//{	id: newTaskID,
-						//	patient: taskObj.patient,
-						//	template: taskObj.template,
-						//	data: taskObj.data,
-						//	fromUser: taskObj.fromUser,
-						//	toUser: taskObj.toUser,
-						//	descr: taskObj.descr
-						//}
-						//};
+
 						http.post('private/dashboard/tasks/edit', paramsPOST)
 							.then(function (res) {
 								blockUI.stop();

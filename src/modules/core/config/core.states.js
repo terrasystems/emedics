@@ -261,8 +261,8 @@ angular.module('modules.core')
 			url: '/tasks',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.patTasks.html',
-					controller: 'patientTasksCtrl as vm'
+					templateUrl: 'modules/dashboard/tasks/views/tasks.html',
+					controller: 'tasksCtrl as vm'
 				}
 			}
 		},
@@ -271,8 +271,8 @@ angular.module('modules.core')
 			url: '/catalog',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/catalog/views/Catalog.html',
-					controller: 'CatalogCtrl as vm'
+					templateUrl: 'modules/dashboard/catalog/views/catalog.html',
+					controller: 'catalogCtrl as vm'
 				}
 			},
 			params: {
@@ -284,8 +284,8 @@ angular.module('modules.core')
 			url: '/edit',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.patTasksEdit.html',
-					controller: 'patientTasksEditCtrl as vm'
+					templateUrl: 'modules/dashboard/tasks/views/tasksEdit.html',
+					controller: 'tasksEditCtrl as vm'
 				}
 			},
 			params: {

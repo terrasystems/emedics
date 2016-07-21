@@ -3,12 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('notificationsCtrl', function (http,$scope,blockUI, alertService, $rootScope, DTO) {
+	.controller('notificationsCtrl', function (http, $scope, blockUI, alertService, $rootScope, DTO) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 
-		vm.onRefreshNotif = function(val) {
-			return http.post('private/dashboard/events/notifications/all', DTO.getNotif)
+		vm.allNotifications = function (val) {
+			var criteriaDTO = DTO.criteriaDTO();
+			criteriaDTO.search = val;
+			return http.post('/notifications/all', criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -17,31 +19,32 @@ angular.module('modules.dash')
 					return res.result;
 				});
 		};
-		vm.onRefreshNotif();
+		vm.allNotifications();
 
-		vm.onAccept = function (id) {
-			http.get('private/dashboard/events/notifications/accept/'+id)
+		vm.Accept = function (id) {
+			http.get('/notifications/accept/' + id)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-						$rootScope.$broadcast('calc.notif');
+					if (res.result) {
+						return res.result;
 					}
-					vm.onRefreshNotif();
+					$rootScope.$broadcast('calc.notif');
+					vm.allNotifications();
 				});
 		};
 
 		$rootScope.$broadcast('calc.notif');
 
-		vm.onDecline = function (id) {
-			http.get('private/dashboard/events/notifications/decline/'+id)
+		vm.Decline = function (id) {
+			http.get('/notifications/decline/' + id)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.state) {
-						alertService.add(0, res.state.message);
-						$rootScope.$broadcast('calc.notif');
+					if (res.result) {
+						return res.result;
+
 					}
-					vm.onRefreshNotif();
+					$rootScope.$broadcast('calc.notif');
+					vm.allNotifications();
 				});
 		};
 

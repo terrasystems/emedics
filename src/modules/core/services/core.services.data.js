@@ -238,12 +238,24 @@ angular.module('modules.core')
 				address: null,
 				phone: null
 			};
+
+		}
+
+		function tasksCriteriaDTO (){
+			return{
+				period:1,
+				templateName:null,
+				patientName:null,
+				fromName:null,
+				status:null
+			};
 		}
 
 	return {
 		criteriaDTO: criteriaDTO,
 		referencesDTO: referencesDTO,
-		staffDTO: staffDTO
+		staffDTO: staffDTO,
+		tasksCriteriaDTO: tasksCriteriaDTO
 	};
 	})
 
