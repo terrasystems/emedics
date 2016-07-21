@@ -6,7 +6,7 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 		vm.stafs = [];
-		vm.temp_ = '';
+		vm.vm.search = '';
 
 		if (vm.user.type === 'doctor' && (vm.user.org === 'true' || vm.user.org === true)) {
 			vm.canEdit = true;
@@ -29,11 +29,11 @@ angular.module('modules.dash')
 		vm.getFindStuffs('');
 
 		vm.onOpenStuf = function (staf_) {
-			$state.go('main.private.dashboard.abstract.stafs.info', {staf: staf_});
+			$state.go('main.private.dashboard.abstract.staffs.info', {staff: staf_});
 		};
 
 		vm.onEdit = function (id_) {
-			$state.go('main.private.dashboard.abstract.stafs.stuffedit', {id: id_});
+			$state.go('main.private.dashboard.abstract.staffs.editor', {id: id_});
 		};
 
 	});

@@ -24,7 +24,7 @@ angular.module('modules.dash')
 
 		if (vm.user.org == 'true' || vm.user.org == true || vm.user.type == 'stuff') {
 			vm.tabData.push({heading: $translate.instant('STUFF'),
-				route:'main.private.dashboard.abstract.stafs',
+				route:'main.private.dashboard.abstract.staffs',
 				disable: false});
 		}
 
