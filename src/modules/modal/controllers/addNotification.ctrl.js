@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('modalAddNotifCtrl', function ($uibModalInstance, model, blockUI, alertService, $timeout, http, localStorageService, $scope, $q) {
+	.controller('addNotificationCtrl', function ($uibModalInstance, model, blockUI, alertService, $timeout, http, localStorageService, $scope, $q) {
 		var vm = this;
 		vm.model = model;
 		vm.user = localStorageService.get('userData');

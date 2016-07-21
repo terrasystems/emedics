@@ -42,16 +42,16 @@ angular.module('modules.core')
 			}
 		};
 		return {
-			success: function(msg, titleText, msgParam){
+			success: function (msg, titleText, msgParam) {
 				toastr.success(msg, titleText, msgParam);
 			},
-			warning: function(msg, titleText, msgParam){
+			warning: function (msg, titleText, msgParam) {
 				toastr.warning(msg, titleText, msgParam);
 			},
-			error: function(msg, titleText, msgParam){
+			error: function (msg, titleText, msgParam) {
 				toastr.error(msg, titleText, msgParam);
 			},
-			info: function(msg, titleText, msgParam){
+			info: function (msg, titleText, msgParam) {
 				toastr.info(msg, titleText, msgParam);
 			},
 			add: function (type, titleText, msg, msgParam) {
@@ -86,9 +86,10 @@ angular.module('modules.core')
 			}
 			else {
 				deferred.reject(false);
-					alertService.warning($translate.instant('MSG_NO_DATA'));
+				alertService.warning($translate.instant('MSG_NO_DATA'));
 			}
 		}
+
 		//Call if error
 		function errorListener(error, deferred) {
 			deferred.reject(error);
@@ -99,17 +100,19 @@ angular.module('modules.core')
 				alertService.error(error.status + ' ' + error.statusText);
 			}
 		}
+
 		//Function wrapper on $http service
 		function H(url, params, method) {
 			var deferred = $q.defer();
-				$http[method](constants.restUrl + url, params).then(function (resp) {
-						successListener(resp, deferred);
-					},
-					function (error) {
-						errorListener(error, deferred);
-					});
+			$http[method](constants.restUrl + url, params).then(function (resp) {
+					successListener(resp, deferred);
+				},
+				function (error) {
+					errorListener(error, deferred);
+				});
 			return deferred.promise;
 		}
+
 		return {
 			get: function (url, params) {
 				return H(url, params, 'get');
@@ -153,7 +156,8 @@ angular.module('modules.core')
 						$injector.get('$state').go('main.public.login', {reload: true});
 						break;
 					}
-					case 404:{
+					case 404:
+					{
 						$log.debug(rejection.statusText);
 						break;
 					}
@@ -205,11 +209,11 @@ angular.module('modules.core')
 //инициализация параметров для $http запроса
 	.factory('DTO', function (constants) {
 		function criteriaDTO() {
-			return  {
+			return {
 				search: '',
 				start: 0,
 				count: constants.pagination,
-				type:null
+				type: null
 			};
 		}
 
@@ -240,23 +244,41 @@ angular.module('modules.core')
 			};
 
 		}
+		function taskDTO() {
+			return {
+				id: null,
+				fromUser: null,
+				toUser: null,
+				descr: null,
+				template: null,
+				patient: null,
+				date: null,
+				status: null,
+				model: null,
+				_id: null,
+				_rev: null,
+				_type: null
+			};
 
-		function tasksCriteriaDTO (){
-			return{
-				period:1,
-				templateName:null,
-				patientName:null,
-				fromName:null,
-				status:null
+		}
+
+		function tasksCriteriaDTO() {
+			return {
+				period: 1,
+				templateName: null,
+				patientName: null,
+				fromName: null,
+				status: null
 			};
 		}
 
-	return {
-		criteriaDTO: criteriaDTO,
-		referencesDTO: referencesDTO,
-		staffDTO: staffDTO,
-		tasksCriteriaDTO: tasksCriteriaDTO
-	};
+		return {
+			criteriaDTO: criteriaDTO,
+			referencesDTO: referencesDTO,
+			staffDTO: staffDTO,
+			tasksCriteriaDTO: tasksCriteriaDTO,
+			taskDTO:taskDTO
+		};
 	})
 
 //работа с базой pouchdb

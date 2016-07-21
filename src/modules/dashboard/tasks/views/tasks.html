@@ -1,9 +1,9 @@
 <div class="ui-list-view">
 	<uib-tabset>
 
-		<uib-tab ng-click="vm.onRefreshNew();" index="0" heading="New">
+		<uib-tab ng-click="vm.allTasks()" index="0" heading="New">
 			<!-- filters -->
-			<div class="pad" ng-include="'modules/dashboard/views/filters.tmpl.html'" ng-if="vm.user.type !== 'patient'">
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/filters.html'" ng-if="vm.user.type !== 'patient'">
 				<!-- filters include here-->
 			</div>
 
@@ -121,9 +121,9 @@
 			</section>
 		</uib-tab>
 
-		<uib-tab ng-click="vm.onRefreshHistory();" index="2" heading="History">
+		<uib-tab ng-click="vm.GetHistory();" index="2" heading="History">
 
-			<div class="pad" ng-include="'modules/dashboard/views/filters-history.tmpl.html'" ng-if="vm.user.type !== 'patient'">
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/filtersHistory.html'" ng-if="vm.user.type !== 'patient'">
 				<!-- filters include here-->
 			</div>
 

@@ -113,8 +113,8 @@ angular.module('modules.dash')
 			vm.onRefreshNew();
 		};
 
-		vm.onRefreshHistory = function() {
-			http.post('private/dashboard/tasks/gethistory', vm.filterModelH)
+		vm.GetHistory = function() {
+			http.post('/tasks/history',DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -128,8 +128,8 @@ angular.module('modules.dash')
 
 			blockUI.start();
 			var result = $uibModal.open({
-				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
-				controller: 'modalAddNotifCtrl',
+				templateUrl: 'modules/modal /views/addNotification.html',
+				controller: 'addNotificationCtrl',
 				controllerAs: 'vm',
 				resolve: {
 					model: function () {
@@ -144,27 +144,24 @@ angular.module('modules.dash')
 		};
 
 		vm.onCopyHistory = function(taskObj, patientId) {
-			var paramsPOST = DTO.createTask;
-			paramsPOST.template.id = taskObj.template.id;
-			paramsPOST.template.templateDto = {};
-			paramsPOST.template.templateDto.id = taskObj.template.id;
-			paramsPOST.patient = patientId;
+			var taskDTO = DTO.taskDTO;
 
-			http.post('private/dashboard/tasks/create', paramsPOST)
+
+			http.post('/tasks/create', taskDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state && res.state.value && !!res.state.value) {
 						var newTaskID = res.result.id;
-						paramsPOST = DTO.editTask;
-						paramsPOST.event.id = newTaskID;
-						paramsPOST.event.patient = taskObj.patient;
-						paramsPOST.event.template = taskObj.template;
-						paramsPOST.event.data = taskObj.data;
-						paramsPOST.event.fromUser = taskObj.fromUser;
-						paramsPOST.event.toUser = taskObj.toUser;
-						paramsPOST.event.descr = taskObj.descr;
+						taskDTO = DTO.editTask;
+						taskDTO.event.id = newTaskID;
+						taskDTO.event.patient = taskObj.patient;
+						taskDTO.event.template = taskObj.template;
+						taskDTO.event.data = taskObj.data;
+						taskDTO.event.fromUser = taskObj.fromUser;
+						taskDTO.event.toUser = taskObj.toUser;
+						taskDTO.event.descr = taskObj.descr;
 
-						http.post('private/dashboard/tasks/edit', paramsPOST)
+						http.post('/tasks/edit', taskDTO)
 							.then(function (res) {
 								blockUI.stop();
 								if (res.result) {
