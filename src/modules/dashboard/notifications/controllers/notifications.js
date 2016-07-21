@@ -3,12 +3,14 @@
 
 angular.module('modules.dash')
 
-	.controller('notificationsCtrl', function (http,$scope,blockUI, alertService, $rootScope, DTO) {
+	.controller('notificationsCtrl', function (http, $scope, blockUI, alertService, $rootScope, DTO) {
 		var vm = this;
 		vm.UnreadNotifications = [];
 
-		vm.allNotifications = function() {
-			return http.post('/notifications/all', DTO.criteriaDTO())
+		vm.allNotifications = function (val) {
+			var criteriaDTO = DTO.criteriaDTO();
+			criteriaDTO.search = val;
+			return http.post('/notifications/all', criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result)) {
@@ -20,7 +22,7 @@ angular.module('modules.dash')
 		vm.allNotifications();
 
 		vm.Accept = function (id) {
-			http.get('/notifications/accept/'+id)
+			http.get('/notifications/accept/' + id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
@@ -34,7 +36,7 @@ angular.module('modules.dash')
 		$rootScope.$broadcast('calc.notif');
 
 		vm.Decline = function (id) {
-			http.get('/notifications/decline/'+id)
+			http.get('/notifications/decline/' + id)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
