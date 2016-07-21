@@ -1,7 +1,7 @@
 'use strict';
 /*jshint -W117, -W097, -W116*/
 angular.module('modules.dash')
-	.controller('patientTasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
+	.controller('tasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
 												  $scope, alertService, $timeout, $translate, $base64, confirmService,
 												  $rootScope, pouch_db, forEditTask, DTO) {
 

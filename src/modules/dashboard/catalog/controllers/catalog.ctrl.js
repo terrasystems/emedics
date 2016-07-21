@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('CatalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
+	.controller('catalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
 		var vm = this;
 		vm.userType = localStorageService.get('userData');
 		vm.FormTemplate = [];

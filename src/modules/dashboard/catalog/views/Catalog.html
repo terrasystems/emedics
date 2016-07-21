@@ -32,13 +32,10 @@
 								<button class="btn btn-danger btn-small"
 										ng-click="vm.onBuy(form.id);form.isPay=true;form.isLoad=true;"
 										ng-disabled="form.isPay"
-										ng-if="form.commercialEnum==='PAID'"
-										ng-hide="form.existPaid === true"
 										translate="BUY">
 								</button>
 								<button class="btn btn-success btn-small"
 										ng-click="vm.onLoad(form.id);form.isLoad=true;"
-										ng-if="(form.existPaid === true) || (form.commercialEnum ==='FREE');"
 										translate="LOAD">
 								</button>
 								<button class="btn btn btn-info btn-small"
@@ -74,8 +71,7 @@
 							<td>{{forms.type}}
 								<div class=" pull-right btn-group btn-group-xs">
 									<button class="btn btn-danger  btn-small"
-											ng-click="vm.onRemove(forms.id);"
-											ng-if="!(forms.type=='PAID')">
+											ng-click="vm.onRemove(forms.id);">
 										<i class="glyphicon glyphicon-trash"></i>
 									</button>
 									<button style="float: right"
