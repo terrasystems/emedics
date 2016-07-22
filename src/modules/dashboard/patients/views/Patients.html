@@ -12,8 +12,8 @@
 							   style="height: 35px"
 							   class="form-control"
 							   placeholder="{{'SEARCH_PATS'  | translate}}..."
-							   ng-model="vm.temp_"
-							   ng-change="vm.getFindPatients(vm.temp_);" />
+							   ng-model="vm.search"
+							   ng-change="vm.getPatients(vm.search);" />
 					</form>
 				</div>
 				<p></p>
@@ -43,7 +43,7 @@
 							<td>
 								<div class="btn-group btn-group-xs">
 									<button ng-click="vm.onRemove(patient.id,$event)" class="btn btn-danger">x</button>
-									<button ng-if="patient.enabled == false" ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
+									<button ng-if="patient.enabled === false" ng-click="vm.onInvite(patient.id,$event)" class="btn btn-info"><span translate="INVITE"></span></button>
 								</div>
 							</td>
 						</tr>
