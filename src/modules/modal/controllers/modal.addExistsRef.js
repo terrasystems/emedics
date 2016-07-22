@@ -62,7 +62,7 @@ angular.module('modules.dash')
 				$uibModalInstance.close();
 				return;
 			}
-			http.get('/patients/add/'+ id)
+			http.get('/references/add/'+ id)  // !!!!!references
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
