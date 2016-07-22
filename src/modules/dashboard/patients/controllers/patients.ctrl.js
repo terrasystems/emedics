@@ -45,7 +45,7 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('/patients/remove/'+id_)
+			http.get('/references/remove/'+id_)   /* references!!!!  */
 				.then(function (res) {
 					blockUI.stop();
 					alertService.add(0, res.state.message);
@@ -58,7 +58,7 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('/patients/invite/' + id)
+			http.get('/references/invite/' + id)  /* references!!!!  */
 				.then(function (res) {
 					blockUI.stop();
 					if  (res.state) {

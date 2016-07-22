@@ -19,9 +19,9 @@ angular.module('modules.dash')
 			phone: $stateParams.phone
 		};
 
-		vm.onOpenPatient = function (id) {
+		vm.onGetTemplates = function (id) {
 			vm.templates = [];
-			http.get('private/dashboard/patients/' + id + '/events')
+			http.get('/catalog/byUserId/' + id )
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result && angular.isArray(res.result) ) {
@@ -29,7 +29,7 @@ angular.module('modules.dash')
 					}
 				});
 		};
-		vm.onOpenPatient($stateParams.id);
+		vm.onGetTemplates($stateParams.id);
 
 		vm.onReturn = function() {
 			$state.go('main.private.dashboard.abstract.patients');

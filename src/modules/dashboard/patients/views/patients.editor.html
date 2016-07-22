@@ -13,6 +13,7 @@
 
 <div class="container ">
 	<div class="Refs_add">
+
 		<button ui-sref="main.private.dashboard.abstract.patients" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
 
 		<uib-tabset>
@@ -20,49 +21,61 @@
 			<uib-tab  heading="Patient">
 				<form name="userForm" class="elegant-aero" ng-submit="submitForm()" novalidate>
 
-					<div class="form-group"
-						 ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+					<div class="form-group"	ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
 						<label translate="FIRST_NAME"></label>
-						<input type="text" name="name" class="form-control" ng-model="vm.addPat.firstName" required>
-
-						<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is
-							required.</p>
+						<input type="text"
+							   name="name"
+							   class="form-control"
+							   ng-model="vm.patientsDTO.firstName"
+							   required />
+						<p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is	required.</p>
 					</div>
-					<div class="form-group"
-						 ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+
+					<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
 						<label translate="LAST_NAME"></label>
-						<input type="text" name="username" class="form-control" ng-model="vm.addPat.lastName"
-							   ng-minlength="3" required>
-
-						<p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">You
-							Last Name is required.</p>
-
+						<input type="text"
+							   name="username"
+							   class="form-control"
+							   ng-model="vm.patientsDTO.lastName"
+							   ng-minlength="3"
+							   required />
+						<p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">You Last Name is required.</p>
 					</div>
+
 					<div class="form-group"
 						 ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
 						<label translate="EMAIL"></label>
-						<input ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/" type="email"
-							   name="email" class="form-control" ng-model="vm.addPat.email" required>
-
-						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a
-							valid email.</p>
+						<input type="email"
+							   ng-pattern="/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$/"
+							   name="email"
+							   class="form-control"
+							   ng-model="vm.patientsDTO.email"
+							   required />
+						<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 					</div>
-
 
 					<div class="input-group">
 						<label translate="BIRTH_DATE"></label>
-						<input ng-click="open1()" name="myInput" type="text" class="form-control" uib-datepicker-popup="{{format}}"
-							   ng-model="vm.addPat.birth"
-							   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-							   close-text="Close" alt-input-formats="altInputFormats"/>
-
-          <span class="input-group-btn" style="padding-top: 5px;">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i
-					class="glyphicon glyphicon-calendar" style=""></i></button>
-          </span>
+						<input type="text"
+							   ng-click="open1()"
+							   name="myInput"
+							   class="form-control"
+							   uib-datepicker-popup="{{format}}"
+							   ng-model="vm.patientsDTO.dob"
+							   is-open="popup1.opened"
+							   datepicker-options="dateOptions"
+							   ng-required="true"
+							   close-text="Close"
+							   alt-input-formats="altInputFormats" />
+						<span class="input-group-btn" style="padding-top: 5px;">
+							<button type="button" class="btn btn-default" ng-click="open1()">
+								<i class="glyphicon glyphicon-calendar" style=""></i>
+							</button>
+						</span>
 					</div>
-					<button ng-click="vm.addPatients();" type="submit" class="btn btn-primary"
-							ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
+
+					<button ng-click="vm.addPatients();" type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" translate="REGISTRATION"></button>
+
 				</form>
 			</uib-tab>
 

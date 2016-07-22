@@ -9,7 +9,7 @@
 				   title="Choose a person"
 				   on-select="vm.onSelectCallback($item, $model)">
 			<ui-select-match placeholder="{{vm.placeholder}}...">{{$select.selected.name}} &lt;{{$select.selected.email}}&gt;</ui-select-match>
-			<ui-select-choices refresh="vm.getFindUsers($select.search)"
+			<ui-select-choices refresh="vm.getUsers($select.search)"
 							   refresh-delay="1"
 							   repeat="person.id as person in vm.users">
 				<div ng-bind-html="person.name | highlight: $select.search"></div>

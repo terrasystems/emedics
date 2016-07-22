@@ -37,8 +37,8 @@ angular.module('modules.dash')
 
 			blockUI.start();
 			var result = $uibModal.open({
-				templateUrl: 'modules/dashboard/views/modal.addNotif.html',
-				controller: 'modalAddNotifCtrl',
+				templateUrl: 'modules/modal/views/addNotification.html',
+				controller: 'addNotificationCtrl',
 				controllerAs: 'vm',
 				resolve: {
 					model: function ($q) {
@@ -57,44 +57,25 @@ angular.module('modules.dash')
 		};
 
 		vm.onCopyTask = function (taskObj, patientId) {
-			var paramsPOST = DTO.copyTask;
-
-			paramsPOST.template.id = taskObj.template.id;
-			paramsPOST.template.templateDto.id = taskObj.template.id;
-			paramsPOST.patient = patientId;
-			paramsPOST.data = '{}';
-
-			http.post('private/dashboard/tasks/create', paramsPOST)
+			var taskDTO = DTO.taskDTO();
+			taskDTO.patient = taskObj.patient;
+			taskDTO.template = taskObj.template;
+			taskDTO.model = taskObj.data;
+			taskDTO.fromUser = taskObj.fromUser;
+			taskDTO.toUser = taskObj.toUser;
+			taskDTO.descr = taskObj.descr;
+			http.post('/tasks/create', taskDTO)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.state && res.state.value && !!res.state.value) {
-						var newTaskID = res.result.id;
-
-						var taskEdit = DTO.taskEdit;
-
-						taskEdit.event.id = newTaskID;
-						taskEdit.event.patient = taskObj.patient;
-						taskEdit.event.template = taskObj.template;
-						taskEdit.event.data = taskObj.data;
-						taskEdit.event.fromUser = taskObj.fromUser;
-						taskEdit.event.toUser = taskObj.toUser;
-						taskEdit.event.descr = taskObj.descr;
-
-						http.post('private/dashboard/tasks/edit', taskEdit)
-							.then(function (res) {
-								blockUI.stop();
-								if (res.result) {
-									alertService.add(0, res.state.message);
-									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.editor', {
-										id: newTaskID,
-										type: 'patients',
-										patId: patientId
-									});
-								}
-							});
+					if (res.result) {
+						alertService.success(res.state.message);
+						$state.go('main.private.dashboard.abstract.patients.editor', {
+							id: res.result.id,
+							type: 'patients',
+							patId: patientId
+						});
 					} else {
-						alertService.add(2, res.state.message);
+						alertService.error(res.state.message);
 					}
 				});
 		};

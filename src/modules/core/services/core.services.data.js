@@ -272,12 +272,24 @@ angular.module('modules.core')
 			};
 		}
 
+		function patientsDTO() {
+			return {
+				id: null,
+				name: null,
+				firstName: null,
+				lastName: null,
+				phone: null,
+				email: null
+			};
+		}
+
 		return {
 			criteriaDTO: criteriaDTO,
 			referencesDTO: referencesDTO,
 			staffDTO: staffDTO,
 			tasksCriteriaDTO: tasksCriteriaDTO,
-			taskDTO:taskDTO
+			taskDTO:taskDTO,
+			patientsDTO: patientsDTO
 		};
 	})
 
