@@ -7,7 +7,7 @@
 				   theme="bootstrap"
 				   close-on-select="true"
 				   title="Choose a template"
-				   on-select="vm.onSelected($item, $model)">
+				   on-select="vm.Selected($item, $model)">
 			<ui-select-match placeholder="Select template...">{{$select.selected.templateDto.name}} &lt;{{$select.selected.templateDto.number}}&gt;</ui-select-match>
 			<ui-select-choices repeat="template.templateDto.id as template in vm.myForms | filter: {name: $select.search}">
 				<div ng-bind-html="template.templateDto.name | highlight: $select.search"></div>
@@ -15,7 +15,7 @@
 			</ui-select-choices>
 		</ui-select>
 
-		<section ng-if="vm.isMulti">
+		<section >
 			<p></p>
 			<h4>Patients:</h4>
 			<ui-select multiple
@@ -26,7 +26,7 @@
 					   on-select="vm.onSelectCallback($item, $model)"
 					   on-remove="vm.onRemoveCallback($item, $model)">
 				<ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
-				<ui-select-choices refresh="vm.getFindUsers($select.search)"
+				<ui-select-choices refresh="vm.FindPatients($select.search)"
 								   refresh-delay="1"
 								   repeat="person.id as person in vm.patients">
 					<div ng-bind-html="person.name | highlight: $select.search"></div>

@@ -20,7 +20,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
+						<tr ng-click="vm.goToEdit(form.id)" ng-repeat="form in vm.list track by $index">
 							<td>{{vm.convertDateTime(form.date)}}</td>
 							<td>{{form.template.number}}</td>
 							<td>{{form.template.name}}</td>
@@ -48,7 +48,7 @@
 						</thead>
 
 						<tbody>
-						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
+						<tr ng-click="vm.goToEdit(form.id)" ng-repeat="form in vm.list track by $index">
 							<td>{{vm.convertDateTime(form.date)}}</td>
 							<!--<td>{{form.template.number}}</td>-->
 							<td>{{form.patient.username}}</td>
@@ -210,6 +210,6 @@
 
 		</uib-tab>
 
-		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.onCreateTask();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="CREATE"></span></button>
+		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.CreateTask();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="CREATE"></span></button>
 	</uib-tabset>
 </div>

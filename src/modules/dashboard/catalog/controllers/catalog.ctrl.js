@@ -197,7 +197,7 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.remove = function (id) {
+		vm.Remove = function (id) {
 			http.get('/mytemplates/remove' + id)
 				.then(function (res) {
 					vm.getMyTemplates();

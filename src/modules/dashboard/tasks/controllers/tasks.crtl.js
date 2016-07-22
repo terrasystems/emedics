@@ -66,23 +66,51 @@ angular.module('modules.dash')
 		//	vm.onRefreshNew();
 		//};
 
-		vm.allTasks = function() {
+		vm.CreateTask = function () {
+			var config = {
+				templateUrl: 'modules/modal/views/createTask.html',
+				controller: 'CreateTaskCtrl',
+				controllerAs: 'vm',
+				resolve: {
+					model: function ($q) {
+						var deferred = $q.defer();
+						deferred.resolve({});
+						return deferred.promise;
+					}
+				}
+			};
+			var result = $uibModal.open(config);
+			result.result.then(function () {
+				vm.allTasks();
+			});
+		};
+
+
+		vm.allTasks = function () {
 			http.post('/tasks/all', DTO.tasksCriteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
 						vm.list = res.result;
+
+						//must be delete later, only for testing
+						//<<-------->>//
+						vm.list.forEach(function(objects,i) {
+							objects.id  = i+1;
+							console.log(objects);
+						});
+						//<<-------->>//
 					}
 				});
 		};
 		vm.allTasks();
 
-		vm.onClickNew = function (index) {
+		vm.goToEdit = function (index) {
 			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
 		};
 
 		vm.onAssignTask = function (id, stafs, $event) {
-			if($event){
+			if ($event) {
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
@@ -91,7 +119,7 @@ angular.module('modules.dash')
 				controller: 'modalAssignTaskCtrl',
 				controllerAs: 'vm',
 				resolve: {
-					model: function($q) {
+					model: function ($q) {
 						var deferred = $q.defer();
 						deferred.resolve({data: {task_id: id, stafs: stafs}});
 						return deferred.promise;
@@ -105,16 +133,16 @@ angular.module('modules.dash')
 		};
 
 		/*********** << HISTORY >> *************/
-		vm.onClearFiltersH = function() {
-			vm.filterModelH = { period: 1, patientName: null, templateName: null, statusEnum: null };
+		vm.onClearFiltersH = function () {
+			vm.filterModelH = {period: 1, patientName: null, templateName: null, statusEnum: null};
 		};
 
-		vm.onApplyFiltersH = function() {
+		vm.onApplyFiltersH = function () {
 			vm.onRefreshNew();
 		};
 
-		vm.GetHistory = function() {
-			http.post('/tasks/history',DTO.criteriaDTO())
+		vm.GetHistory = function () {
+			http.post('/tasks/history', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -123,8 +151,8 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onSendHistory = function (obj,hist) {
-			var model = { templ_id: obj.id, obj: obj };
+		vm.onSendHistory = function (obj, hist) {
+			var model = {templ_id: obj.id, obj: obj};
 
 			blockUI.start();
 			var result = $uibModal.open({
@@ -143,7 +171,7 @@ angular.module('modules.dash')
 			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'tasks+', patId: patientId});
 		};
 
-		vm.onCopyHistory = function(taskObj, patientId) {
+		vm.onCopyHistory = function (taskObj, patientId) {
 			var taskDTO = DTO.taskDTO;
 
 
@@ -167,7 +195,11 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.add(0, res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.editor', {id: newTaskID, type: 'tasks', patId: patientId});
+									$state.go('main.private.dashboard.abstract.patients.editor', {
+										id: newTaskID,
+										type: 'tasks',
+										patId: patientId
+									});
 								}
 							});
 					} else {
@@ -178,12 +210,12 @@ angular.module('modules.dash')
 
 		/*********** << STUFF >> ************/
 
-		vm.onRefreshAdminTasks = function() {
-			http.post('private/dashboard/stuff', DTO.filters /*{name: ''}*/ )
+		vm.onRefreshAdminTasks = function () {
+			http.post('private/dashboard/stuff', DTO.filters /*{name: ''}*/)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
-						if  (angular.isArray(res.result) && res.result.length>0) {
+						if (angular.isArray(res.result) && res.result.length > 0) {
 							res.result.map(function (item) {
 								item.all = item.firstName + ' ' + item.lastName + ((item.email === null) ? '' : ', ' + item.email) + ((item.phone === null) ? '' : ', ' + item.phone);
 								return item;
@@ -193,12 +225,12 @@ angular.module('modules.dash')
 					}
 				});
 		};
-		if  (vm.hideAdminTasks) {
+		if (vm.hideAdminTasks) {
 			vm.onRefreshAdminTasks();
 		}
 
 		vm.onOpenStaff = function (id) {
-			http.get('private/dashboard/stuff/'+id+'/events')
+			http.get('private/dashboard/stuff/' + id + '/events')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -207,10 +239,10 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onCloseTask = function(task_id, stuff_id) {
+		vm.onCloseTask = function (task_id, stuff_id) {
 			confirmService('Close task?')
-				.then(function(res) {
-					http.get('private/dashboard/stuff/event/adminClose/'+task_id)
+				.then(function (res) {
+					http.get('private/dashboard/stuff/event/adminClose/' + task_id)
 						.then(function (res) {
 							blockUI.stop();
 							alertService.add(0, res.state.message);
@@ -220,7 +252,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEditAdminTask = function (index) {
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasksAdmin', patId: null});
+			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index});
 		};
 
 		/*****************************/
@@ -235,4 +267,4 @@ angular.module('modules.dash')
 			return y.toLocaleString().slice(0, 10);
 		};
 
-});
+	});

@@ -289,9 +289,7 @@ angular.module('modules.core')
 				}
 			},
 			params: {
-				id: '',
-				type: '',
-				patId: null
+				id: null
 			}
 		},
 		{
