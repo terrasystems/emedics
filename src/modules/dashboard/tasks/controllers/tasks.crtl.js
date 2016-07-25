@@ -17,11 +17,8 @@ angular.module('modules.dash')
 
 		vm.list = [];
 
-		//vm.stafs = [];
-		//
-		//vm.showFilter = true;
-		//vm.showFilterH = true;
-		//
+		vm.stafs = [];
+
 		vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
 
 		if (vm.user.type === 'patient') {
@@ -143,7 +140,7 @@ angular.module('modules.dash')
 
 			blockUI.start();
 			var result = $uibModal.open({
-				templateUrl: 'modules/modal /views/addNotification.html',
+				templateUrl: 'modules/modal/views/addNotification.html',
 				controller: 'addNotificationCtrl',
 				controllerAs: 'vm',
 				resolve: {
@@ -159,7 +156,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onCopyHistory = function (taskObj, patientId) {
-			var taskDTO = DTO.taskDTO;
+			var taskDTO = DTO.taskDTO();
 
 
 			http.post('/tasks/create', taskDTO)
@@ -167,14 +164,14 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if (res.state && res.state.value && !!res.state.value) {
 						var newTaskID = res.result.id;
-						taskDTO = DTO.editTask;
-						taskDTO.event.id = newTaskID;
-						taskDTO.event.patient = taskObj.patient;
-						taskDTO.event.template = taskObj.template;
-						taskDTO.event.data = taskObj.data;
-						taskDTO.event.fromUser = taskObj.fromUser;
-						taskDTO.event.toUser = taskObj.toUser;
-						taskDTO.event.descr = taskObj.descr;
+						taskDTO = DTO.taskDTO();
+						taskDTO.id = newTaskID;
+						taskDTO.patient = taskObj.patient;
+						taskDTO.template = taskObj.template;
+						taskDTO.model = taskObj.model;
+						taskDTO.fromUser = taskObj.fromUser;
+						taskDTO.toUser = taskObj.toUser;
+						taskDTO.descr = taskObj.descr;
 
 						http.post('/tasks/edit', taskDTO)
 							.then(function (res) {
@@ -202,12 +199,12 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
-						if (angular.isArray(res.result) && res.result.length > 0) {
+						/*if (angular.isArray(res.result) && res.result.length > 0) {
 							res.result.map(function (item) {
 								item.all = item.firstName + ' ' + item.lastName + ((item.email === null) ? '' : ', ' + item.email) + ((item.phone === null) ? '' : ', ' + item.phone);
 								return item;
 							});
-						}
+						}*/
 						vm.stafs = res.result;
 					}
 				});
@@ -217,23 +214,23 @@ angular.module('modules.dash')
 		}
 
 		vm.onOpenStaff = function (id) {
-			http.get('private/dashboard/stuff/' + id + '/events')
+/*			http.get('private/dashboard/stuff/' + id + '/events')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
 						vm.tasks = res.result;
 					}
-				});
+				});*/
 		};
 
-		vm.onCloseTask = function (task_id, stuff_id) {
+		vm.onCloseTask = function (task_id, staff_id) {
 			confirmService('Close task?')
 				.then(function (res) {
-					http.get('private/dashboard/stuff/event/adminClose/' + task_id)
+					http.get('/task/lose/' + task_id)
 						.then(function (res) {
 							blockUI.stop();
 							alertService.add(0, res.state.message);
-							vm.onOpenStaff(stuff_id);
+							vm.onOpenStaff(staff_id);
 						});
 				});
 		};
