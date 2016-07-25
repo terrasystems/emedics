@@ -298,7 +298,7 @@ angular.module('modules.core')
 			//parent: 'main.private.dashboard',
 			views: {
 				'dashboard@content': {
-					templateUrl: 'modules/dashboard/views/settings.html',
+					templateUrl: 'modules/dashboard/settings/views/settings.html',
 					controller: 'settingsCtrl as vm'
 				}
 			}
