@@ -9,6 +9,30 @@ angular.module('modules.dash')
 		vm.FormTemplate = [];
 		vm.myForms = [];
 		vm.user = localStorageService.get('userData');
+		vm.filter = DTO.catalogFilter();
+
+		function selectAll() {
+			var countTrue = 0, keys;
+
+			function checkAll(check) {
+				vm.filter.all = check;
+				_.each(keys, function (key) {
+					vm.filter[key] = check;
+				});
+			};
+
+			keys = _.difference(Object.keys(vm.filter), ['search', 'all']);
+
+			_.each(keys, function (key) {
+				countTrue += vm.filter[key] ? 1 : 0;
+			});
+			if (countTrue < keys.length) {
+				checkAll(true);
+			} else {
+				checkAll(false)
+			}
+		}
+
 		//vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
 
 		//vm.filter_ = {};

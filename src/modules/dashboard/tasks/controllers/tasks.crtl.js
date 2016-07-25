@@ -226,7 +226,7 @@ angular.module('modules.dash')
 		vm.onCloseTask = function (task_id, staff_id) {
 			confirmService('Close task?')
 				.then(function (res) {
-					http.get('/task/lose/' + task_id)
+					http.get('/task/close/' + task_id)
 						.then(function (res) {
 							blockUI.stop();
 							alertService.add(0, res.state.message);

@@ -283,13 +283,18 @@ angular.module('modules.core')
 			};
 		}
 
+		function catalogFilter () {
+			return {all:true, paid:true, free:true, patient:true, med:true, search:''};
+		};
+
 		return {
 			criteriaDTO: criteriaDTO,
 			referencesDTO: referencesDTO,
 			staffDTO: staffDTO,
 			tasksCriteriaDTO: tasksCriteriaDTO,
 			taskDTO:taskDTO,
-			patientsDTO: patientsDTO
+			patientsDTO: patientsDTO,
+			catalogFilter:catalogFilter
 		};
 	})
 
