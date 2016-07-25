@@ -24,7 +24,7 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (angular.isArray(res.result) && res.result.length > 0) {
-						res.result.unshift({name: '<< To ALL PATIENTS >>', email: '', id: 'ALL'});
+						res.result.unshift({name: 'To ALL PATIENTS', email: '', id: 'ALL'});
 					}
 					vm.patients = res.result;
 					return res.result;
@@ -52,9 +52,9 @@ angular.module('modules.dash')
 				}
 			});
 
-		vm.Selected = function (item) {
-			vm.isMulti = (vm.user.type === 'doctor' || vm.user.type === 'stuff') && item.templateDto.typeEnum === 'PATIENT';
-		};
+		//vm.Selected = function (item) {
+		//	vm.isMulti = (vm.user.type === 'doctor' || vm.user.type === 'stuff') && item.templateDto.typeEnum === 'PATIENT';
+		//};
 
 		//vm.onCreate = function () {
 		//	if (vm.isMulti) {

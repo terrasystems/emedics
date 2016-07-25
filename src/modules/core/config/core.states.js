@@ -308,7 +308,7 @@ angular.module('modules.core')
 			url: '/drafts',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.Drafts.html',
+					templateUrl: 'modules/dashboard/drafts/views/drafts.html',
 					controller: 'draftsCtrl as vm'
 				}
 			}
@@ -318,7 +318,7 @@ angular.module('modules.core')
 			url: '/edit',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/views/dashboard.draftEdit.html',
+					templateUrl: 'modules/dashboard/drafts/views/draftEdit.html',
 					controller: 'draftEditCtrl as vm'
 				}
 			},
