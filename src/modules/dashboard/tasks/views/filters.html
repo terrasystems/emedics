@@ -2,10 +2,10 @@
 <div class="container">
 	<div class="pad row">
 		<div class="btn-group col-md-8 s-center-page">
-			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="1" uib-uncheckable="uncheckable" translate="TODAY"></label>
-			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="2" uib-uncheckable="uncheckable" translate="YESTERDAY"></label>
-			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="3" uib-uncheckable="uncheckable" translate="WEEK"></label>
-			<label class="btn btn-primary" ng-model="vm.filterModel.period" uib-btn-radio="4" uib-uncheckable="uncheckable" translate="MONTH"></label>
+			<label class="btn btn-primary" ng-model="vm.tasksCriteriaDTO.period" uib-btn-radio="1" uib-uncheckable="uncheckable" translate="TODAY"></label>
+			<label class="btn btn-primary" ng-model="vm.tasksCriteriaDTO.period" uib-btn-radio="2" uib-uncheckable="uncheckable" translate="YESTERDAY"></label>
+			<label class="btn btn-primary" ng-model="vm.tasksCriteriaDTO.period" uib-btn-radio="3" uib-uncheckable="uncheckable" translate="WEEK"></label>
+			<label class="btn btn-primary" ng-model="vm.tasksCriteriaDTO.period" uib-btn-radio="4" uib-uncheckable="uncheckable" translate="MONTH"></label>
 		</div>
 		<div class="col-md-4">
 			<button type="button"
@@ -28,13 +28,13 @@
 					<p class="col-md-3 col-sm-3 col-xs-3"><label class="control-label"><span translate="Patient name"></span>: </label></p>
 					<div class="col-md-8 col-sm-8 col-xs-8">
 						<div class="input-group">
-							<input ng-model="vm.filterModel.patientName"
+							<input ng-model="vm.tasksCriteriaDTO.patientName"
 								   type="text"
 								   class="form-control col-md-8 col-sm-8 col-xs-8"
 								   id="patientName"
 								   placeholder="Enter patient name ...">
 							<span class="input-group-btn">
-								<button type="button" ng-click="vm.filterModel.patientName = ''" class="btn btn-default">
+								<button type="button" ng-click="vm.tasksCriteriaDTO.patientName = ''" class="btn btn-default">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</span>
@@ -47,13 +47,13 @@
 					<div class="col-md-8 col-sm-8 col-xs-8">
 						<div class="input-group">
 
-							<input ng-model="vm.filterModel.templateName"
+							<input ng-model="vm.tasksCriteriaDTO.templateName"
 								   type="text"
 								   class="form-control col-md-8 col-sm-8 col-xs-8"
 								   id="templateName"
 								   placeholder="Select a template in the list...">
 							<span class="input-group-btn">
-								<button type="button" ng-click="vm.filterModel.templateName = ''" class="btn btn-default">
+								<button type="button" ng-click="vm.tasksCriteriaDTO.templateName = ''" class="btn btn-default">
 								  <span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</span>
@@ -66,7 +66,7 @@
 					<div class="col-md-8 col-sm-8 col-xs-8">
 						<div class="input-group">
 
-							<ui-select allow-clear ng-model="vm.filterModel.statusEnum" theme="bootstrap">
+							<ui-select allow-clear ng-model="vm.tasksCriteriaDTO.status" theme="bootstrap">
 								<ui-select-match placeholder="Select a type in the list...">{{$select.selected.name}}</ui-select-match>
 								<ui-select-choices repeat="item.value as item in vm.typeList">
 									<span ng-bind-html="item.name"></span>
@@ -74,7 +74,7 @@
 							</ui-select>
 
 							<span class="input-group-btn">
-								<button type="button" ng-click="vm.filterModel.statusEnum = null" class="btn btn-default">
+								<button type="button" ng-click="vm.tasksCriteriaDTO.status = null" class="btn btn-default">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</span>

@@ -6,65 +6,60 @@ angular.module('modules.dash')
 	.controller('tasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope, DTO) {
 		var vm = this;
 		vm.user = localStorageService.get('userData');
-		//vm.page = {};
-		//vm.list = [];
-		//vm.history = [];
+
+		vm.tasksCriteriaDTO = DTO.tasksCriteriaDTO();
+		vm.history = false;
+
+		vm.changeTab = changeTab;
+		vm.allTasks = allTasks;
+		vm.getHistory = getHistory;
+
+
+		vm.list = [];
+
 		//vm.stafs = [];
 		//
 		//vm.showFilter = true;
 		//vm.showFilterH = true;
 		//
-		//vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
-		//
-		//vm.filterModel = { period: 1, patientName: '', templateName: '', statusEnum: null };
-		//vm.filterModelH= { period: 1, patientName: '', templateName: '', statusEnum: null };
-		//
-		//if (vm.user.type === 'patient') {
-		//	vm.filterModel.period = 4;
-		//	vm.filterModelH.period = 4;
-		//}
-		//
-		//if (!(vm.user.org === 'true' || vm.user.org === true)) {
-		//	vm.hideAdminTasks = false;
-		//} else {
-		//	vm.hideAdminTasks = true;
-		//}
-		//
-		//$scope.$watch('vm.filterModel.period', function (newValue) {
-		//	vm.onRefreshNew();
-		//});
-		//
-		//$scope.$watch('vm.filterModelH.period', function (newValue) {
-		//	vm.onRefreshHistory();
-		//});
-		//
-		//vm.onCreateTask = function() {
-		//	var config = {
-		//		templateUrl: 'modules/dashboard/views/modal.createTask.html',
-		//		controller: 'modalCreateTaskCtrl',
-		//		controllerAs: 'vm',
-		//		resolve: {
-		//			model: function($q) {
-		//				var deferred = $q.defer();
-		//				deferred.resolve({});
-		//				return deferred.promise;
-		//			}
-		//		}
-		//	};
-		//	var result = $uibModal.open(config);
-		//	result.result.then(function () {
-		//		vm.onRefreshNew();
-		//	});
-		//};
-		//
-		///*********** << NEW >> ************/
-		//vm.onClearFilters = function() {
-		//	vm.filterModel = { period: null, patientName: null, templateName: null, statusEnum: null };
-		//};
-		//
-		//vm.onApplyFilters = function() {
-		//	vm.onRefreshNew();
-		//};
+		vm.typeList = [{value: '0', name: 'NEW'}, {value: '2', name: 'PROCESSED'}];
+
+		if (vm.user.type === 'patient') {
+			vm.tasksCriteriaDTO.period = 4;
+		}
+
+		if (vm.user.isAdmin) {
+			vm.hideAdminTasks = false;
+		} else {
+			vm.hideAdminTasks = true;
+		}
+
+		$scope.$watch('vm.tasksCriteriaDTO.period', function (newValue) {
+			if (vm.history)
+			getHistory();
+			else
+			allTasks();
+		});
+
+		function changeTab (index) {
+			if (0===index){
+				vm.history = false;
+				allTasks();
+			} else
+			{
+				vm.history = true;
+				getHistory();
+			}
+		}
+
+		/*********** << NEW >> ************/
+		vm.onClearFilters = function() {
+			vm.tasksCriteriaDTO = DTO.tasksCriteriaDTO();
+		};
+
+		vm.onApplyFilters = function() {
+			allTasks();
+		};
 
 		vm.CreateTask = function () {
 			var config = {
@@ -86,8 +81,8 @@ angular.module('modules.dash')
 		};
 
 
-		vm.allTasks = function () {
-			http.post('/tasks/all', DTO.tasksCriteriaDTO())
+		function allTasks () {
+			http.post('/tasks/all', vm.tasksCriteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
@@ -128,25 +123,17 @@ angular.module('modules.dash')
 			};
 			var result = $uibModal.open(config);
 			result.result.then(function () {
-				vm.onRefreshNew();
+				allTasks();
 			});
 		};
 
-		/*********** << HISTORY >> *************/
-		vm.onClearFiltersH = function () {
-			vm.filterModelH = {period: 1, patientName: null, templateName: null, statusEnum: null};
-		};
 
-		vm.onApplyFiltersH = function () {
-			vm.onRefreshNew();
-		};
-
-		vm.GetHistory = function () {
+		function getHistory () {
 			http.post('/tasks/history', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
-						vm.history = res.result;
+						vm.list = res.result;
 					}
 				});
 		};
@@ -208,10 +195,10 @@ angular.module('modules.dash')
 				});
 		};
 
-		/*********** << STUFF >> ************/
+		/*********** << STAFF >> ************/
 
 		vm.onRefreshAdminTasks = function () {
-			http.post('private/dashboard/stuff', DTO.filters /*{name: ''}*/)
+			http.post('/staff/all', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
 					if (res.result) {
