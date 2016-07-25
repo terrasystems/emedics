@@ -2,20 +2,25 @@
 	<div class="content_modal">
 
 		<p></p>
-		<h4>Template:</h4>
-		<ui-select ng-model="vm.message.template"
-				   theme="bootstrap"
-				   close-on-select="true"
-				   title="Choose a template"
-				   on-select="vm.Selected($item, $model)">
-			<ui-select-match placeholder="Select template...">{{$select.selected.templateDto.name}} &lt;{{$select.selected.templateDto.number}}&gt;</ui-select-match>
-			<ui-select-choices repeat="template.templateDto.id as template in vm.myForms | filter: {name: $select.search}">
-				<div ng-bind-html="template.templateDto.name | highlight: $select.search"></div>
-				<small>Type: {{template.templateDto.typeEnum}}</small>
-			</ui-select-choices>
-		</ui-select>
+		<section>
+			<p></p>
+			<h4>Templates:</h4>
+			<ui-select ng-model="vm.message.templates"
+					   theme="bootstrap"
+					   title="Choose a form">
+				<ui-select-match placeholder="Select a form...">
+					{{$select.selected.name}}
+				</ui-select-match>
+				<ui-select-choices
+						refresh="vm.FindTemplates()"
+						repeat="form.id as form in vm.templates">
+					<div ng-bind-html="form.id | highlight: $select.search"></div>
 
-		<section >
+				</ui-select-choices>
+			</ui-select>
+		</section>
+
+		<section>
 			<p></p>
 			<h4>Patients:</h4>
 			<ui-select multiple
@@ -36,13 +41,14 @@
 		</section>
 
 		<form name="myform" class="notif" action="">
-			<textarea rows="6" cols="6" ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}" rows="5"></textarea>
+			<textarea rows="6" cols="6" ng-model="vm.message.message" placeholder="{{'MESSAGE_TEXT' | translate}}"
+					  rows="5"></textarea>
 		</form>
 
 		<button style="margin-right:10px;margin-bottom: 10px;"
 				class="pull-right btn btn-primary"
 				ng-disabled="(vm.message.template==='') || (vm.isMulti && vm.message.patients.length == 0)"
-				ng-click="vm.onCreate();"
+				ng-click="vm.Create();"
 				translate="CREATE">
 		</button>
 	</div>

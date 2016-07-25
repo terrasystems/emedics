@@ -14,15 +14,14 @@
 						<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">
 
 							<uib-accordion-heading>
-								<div ng-click="vm.onOpenStaff(staf.id)">
+								<div ng-click="vm.OpenStaff(staf.id)">
 									<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>
 									<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}
 									<label class="control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}
 									<label class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}
 								</div>
 							</uib-accordion-heading>
-
-							<uib-accordion>
+ 							<uib-accordion>
 								<uib-accordion-group ng-repeat="item in vm.tasks" is-open="item.status.open">
 
 									<uib-accordion-heading>

@@ -32,29 +32,30 @@ angular.module('modules.dash')
 		}
 
 		$scope.$watch('vm.tasksCriteriaDTO.period', function (newValue) {
-			if (vm.history)
-			getHistory();
-			else
-			allTasks();
+			if (vm.history) {
+				getHistory();
+			} else {
+				allTasks();
+			}
+
 		});
 
-		function changeTab (index) {
-			if (0===index){
+		function changeTab(index) {
+			if (0 === index) {
 				vm.history = false;
 				allTasks();
-			} else
-			{
+			} else {
 				vm.history = true;
 				getHistory();
 			}
 		}
 
 		/*********** << NEW >> ************/
-		vm.onClearFilters = function() {
-			vm.tasksCriteriaDTO = DTO.tasksCriteriaDTO();
+		vm.onClearFilters = function () {
+			vm.criteriaDTO = DTO.criteriaDTO();
 		};
 
-		vm.onApplyFilters = function() {
+		vm.onApplyFilters = function () {
 			allTasks();
 		};
 
@@ -78,7 +79,7 @@ angular.module('modules.dash')
 		};
 
 
-		function allTasks () {
+		function allTasks() {
 			http.post('/tasks/all', vm.tasksCriteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
@@ -87,14 +88,15 @@ angular.module('modules.dash')
 
 						//must be delete later, only for testing
 						//<<-------->>//
-						vm.list.forEach(function(objects,i) {
-							objects.id  = i+1;
+						vm.list.forEach(function (objects, i) {
+							objects.id = i + 1;
 							console.log(objects);
 						});
 						//<<-------->>//
 					}
 				});
-		};
+		}
+
 		vm.allTasks();
 
 		vm.goToEdit = function (index) {
@@ -107,7 +109,7 @@ angular.module('modules.dash')
 				$event.preventDefault();
 			}
 			var config = {
-				templateUrl: 'modules/dashboard/views/modal.assignTask.html',
+				templateUrl: 'modules/modal/views/assignTask.html',
 				controller: 'modalAssignTaskCtrl',
 				controllerAs: 'vm',
 				resolve: {
@@ -125,7 +127,7 @@ angular.module('modules.dash')
 		};
 
 
-		function getHistory () {
+		function getHistory() {
 			http.post('/tasks/history', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
@@ -135,7 +137,7 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.onSendHistory = function (obj, hist) {
+		vm.SendHistory = function (obj, hist) {
 			var model = {templ_id: obj.id, obj: obj};
 
 			blockUI.start();
@@ -200,11 +202,11 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if (res.result) {
 						/*if (angular.isArray(res.result) && res.result.length > 0) {
-							res.result.map(function (item) {
-								item.all = item.firstName + ' ' + item.lastName + ((item.email === null) ? '' : ', ' + item.email) + ((item.phone === null) ? '' : ', ' + item.phone);
-								return item;
-							});
-						}*/
+						 res.result.map(function (item) {
+						 item.all = item.firstName + ' ' + item.lastName + ((item.email === null) ? '' : ', ' + item.email) + ((item.phone === null) ? '' : ', ' + item.phone);
+						 return item;
+						 });
+						 }*/
 						vm.stafs = res.result;
 					}
 				});
@@ -213,14 +215,14 @@ angular.module('modules.dash')
 			vm.onRefreshAdminTasks();
 		}
 
-		vm.onOpenStaff = function (id) {
-/*			http.get('private/dashboard/stuff/' + id + '/events')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result) {
-						vm.tasks = res.result;
-					}
-				});*/
+		vm.OpenStaff = function (id) {
+						http.get('/stuff/get'+ id)
+			 .then(function (res) {
+			 blockUI.stop();
+			 if (res.result) {
+			 vm.tasks = res.result;
+			 }
+			 });
 		};
 
 		vm.onCloseTask = function (task_id, staff_id) {
@@ -230,7 +232,7 @@ angular.module('modules.dash')
 						.then(function (res) {
 							blockUI.stop();
 							alertService.add(0, res.state.message);
-							vm.onOpenStaff(staff_id);
+							vm.OpenStaff(staff_id);
 						});
 				});
 		};

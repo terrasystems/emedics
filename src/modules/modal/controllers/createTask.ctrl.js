@@ -44,46 +44,22 @@ angular.module('modules.dash')
 			}
 		};
 
-		http.post('/mytemplates/all', DTO.criteriaDTO())
-			.then(function (res) {
-				blockUI.stop();
-				if (res.state) {
-					vm.myForms = res.result;
-				}
-			});
 
-		//vm.Selected = function (item) {
-		//	vm.isMulti = (vm.user.type === 'doctor' || vm.user.type === 'stuff') && item.templateDto.typeEnum === 'PATIENT';
-		//};
+		vm.FindTemplates = function () {
 
-		//vm.onCreate = function () {
-		//	if (vm.isMulti) {
-		//		if (vm.message.assignAll === true) {
-		//			vm.message.patients = [];
-		//		}
-		//		http.post('private/dashboard/tasks/multipleCreate', vm.message)
-		//			.then(function (res) {
-		//				blockUI.stop();
-		//				if (res.state) {
-		//					alertService.add(0, res.state.message);
-		//				}
-		//				$uibModalInstance.close(res);
-		//			});
-		//	} else {
-		//		var paramsPOST = {
-		//			template: {id: vm.message.template, type: null, description: null, templateDto: null},
-		//			patient: vm.user.id,
-		//			data: "{}"
-		//		};
-		//		http.post('private/dashboard/tasks/create', paramsPOST)
-		//			.then(function (res) {
-		//				blockUI.stop();
-		//				alertService.add(0, res.state.message);
-		//				$uibModalInstance.close(res);
-		//			}, function (error) {
-		//				$uibModalInstance.close(error);
-		//			});
-		//	}
-		//};
+			return http.post('/mytemplates/all', DTO.criteriaDTO())
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						vm.templates = res.result;
+						return res.result;
+					}
+				});
+
+		};
+
+		vm.Create = function(){
+
+		};
 
 	});
