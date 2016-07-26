@@ -3,7 +3,7 @@
 
 angular.module('modules.public', [])
 
-	.controller('LoginCtrl', function ($translate, $state, $timeout, blockUI, alertService, auth, http) {
+	.controller('LoginCtrl111', function ($translate, $state, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
 		vm.user = {};
 		vm.options = {};
@@ -62,7 +62,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('RegistrationCtrl', function ($translate, $state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
+	.controller('RegistrationCtrl1111', function ($translate, $state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
 		var vm = this;
 		vm.pat_fields = pat_fields;
 		vm.doc_fields = doc_fields;
@@ -172,7 +172,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('NewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService, $translate) {
+	.controller('NewPasswordCtrl1111', function ($state, $timeout, http, blockUI, alertService, $translate) {
 		var vm = this;
 		vm.forgotPass = '';
 
@@ -229,7 +229,7 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('confirmNewPasswordCtrl', function ($state, $timeout, http, blockUI, alertService, $translate, $stateParams) {
+	.controller('confirmNewPasswordCtrl1111', function ($state, $timeout, http, blockUI, alertService, $translate, $stateParams) {
 		var vm = this;
 		if  (!$stateParams.key) {
 			$state.go('main.public.login');

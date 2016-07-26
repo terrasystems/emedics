@@ -23,8 +23,8 @@ angular.module('modules.core')
 			url: 'login',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/views/login.html',
-					controller: 'LoginCtrl as vm'
+					templateUrl: 'modules/public/login/views/login.html',
+					controller: 'loginCtrl as vm'
 				}
 			},
 			parent:'main.public'
@@ -34,30 +34,30 @@ angular.module('modules.core')
 			url: 'registration',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/views/registration.html',
-					controller: 'RegistrationCtrl as vm'
+					templateUrl: 'modules/public/registration/views/registration.html',
+					controller: 'registrationCtrl as vm'
 				}
 			},
 			parent:'main.public'
 		},
 		{
-			name: 'main.public.newpassword',
-			url: 'newpassword',
+			name: 'main.public.forgotpassword',
+			url: 'fogotpassword',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/views/newpassword.html',
-					controller: 'NewPasswordCtrl as vm'
+					templateUrl: 'modules/public/forgotpassword/views/forgotpassword.html',
+					controller: 'forgotpasswordCtrl as vm'
 				}
 			},
 			parent:'main.public'
 		},
 		{
-			name: 'main.public.newpassword.confirm',
+			name: 'main.public.resetpassword',
 			url: '/confirm',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/views/confirm.newpassword.html',
-					controller: 'confirmNewPasswordCtrl as vm'
+					templateUrl: 'modules/public/resetpassword/views/resetpassword.html',
+					controller: 'resetpasswordCtrl as vm'
 				},
 				parent:'main.public'
 			},
@@ -83,7 +83,7 @@ angular.module('modules.core')
 				http.get('public/activate/' + $stateParams.code).then(function (response) {
 					console.log(response);
 					auth.saveUserData(response);
-					$state.go('^.private.dashboard.catalog', {reload: true});
+					$state.go('main.private.dashboard.catalog', {reload: true});
 				});
 				console.log($stateParams.code);
 			},
@@ -94,7 +94,7 @@ angular.module('modules.core')
 			url: 'signup',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/views/signup.html'
+					templateUrl: 'modules/public/signup/views/signup.html'
 				}
 			},
 			parent:'main.public'
