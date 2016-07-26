@@ -38,7 +38,7 @@ angular.module('modules.public', [])
 			}
 		];
 
-		vm.onSubmit = function() {
+		vm.onSubmit = function () {
 			if (vm.form.$valid) {
 				doLogin();
 			}
@@ -62,19 +62,19 @@ angular.module('modules.public', [])
 	})
 
 
-	.controller('RegistrationCtrl1111', function ($translate, $state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http) {
+	.controller('RegistrationCtrl1111', function ($translate, $state, pat_fields, doc_fields, org_fields, $timeout, blockUI, alertService, auth, http, DTO) {
 		var vm = this;
 		vm.pat_fields = pat_fields;
 		vm.doc_fields = doc_fields;
 		vm.org_fields = org_fields;
 
-		vm.reg = {pat:{}, doc:{}, org: {}};
+		vm.reg = {pat: {}, doc: {}, org: {}};
 
 		vm.tabs = [
 			{
 				title: $translate.instant('PATIENT'),
 				active: true,
-				index : 0,
+				index: 0,
 				type: 'pat',
 				form: {
 					options: {},
@@ -85,7 +85,7 @@ angular.module('modules.public', [])
 			{
 				title: $translate.instant('DOCTOR'),
 				active: false,
-				index : 1,
+				index: 1,
 				type: 'doc',
 				form: {
 					options: {},
@@ -96,7 +96,7 @@ angular.module('modules.public', [])
 			{
 				title: $translate.instant('ORGANIZATION'),
 				active: false,
-				index : 2,
+				index: 2,
 				type: 'org',
 				form: {
 					options: {},
@@ -108,49 +108,44 @@ angular.module('modules.public', [])
 
 		vm.active = 0;
 
-		vm.getTypesDoc = function() {
-			http.get('public/dashboard/doc_type/doctor')
+		vm.getTypes = function (type) {
+
+			var criteriaDTO = DTO.criteriaDTO;
+			criteriaDTO.type = type;
+			return http.post('/type/all', criteriaDTO)
 				.then(function (res) {
 					blockUI.stop();
-					if (res.result && angular.isArray(res.result)) {
-						res.result.map(function (item) {
-							var x = angular.copy(item.id);
-							delete item.id;
-							item.value = x;
-							item.name = $translate.instant(item.name);
-							return item;
-						});
-						vm.tabs[1].form.fields[5].templateOptions.options = res.result;
-					}
+					vm.tabs[1].form.fields[5].templateOptions.options = res.result;
+					return res.result;
 				});
 		};
 		vm.getTypesDoc();
 
-		vm.getTypesOrg = function() {
-			http.get('public/dashboard/doc_type/organization')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result)) {
-						res.result.map(function (item) {
-							var x = angular.copy(item.id);
-							delete item.id;
-							item.value = x;
-							item.name = $translate.instant(item.name);
-							return item;
-						});
-						vm.tabs[2].form.fields[5].templateOptions.options = res.result;
-					}
-				});
-		};
-		vm.getTypesOrg();
+		//vm.getTypesOrg = function () {
+		//	http.get('public/dashboard/doc_type/organization')
+		//		.then(function (res) {
+		//			blockUI.stop();
+		//			if (res.result && angular.isArray(res.result)) {
+		//				res.result.map(function (item) {
+		//					var x = angular.copy(item.id);
+		//					delete item.id;
+		//					item.value = x;
+		//					item.name = $translate.instant(item.name);
+		//					return item;
+		//				});
+		//				vm.tabs[2].form.fields[5].templateOptions.options = res.result;
+		//			}
+		//		});
+		//};
+		//vm.getTypesOrg();
 
 		vm.onSubmit = function () {
-			var  paramsPOST= {
+			var paramsPOST = {
 				"type": vm.tabs[vm.active].type,
 				"user": vm.reg[vm.tabs[vm.active].type].user,
 				"organisation": {}
 			};
-			if  (vm.tabs[vm.active].type==='org') {
+			if (vm.tabs[vm.active].type === 'org') {
 				paramsPOST.organisation = vm.reg[vm.tabs[vm.active].type].org;
 				paramsPOST.organisation.name = vm.reg[vm.tabs[vm.active].type].user.username;
 			}
@@ -231,7 +226,7 @@ angular.module('modules.public', [])
 
 	.controller('confirmNewPasswordCtrl1111', function ($state, $timeout, http, blockUI, alertService, $translate, $stateParams) {
 		var vm = this;
-		if  (!$stateParams.key) {
+		if (!$stateParams.key) {
 			$state.go('main.public.login');
 			return;
 		}
@@ -265,7 +260,7 @@ angular.module('modules.public', [])
 					show: true
 				},
 				validators: {
-					samePassword2: function($viewValue, $modelValue, scope) {
+					samePassword2: function ($viewValue, $modelValue, scope) {
 						var value = $modelValue || $viewValue;
 						if (value) {
 							return $modelValue === scope.model.password;
@@ -280,7 +275,7 @@ angular.module('modules.public', [])
 
 		vm.onSubmit = function () {
 			var paramsPOST = {
-				validKey:$stateParams.key,
+				validKey: $stateParams.key,
 				newPassword: vm.newPass.password
 			};
 
