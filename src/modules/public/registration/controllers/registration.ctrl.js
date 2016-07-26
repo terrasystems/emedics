@@ -2,7 +2,7 @@
 	"use strict";
 	/*jshint -W117, -W097, -W089, -W061*/
 	angular.module('modules.public')
-		.controller('registrationCtrl', function (regFields, $translate, DTO, http) {
+		.controller('registrationCtrl', function (regFields, $translate, DTO, http,$state) {
 			var vm = this;
 			vm.reg = {};
 			vm.resetAllForms = invokeOnAllFormOptions.bind(null, 'resetModel');
@@ -54,8 +54,8 @@
 					}
 				}
 			];
-			getTypes('doc');
-			getTypes('org');
+			//getTypes('doc');
+			//getTypes('org');
 
 			function getTypes(type) {
 
@@ -79,6 +79,7 @@
 						else
 							insertTypes(2, type, res.result);
 					});
+
 			};
 
 			vm.onSubmit = function () {
@@ -88,7 +89,12 @@
 				if ('org'=== vm.tabs[vm.active].type)
 					vm.reg[vm.tabs[vm.active].type].user.isAdmin = true;
 
-			http.post('',vm.userDTO).then()
+			http.post('/auth/auth',vm.userDTO)
+				.then(function (res) {
+					if(res.result){
+						$state.go('main.public.successregistration');
+					}
+				});
 			};
 
 		});

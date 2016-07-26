@@ -41,8 +41,18 @@ angular.module('modules.core')
 			parent:'main.public'
 		},
 		{
+			name: 'main.public.successregistration',
+			url: 'successregistration ',
+			views: {
+				'content@main': {
+					templateUrl: 'modules/public/registration/views/success.registration.html'
+				}
+			},
+			parent:'main.public'
+		},
+		{
 			name: 'main.public.forgotpassword',
-			url: 'fogotpassword',
+			url: 'forgotpassword',
 			views: {
 				'content@main': {
 					templateUrl: 'modules/public/forgotpassword/views/forgotpassword.html',
