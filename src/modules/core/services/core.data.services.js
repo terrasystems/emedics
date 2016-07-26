@@ -272,14 +272,49 @@ angular.module('modules.core')
 			return {all:true, paid:true, free:true, patient:true, med:true, search:''};
 		};
 
+		function userDTO() {
+			return{
+				id: null,
+				userType: null,
+				type: null,
+				name: null,
+				firstName: null,
+				lastName: null,
+				pass: null,
+				dob: null,
+				email: null,
+				phone: null,
+				address: null,
+				orgName: null,
+				website: null,
+				isAdmin: false
+			};
+
+		};
+
+		function mergeDTO(object, other) {
+
+			function customizer(objValue, srcValue) {
+				if (_.isArray(objValue)) {
+					return objValue.concat(srcValue);
+				} else if (srcValue) {
+					objValue = srcValue
+					return objValue;
+				}
+			};
+			return _.mergeWith(object, other, customizer);
+		};
+
 		return {
+			mergeDTO:mergeDTO,
 			criteriaDTO: criteriaDTO,
 			referencesDTO: referencesDTO,
 			staffDTO: staffDTO,
 			tasksCriteriaDTO: tasksCriteriaDTO,
 			taskDTO:taskDTO,
 			patientsDTO: patientsDTO,
-			catalogFilter:catalogFilter
+			catalogFilter:catalogFilter,
+			userDTO:userDTO
 		};
 	})
 

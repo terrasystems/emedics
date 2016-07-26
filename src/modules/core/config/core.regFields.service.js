@@ -121,7 +121,7 @@ angular.module('modules.core')
 			return baseFields.concat([
 				{
 					className: 'col-md-12',
-					key: 'user.type',
+					key: 'user.doctype',
 					type: 'select',
 					templateOptions: {
 						required: true,
@@ -165,7 +165,7 @@ angular.module('modules.core')
 				},
 				{
 					className: 'col-md-12',
-					key: 'user.type',
+					key: 'user.orgtype',
 					type: 'select',
 					templateOptions: {
 						required: true,
