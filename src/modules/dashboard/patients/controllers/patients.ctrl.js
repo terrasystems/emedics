@@ -69,7 +69,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onOpenPatientsTemplates = function (id_, name_, email_, phone_) {
-			$state.go('main.private.dashboard.patients.templates', {id: id_, name: name_, email: email_, phone: phone_});
+			$state.go('main.private.dashboard.user.templates', {id: id_, name: name_, email: email_, phone: phone_});
 		};
 
 	});

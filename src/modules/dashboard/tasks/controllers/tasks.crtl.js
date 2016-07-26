@@ -100,8 +100,8 @@ angular.module('modules.dash')
 
 		vm.allTasks();
 
-		vm.goToEdit = function (index) {
-			$state.go('.edit', {id: index, type: 'tasks', patId: null});
+		vm.staffEdit = function (id) {
+			$state.go('main.private.dashboard.user.templates', {id: id});
 		};
 
 		vm.onAssignTask = function (id, stafs, $event) {
@@ -197,7 +197,7 @@ angular.module('modules.dash')
 
 		/*********** << STAFF >> ************/
 
-		vm.onRefreshAdminTasks = function () {
+		vm.staffInfo = function () {
 			http.post('/staff/all', DTO.criteriaDTO())
 				.then(function (res) {
 					blockUI.stop();
@@ -208,12 +208,12 @@ angular.module('modules.dash')
 						 return item;
 						 });
 						 }*/
-						vm.stafs = res.result;
+						vm.staffList = res.result;
 					}
 				});
 		};
 		if (vm.hideAdminTasks) {
-			vm.onRefreshAdminTasks();
+			vm.staffInfo();
 		}
 
 		vm.OpenStaff = function (id) {
