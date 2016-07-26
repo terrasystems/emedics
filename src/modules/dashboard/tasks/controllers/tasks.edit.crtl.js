@@ -6,7 +6,7 @@ angular.module('modules.dash')
                                          $rootScope, forEditTask, DTO) {
 
 		//if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
-		//	$state.go('main.private.dashboard.abstract.tasks');
+		//	$state.go('main.private.dashboard.tasks');
 		//	return;
 		//}
 
@@ -14,22 +14,23 @@ angular.module('modules.dash')
 		vm.taskId = $stateParams.id;
 		vm.user = localStorageService.get('userData');
 		vm.Task = DTO.taskDTO();
+		vm.mainState = '^';
 		//vm.onNeedSave = true;
 
-		//if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
-		//	vm.mainState = 'main.private.dashboard.abstract.tasks';
-		//} else if ($stateParams.type == 'patients' || $stateParams.type == 'patients+') {
-		//	vm.mainState = 'main.private.dashboard.abstract.patients';
-		//} else if ($stateParams.type == 'tasksAdmin') {
-		//	vm.mainState = 'main.private.dashboard.abstract.tasks';
-		//}
+/*		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
+			vm.mainState = 'main.private.dashboard.tasks';
+		} else if ($stateParams.type == 'patients' || $stateParams.type == 'patients+') {
+			vm.mainState = 'main.private.dashboard.patients';
+		} else if ($stateParams.type == 'tasksAdmin') {
+			vm.mainState = 'main.private.dashboard.tasks';
+		}
 
-		//if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-		//	$state.go(vm.mainState);
-		//	return;
-		//} else {
-		//	vm.id = $stateParams.id;
-		//}
+		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
+			$state.go(vm.mainState);
+			return;
+		} else {
+			vm.id = $stateParams.id;
+		}*/
 
 		//if ($stateParams.type == 'patients+' || $stateParams.type == 'tasks+') {
 		//	vm.viewButtons = false;
@@ -83,7 +84,7 @@ angular.module('modules.dash')
 
 
 		vm.getTask = function () {
-			http.get('/tasks/get' + vm.taskId)
+			http.get('/tasks/get/' + vm.taskId)
 				.then(function (res) {
 					return res.result;
 				});
@@ -130,7 +131,7 @@ angular.module('modules.dash')
 
 		};
 
-		vm.Return = function () {
+		vm.return = function () {
 			$state.go(vm.mainState);
 		};
 

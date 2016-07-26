@@ -11,7 +11,7 @@ angular.module('modules.dash')
 		var base_db = $rootScope.db;
 
 		vm.onEdit = function (id) {
-			$state.go('main.private.dashboard.abstract.drafts.edit', {id: id});
+			$state.go('main.private.dashboard.drafts.edit', {id: id});
 		};
 
 		vm.onSend = function (obj) {

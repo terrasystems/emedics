@@ -7,24 +7,24 @@ angular.module('modules.dash')
 		var vm = this;
 		vm.user = localStorageService.get('userData');
 
-		vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.abstract.tasks', disable: false},
-			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.abstract.references', disable: false },
-			{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.abstract.notifications', disable: false },
-			{heading: $translate.instant('MYFORMS'), route:'main.private.dashboard.abstract.catalog', disable: false},
-			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.abstract.drafts', disable: false}
+		vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.tasks', disable: false},
+			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.references', disable: false },
+			{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.notifications', disable: false },
+			{heading: $translate.instant('MYFORMS'), route:'main.private.dashboard.catalog', disable: false},
+			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.drafts', disable: false}
 	];
 
 		if ('patient'!==vm.user.type) {
 			vm.tabData.push({
 				heading: $translate.instant('PATIENTS'),
-				route: 'main.private.dashboard.abstract.patients',
+				route: 'main.private.dashboard.patients',
 				disable: false
 			});
 		}
 
 		if (vm.user.org == 'true' || vm.user.org == true || vm.user.type == 'stuff') {
 			vm.tabData.push({heading: $translate.instant('STUFF'),
-				route:'main.private.dashboard.abstract.staff',
+				route:'main.private.dashboard.staff',
 				disable: false});
 		}
 

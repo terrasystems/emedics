@@ -21,7 +21,7 @@ angular.module('modules.dash')
 			http.post('/references/create', vm.referencesDTO)
 				.then(function () {
 					blockUI.stop();
-					$state.go('main.private.dashboard.abstract.references');
+					$state.go('main.private.dashboard.references');
 				});
 		};
 

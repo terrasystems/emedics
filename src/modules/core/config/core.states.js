@@ -15,7 +15,8 @@ angular.module('modules.core')
 			name: 'main.public',
 			url: '/',
 			//templateUrl: 'modules/core/views/main.public.html',
-			abstract: true
+			abstract: true,
+			parent:'main'
 		},
 		{
 			name: 'main.public.login',
@@ -25,7 +26,8 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/login.html',
 					controller: 'LoginCtrl as vm'
 				}
-			}
+			},
+			parent:'main.public'
 		},
 		{
 			name: 'main.public.registration',
@@ -35,7 +37,8 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/registration.html',
 					controller: 'RegistrationCtrl as vm'
 				}
-			}
+			},
+			parent:'main.public'
 		},
 		{
 			name: 'main.public.newpassword',
@@ -45,7 +48,8 @@ angular.module('modules.core')
 					templateUrl: 'modules/public/views/newpassword.html',
 					controller: 'NewPasswordCtrl as vm'
 				}
-			}
+			},
+			parent:'main.public'
 		},
 		{
 			name: 'main.public.newpassword.confirm',
@@ -54,7 +58,8 @@ angular.module('modules.core')
 				'content@main': {
 					templateUrl: 'modules/public/views/confirm.newpassword.html',
 					controller: 'confirmNewPasswordCtrl as vm'
-				}
+				},
+				parent:'main.public'
 			},
 			params: {
 				key: ''
@@ -68,7 +73,8 @@ angular.module('modules.core')
 					.then(function (res) {
 						$state.go('main.public.newpassword.confirm', {key: $stateParams.key});
 					});
-			}
+			},
+			parent:'main.public'
 		},
 		{
 			name: 'main.public.activation',
@@ -77,10 +83,11 @@ angular.module('modules.core')
 				http.get('public/activate/' + $stateParams.code).then(function (response) {
 					console.log(response);
 					auth.saveUserData(response);
-					$state.go('main.private.dashboard.abstract.catalog', {reload: true});
+					$state.go('^.private.dashboard.catalog', {reload: true});
 				});
 				console.log($stateParams.code);
-			}
+			},
+			parent:'main.public'
 		},
 		{
 			name: 'main.public.signup',
@@ -89,7 +96,8 @@ angular.module('modules.core')
 				'content@main': {
 					templateUrl: 'modules/public/views/signup.html'
 				}
-			}
+			},
+			parent:'main.public'
 		},
 		// private
 		{
@@ -110,7 +118,7 @@ angular.module('modules.core')
 				}
 			}
 		},
-		{
+/*		{
 			name: 'main.private.dashboard.abstract',
 			abstract: true,
 			//parent:'main.private.abstract',
@@ -120,19 +128,20 @@ angular.module('modules.core')
 					//controller:'DashCtrl as vm'
 				}
 			}
-		},
+		},*/
 		{
-			name: 'main.private.dashboard.abstract.patients',
+			name: 'main.private.dashboard.patients',
 			url: '/patients',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/patients/views/patients.html',
 					controller: 'patientsCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.patients.editor',
+			name: 'main.private.dashboard.patients.editor',
 			url: '/editor',
 			views: {
 				'forms@dashboard': {
@@ -140,6 +149,7 @@ angular.module('modules.core')
 					controller: 'patientsEditorCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard',
 			params: {
 				id: '',
 				type: '',
@@ -147,7 +157,12 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.patients.templates',
+			name: 'main.private.dashboard.user',
+			url: '',
+			abstract: true
+		},
+		{
+			name: 'main.private.dashboard.user.templates',
 			url: '/templates',
 			views: {
 				'forms@dashboard': {
@@ -155,6 +170,7 @@ angular.module('modules.core')
 					controller: 'patientsTemplatesCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.user',
 			params: {
 				id: '',
 				name: '',
@@ -163,7 +179,7 @@ angular.module('modules.core')
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.patients.history',
+			name: 'main.private.dashboard.user.history',
 			url: '/history',
 			views: {
 				'forms@dashboard': {
@@ -171,33 +187,36 @@ angular.module('modules.core')
 					controller: 'patientsHistoryCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.user',
 			params: {
 				patient: null,
 				obj: null
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.references',
+			name: 'main.private.dashboard.references',
 			url: '/references',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/references/views/references.html',
 					controller: 'referencesCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.references.editor',
+			name: 'main.private.dashboard.references.editor',
 			url: '/add',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/references/views/references.editor.html',
 					controller: 'referencesEditorCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard.references'
 		},
 		{
-			name: 'main.private.dashboard.abstract.references.info',
+			name: 'main.private.dashboard.references.info',
 			url: '/info',
 			views: {
 				'forms@dashboard': {
@@ -205,22 +224,24 @@ angular.module('modules.core')
 					controller: 'referencesInfoCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.references',
 			params: {
 				ref: null
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.staff',
+			name: 'main.private.dashboard.staff',
 			url: '/staff',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/staff/views/staff.html',
 					controller: 'staffCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.staff.editor',
+			name: 'main.private.dashboard.staff.editor',
 			url: '/editor',
 			views: {
 				'forms@dashboard': {
@@ -228,12 +249,13 @@ angular.module('modules.core')
 					controller: 'staffEditorCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.staff',
 			params: {
 				id: ''
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.staff.info',
+			name: 'main.private.dashboard.staff.info',
 			url: '/info',
 			views: {
 				'forms@dashboard': {
@@ -241,12 +263,13 @@ angular.module('modules.core')
 					controller: 'staffInfoCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.staff',
 			params: {
 				staff: null
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.notifications',
+			name: 'main.private.dashboard.notifications',
 			url: '/notifications',
 			views: {
 				'forms@dashboard': {
@@ -254,20 +277,22 @@ angular.module('modules.core')
 					controller: 'notificationsCtrl as vm'
 
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.tasks',
+			name: 'main.private.dashboard.tasks',
 			url: '/tasks',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/tasks/views/tasks.html',
 					controller: 'tasksCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.catalog',
+			name: 'main.private.dashboard.catalog',
 			url: '/catalog',
 			views: {
 				'forms@dashboard': {
@@ -275,25 +300,27 @@ angular.module('modules.core')
 					controller: 'catalogCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard',
 			params: {
 				arr: null
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.tasks.edit',
+			name: 'main.private.dashboard.tasks.edit',
 			url: '/edit',
 			views: {
 				'forms@dashboard': {
-					templateUrl: 'modules/dashboard/tasks/views/tasksEdit.html',
+					templateUrl: 'modules/dashboard/tasks/views/tasks.edit.html',
 					controller: 'tasksEditCtrl as vm'
 				}
 			},
+			parent:'main.private.dashboard.tasks',
 			params: {
 				id: null
 			}
 		},
 		{
-			name: 'main.private.dashboard.abstract.settings',
+			name: 'main.private.dashboard.settings',
 			url: '/settings',
 			//parent: 'main.private.dashboard',
 			views: {
@@ -301,26 +328,29 @@ angular.module('modules.core')
 					templateUrl: 'modules/dashboard/settings/views/settings.html',
 					controller: 'settingsCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.drafts',
+			name: 'main.private.dashboard.drafts',
 			url: '/drafts',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/drafts/views/drafts.html',
 					controller: 'draftsCtrl as vm'
 				}
-			}
+			},
+			parent:'main.private.dashboard'
 		},
 		{
-			name: 'main.private.dashboard.abstract.drafts.edit',
+			name: 'main.private.dashboard.drafts.edit',
 			url: '/edit',
 			views: {
 				'forms@dashboard': {
 					templateUrl: 'modules/dashboard/drafts/views/draftEdit.html',
 					controller: 'draftEditCtrl as vm'
-				}
+				},
+				parent:'main.private.dashboard.drafts'
 			},
 			params: {
 				id: ''

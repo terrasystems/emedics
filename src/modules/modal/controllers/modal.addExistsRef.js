@@ -14,7 +14,7 @@ angular.module('modules.dash')
 
 		vm.onSelectCallback = function (item, id) {
 			if ('ADD' === id) {
-				$state.go('main.private.dashboard.abstract.references.editor');
+				$state.go('main.private.dashboard.references.editor');
 				$uibModalInstance.close();
 				return;
 			}
@@ -58,7 +58,7 @@ angular.module('modules.dash')
 
 		vm.onSelectCallback = function (item, id) {
 			if (model === 'ADD') {
-				$state.go('main.private.dashboard.abstract.patients.create');
+				$state.go('main.private.dashboard.patients.create');
 				$uibModalInstance.close();
 				return;
 			}

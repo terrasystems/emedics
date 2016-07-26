@@ -9,6 +9,7 @@ angular.module('modules.dash')
 
 		vm.tasksCriteriaDTO = DTO.tasksCriteriaDTO();
 		vm.history = false;
+		vm.hideFilter = true;
 
 		vm.changeTab = changeTab;
 		vm.allTasks = allTasks;
@@ -100,7 +101,7 @@ angular.module('modules.dash')
 		vm.allTasks();
 
 		vm.goToEdit = function (index) {
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index, type: 'tasks', patId: null});
+			$state.go('.edit', {id: index, type: 'tasks', patId: null});
 		};
 
 		vm.onAssignTask = function (id, stafs, $event) {
@@ -110,7 +111,7 @@ angular.module('modules.dash')
 			}
 			var config = {
 				templateUrl: 'modules/modal/views/assignTask.html',
-				controller: 'modalAssignTaskCtrl',
+				controller: 'assignTaskCtrl',
 				controllerAs: 'vm',
 				resolve: {
 					model: function ($q) {
@@ -154,7 +155,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onViewHistory = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'tasks+', patId: patientId});
+			$state.go('^.patients.editor', {id: histId, type: 'tasks+', patId: patientId});
 		};
 
 		vm.onCopyHistory = function (taskObj, patientId) {
@@ -181,7 +182,7 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.add(0, res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.abstract.patients.editor', {
+									$state.go('main.private.dashboard.patients.editor', {
 										id: newTaskID,
 										type: 'tasks',
 										patId: patientId
@@ -216,7 +217,7 @@ angular.module('modules.dash')
 		}
 
 		vm.OpenStaff = function (id) {
-						http.get('/stuff/get'+ id)
+						http.get('/staff/get/'+ id)
 			 .then(function (res) {
 			 blockUI.stop();
 			 if (res.result) {
@@ -238,7 +239,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEditAdminTask = function (index) {
-			$state.go('main.private.dashboard.abstract.tasks.edit', {id: index});
+			$state.go('.edit', {id: index});
 		};
 
 		/*****************************/

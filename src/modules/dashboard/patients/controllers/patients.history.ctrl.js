@@ -8,14 +8,14 @@ angular.module('modules.dash')
 		vm.templates = [];
 
 		if (!$stateParams.patient || $stateParams.patient === '' || $stateParams.patient === null) {
-			$state.go('main.private.dashboard.abstract.patients');
+			$state.go('main.private.dashboard.patients');
 			return;
 		}
 		vm.patient = $stateParams.patient;
 		vm.item = $stateParams.obj;
 
 		vm.onReturn = function () {
-			$state.go('main.private.dashboard.abstract.patients.templates', {
+			$state.go('main.private.dashboard.patients.templates', {
 				id: vm.patient.id,
 				name: vm.patient.name,
 				email: vm.patient.email,
@@ -29,7 +29,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onView = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients+', patId: patientId});
+			$state.go('main.private.dashboard.patients.editor', {id: histId, type: 'patients+', patId: patientId});
 		};
 
 		vm.onSend = function (obj, hist) {
@@ -69,7 +69,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if (res.result) {
 						alertService.success(res.state.message);
-						$state.go('main.private.dashboard.abstract.patients.editor', {
+						$state.go('main.private.dashboard.patients.editor', {
 							id: res.result.id,
 							type: 'patients',
 							patId: patientId
@@ -81,7 +81,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEditTask = function (histId, patientId) {
-			$state.go('main.private.dashboard.abstract.patients.editor', {id: histId, type: 'patients', patId: patientId});
+			$state.go('main.private.dashboard.patients.editor', {id: histId, type: 'patients', patId: patientId});
 		};
 
 	});

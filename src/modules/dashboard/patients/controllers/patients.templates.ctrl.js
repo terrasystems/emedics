@@ -8,7 +8,7 @@ angular.module('modules.dash')
 		vm.templates = [];
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.abstract.patients');
+			$state.go('main.private.dashboard.patients');
 			return;
 		}
 
@@ -32,11 +32,11 @@ angular.module('modules.dash')
 		vm.onGetTemplates($stateParams.id);
 
 		vm.onReturn = function() {
-			$state.go('main.private.dashboard.abstract.patients');
+			$state.go('main.private.dashboard.patients');
 		};
 
 		vm.onOpenHistory = function(arr) {
-			$state.go('main.private.dashboard.abstract.patients.history',{patient: vm.patient, obj: arr});
+			$state.go('main.private.dashboard.patients.history',{patient: vm.patient, obj: arr});
 		};
 
 	});

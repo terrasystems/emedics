@@ -5,7 +5,7 @@ angular.module('modules.dash')
 		var vm = this;
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.abstract.drafts');
+			$state.go('^');
 			return;
 		}
 
@@ -28,12 +28,12 @@ angular.module('modules.dash')
 			pouch_db.save($rootScope.db, $stateParams.id, vm.data.formInfo, vm.data.model)
 				.then(function() {
 					alertService.add(0, 'Saved - Ok!');
-					$state.go('main.private.dashboard.abstract.drafts');
+					$state.go('^');
 				});
 		};
 
 		vm.onReturn = function () {
-			$state.go('main.private.dashboard.abstract.drafts');
+			$state.go('^');
 		};
 
 	});

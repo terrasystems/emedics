@@ -257,7 +257,7 @@ angular.module('modules.dash')
 		//		};
 		//		var result = $uibModal.open(config);
 		//		result.result.then(function () {
-		//			$state.go('main.private.dashboard.abstract.catalog');
+		//			$state.go('main.private.dashboard.catalog');
 		//		});
 		//	}
 		//};

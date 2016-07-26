@@ -68,7 +68,7 @@ angular.module('modules.dash')
 		vm.getReferences('');
 
 		vm.onRefInfo = function(ref) {
-			$state.go('main.private.dashboard.abstract.references.info', {ref: ref});
+			$state.go('main.private.dashboard.references.info', {ref: ref});
 		};
 });
 

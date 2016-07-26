@@ -5,7 +5,7 @@
 			<div class="pad" ng-include="'modules/dashboard/tasks/views/tasks.list.html'"></div>
 		</uib-tab>
 
-		<uib-tab ng-click="vm.onRefreshAdminTasks();" index="1" heading="Staff" ng-if="vm.hideAdminTasks;">
+		<uib-tab ng-click="vm.onRefreshAdminTasks();" index="1" heading="Staff" ng-if="vm.hideAdminTasks">
 			<section >
 				<div class="container ui-list-view">
 					<div ng-show="vm.stafs.length == 0" class=""> <h5 class="noData_msg"> You don't have any stuff</h5></div>
