@@ -180,7 +180,7 @@ angular.module('modules.core')
 				address: null,
 				orgName: null,
 				website: null,
-				isAdmin: false
+				admin: false
 			};
 
 		};

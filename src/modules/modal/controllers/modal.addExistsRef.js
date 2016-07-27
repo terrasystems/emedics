@@ -7,7 +7,7 @@ angular.module('modules.dash')
 												   DTO, $state, $translate) {
 		var vm = this;
 		vm.model = model;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.users = [];
 		vm.filterTitle = $translate.instant('Search and add reference');
 		vm.placeholder = $translate.instant('SEARCH_REFS2');
@@ -51,7 +51,7 @@ angular.module('modules.dash')
 												   DTO, $state, $translate) {
 		var vm = this;
 		vm.model = model;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.users = [];
 		vm.filterTitle = $translate.instant('Search and add patients');
 		vm.placeholder = $translate.instant('SEARCH_PATS');

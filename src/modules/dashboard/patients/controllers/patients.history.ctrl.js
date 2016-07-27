@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('patientsHistoryCtrl', function (localStorageService, DTO, $stateParams, $state, blockUI, http, $q, $uibModal, alertService) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.templates = [];
 
 		if (!$stateParams.patient || $stateParams.patient === '' || $stateParams.patient === null) {

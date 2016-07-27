@@ -12,7 +12,7 @@ angular.module('modules.dash')
 
 		var vm = this;
 		vm.taskId = $stateParams.id;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.Task = DTO.taskDTO();
 		vm.mainState = '^';
 		//vm.onNeedSave = true;

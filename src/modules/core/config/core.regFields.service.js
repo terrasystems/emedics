@@ -42,9 +42,9 @@ angular.module('modules.core')
 						placeholder: $translate.instant('BIRTH_DATE'),
 						datepickerPopup: 'yyyy-MMMM-dd'
 					},
-					validation: {
+				/*	validation: {
 						show: true
-					}
+					}*/
 				}, {
 				className: 'col-md-12',
 				key: 'user.email',

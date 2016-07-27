@@ -5,10 +5,10 @@ angular.module('modules.dash')
 
 	.controller('catalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
 		var vm = this;
-		vm.userType = localStorageService.get('userData');
+		vm.userType = localStorageService.get('user');
 		vm.FormTemplate = [];
 		vm.myForms = [];
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.filter = DTO.catalogFilter();
 
 		function selectAll() {

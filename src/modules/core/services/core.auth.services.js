@@ -11,9 +11,9 @@
 						$rootScope.token = data.token;
 						localStorageService.set('token', data.token);
 					}
-					if (data.user) {
-						$rootScope.userData = data.user;
-						localStorageService.set('userData', data.user);
+					if (data.userDto) {
+						$rootScope.user = data.userDto;
+						localStorageService.set('user', data.userDto);
 					}
 				},
 				checkUserAuth: function () {
@@ -22,7 +22,7 @@
 					var authToken = localStorageService.get('token');
 					if ((authToken !== undefined) && (authToken !== null)) {
 						$rootScope.token = authToken;
-						$rootScope.userData = localStorageService.get('userData');
+						$rootScope.user = localStorageService.get('user');
 						$location.path(originalPath);
 						return;
 					}

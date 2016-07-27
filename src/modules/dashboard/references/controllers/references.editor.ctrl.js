@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 
 		vm.tabPatient = function() {
 			vm.referencesDTO = DTO.referencesDTO();

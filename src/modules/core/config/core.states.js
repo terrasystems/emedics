@@ -41,14 +41,14 @@ angular.module('modules.core')
 			parent:'main.public'
 		},
 		{
-			name: 'main.public.successregistration',
-			url: 'successregistration ',
+			name: 'main.public.registration.success',
+			url: 'success_registration',
 			views: {
 				'content@main': {
-					templateUrl: 'modules/public/registration/views/success.registration.html'
+					templateUrl: 'modules/public/registration/views/registration.success.html'
 				}
 			},
-			parent:'main.public'
+			parent:'main.public.registration'
 		},
 		{
 			name: 'main.public.forgotpassword',
@@ -89,13 +89,15 @@ angular.module('modules.core')
 		{
 			name: 'main.public.activation',
 			url: 'activation/:code',
-			onEnter: function ($stateParams, http, $state, auth) {
-				http.get('public/activate/' + $stateParams.code).then(function (response) {
-					console.log(response);
-					auth.saveUserData(response);
-					$state.go('main.private.dashboard.catalog', {reload: true});
+			onEnter: function ($stateParams, http, $state, auth, $log) {
+				http.get('/auth/activate/' + $stateParams.code).then(function (resp) {
+					$log.debug(resp);
+					if (resp.state) {
+						auth.saveUserData(resp.result);
+						$state.go('main.private.dashboard.catalog', {reload: true});
+					}
 				});
-				console.log($stateParams.code);
+				$log.debug($stateParams.code);
 			},
 			parent:'main.public'
 		},
@@ -128,17 +130,6 @@ angular.module('modules.core')
 				}
 			}
 		},
-/*		{
-			name: 'main.private.dashboard.abstract',
-			abstract: true,
-			//parent:'main.private.abstract',
-			views: {
-				'dashboard@content': {
-					templateUrl: 'modules/core/views/tabs.html'
-					//controller:'DashCtrl as vm'
-				}
-			}
-		},*/
 		{
 			name: 'main.private.dashboard.patients',
 			url: '/patients',

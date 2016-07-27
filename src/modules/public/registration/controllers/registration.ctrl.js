@@ -89,13 +89,13 @@
 
 				vm.userDTO = DTO.mergeDTO(DTO.userDTO(), vm.reg.user);
 				vm.userDTO.userType = vm.tabs[vm.active].type;
-				if ('org'=== vm.tabs[vm.active].type)
-					vm.reg[vm.tabs[vm.active].type].user.isAdmin = true;
+				if (userTypes.org === vm.tabs[vm.active].type)
+					vm.reg.user.admin = true;
 
-			http.post('/auth/auth',vm.userDTO)
+			http.post('/auth/registration',vm.userDTO)
 				.then(function (res) {
-					if(res.result){
-						$state.go('main.public.successregistration');
+					if(res.state){
+						$state.go('.success');
 					}
 				});
 			};

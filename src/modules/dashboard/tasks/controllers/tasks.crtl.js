@@ -5,7 +5,7 @@ angular.module('modules.dash')
 
 	.controller('tasksCtrl', function ($state, blockUI, http, localStorageService, alertService, $uibModal, confirmService, $scope, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 
 		vm.tasksCriteriaDTO = DTO.tasksCriteriaDTO();
 		vm.history = false;
@@ -26,7 +26,7 @@ angular.module('modules.dash')
 			vm.tasksCriteriaDTO.period = 4;
 		}
 
-		if (vm.user.isAdmin) {
+		if (vm.user.admin) {
 			vm.hideAdminTasks = false;
 		} else {
 			vm.hideAdminTasks = true;

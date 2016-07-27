@@ -5,7 +5,7 @@ angular.module('modules.dash')
 
 	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 
 		vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.tasks', disable: false},
 			{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.references', disable: false },
@@ -53,10 +53,10 @@ angular.module('modules.dash')
 		$scope.$state = $state;
 
 		vm.logout = function () {
-			$rootScope.userData = null;
+			$rootScope.user = null;
 			$rootScope.token = null;
 			localStorageService.set('token', null);
-			localStorageService.set('userData', null);
+			localStorageService.set('user', null);
 			$state.go('main.public.login');
 		};
 
@@ -72,7 +72,7 @@ angular.module('modules.dash')
 		);
 
 		$scope.$on('change.username', function() {
-			vm.user = localStorageService.get('userData');
+			vm.user = localStorageService.get('user');
 		});
 
 		$rootScope.$broadcast('calc.notif');

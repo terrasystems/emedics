@@ -6,7 +6,7 @@ angular.module('modules.dash')
 	.controller('assignTaskCtrl', function ($uibModalInstance, model, blockUI, alertService, $timeout, http, localStorageService) {
 		var vm = this;
 		vm.model = model;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.Assign = function () {
 			vm.message.stuffId = vm.toUser.id;
 			http.post('private/dashboard/stuff/assignTask', vm.message)

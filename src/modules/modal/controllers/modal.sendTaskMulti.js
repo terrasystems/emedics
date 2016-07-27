@@ -6,7 +6,7 @@ angular.module('modules.dash')
 	.controller('modalSendTaskMultiCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService) {
 		var vm = this;
 		vm.model = model;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.message = {template: model.data.template_id, message: '', patients:[], assignAll: false};
 		vm.patients = [];
 

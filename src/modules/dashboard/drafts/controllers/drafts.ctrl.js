@@ -6,7 +6,7 @@ angular.module('modules.dash')
 	.controller('draftsCtrl', function ($scope, pouchDB, $rootScope, $state, pouch_db, confirmService, alertService,
 										http, blockUI, localStorageService, $q, $uibModal, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.list = [];
 		var base_db = $rootScope.db;
 

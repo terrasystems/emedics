@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('staffInfoCtrl', function ($stateParams, $state, localStorageService) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.staff = $stateParams.staff;
 
 		if (!$stateParams.staff || $stateParams.staff === '' || $stateParams.staff === null) {

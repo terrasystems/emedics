@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('referencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.references = [];
 		vm.search = '';
 

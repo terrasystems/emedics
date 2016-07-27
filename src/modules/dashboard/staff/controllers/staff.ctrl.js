@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('staffCtrl', function(http, blockUI, $state, localStorageService, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.staff = [];
 		vm.search = '';
 
