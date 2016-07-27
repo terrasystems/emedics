@@ -3,7 +3,7 @@
 
 angular.module('modules.dash')
 
-	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO) {
+	.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO, userTypes) {
 		var vm = this;
 		vm.user = localStorageService.get('user');
 
@@ -14,7 +14,7 @@ angular.module('modules.dash')
 			{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.drafts', disable: false}
 	];
 
-		if ('patient'!==vm.user.type) {
+		if (userTypes.patient !==vm.user.userType) {
 			vm.tabData.push({
 				heading: $translate.instant('PATIENTS'),
 				route: 'main.private.dashboard.patients',
@@ -22,8 +22,8 @@ angular.module('modules.dash')
 			});
 		}
 
-		if (vm.user.org == 'true' || vm.user.org == true || vm.user.type == 'stuff') {
-			vm.tabData.push({heading: $translate.instant('STUFF'),
+		if (vm.user.admin || (vm.user.userType === userTypes.staff)) {
+			vm.tabData.push({heading: $translate.instant('STAFF'),
 				route:'main.private.dashboard.staff',
 				disable: false});
 		}
