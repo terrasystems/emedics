@@ -7,4 +7,10 @@ angular.module('modules.core')
 		restUrl: '/api/v2',
 		pagination:10
 
+	})
+	.constant('userTypes', {
+		patient: 'PATIENT',
+		doctor: 'DOCTOR',
+		staff: 'STAFF',
+		org: 'ORG'
 	});

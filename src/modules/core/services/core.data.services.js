@@ -19,28 +19,7 @@ angular.module('modules.core')
 		};
 	})
 
-	.service('alertService', function ($rootScope, toastr) {
-		var alertService = {};
-		alertService.add = function (type, titleText, msg, msgParam) {
-			switch (type) {
-				case 0:
-					type = 'success';
-					toastr.success(msg, titleText, msgParam);
-					break;
-				case 1:
-					type = 'warning';
-					toastr.warning(msg, titleText, msgParam);
-					break;
-				case 2:
-					type = 'danger';
-					toastr.error(msg, titleText, msgParam);
-					break;
-				default:
-					type = 'info';
-					toastr.info(msg, titleText, msgParam);
-					break;
-			}
-		};
+	.service('alertService', function (toastr) {
 		return {
 			success: function (msg, titleText, msgParam) {
 				toastr.success(msg, titleText, msgParam);
@@ -53,9 +32,6 @@ angular.module('modules.core')
 			},
 			info: function (msg, titleText, msgParam) {
 				toastr.info(msg, titleText, msgParam);
-			},
-			add: function (type, titleText, msg, msgParam) {
-				alertService.add(type, titleText, msg, msgParam);
 			}
 		};
 	})
@@ -108,90 +84,7 @@ angular.module('modules.core')
 		};
 	})
 
-
-//Сервис интерцептора запроса, вставляет токен в хедер
-	.service('requestInterceptor', function ($rootScope, $q) {
-		return {
-			'request': function (config) {
-				if ($rootScope.token) {
-					var authToken = $rootScope.token;
-					config.headers['X-Auth-Token'] = authToken;
-					$rootScope.$broadcast('change.username');
-				}
-				return config || $q.when(config);
-			}
-		};
-	})
-
-// Интерцептор для перехвата ошибок
-	.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI, $log) {
-		return {
-			'response': function (response) {
-				//console.log('int.responce: '+response);
-				return response;
-			},
-			'responseError': function (rejection) {
-				//console.log('int.rejection: ' + rejection);
-
-				blockUI.reset();
-
-				switch (rejection.status) {
-					case 401:
-					{
-						$injector.get('$state').go('main.public.login', {reload: true});
-						break;
-					}
-					case 404:
-					{
-						$log.debug(rejection.statusText);
-						break;
-					}
-					default:
-					{
-						//console.log(rejection);
-						break;
-					}
-				}
-				return $q.reject(rejection);
-			}
-		};
-	})
-
-
-	.service('checkUserAuth', function ($location, localStorageService, $rootScope) {
-		var checkUserAuth = function () {
-			var originalPath = $location.path();
-			$location.path('/login');
-			var authToken = localStorageService.get('token');
-			if ((authToken !== undefined) && (authToken !== null)) {
-				$rootScope.token = authToken;
-				$rootScope.userData = localStorageService.get('userData');
-				$location.path(originalPath);
-				return;
-			}
-		};
-		return checkUserAuth;
-	})
-//инициализация параметров для $http запроса
-	.service('initParamsPOST', function () {
-		var paramsPOST = {
-			"page": {
-				"start": 0,
-				"count": 20,
-				"size": 0
-			},
-			"criteria": {
-				"search": '',
-				"list": []
-			}
-		};
-		return {
-			'params': paramsPOST
-		};
-	})
-
-
-//инициализация параметров для $http запроса
+//init data transfer objects to sent to server
 	.factory('DTO', function (constants) {
 		function criteriaDTO() {
 			return {
@@ -406,7 +299,7 @@ angular.module('modules.core')
 	})
 
 //
-	.service('forEditTask', function ($q, http, blockUI, $base64, $translate, pouch_db, $rootScope) {
+/*	.service('forEditTask', function ($q, http, blockUI, $base64, $translate, pouch_db, $rootScope) {
 		var getModelForEdit = function (getUrl, id) {
 			var deferred = $q.defer();
 			var data = {
@@ -493,4 +386,5 @@ angular.module('modules.core')
 		return {
 			getModel: getModelForEdit
 		};
-	});
+	})*/
+;

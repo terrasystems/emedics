@@ -2,7 +2,7 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.core')
-	.service('regFields', function ($translate) {
+	.service('regFields', function ($translate, userTypes) {
 		var baseFields =
 			[
 				{
@@ -33,7 +33,7 @@ angular.module('modules.core')
 				},
 				{
 					className: 'col-md-12',
-					key: 'user.birth',
+					key: 'user.dob',
 					type: 'datepicker',
 					templateOptions: {
 						type: 'text',
@@ -75,7 +75,7 @@ angular.module('modules.core')
 			},
 				{
 					className: 'col-md-12',
-					key: 'user.password',
+					key: 'user.pass',
 					type: 'input',
 					templateOptions: {
 						type: 'password',
@@ -121,7 +121,7 @@ angular.module('modules.core')
 			return baseFields.concat([
 				{
 					className: 'col-md-12',
-					key: 'user.doctype',
+					key: 'user.type',
 					type: 'select',
 					templateOptions: {
 						required: true,
@@ -165,7 +165,7 @@ angular.module('modules.core')
 				},
 				{
 					className: 'col-md-12',
-					key: 'user.orgtype',
+					key: 'user.type',
 					type: 'select',
 					templateOptions: {
 						required: true,

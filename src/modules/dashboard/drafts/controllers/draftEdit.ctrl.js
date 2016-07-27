@@ -1,7 +1,7 @@
 'use strict';
 /*jshint -W117, -W097, -W116*/
 angular.module('modules.dash')
-	.controller('draftEditCtrl', function ($stateParams, $state, $scope, alertService, $translate, $rootScope, pouch_db, forEditTask) {
+	.controller('draftEditCtrl', function ($stateParams, $state, $scope, alertService, $translate, $rootScope, pouch_db) {
 		var vm = this;
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
@@ -11,7 +11,7 @@ angular.module('modules.dash')
 
 		vm.data = { sections: [], options: [], model: [], sectionsName: [], selectedSection: '', selectedKey: '', editModel: {}, formInfo: {} };
 
-		forEditTask.getModel('', $stateParams.id)
+/*		forEditTask.getModel('', $stateParams.id)
 			.then(function(res) {
 				vm.data = res;
 
@@ -22,12 +22,12 @@ angular.module('modules.dash')
 						}
 					}
 				});
-			});
+			});*/
 
 		vm.onSaveDraft = function() {
 			pouch_db.save($rootScope.db, $stateParams.id, vm.data.formInfo, vm.data.model)
 				.then(function() {
-					alertService.add(0, 'Saved - Ok!');
+					alertService.success('Saved - Ok!');
 					$state.go('^');
 				});
 		};

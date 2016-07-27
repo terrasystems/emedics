@@ -3,7 +3,7 @@
 angular.module('modules.dash')
 	.controller('tasksEditCtrl', function ($uibModal, http, $q, $stateParams, $state, localStorageService, blockUI,
                                          $scope, alertService, $timeout, $translate, $base64, confirmService,
-                                         $rootScope, forEditTask, DTO) {
+                                         $rootScope, DTO) {
 
 		//if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
 		//	$state.go('main.private.dashboard.tasks');
@@ -142,7 +142,7 @@ angular.module('modules.dash')
 						http.get('/tasks/close/' + vm.taskId)
 							.then(function (res) {
 								blockUI.stop();
-								alertService.add(0, res.state.message);
+								alertService.success(res.state.message);
 							});
 					}
 				});

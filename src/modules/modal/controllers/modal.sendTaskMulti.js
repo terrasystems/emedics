@@ -44,7 +44,7 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-						alertService.add(0, res.state.message);
+						alertService.success(res.state.message);
 					}
 					$uibModalInstance.close(res);
 				}, function (error) {

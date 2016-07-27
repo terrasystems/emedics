@@ -65,7 +65,7 @@ angular.module('modules.dash')
 			http.get('/references/add/'+ id)  // !!!!!references
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
+					alertService.success(res.state.message);
 				});
 		};
 

@@ -180,7 +180,7 @@ angular.module('modules.dash')
 							.then(function (res) {
 								blockUI.stop();
 								if (res.result) {
-									alertService.add(0, res.state.message);
+									alertService.success(res.state.message);
 									newTaskID = res.result.id;
 									$state.go('main.private.dashboard.patients.editor', {
 										id: newTaskID,
@@ -190,7 +190,7 @@ angular.module('modules.dash')
 								}
 							});
 					} else {
-						alertService.add(2, res.state.message);
+						alertService.error(res.state.message);
 					}
 				});
 		};
@@ -232,7 +232,7 @@ angular.module('modules.dash')
 					http.get('/task/close/' + task_id)
 						.then(function (res) {
 							blockUI.stop();
-							alertService.add(0, res.state.message);
+							alertService.success(res.state.message);
 							vm.OpenStaff(staff_id);
 						});
 				});

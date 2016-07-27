@@ -48,7 +48,7 @@ angular.module('modules.dash')
 			http.get('/references/remove/'+id_)   /* references!!!!  */
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
+					alertService.success(res.state.message);
 					vm.getPatients(vm.temp_);
 				});
 		};

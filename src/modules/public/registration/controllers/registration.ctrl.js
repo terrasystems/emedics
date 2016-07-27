@@ -2,7 +2,7 @@
 	"use strict";
 	/*jshint -W117, -W097, -W089, -W061*/
 	angular.module('modules.public')
-		.controller('registrationCtrl', function (regFields, $translate, DTO, http,$state) {
+		.controller('registrationCtrl', function (regFields, $translate, DTO, http,$state, userTypes) {
 			var vm = this;
 			vm.reg = {};
 			vm.resetAllForms = invokeOnAllFormOptions.bind(null, 'resetModel');
@@ -24,7 +24,7 @@
 					title: $translate.instant('PATIENT'),
 					active: true,
 					index : 0,
-					type: 'pat',
+					type: userTypes.patient,
 					form: {
 						options: {},
 						model: vm.reg,
@@ -35,7 +35,7 @@
 					title: $translate.instant('DOCTOR'),
 					active: false,
 					index : 1,
-					type: 'doc',
+					type: userTypes.doctor,
 					form: {
 						options: {},
 						model: vm.reg,
@@ -46,7 +46,7 @@
 					title: $translate.instant('ORGANIZATION'),
 					active: false,
 					index : 2,
-					type: 'org',
+					type: userTypes.org,
 					form: {
 						options: {},
 						model: vm.reg,
@@ -54,37 +54,40 @@
 					}
 				}
 			];
-			//getTypes('doc');
-			//getTypes('org');
+			getTypes(userTypes.doctor);
+			getTypes(userTypes.org);
 
 			function getTypes(type) {
 
-				if (!_.includes(['doc', 'org'], type))
+				if (!_.includes([userTypes.doctor, userTypes.org], type))
 					return;
 
 				var criteriaDTO = DTO.criteriaDTO();
 				criteriaDTO.type = type;
 
-				function insertTypes(index, type, res) {
+				function insertTypes(index, res) {
 					_.each(vm.tabs[index].form.fields, function (field) {
-						if ('user.' + type + 'type' === field.key)
-							field.templateOptions.options = res;
+						if ('user.type' === field.key)
+							field.templateOptions.options = _.map(res, function (item) {
+								item.value = {id: item.id, name: item.name, userType: item.userType};
+								return item;
+							});
 					});
 				};
 
-				http.post('/type/all', criteriaDTO)
+				http.post('/types/all', criteriaDTO)
 					.then(function (res) {
-						if ('doc' === type)
-							insertTypes(1, type, res.result)
+						if (userTypes.doctor === type)
+							insertTypes(1, res.result)
 						else
-							insertTypes(2, type, res.result);
+							insertTypes(2, res.result);
 					});
 
 			};
 
 			vm.onSubmit = function () {
 
-				vm.userDTO = DTO.mergeDTO(DTO.userDTO(), vm.reg[vm.tabs[vm.active].type].user);
+				vm.userDTO = DTO.mergeDTO(DTO.userDTO(), vm.reg.user);
 				vm.userDTO.userType = vm.tabs[vm.active].type;
 				if ('org'=== vm.tabs[vm.active].type)
 					vm.reg[vm.tabs[vm.active].type].user.isAdmin = true;

@@ -52,7 +52,7 @@ angular.module('modules.public', [])
 			http.post('public/login', paramsPOST).then(function (res) {
 				blockUI.stop();
 				auth.saveUserData(res);
-				alertService.add(0, '', res.state.message, '');
+				alertService.success(res.state.message);
 				$timeout(function () {
 					$state.go('main.private.dashboard.tasks');
 				}, 0);
@@ -152,7 +152,7 @@ angular.module('modules.public', [])
 			http.post('public/registration', paramsPOST).then(function (res) {
 				blockUI.stop();
 				auth.saveUserData(res);
-				alertService.add(0, '', res.state.message, '');
+				alertService.success(res.state.message);
 				$timeout(function () {
 					$state.go('main.public.login');
 				}, 0);
@@ -209,7 +209,7 @@ angular.module('modules.public', [])
 			http.post('public/reset_pass', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, '', res.state.message, '');
+					alertService.success(res.state.message);
 					$timeout(function () {
 						$state.go('main.public.login');
 					}, 500);
@@ -283,7 +283,7 @@ angular.module('modules.public', [])
 			http.post('public/changePassword', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, '', res.state.message, '');
+					alertService.success(res.state.message);
 					$timeout(function () {
 						$state.go('main.public.login');
 					}, 500);
