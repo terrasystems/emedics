@@ -5,7 +5,7 @@ var eMedics = angular.module('eMedics', ['ui.router', 'ui.bootstrap', 'formly', 
 	'blockUI', 'toastr', 'LocalStorageModule','xeditable', 'pascalprecht.translate', 'base64', /*'ngMockE2E',*/ 'pouchdb',
 	'ui.select','ngSanitize','ui.router.tabs', 'angular-confirm',
 	//--
-	'modules.core', 'modules.public', 'modules.dash', 'modules.modal']);
+	'modules.core', 'modules.auth', 'modules.dash', 'modules.modal']);
 
 
 eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
@@ -56,26 +56,26 @@ eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyC
 
 	});
 
-	//$httpBackend.whenGET(/^modules\//).passThrough();
-	//$httpBackend.whenGET(/^i18n\//).passThrough();
-	//$httpBackend.whenGET(/rest\/public\/.*/).passThrough();
-	//$httpBackend.whenPOST(/rest\/public\/.*/).passThrough();
-	//$httpBackend.whenGET(/rest\/private\/.*/).passThrough();
-	//$httpBackend.whenPOST(/rest\/private\/.*/).passThrough();
+/*	$httpBackend.whenGET(/^modules\//).passThrough();
+	$httpBackend.whenGET(/^i18n\//).passThrough();
+	$httpBackend.whenGET(/rest\/public\/.*!/).passThrough();
+	$httpBackend.whenPOST(/rest\/public\/.*!/).passThrough();
+	$httpBackend.whenGET(/rest\/private\/.*!/).passThrough();
+	$httpBackend.whenPOST(/rest\/private\/.*!/).passThrough();
 
-	//$httpBackend.whenGET(/template_user\.list/).respond(function () {
-	//	console.log('... mock "template_user.list"');
-	//	return [200, {state: {value: true, message: 'MSG_'}, result: constants.myForms }, {}];
-	//});
-    //
-	//$httpBackend.whenGET(/template_user\.delete/).respond(function () {
-	//	console.log('... mock "template_user.delete"');
-	//	return [200, {state: {value: true, message: 'MSG_'}, result: [] }, {}];
-	//});
-    //
-	//$httpBackend.whenGET(/template\.list/).respond(function () {
-	//	console.log('... mock "template.list"');
-	//	return [200, {state: {value: true, message: 'MSG_'}, result: constants.formTemplate }, {}];
-	//});
+	$httpBackend.whenGET(/template_user\.list/).respond(function () {
+		console.log('... mock "template_user.list"');
+		return [200, {state: {value: true, message: 'MSG_'}, result: constants.myForms }, {}];
+	});
+
+	$httpBackend.whenGET(/template_user\.delete/).respond(function () {
+		console.log('... mock "template_user.delete"');
+		return [200, {state: {value: true, message: 'MSG_'}, result: [] }, {}];
+	});
+
+	$httpBackend.whenGET(/template\.list/).respond(function () {
+		console.log('... mock "template.list"');
+		return [200, {state: {value: true, message: 'MSG_'}, result: constants.formTemplate }, {}];
+	});*/
 
 });
