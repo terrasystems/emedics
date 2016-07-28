@@ -20,7 +20,7 @@
 					var originalPath = $location.path();
 					$location.path('/login');
 					var authToken = localStorageService.get('token');
-					if ((authToken !== undefined) && (authToken !== null)) {
+					if (authToken) {
 						$rootScope.token = authToken;
 						$rootScope.user = localStorageService.get('user');
 						$location.path(originalPath);
@@ -34,8 +34,7 @@
 			return {
 				'request': function (config) {
 					if ($rootScope.token) {
-						var authToken = $rootScope.token;
-						config.headers['X-Auth-Token'] = authToken;
+						config.headers['X-Auth-Token'] = $rootScope.token;
 						$rootScope.$broadcast('change.username');
 					}
 					return config || $q.when(config);
