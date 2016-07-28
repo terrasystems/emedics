@@ -63,7 +63,7 @@
 			},
 			{
 				name: 'main.auth.resetpassword',
-				url: '/confirm',
+				url: '/resetpassword',
 				views: {
 					'content@main': {
 						templateUrl: 'modules/auth/resetpassword/views/resetpassword.html',
@@ -72,16 +72,19 @@
 					parent: 'main.auth'
 				},
 				params: {
-					key: ''
+					key: null
 				}
 			},
 			{
 				name: 'main.auth.validationkey',
 				url: 'validationkey/:key',
-				onEnter: function ($stateParams, http, $state) {
-					http.get('public/validation_key/' + $stateParams.key)
+				onEnter: function ($stateParams, http, $state, $log) {
+					http.get('/auth/check_key/' + $stateParams.key)
 						.then(function () {
-							$state.go('main.auth.newpassword.confirm', {key: $stateParams.key});
+							$state.go('main.auth.resetpassword', $stateParams);
+						}, function (error) {
+							$log.debug(error);
+							$state.go('main.auth.login');
 						});
 				},
 				parent: 'main.auth'

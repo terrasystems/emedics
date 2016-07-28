@@ -62,7 +62,7 @@
 					switch (rejection.status) {
 						case 401:
 						{
-							$injector.get('$state').go('main.public.login', {reload: true});
+							$injector.get('$state').go('main.auth.login', {reload: true});
 							break;
 						}
 						case 404:

@@ -154,7 +154,7 @@ angular.module('modules.auth')
 				auth.saveUserData(res);
 				alertService.success(res.state.message);
 				$timeout(function () {
-					$state.go('main.public.login');
+					$state.go('main.auth.login');
 				}, 0);
 			});
 		};
@@ -211,12 +211,12 @@ angular.module('modules.auth')
 					blockUI.stop();
 					alertService.success(res.state.message);
 					$timeout(function () {
-						$state.go('main.public.login');
+						$state.go('main./auth.login');
 					}, 500);
 				}, function () {
 					blockUI.stop();
 					$timeout(function () {
-						$state.go('main.public.login');
+						$state.go('main./auth.login');
 					}, 500);
 				});
 		};
@@ -227,7 +227,7 @@ angular.module('modules.auth')
 	.controller('confirmNewPasswordCtrl1111', function ($state, $timeout, http, blockUI, alertService, $translate, $stateParams) {
 		var vm = this;
 		if (!$stateParams.key) {
-			$state.go('main.public.login');
+			$state.go('main./auth.login');
 			return;
 		}
 		vm.newPass = {};
@@ -280,17 +280,17 @@ angular.module('modules.auth')
 			};
 
 			blockUI.start();
-			http.post('public/changePassword', paramsPOST)
+			http.post('/auth/changePassword', paramsPOST)
 				.then(function (res) {
 					blockUI.stop();
 					alertService.success(res.state.message);
 					$timeout(function () {
-						$state.go('main.public.login');
+						$state.go('main.auth.login');
 					}, 500);
 				}, function () {
 					blockUI.stop();
 					$timeout(function () {
-						$state.go('main.public.login');
+						$state.go('main.auth.login');
 					}, 500);
 				});
 		};
