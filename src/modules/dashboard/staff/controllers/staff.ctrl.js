@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('staffCtrl', function(http, blockUI, $state, localStorageService, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.staff = [];
 		vm.search = '';
 
@@ -29,11 +29,11 @@ angular.module('modules.dash')
 		vm.getStaff('');
 
 		vm.onOpenStuf = function (staf_) {
-			$state.go('main.private.dashboard.abstract.staff.info', {staff: staf_});
+			$state.go('main.private.dashboard.staff.info', {staff: staf_});
 		};
 
 		vm.onEdit = function (id_) {
-			$state.go('main.private.dashboard.abstract.staff.editor', {id: id_});
+			$state.go('main.private.dashboard.staff.editor', {id: id_});
 		};
 
 	});

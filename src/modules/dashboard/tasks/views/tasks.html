@@ -1,215 +1,80 @@
 <div class="ui-list-view">
 	<uib-tabset>
 
-		<uib-tab ng-click="vm.allTasks()" index="0" heading="New">
-			<!-- filters -->
-			<div class="pad" ng-include="'modules/dashboard/tasks/views/filters.html'" ng-if="vm.user.type !== 'patient'">
-				<!-- filters include here-->
-			</div>
-
-			<section ng-if="vm.user.type === 'patient'">
-				<div class="container ui-list-view">
-					<table class="table table-hover">
-						<thead>
-						<tr>
-							<th translate="DATE"></th>
-							<th translate="NUMBER"></th>
-							<th translate="NAME"></th>
-							<th translate="STATUS"></th>
-							<th translate="DESCRIPTION"></th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
-							<td>{{vm.convertDateTime(form.date)}}</td>
-							<td>{{form.template.number}}</td>
-							<td>{{form.template.name}}</td>
-							<td>{{form.status}}</td>
-							<td>{{form.template.descr}}</td>
-						</tr>
-						</tbody>
-					</table>
-					<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
-				</div>
-			</section>
-			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
-				<div class="container ui-list-view">
-					<table class="table table-hover header-fixed3">
-						<thead>
-						<tr>
-							<th translate="DATE"></th>
-							<!--<th translate="NUMBER"></th>-->
-							<th translate="PATIENT_NAME"></th>
-							<th translate="FORM_TASKS"></th>
-							<th translate="STATUS"></th>
-							<th translate="DESCRIPTION"></th>
-							<th translate="ACTION" ng-if="vm.hideAdminTasks;"></th>
-						</tr>
-						</thead>
-
-						<tbody>
-						<tr ng-click="vm.onClickNew(form.id)" ng-repeat="form in vm.list track by $index">
-							<td>{{vm.convertDateTime(form.date)}}</td>
-							<!--<td>{{form.template.number}}</td>-->
-							<td>{{form.patient.username}}</td>
-							<td>{{form.template.name}}</td>
-							<td>{{form.status}}</td>
-							<td>{{form.template.descr}}</td>
-							<td ng-if="vm.hideAdminTasks;">
-								<div class="btn-group btn-group-xs">
-									<button style="float: right" class="btn btn-success btn-small"
-											ng-click="vm.onAssignTask(form.id, vm.stafs, $event)"><span
-											translate="ASSIGN"></span></button>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-
-					</table>
-					<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
-				</div>
-			</section>
-
+		<uib-tab ng-click="vm.changeTab(0)" index="0" heading="New">
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/tasks.list.html'"></div>
 		</uib-tab>
 
-		<uib-tab ng-click="vm.onRefreshAdminTasks();" index="1" heading="Stuff" ng-if="vm.hideAdminTasks;">
-			<section >
-				<div class="container ui-list-view">
-					<div ng-show="vm.stafs.length == 0" class=""> <h5 class="noData_msg"> You don't have any stuff</h5></div>
+		<uib-tab ng-click="vm.staffInfo();" index="1" heading="Staff" ng-if="vm.hideAdminTasks">
+			<!--<section >-->
+			<!--<div class="container ui-list-view">-->
+			<!--<div ng-show="vm.stafs.length == 0" class=""> <h5 class="noData_msg"> You don't have any stuff</h5></div>-->
 
-					<uib-accordion>
-						<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">
+			<!--<uib-accordion>-->
+			<!--<uib-accordion-group ng-repeat="staf in vm.stafs"  is-open="staf.status.open">-->
 
-							<uib-accordion-heading>
-								<div ng-click="vm.onOpenStaff(staf.id)">
-									<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>
-									<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}
-									<label class="control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}
-									<label class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}
-								</div>
-							</uib-accordion-heading>
+			<!--<uib-accordion-heading>-->
+			<!--<div ng-click="vm.OpenStaff(staf.id)">-->
+			<!--<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': staf.status.open, 'glyphicon-chevron-right': !staf.status.open}"></i>-->
+			<!--<label class="control-label"><span translate="NAME"></span>:</label>{{staf.firstName}} {{staf.lastName}}-->
+			<!--<label class="control-label"><span translate="BIRTH_DATE"></span>:</label>{{vm.convertDate(staf.birth)}}-->
+			<!--<label class="control-label"><span translate="PHONE"></span>:</label>{{staf.phone}}-->
+			<!--</div>-->
+			<!--</uib-accordion-heading>-->
+			<!--<uib-accordion>-->
+			<!--<uib-accordion-group ng-repeat="item in vm.tasks" is-open="item.status.open">-->
 
-							<uib-accordion>
-								<uib-accordion-group ng-repeat="item in vm.tasks" is-open="item.status.open">
+			<!--<uib-accordion-heading>-->
+			<!--<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></i>-->
+			<!--<label class="control-label"><span translate="NAME"></span>:</label>{{item.name}}-->
+			<!--</uib-accordion-heading>-->
 
-									<uib-accordion-heading>
-										<i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></i>
-										<label class="control-label"><span translate="NAME"></span>:</label>{{item.name}}
-									</uib-accordion-heading>
+			<!--<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">-->
+			<!--<button style="float: right" class="btn btn-success" ng-click="vm.onCloseTask(hist.id,staf.id)"><span translate="CLOSE_TASK"></span></button>-->
+			<!--<button style="float: right" class="btn btn-info" ng-click="vm.onEditAdminTask(hist.id)"><span translate="EDIT"></span></button>-->
 
-									<div ng-repeat="hist in item.events" style="border-top: 1px solid #ddd;">
-										<button style="float: right" class="btn btn-success" ng-click="vm.onCloseTask(hist.id,staf.id)"><span translate="CLOSE_TASK"></span></button>
-										<button style="float: right" class="btn btn-info" ng-click="vm.onEditAdminTask(hist.id)"><span translate="EDIT"></span></button>
+			<!--<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDateTime(hist.date)}}</p>-->
+			<!--<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username || '(none)'}}</p>-->
+			<!--<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{hist.template.name}}</p>-->
+			<!--<p><label class="col-sm-3 control-label"><span translate="STATUS"></span>: </label>{{hist.status}}</p>-->
+			<!--</div>-->
 
-										<p><label class="col-sm-3 control-label"><span translate="DATE"></span>: </label>{{vm.convertDateTime(hist.date)}}</p>
-										<p><label class="col-sm-3 control-label"><span translate="FROM"></span>: </label>{{hist.fromUser.username || '(none)'}}</p>
-										<p><label class="col-sm-3 control-label"><span translate="NAME"></span>: </label>{{hist.template.name}}</p>
-										<p><label class="col-sm-3 control-label"><span translate="STATUS"></span>: </label>{{hist.status}}</p>
-									</div>
+			<!--</uib-accordion-group>-->
+			<!--</uib-accordion>-->
 
-								</uib-accordion-group>
-							</uib-accordion>
+			<!--<div ng-if="vm.tasks.length==0" class="text-center">-->
+			<!--<span><h4><span translate="NO_DATA"></span></h4></span>-->
+			<!--</div>-->
 
-							<div ng-if="vm.tasks.length==0" class="text-center">
-								<span><h4><span translate="NO_DATA"></span></h4></span>
-							</div>
+			<!--</uib-accordion-group>-->
+			<!--</uib-accordion>-->
 
-						</uib-accordion-group>
-					</uib-accordion>
+			<!--</div>-->
+			<!--</section>-->
 
-				</div>
-			</section>
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th translate="F1_SAA_1CLIENT"></th>
+					<th translate="DOC_TYPE"></th>
+				</tr>
+				</thead>
+				<tbody ng-click="vm.staffEdit(staff.id)" ng-repeat="staff in vm.staffList track by $index">
+				<tr>
+					<td>Jill</td>
+					<td>Doc</td>
+
+				</tr>
+				</tbody>
+			</table>
 		</uib-tab>
 
-		<uib-tab ng-click="vm.GetHistory();" index="2" heading="History">
-
-			<div class="pad" ng-include="'modules/dashboard/tasks/views/filtersHistory.html'" ng-if="vm.user.type !== 'patient'">
-				<!-- filters include here-->
-			</div>
-
-			<section ng-if="vm.user.type === 'patient'">
-				<div class="container ui-list-view">
-
-					<table class="table table-hover">
-						<thead>
-						<tr>
-							<th translate="DATE"></th>
-							<th translate="NUMBER"></th>
-							<th translate="NAME"></th>
-							<th translate="DESCRIPTION"></th>
-							<th translate="ACTION"></th>
-						</tr>
-						</thead>
-
-						<tbody>
-						<tr ng-repeat="form in vm.history track by $index">
-							<td>{{vm.convertDateTime(form.date)}}</td>
-							<td>{{form.template.number}}</td>
-							<td>{{form.template.name}}</td>
-							<td>{{form.template.descr}}</td>
-							<td>
-								<div class="btn-group btn-group-xs">
-									<button style="float: right" class="btn btn-success btn-small"
-											ng-click="vm.onSendHistory(form.template, form)"><span
-											translate="SEND"></span></button>
-									<button style="float: right" class="btn btn-info btn-small"
-											ng-click="vm.onViewHistory(form.id, form.patient.id)"><span
-											translate="VIEW"></span></button>
-									<button style="float: right" class="btn btn-info btn-small"
-											ng-click="vm.onCopyHistory(form, form.patient.id)"><span
-											translate="COPY_TASK"></span></button>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-					<div ng-show="vm.history.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
-				</div>
-			</section>
-			<section ng-if="vm.user.type === 'doctor' || vm.user.type === 'stuff'">
-				<div class="container ui-list-view">
-					<table class="table table-hover header-fixed3">
-						<thead>
-						<tr>
-							<th translate="DATE"></th>
-							<th translate="NUMBER"></th>
-							<th translate="PATIENT_NAME"></th>
-							<th translate="FORM_TASKS"></th>
-							<th translate="DESCRIPTION"></th>
-							<th translate="ACTION"></th>
-						</tr>
-						</thead>
-
-						<tbody>
-						<tr ng-click="vm.onClick(form.id)" ng-repeat="form in vm.history track by $index">
-							<td>{{vm.convertDateTime(form.date)}}</td>
-							<td>{{form.template.number}}</td>
-							<td>{{form.patient.username}}</td>
-							<td>{{form.template.name}}</td>
-							<td>{{form.template.descr}}</td>
-							<td>
-								<div class="btn-group btn-group-xs">
-									<button style="float: right" class="btn btn-success btn-small"
-											ng-click="vm.onSendHistory(form.template, form)"><span
-											translate="SEND"></span></button>
-									<button style="float: right" class="btn btn-info btn-small"
-											ng-click="vm.onViewHistory(form.id, form.patient.id)"><span
-											translate="VIEW"></span></button>
-									<button style="float: right" class="btn btn-info btn-small"
-											ng-click="vm.onCopyHistory(form, form.patient.id)"><span
-											translate="COPY_TASK"></span></button>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-
-					</table>
-					<div ng-show="vm.history.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
-				</div>
-			</section>
-
+		<uib-tab ng-click="vm.changeTab(2);" index="2" heading="History">
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/tasks.list.html'"></div>
 		</uib-tab>
 
-		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success" ng-click="vm.onCreateTask();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="CREATE"></span></button>
+		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success"
+				ng-click="vm.CreateTask();"><i class="glyphicon glyphicon-plus-sign"></i> <span
+				translate="CREATE"></span></button>
 	</uib-tabset>
 </div>

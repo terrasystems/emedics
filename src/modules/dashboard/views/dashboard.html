@@ -1,18 +1,18 @@
 <div id="header">
 	<div class="col-md-10 settings">
-		<h2 class="" ng-show="$state.includes('main.private.dashboard.abstract.settings')"><span translate="SETTINGS"></span></h2>
+		<h2 class="" ng-show="$state.includes('main.private.dashboard.settings')"><span translate="SETTINGS"></span></h2>
 	</div>
 
 	<div class="btn-group pull-rigth header_settings" uib-dropdown is-open="status.isopen">
 
 		<button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
-			<span translate="HELLO"></span>{{vm.user.type.toUpperCase()}}
-			({{vm.user.username}})
+			<span translate="HELLO"></span>{{vm.user.userType.toUpperCase()}}
+			({{vm.user.name}})
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 
-			<li><a ui-sref="main.private.dashboard.abstract.settings"><span translate="SETTINGS"></span></a></li>
+			<li><a ui-sref="main.private.dashboard.settings"><span translate="SETTINGS"></span></a></li>
 			<li><a class="black-clr " ng-click="vm.logout()"><span translate="LOGOUT"></span></a></li>
 
 		</ul>
@@ -24,6 +24,8 @@
 <div class="container">
 	<div class="row">
 
-		<ui-view  name="dashboard@content"></ui-view>
+		<!--<ui-view  name="dashboard@content"></ui-view>-->
+		<tabs data="vm.tabData" type="pills" ></tabs>
+		<ui-view name="forms@dashboard"></ui-view>
 	</div>
 </div>

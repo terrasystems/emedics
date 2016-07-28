@@ -1,0 +1,83 @@
+<uib-tabset active="activeForm">
+
+	<uib-tab index="0" heading="{{'CHANGE_INFO' | translate}}">
+		<div class="container form-list">
+			<div class="row">
+				<div class="col-md-12 form-group ">
+						<button class="btn btn-primary" ui-sref="main.private.dashboard.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;"></span></button>
+
+						<form ng-submit="vm.onSave()" name="vm.settingsForm" novalidate>
+							<formly-form  model="vm.settings_model" fields="vm.settings_fields" form="vm.settingsForm" options="vm.settings_options">
+								<button type="submit"
+										class="btn btn_submit btn-default login-button submit-button"
+										ng-disabled="vm.settingsForm.$invalid" translate="SAVE">
+								</button>
+								<button ng-click="vm.cleanCache()" class="btn btn-primary">Clean all Drafts</button>
+							</formly-form>
+						</form>
+
+				</div>
+			</div>
+
+		</div>
+	</uib-tab>
+
+	<uib-tab index="2" heading="{{'CHANGE_PASS' | translate}}">
+		<div class="container form-list">
+			<div class="row ">
+				<div class="col-md-12 form-group  ">
+					<button class="btn btn-primary" ui-sref="main.private.dashboard.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;"></span></button>
+
+					<form name="infoForm">
+
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="OLD_PASS"></span>
+							<input ng-model="vm.changedPass.oldPass"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'OLD_PASS2' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="NEW_PASS"></span>
+							<input ng-model="vm.changedPass.newPass"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'NEW_PASS2' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<div class="input-group input-group-md info">
+							<span class="input-group-addon" id="sizing-addon11" translate="CONFIRM"></span>
+							<input ng-model="vm.PassConfirm.confirm"
+								   type="password"
+								   class="form-control"
+								   placeholder="{{'CONFIRM_PASS' | translate}}"
+								   aria-describedby="sizing-addon3"
+								   required>
+						</div>
+						<button ng-click="vm.onChangePass();"
+								ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid"
+								type="submit"
+								class="btn btn-success pull-right">
+							<span translate="CHANGE"></span>
+						</button>
+						<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm" translate="CONFIRM_PASS2"></span>
+
+					</form>
+				</div>
+			</div>
+			<a ui-sref="main.private.dashboard.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;" translate="BACK_DASH"></span></a>
+		</div>
+
+	</uib-tab>
+</uib-tabset>
+
+
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+	</div>
+</script>

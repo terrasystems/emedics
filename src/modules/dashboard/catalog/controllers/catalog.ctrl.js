@@ -5,10 +5,34 @@ angular.module('modules.dash')
 
 	.controller('catalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
 		var vm = this;
-		vm.userType = localStorageService.get('userData');
+		vm.userType = localStorageService.get('user');
 		vm.FormTemplate = [];
 		vm.myForms = [];
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
+		vm.filter = DTO.catalogFilter();
+
+		function selectAll() {
+			var countTrue = 0, keys;
+
+			function checkAll(check) {
+				vm.filter.all = check;
+				_.each(keys, function (key) {
+					vm.filter[key] = check;
+				});
+			};
+
+			keys = _.difference(Object.keys(vm.filter), ['search', 'all']);
+
+			_.each(keys, function (key) {
+				countTrue += vm.filter[key] ? 1 : 0;
+			});
+			if (countTrue < keys.length) {
+				checkAll(true);
+			} else {
+				checkAll(false)
+			}
+		}
+
 		//vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
 
 		//vm.filter_ = {};
@@ -197,7 +221,7 @@ angular.module('modules.dash')
 				});
 		};
 
-		vm.remove = function (id) {
+		vm.Remove = function (id) {
 			http.get('/mytemplates/remove' + id)
 				.then(function (res) {
 					vm.getMyTemplates();
@@ -233,7 +257,7 @@ angular.module('modules.dash')
 		//		};
 		//		var result = $uibModal.open(config);
 		//		result.result.then(function () {
-		//			$state.go('main.private.dashboard.abstract.catalog');
+		//			$state.go('main.private.dashboard.catalog');
 		//		});
 		//	}
 		//};

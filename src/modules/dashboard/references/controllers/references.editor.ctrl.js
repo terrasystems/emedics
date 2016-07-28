@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 
 		vm.tabPatient = function() {
 			vm.referencesDTO = DTO.referencesDTO();
@@ -21,7 +21,7 @@ angular.module('modules.dash')
 			http.post('/references/create', vm.referencesDTO)
 				.then(function () {
 					blockUI.stop();
-					$state.go('main.private.dashboard.abstract.references');
+					$state.go('main.private.dashboard.references');
 				});
 		};
 

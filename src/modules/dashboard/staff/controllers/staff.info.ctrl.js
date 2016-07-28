@@ -4,11 +4,11 @@
 angular.module('modules.dash')
 	.controller('staffInfoCtrl', function ($stateParams, $state, localStorageService) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.staff = $stateParams.staff;
 
 		if (!$stateParams.staff || $stateParams.staff === '' || $stateParams.staff === null) {
-			$state.go('main.private.dashboard.abstract.staff');
+			$state.go('main.private.dashboard.staff');
 			return;
 		}
 
@@ -19,7 +19,7 @@ angular.module('modules.dash')
 		}
 
 		vm.onReturn = function() {
-			$state.go('main.private.dashboard.abstract.staff');
+			$state.go('main.private.dashboard.staff');
 		};
 
 		vm.convertDate = function (d) {
@@ -28,7 +28,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onEdit = function () {
-			$state.go('main.private.dashboard.abstract.staff.editor', {id: vm.staff.id});
+			$state.go('main.private.dashboard.staff.editor', {id: vm.staff.id});
 		};
 
 	});

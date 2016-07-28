@@ -1,0 +1,20 @@
+<div class="row ">
+	<div class="content_modal">
+
+		<!--<pre></pre>-->
+		<label>Assign to:</label>
+		<form name="myStuffs">
+			<input style="height: 35px" class="col-md-11 col-lg-11 col-sm-10 col-xs-9" type="text"
+				   ng-model="vm.references"
+				   placeholder="{{'Search references ...' | translate}}"
+				   uib-typeahead="item as item.all for item in vm.model.data.stafs | filter:vm.toUser"
+				   typeahead-loading="loadingLocations"
+				   typeahead-editable="true"
+				   class="form-control">
+		</form>
+
+		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-warning" ng-disabled="!(vm.toUser.id)" ng-click="vm.Assign();">Assign</button>
+	</div>
+</div>
+
+

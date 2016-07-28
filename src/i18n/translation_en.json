@@ -52,7 +52,7 @@
   	"CREATE": "Create",
   	"CLEAR": "Clear",
 	"DOCTOR": "Doctor",
-  	"DOC_TYPE": "Type doctor",
+  	"DOC_TYPE": "Doctor type",
 	"DESCRIPTION":"Description",
 	"DATE":"Date/Time",
 	"DECLINE": "Decline",

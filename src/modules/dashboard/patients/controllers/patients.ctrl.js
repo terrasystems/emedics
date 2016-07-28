@@ -45,10 +45,10 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('/patients/remove/'+id_)
+			http.get('/references/remove/'+id_)   /* references!!!!  */
 				.then(function (res) {
 					blockUI.stop();
-					alertService.add(0, res.state.message);
+					alertService.success(res.state.message);
 					vm.getPatients(vm.temp_);
 				});
 		};
@@ -58,7 +58,7 @@ angular.module('modules.dash')
 				$event.stopPropagation();
 				$event.preventDefault();
 			}
-			http.get('/patients/invite/' + id)
+			http.get('/references/invite/' + id)  /* references!!!!  */
 				.then(function (res) {
 					blockUI.stop();
 					if  (res.state) {
@@ -69,7 +69,7 @@ angular.module('modules.dash')
 		};
 
 		vm.onOpenPatientsTemplates = function (id_, name_, email_, phone_) {
-			$state.go('main.private.dashboard.abstract.patients.templates', {id: id_, name: name_, email: email_, phone: phone_});
+			$state.go('main.private.dashboard.user.templates', {id: id_, name: name_, email: email_, phone: phone_});
 		};
 
 	});

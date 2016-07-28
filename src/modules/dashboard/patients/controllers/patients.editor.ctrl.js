@@ -2,28 +2,19 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('patientsEditorCtrl', function($state, http, blockUI, $timeout, alertService, $scope){
+	.controller('patientsEditorCtrl', function($state, http, blockUI, $timeout, alertService, $scope, DTO){
 		var vm = this;
-		vm.addPat=DTO.addPat;
-		//vm.addPat = {
-		//	'email':'',
-		//	'type':'pat',
-		//	'firstName':null,
-		//	'lastName': null,
-		//	'birth': null,
-		//	'docType':''
-		//};
-
+		vm.patientsDTO = DTO.patientsDTO();
 
 		vm.addPatients = function () {
-			http.post('private/dashboard/patients/create', vm.addPat)
+			http.post('/patients/create', vm.patientsDTO)
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-						alertService.add(0, res.state.message);
+						alertService.success(res.state.msg);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.abstract.patients');
+						$state.go('main.private.dashboard.patients');
 					}, 500);
 				});
 		};

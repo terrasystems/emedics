@@ -4,7 +4,7 @@
 angular.module('modules.dash')
 	.controller('referencesCtrl', function ($state, http, blockUI, localStorageService, alertService, $uibModal, $q, DTO) {
 		var vm = this;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.references = [];
 		vm.search = '';
 
@@ -68,7 +68,7 @@ angular.module('modules.dash')
 		vm.getReferences('');
 
 		vm.onRefInfo = function(ref) {
-			$state.go('main.private.dashboard.abstract.references.info', {ref: ref});
+			$state.go('main.private.dashboard.references.info', {ref: ref});
 		};
 });
 

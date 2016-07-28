@@ -1,0 +1,54 @@
+<!--<pre>vm.formPat.$invalid: {{vm.formPat.$invalid}}</pre>-->
+<!--<pre>vm.formPat.$valid: {{vm.formPat.$valid}}</pre>-->
+<!--<pre>Model: {{vm.reg | json}}</pre>-->
+
+<div class="container reg_form">
+	<div class="col-md6">
+
+		<uib-tabset active="vm.active">
+			<uib-tab ng-repeat="tab in vm.tabs track by $index" heading="{{tab.title}}" active="tab.active" disable="tab.disabled" select="vm.resetAllForms();vm.selTab($index)">
+				<form ng-submit="vm.onSubmit()" name="form" novalidate>
+					<formly-form model="tab.form.model" fields="tab.form.fields" form="form" options="tab.form.options"></formly-form>
+					<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="form.$invalid"><span translate="SUBMIT"></span></button>
+					</formly-form>
+				</form>
+			</uib-tab>
+<!--				<uib-tab class="tab-animation" heading="{{vm.tabs[0].title}}" disable="vm.tabs[0].disabled" active="vm.tabs[0].active"
+						 select="vm.selTab(0);vm.tabs[0].form.options.resetModel()" ng-click="">
+					<form ng-submit="vm.onSubmit()" name="vm.formPat" novalidate>
+						<formly-form  model="vm.tabs[0].form.model" fields="vm.tabs[0].form.fields" form="vm.formPat" options="vm.tabs[0].form.options">
+						<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formPat.$invalid"><span translate="SUBMIT_ON_REGISTRATION"></span></button>
+						</formly-form>
+					</form>
+				</uib-tab>
+
+				<uib-tab class="tab-animation" heading="{{vm.tabs[1].title}}" disable="vm.tabs[1].disabled" active="vm.tabs[1].active"
+						 select="vm.selTab(1);vm.tabs[1].form.options.resetModel()" ng-click="">
+					<form ng-submit="vm.onSubmit()" name="vm.formDoc" novalidate>
+						<formly-form model="vm.tabs[1].form.model" fields="vm.tabs[1].form.fields" form="vm.formDoc" options="vm.tabs[1].form.options">
+							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formDoc.$invalid"><span translate="SUBMIT_ON_REGISTRATION"></span></button>
+						</formly-form>
+					</form>
+				</uib-tab>
+
+				<uib-tab class="tab-animation" heading="{{vm.tabs[2].title}}" disable="vm.tabs[2].disabled" active="vm.tabs[2].active"
+						 select="vm.selTab(2);vm.tabs[2].form.options.resetModel()" ng-click="">
+					<form ng-submit="vm.onSubmit()" name="vm.formOrg" novalidate>
+						<formly-form model="vm.tabs[2].form.model" fields="vm.tabs[2].form.fields" form="vm.formOrg" options="vm.tabs[2].form.options">
+							<button type="submit" class="btn btn_submit btn-default login-button submit-button" ng-disabled="vm.formOrg.$invalid"><span translate="SUBMIT_ON_REGISTRATION"></span></button>
+						</formly-form>
+					</form>
+				</uib-tab>-->
+
+		</uib-tabset>
+
+	</div>
+	<a class="login-page-form" ui-sref="^.signup"> <i class="glyphicon glyphicon-arrow-left"></i><span translate="BACK"></span></a>
+</div>
+
+<script type="text/ng-template" id="error-messages.html">
+	<formly-transclude></formly-transclude>
+	<div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+		<div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+	</div>
+</script>

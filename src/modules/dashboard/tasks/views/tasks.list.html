@@ -1,0 +1,81 @@
+	<!-- filters -->
+	<div class="pad" ng-include="'modules/dashboard/tasks/views/filters.html'" ng-if="vm.user.type !== 'patient'">
+		<!-- filters include here-->
+	</div>
+
+	<section ng-if="vm.user.type === 'patient'">
+		<div class="container ui-list-view">
+			<table class="table table-hover">
+				<thead>
+				<tr>
+					<th translate="DATE"></th>
+					<th translate="NUMBER"></th>
+					<th translate="NAME"></th>
+					<th translate="STATUS"></th>
+					<th translate="DESCRIPTION"></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-click="vm.goToEdit(form.id)" ng-repeat="form in vm.list track by $index">
+					<td>{{vm.convertDateTime(form.date)}}</td>
+					<td>{{form.template.number}}</td>
+					<td>{{form.template.name}}</td>
+					<td>{{form.status}}</td>
+					<td>{{form.template.descr}}</td>
+				</tr>
+				</tbody>
+			</table>
+			<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
+		</div>
+	</section>
+	<section ng-if="vm.user.type !== 'patient'">
+		<div class="container ui-list-view">
+			<table class="table table-hover header-fixed3">
+				<thead>
+				<tr>
+					<th translate="DATE"></th>
+					<!--<th translate="NUMBER"></th>-->
+					<th translate="PATIENT_NAME"></th>
+					<th translate="FORM_TASKS"></th>
+					<th translate="STATUS"></th>
+					<th translate="DESCRIPTION"></th>
+					<th translate="ACTION" ng-if="vm.hideAdminTasks && !vm.history"></th>
+					<th translate="ACTION" ng-if="vm.history"></th>
+				</tr>
+				</thead>
+
+				<tbody>
+				<tr ng-click="vm.goToEdit(form.id)" ng-repeat="form in vm.list track by $index">
+					<td>{{vm.convertDateTime(form.date)}}</td>
+					<!--<td>{{form.template.number}}</td>-->
+					<td>{{form.patient.username}}</td>
+					<td>{{form.template.name}}</td>
+					<td>{{form.status}}</td>
+					<td>{{form.template.descr}}</td>
+					<td ng-if="vm.hideAdminTasks && !vm.history">
+						<div class="btn-group btn-group-xs">
+							<button style="float: right" class="btn btn-success btn-small"
+									ng-click="vm.onAssignTask(form.id, vm.stafs, $event)"><span
+									translate="ASSIGN"></span></button>
+						</div>
+					</td>
+					<td ng-if="vm.history">
+						<div class="btn-group btn-group-xs">
+							<button style="float: right" class="btn btn-success btn-small"
+									ng-click="vm.onSendHistory(form.template, form)"><span
+									translate="SEND"></span></button>
+							<button style="float: right" class="btn btn-info btn-small"
+									ng-click="vm.onViewHistory(form.id, form.patient.id)"><span
+									translate="VIEW"></span></button>
+							<button style="float: right" class="btn btn-info btn-small"
+									ng-click="vm.onCopyHistory(form, form.patient.id)"><span
+									translate="COPY_TASK"></span></button>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+
+			</table>
+			<div ng-show="vm.list.length == 0" class="text-center"><h4><span translate="NO_DATA"></span></h4></div>
+		</div>
+	</section>

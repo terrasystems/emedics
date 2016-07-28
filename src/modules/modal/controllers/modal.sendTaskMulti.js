@@ -6,7 +6,7 @@ angular.module('modules.dash')
 	.controller('modalSendTaskMultiCtrl', function ($uibModalInstance, model, blockUI, alertService, http, localStorageService) {
 		var vm = this;
 		vm.model = model;
-		vm.user = localStorageService.get('userData');
+		vm.user = localStorageService.get('user');
 		vm.message = {template: model.data.template_id, message: '', patients:[], assignAll: false};
 		vm.patients = [];
 
@@ -44,7 +44,7 @@ angular.module('modules.dash')
 				.then(function (res) {
 					blockUI.stop();
 					if (res.state) {
-						alertService.add(0, res.state.message);
+						alertService.success(res.state.message);
 					}
 					$uibModalInstance.close(res);
 				}, function (error) {
