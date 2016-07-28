@@ -4,37 +4,40 @@
 	angular.module('modules.core')
 
 		.service('auth', function ($rootScope, localStorageService, $location, $log, http, $state) {
-			return {
-				saveUserData: function (data) {
-					if (data.token) {
-						$rootScope.token = data.token;
-						localStorageService.set('token', data.token);
-					}
-					if (data.userDto) {
-						$rootScope.user = data.userDto;
-						localStorageService.set('user', data.userDto);
-					}
-				},
-				activateUser: function (code) {
-					http.get('/auth/activate/' + code).then(function (resp) {
-						$log.debug(resp);
-						if (resp.state) {
-							this.saveUserData(resp.result);
-							$state.go('main.private.dashboard.catalog', {reload: true});
-						}
-					});
-				},
-				checkUserAuth: function () {
-					var originalPath = $location.path();
-					$location.path('/login');
-					var authToken = localStorageService.get('token');
-					if (authToken) {
-						$rootScope.token = authToken;
-						$rootScope.user = localStorageService.get('user');
-						$location.path(originalPath);
-						return;
-					}
+			function saveUserData (data) {
+				if (data.token) {
+					$rootScope.token = data.token;
+					localStorageService.set('token', data.token);
 				}
+				if (data.userDto) {
+					$rootScope.user = data.userDto;
+					localStorageService.set('user', data.userDto);
+				}
+			};
+			function activateUser (code) {
+				http.get('/auth/activate/' + code).then(function (resp) {
+					$log.debug(resp);
+					if (resp.state) {
+						saveUserData(resp.result);
+						$state.go('main.private.dashboard.catalog', {reload: true});
+					}
+				});
+			};
+			function checkUserAuth () {
+				var originalPath = $location.path();
+				$location.path('/login');
+				var authToken = localStorageService.get('token');
+				if (authToken) {
+					$rootScope.token = authToken;
+					$rootScope.user = localStorageService.get('user');
+					$location.path(originalPath);
+					return;
+				}
+			}
+			return {
+				saveUserData: saveUserData,
+				activateUser: activateUser,
+				checkUserAuth: checkUserAuth
 			};
 		})
 //Request interceptor service , set token into header
