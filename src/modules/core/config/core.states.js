@@ -80,7 +80,7 @@ angular.module('modules.core')
 			url: 'validationkey/:key',
 			onEnter: function ($stateParams, http, $state) {
 				http.get('public/validation_key/' + $stateParams.key)
-					.then(function (res) {
+					.then(function () {
 						$state.go('main.public.newpassword.confirm', {key: $stateParams.key});
 					});
 			},
@@ -89,14 +89,8 @@ angular.module('modules.core')
 		{
 			name: 'main.public.activation',
 			url: 'activation/:code',
-			onEnter: function ($stateParams, http, $state, auth, $log) {
-				http.get('/auth/activate/' + $stateParams.code).then(function (resp) {
-					$log.debug(resp);
-					if (resp.state) {
-						auth.saveUserData(resp.result);
-						$state.go('main.private.dashboard.catalog', {reload: true});
-					}
-				});
+			onEnter: function ($stateParams, auth, $log) {
+				auth.activateUser($stateParams.code);
 				$log.debug($stateParams.code);
 			},
 			parent:'main.public'

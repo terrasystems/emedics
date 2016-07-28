@@ -86,6 +86,21 @@ angular.module('modules.core')
 
 //init data transfer objects to sent to server
 	.factory('DTO', function (constants) {
+
+		return {
+			mergeDTO:mergeDTO,
+			criteriaDTO: criteriaDTO,
+			referencesDTO: referencesDTO,
+			staffDTO: staffDTO,
+			tasksCriteriaDTO: tasksCriteriaDTO,
+			taskDTO:taskDTO,
+			patientsDTO: patientsDTO,
+			catalogFilter:catalogFilter,
+			userDTO:userDTO,
+			loginDTO:loginDTO
+		};
+
+		//region <body>
 		function criteriaDTO() {
 			return {
 				search: '',
@@ -197,44 +212,29 @@ angular.module('modules.core')
 			};
 			return _.mergeWith(object, other, customizer);
 		};
-
-		return {
-			mergeDTO:mergeDTO,
-			criteriaDTO: criteriaDTO,
-			referencesDTO: referencesDTO,
-			staffDTO: staffDTO,
-			tasksCriteriaDTO: tasksCriteriaDTO,
-			taskDTO:taskDTO,
-			patientsDTO: patientsDTO,
-			catalogFilter:catalogFilter,
-			userDTO:userDTO
+		function loginDTO() {
+			return {
+				email: null,
+				password: null
+			}
 		};
+		//endregion
+
 	})
 
 //работа с базой pouchdb
-	.service('pouch_db', function ($q, $rootScope, alertService, $translate) {
+	.service('pouch_db', function ($q, $log) {
 		function save(base, id, info, model) {
 			var deferred = $q.defer();
-			//if  (id === 'add') {
-			//	var doc = {
-			//		_id: new Date().toISOString(),
-			//		status: 'draft',
-			//		draftName: info.name,
-			//		body: {sections: model, formInfo: info}
-			//	};
-			//	base.put(doc, function(res) {
-			//		deferred.resolve(res);
-			//	});
-			//}  else {
 			base.get(id).then(function (doc) {
 				var x = new Date().toISOString();
 				doc.body = {sections: model, formInfo: info, changeDateTime: x};
-				console.log('run then: ' + doc.body);
+				$log.debug('run then: ' + doc.body);
 				base.put(doc, function (res) {
 					deferred.resolve(res);
 				});
 				//return doc;
-			}, function (res) {
+			}, function () {
 				var x = new Date().toISOString();
 				var doc = {
 					_id: id,

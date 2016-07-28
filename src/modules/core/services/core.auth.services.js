@@ -4,7 +4,7 @@
 
 	angular.module('modules.core')
 
-		.service('auth', function ($rootScope, localStorageService, $location) {
+		.service('auth', function ($rootScope, localStorageService, $location, $log, http, $state) {
 			return {
 				saveUserData: function (data) {
 					if (data.token) {
@@ -15,6 +15,15 @@
 						$rootScope.user = data.userDto;
 						localStorageService.set('user', data.userDto);
 					}
+				},
+				activateUser: function (code) {
+					http.get('/auth/activate/' + code).then(function (resp) {
+						$log.debug(resp);
+						if (resp.state) {
+							this.saveUserData(resp.result);
+							$state.go('main.private.dashboard.catalog', {reload: true});
+						}
+					});
 				},
 				checkUserAuth: function () {
 					var originalPath = $location.path();
@@ -46,12 +55,9 @@
 		.service('responseErrorInterceptor', function ($rootScope, $q, $injector, blockUI, $log) {
 			return {
 				'response': function (response) {
-					//console.log('int.responce: '+response);
 					return response;
 				},
 				'responseError': function (rejection) {
-					//console.log('int.rejection: ' + rejection);
-
 					blockUI.reset();
 
 					switch (rejection.status) {
