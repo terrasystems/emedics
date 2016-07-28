@@ -1,9 +1,10 @@
 (function(){
-	"use strict";
 	/*jshint -W117, -W097, -W089, -W061*/
-	angular.module('modules.public')
-		.controller('loginCtrl', function ($translate) {
+	angular.module('modules.auth')
+		.controller('loginCtrl', function ($translate, alertService, $timeout, blockUI, DTO, auth, http, $state) {
 			var vm = this;
+
+			vm.user = DTO.loginDTO();
 
 			vm.userFields = [
 				{
@@ -35,5 +36,21 @@
 					}
 				}
 			];
+			vm.submit = function () {
+				if (vm.form.$valid) {
+
+					http.post('/auth/login', vm.user).then(function (res) {
+						blockUI.stop();
+						auth.saveUserData(res.result);
+						if (res.msg) {
+							alertService.success(res.msg);
+						}
+						$timeout(function () {
+							$state.go('main.private.dashboard.tasks');
+						}, 0);
+					});
+				}
+			};
+
 		});
 })();
