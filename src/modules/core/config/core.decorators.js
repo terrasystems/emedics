@@ -2,7 +2,11 @@
 
 	angular.module('modules.core')
 		.config(function ($stateProvider, statesList, $urlMatcherFactoryProvider) {
-
+			//main
+      //auth
+			//dashboard
+			   //editor
+			//user
 			/*		$stateProvider.decorator('state', function(state) {
 			 var moduleName = state.name.split('.');
 

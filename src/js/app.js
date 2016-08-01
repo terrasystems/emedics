@@ -50,7 +50,7 @@
 			formlyValidationMessages.addStringMessage('required', 'This field is required');
 
 			$rootScope.$on('$stateChangeStart', function(event, toState, fromState) { //toParams, fromParams
-				if  ( (toState.name).indexOf('private')>-1 ) {
+				if  ( (toState.name).indexOf('dashboard')>-1 ) {
 					auth.checkUserAuth();
 				}
 
