@@ -6,7 +6,7 @@ angular.module('modules.dash')
                                          $rootScope, DTO) {
 
 		//if (!$stateParams.type || $stateParams.type === '' || $stateParams.type === null) {
-		//	$state.go('main.private.dashboard.tasks');
+		//	$state.go('main.dashboard.tasks');
 		//	return;
 		//}
 
@@ -18,11 +18,11 @@ angular.module('modules.dash')
 		//vm.onNeedSave = true;
 
 /*		if ($stateParams.type == 'tasks' || $stateParams.type == 'tasks+') {
-			vm.mainState = 'main.private.dashboard.tasks';
+			vm.mainState = 'main.dashboard.tasks';
 		} else if ($stateParams.type == 'patients' || $stateParams.type == 'patients+') {
-			vm.mainState = 'main.private.dashboard.patients';
+			vm.mainState = 'main.dashboard.patients';
 		} else if ($stateParams.type == 'tasksAdmin') {
-			vm.mainState = 'main.private.dashboard.tasks';
+			vm.mainState = 'main.dashboard.tasks';
 		}
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {

@@ -46,7 +46,7 @@
 							alertService.success(res.msg);
 						}
 						$timeout(function () {
-							$state.go('main.private.dashboard.tasks');
+							$state.go('main.dashboard.tasks');
 						}, 0);
 					});
 				}

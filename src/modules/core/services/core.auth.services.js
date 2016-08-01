@@ -19,7 +19,7 @@
 					$log.debug(resp);
 					if (resp.state) {
 						saveUserData(resp.result);
-						$state.go('main.private.dashboard.catalog', {reload: true});
+						$state.go('main.dashboard.catalog', {reload: true});
 					}
 				});
 			};

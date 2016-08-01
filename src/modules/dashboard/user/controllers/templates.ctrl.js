@@ -6,10 +6,10 @@
 			var vm = this;
 			vm.user = localStorageService.get('user');
 			vm.templates = [];
-			vm.patient = $stateParams;
+			vm.forUser = $stateParams;
 
 			if (!$stateParams  && !$stateParams.id) {
-				$state.go('^');
+				$state.go('^.^.tasks');
 				return;
 			}
 
@@ -28,11 +28,11 @@
 			vm.onGetTemplates($stateParams.id);
 
 			vm.return = function () {
-				$state.go('^');
+				$state.go('^.^.tasks');
 			};
 
 			vm.openHistory = function (arr) {
-				$state.go('^.history', {patient: vm.patient, obj: arr});
+				$state.go('^.history', {forUser: vm.forUser, obj: arr});
 			};
 
 		});

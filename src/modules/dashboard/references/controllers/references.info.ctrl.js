@@ -7,12 +7,12 @@ angular.module('modules.dash')
 		vm.ref = $stateParams.ref;
 
 		if (!$stateParams.ref || $stateParams.ref === '' || $stateParams.ref === null) {
-			$state.go('main.private.dashboard.references');
+			$state.go('main.dashboard.references');
 			return;
 		}
 
 		vm.onReturn = function() {
-			$state.go('main.private.dashboard.references');
+			$state.go('main.dashboard.references');
 		};
 
 		vm.convertDate = function (d) {

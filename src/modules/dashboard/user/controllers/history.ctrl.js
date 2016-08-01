@@ -8,10 +8,10 @@
 			vm.templates = [];
 
 			if (!$stateParams && !$stateParams.patient) {
-				$state.go('^');
+				$state.go('^.templates');
 				return;
 			}
-			vm.patient = $stateParams.patient;
+			vm.patient = $stateParams.forUser;
 			vm.item = $stateParams.obj;
 
 			vm.onReturn = function () {
@@ -24,7 +24,7 @@
 			};
 
 			vm.onView = function (histId, patientId) {
-				$state.go('main.private.dashboard.patients.editor', {id: histId, type: 'patients+', patId: patientId});
+				$state.go('main.dashboard.patients.editor', {id: histId, type: 'patients+', patId: patientId});
 			};
 
 			vm.onSend = function (obj, hist) {
@@ -58,7 +58,7 @@
 						blockUI.stop();
 						if (res.result) {
 							alertService.success(res.state.message);
-							$state.go('main.private.dashboard.patients.editor', {
+							$state.go('main.dashboard.patients.editor', {
 								id: res.result.id,
 								type: 'patients',
 								patId: patientId
@@ -70,7 +70,7 @@
 			};
 
 			vm.onEditTask = function (histId, patientId) {
-				$state.go('main.private.dashboard.patients.editor', {id: histId, type: 'patients', patId: patientId});
+				$state.go('main.dashboard.patients.editor', {id: histId, type: 'patients', patId: patientId});
 			};
 
 		});

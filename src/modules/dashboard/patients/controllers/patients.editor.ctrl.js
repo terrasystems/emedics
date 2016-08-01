@@ -14,7 +14,7 @@ angular.module('modules.dash')
 						alertService.success(res.state.msg);
 					}
 					$timeout(function () {
-						$state.go('main.private.dashboard.patients');
+						$state.go('main.dashboard.patients');
 					}, 500);
 				});
 		};
