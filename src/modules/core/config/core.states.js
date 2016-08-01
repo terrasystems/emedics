@@ -143,7 +143,8 @@
 				url: '/editor',
 				views: {
 					'forms@dashboard': {
-						templateUrl: 'modules/dashboard/patients/views/patients.editor.html',
+						templateUrl: 'modules/dashboard/patients/views/' +
+						'.editor.html',
 						controller: 'patientsEditorCtrl as vm'
 					}
 				},
@@ -164,16 +165,16 @@
 				url: '/templates',
 				views: {
 					'forms@dashboard': {
-						templateUrl: 'modules/dashboard/patients/views/patients.templates.html',
-						controller: 'patientsTemplatesCtrl as vm'
+						templateUrl: 'modules/dashboard/user/views/user.templates.html',
+						controller: 'userTemplatesCtrl as vm'
 					}
 				},
 				parent: 'main.private.dashboard.user',
 				params: {
-					id: '',
-					name: '',
-					email: '',
-					phone: ''
+					id: null,
+					name: null,
+					email: null,
+					phone: null
 				}
 			},
 			{
@@ -181,8 +182,8 @@
 				url: '/history',
 				views: {
 					'forms@dashboard': {
-						templateUrl: 'modules/dashboard/patients/views/patients.history.html',
-						controller: 'patientsHistoryCtrl as vm'
+						templateUrl: 'modules/dashboard/user/views/user.history.html',
+						controller: 'userHistoryCtrl as vm'
 					}
 				},
 				parent: 'main.private.dashboard.user',

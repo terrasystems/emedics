@@ -1,5 +1,5 @@
 <div class="pad"></div>
-<button type="submit" ng-click="vm.onReturn();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+<button type="submit" ng-click="vm.return();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
 
 <p></p><p></p>
 
@@ -18,7 +18,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr ng-click="vm.onOpenHistory(item);" ng-repeat="item in vm.templates">
+		<tr ng-click="vm.openHistory(item);" ng-repeat="item in vm.templates">
 			<td>{{item.name}}</td>
 			<td>{{item.events.length}}</td>
 		</tr>

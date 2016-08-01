@@ -47,7 +47,7 @@
 				}
 				else {
 					deferred.reject(false);
-					alertService.warning($translate.instant('MSG_NO_DATA'));
+					alertService.warning($translate.instant(resp.data.msg ? resp.data.msg : 'MSG_NO_DATA'));
 				}
 			}
 
