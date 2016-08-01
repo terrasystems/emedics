@@ -10,9 +10,9 @@
 
 	eMedics.config(function( statesList, $stateProvider, $urlRouterProvider, formlyConfigProvider, $httpProvider, blockUIConfig,
 	                         localStorageServiceProvider, $translateProvider/*, $provide*/) {
-		angular.forEach(statesList, function(state) {
+		/*angular.forEach(statesList, function(state) {
 			$stateProvider.state(state.name, state);
-		});
+		});*/
 		$urlRouterProvider.otherwise('/signup');
 
 		formlyConfigProvider.setWrapper({

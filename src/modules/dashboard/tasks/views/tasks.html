@@ -2,7 +2,7 @@
 	<uib-tabset>
 
 		<uib-tab ng-click="vm.changeTab(0)" index="0" heading="New">
-			<div class="pad" ng-include="'modules/dashboard/tasks/views/tasks.list.html'"></div>
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/list.html'"></div>
 		</uib-tab>
 
 		<uib-tab ng-click="vm.staffInfo();" index="1" heading="Staff" ng-if="vm.hideAdminTasks">
@@ -70,7 +70,7 @@
 		</uib-tab>
 
 		<uib-tab ng-click="vm.changeTab(2);" index="2" heading="History">
-			<div class="pad" ng-include="'modules/dashboard/tasks/views/tasks.list.html'"></div>
+			<div class="pad" ng-include="'modules/dashboard/tasks/views/list.html'"></div>
 		</uib-tab>
 
 		<button style="margin-right:10px;margin-bottom: 10px;" class="pull-right btn btn-success"
