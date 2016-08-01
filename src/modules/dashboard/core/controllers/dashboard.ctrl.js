@@ -2,7 +2,7 @@
 	/*jshint -W117, -W097*/
 	angular.module('modules.dash')
 
-		.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO, userTypes) {
+		.controller('dashboardCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO, userTypes) {
 			var vm = this;
 			vm.user = localStorageService.get('user');
 

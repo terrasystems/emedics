@@ -116,8 +116,8 @@
 				parent: 'main',
 				views: {
 					'content@main': {
-						templateUrl: 'modules/dashboard/views/dashboard.html',
-						controller: 'DashCtrl as vm'
+						templateUrl: 'modules/dashboard/core/views/dashboard.html',
+						controller: 'dashboardCtrl as vm'
 					}
 				}
 			},
