@@ -94,7 +94,7 @@
 			http.post('/auth/registration',vm.userDTO)
 				.then(function (res) {
 					if(res.state){
-						$state.go('.success');
+						$state.go('^.successregistration');
 					}
 				});
 			};

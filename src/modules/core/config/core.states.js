@@ -24,7 +24,7 @@
 				name: 'main.auth.registration'
 			},
 			{
-				name: 'main.auth.successregistreation'
+				name: 'main.auth.successregistration'
 			},
 			{
 				name: 'main.auth.forgotpassword'
@@ -37,7 +37,7 @@
 			},
 			{
 				name: 'main.auth.validationkey',
-				url: 'validationkey/:key',
+				url: '/validationkey/:key',
 				onEnter: function ($stateParams, http, $state, $log) {
 					http.get('/auth/check_key/' + $stateParams.key)
 						.then(function () {
@@ -51,7 +51,7 @@
 			},
 			{
 				name: 'main.auth.activation',
-				url: 'activation/:code',
+				url: '/activation/:code',
 				onEnter: function ($stateParams, auth, $log) {
 					auth.activateUser($stateParams.code);
 					$log.debug($stateParams.code);
