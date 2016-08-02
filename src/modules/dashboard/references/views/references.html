@@ -19,7 +19,7 @@
 				</div>
 				<p></p>
 				<div class="col-md-3 col-sm-3 col-xs-3 pull-right">
-					<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.onAddRef();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>
+					<button type="submit" style="margin-rigth:10px; margin-bottom: 10px;" class="btn btn-success" ng-click="vm.addRef();"><i class="glyphicon glyphicon-plus-sign"></i> <span translate="ADD"></span></button>
 				</div>
 			</div>
 			<p></p>
@@ -45,12 +45,11 @@
 				<tbody>
 				<tr ng-click="vm.onRefInfo(ref);" ng-repeat="ref in vm.references">
 					<td>{{ref.name}}</td>
-					<!--<td>{{ref.phone}}</td>-->
 					<td>{{ref.email}}</td>
-					<td>{{ref.type}}</td>
+					<td>{{ref.userType}}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-							<button class="btn btn-danger" ng-click="vm.onRemove(ref.id, $event)">x</button>
+							<button class="btn btn-danger" ng-click="vm.remove(ref.id)">x</button>
 							<button ng-if="ref.enabled == false || ref.enebled == 'false' " class="btn btn-info" ng-click="vm.onInvite(ref.id, $event)">
 								<span translate="INVITE"></span>
 							</button>

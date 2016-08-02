@@ -36,8 +36,8 @@
 
 		vm.addRef = function () {
 			var config = {
-				templateUrl: 'modules/modal/views/modal.addExistsRef.html',
-				controller: 'modalAddExistsRefCtrl',
+				templateUrl: 'modules/modal/views/addReference.html',
+				controller: 'addReferenceCtrl',
 				controllerAs: 'vm',
 				resolve: {
 					model: function($q) {

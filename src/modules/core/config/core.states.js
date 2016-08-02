@@ -103,7 +103,10 @@
 				name: 'main.dashboard.references'
 			},
 			{
-				name: 'main.dashboard.references.editor'
+				name: 'main.dashboard.references.editor',
+				params:{
+					name:null
+				}
 			},
 			{
 				name: 'main.dashboard.references.info',
