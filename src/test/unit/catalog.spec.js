@@ -1,193 +1,117 @@
-'use strict';
+(function () {
+	'use strict';
+	describe('Testing modules.core', function () {
+		var service,
+			httpBackend,
+			matchVal,
+			httpUrl = '/api/v2/api/catalog/all',
+			serviceUrl = '/api/catalog/all',
+			succTestCase = {
+				'state': true, 'msg': 'MSG_FORM', 'result': [
+					{
+						id: 0,
+						name: 'Angular'
+					},
+					{
+						id: 1,
+						name: 'Ember'
+					},
+					{
+						id: 2,
+						name: 'Backbone'
+					},
+					{
+						id: 3,
+						name: 'React'
+					}
+				]
+			},
+			errTestCase = {'status': 401, 'statusText': 'Unauthorized'};
 
-// describe('Catalog Controller', function() {
-// 	var controller, http, scope;
-// 	beforeEach(function(){
-// 		//mock module dependencies
-// 		angular.module('ui-listView', []);
-// 		angular.module('ngMessages', []);
-// 		angular.module('xeditable', []);
-// 		angular.module('ui.select', []);
-// 		angular.module('ngSanitize', []);
-//
-// 		module(function($provide) {
-// 			$provide.service('http', ['$q', function($q) {
-// 				function post () {
-// 					if(true){
-// 						return $q.resolve('55');
-// 					} else {
-// 						return $q.reject();
-// 					}
-// 				};
-//
-// 				return{
-// 					post: post
-// 				};
-// 			}]);
-// 			$provide.service('blockUI', function() {
-// 				this.stop = jasmine.createSpy('stop').and.callFake(function(num) {
-// 					//a fake implementation
-// 				});
-// 			});
-// 			$provide.service('alertService', function() {});
-// 			$provide.service('$state', function() {});
-// 			$provide.service('$uibModal', function() {});
-// 			$provide.service('localStorageService', function() {
-// 				this.get = function () {
-// 					return 'get user';
-// 				};
-// 			});
-// 			$provide.service('$stateParams', function() {});
-// 			$provide.service('DTO', function() {
-// 				this.catalogFilter = function () {
-// 					return 'get user';
-// 				};
-// 				this.criteriaDTO = function () {
-// 					return 'get user';
-// 				};
-// 			});
-// 		});
-//
-// 		module('modules.dash');
-//
-// 		angular.mock.inject(function($controller, $rootScope, http, $q){
-// 			var deferred = $q.defer();
-// 			deferred.resolve('5');
-// 			http = http;
-// 			spyOn(http, 'post').and.returnValue(deferred.promise);
-//
-// 			// create new scope
-// 			scope = $rootScope.$new();
-// 			// inject to mockController $scope our newly created scope
-// 			controller = $controller('catalogCtrl', {
-// 				http : http,
-// 				$scope: scope
-// 			});
-// 		});
-// 	});
-//
-// 	it('Variable definition', function () {
-// 		expect(controller.arr).toBeDefined();
-// 	})
-//
-// 	// it('http service test', function () {
-// 	// 	angular.mock.inject(function (http) {
-// 	// 		controller.getAllTemplates();
-// 	// 		expect(controller.FormTemplate).toEqual(12);
-// 	// 	});
-// 	// })
-//
-// 	it('http post test', function () {
-// 		var result;
-// 		http.post().then(function(returnFromPromise) {
-// 			result = returnFromPromise;
-// 		});
-// 		scope.$apply();
-// 		expect(result).toBe('5');
-// 		expect(http.post).toHaveBeenCalled();
-// 	})
-// });
+		//you need to indicate your module in a test
+		beforeEach(function () {
+			module('modules.core');
+			module('toastr');
+			module('pascalprecht.translate');
+		});
 
-describe('Controller: Catalog Controller', function() {
-	var controller, scope, http, $location;
+		beforeEach(inject(function (http, $httpBackend) {
+			matchVal = null;
+			service = http;
+			httpBackend = $httpBackend;
+		}));
 
-	// dependencies and svc mocking
-	beforeEach(function () {
-		//mock module dependencies
-		angular.module('ui-listView', []);
-		angular.module('ngMessages', []);
-		angular.module('xeditable', []);
-		angular.module('ui.select', []);
-		angular.module('ngSanitize', []);
+		it('should have a http service', function () {
+			assert.isDefined(service, 'http has been defined');
+		});
 
-		module(function($provide) {
-
-			$provide.service('blockUI', function () {
-				this.stop = jasmine.createSpy('stop').and.callFake(function (num) {
-					//a fake implementation
-				});
+		it('get success', function () {
+			httpBackend.expect('GET', httpUrl).respond(200, succTestCase);
+			service.get(serviceUrl).then(function (result) {
+				matchVal = result;
 			});
+			httpBackend.flush();
+			expect(matchVal).to.deep.equal(succTestCase);
+		});
 
-			$provide.service('alertService', function() {});
-			$provide.service('$state', function() {});
-			$provide.service('$uibModal', function() {});
-			$provide.service('localStorageService', function() {
-				this.get = function () {
-					return 'get user';
-				};
+		it('get succ empty', function () {
+			httpBackend.expect('GET', httpUrl).respond(200, {});
+			service.get(serviceUrl).then(function (result) {
+				matchVal = result;
+			}, function (error) {
+				matchVal = error;
 			});
-			$provide.service('$stateParams', function() {});
-			$provide.service('DTO', function() {
-				this.catalogFilter = function () {
-					return 'get user';
-				};
-				this.criteriaDTO = function () {
-					return 'get user';
-				};
+			httpBackend.flush();
+			expect(matchVal).to.be.false;
+		});
+
+		it('get error', function () {
+			httpBackend.expect('GET', httpUrl).respond(401, errTestCase);
+			service.get(serviceUrl).then(function (result) {
+				matchVal = result;
+			}, function (error) {
+				matchVal = error;
 			});
-
-		});
-	});
-
-	// http mock service
-	beforeEach(function() {
-		var mockHttp = {};
-		module('modules.dash', function ($provide) {
-			$provide.value('http', mockHttp);
+			httpBackend.flush();
+			assert.propertyVal(matchVal, 'status', 401);
 		});
 
-		inject(function ($q) {
-			mockHttp.data = [
-				{
-					id: 0,
-					name: 'Angular'
-				},
-				{
-					id: 1,
-					name: 'Ember'
-				},
-				{
-					id: 2,
-					name: 'Backbone'
-				},
-				{
-					id: 3,
-					name: 'React'
-				}
-			];
 
-			mockHttp.post = function () {
-				var defer = $q.defer();
+		it('post success', function () {
+			httpBackend.expect('POST', httpUrl).respond(200, succTestCase);
+			service.post(serviceUrl).then(function (result) {
+				matchVal = result;
+			});
+			httpBackend.flush();
+			expect(matchVal).to.deep.equal(succTestCase);
+		});
 
-				defer.resolve(this.data);
+		it('post scuccess empty', function () {
+			httpBackend.expect('POST', httpUrl).respond(200, {});
+			service.post(serviceUrl).then(function (result) {
+				matchVal = result;
+			}, function (error) {
+				matchVal = error;
+			});
+			httpBackend.flush();
+			expect(matchVal).to.be.false;
+		});
 
-				return defer.promise;
-			};
+		it('post error', function () {
+			httpBackend.expect('POST', httpUrl).respond(401, errTestCase);
+			service.post(serviceUrl).then(function (result) {
+				matchVal = result;
+			}, function (error) {
+				matchVal = error;
+			});
+			httpBackend.flush();
+			assert.propertyVal(matchVal, 'status', 401);
+
+		});
+
+		afterEach(function () {
+			httpBackend.verifyNoOutstandingExpectation();
+			httpBackend.verifyNoOutstandingRequest();
 		});
 	});
-
-	beforeEach(inject(function($controller, $rootScope, _$location_, _http_) {
-		scope = $rootScope.$new();
-		$location = _$location_;
-		http = _http_;
-		controller = $controller('catalogCtrl', {
-			$scope: scope,
-			$location: $location,
-			http: http
-		});
-	}));
-
-	it('arr must be defined', function () {
-		expect(controller.arr).toBeDefined();
-	});
-
-	it('arr must be defined', function () {
-		// controller.getAllTemplates();
-		spyOn(controller, 'getAllTemplates');
-		// controller.getAllTemplates();
-		//expect(controller.getAllTemplates).toHaveBeenCalled();
-		// scope.$apply();
-		// scope.$digest();
-		expect(controller.getAllTemplates()).toEqual('5');
-	});
-});
+})();
