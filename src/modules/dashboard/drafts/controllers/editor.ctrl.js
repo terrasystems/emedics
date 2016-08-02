@@ -1,7 +1,7 @@
 'use strict';
 /*jshint -W117, -W097, -W116*/
 angular.module('modules.dash')
-	.controller('draftEditCtrl', function ($stateParams, $state, $scope, alertService, $translate, $rootScope, pouch_db) {
+	.controller('draftsEditorCtrl', function ($stateParams, $state, $scope, alertService, $translate, $rootScope, pouch_db) {
 		var vm = this;
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {

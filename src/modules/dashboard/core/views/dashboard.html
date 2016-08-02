@@ -1,6 +1,6 @@
 <div id="header">
 	<div class="col-md-10 settings">
-		<h2 class="" ng-show="$state.includes('main.private.dashboard.settings')"><span translate="SETTINGS"></span></h2>
+		<h2 class="" ng-show="$state.includes('main.dashboard.settings')"><span translate="SETTINGS"></span></h2>
 	</div>
 
 	<div class="btn-group pull-rigth header_settings" uib-dropdown is-open="status.isopen">
@@ -12,7 +12,7 @@
 		</button>
 		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 
-			<li><a ui-sref="main.private.dashboard.settings"><span translate="SETTINGS"></span></a></li>
+			<li><a ui-sref="main.dashboard.settings"><span translate="SETTINGS"></span></a></li>
 			<li><a class="black-clr " ng-click="vm.logout()"><span translate="LOGOUT"></span></a></li>
 
 		</ul>

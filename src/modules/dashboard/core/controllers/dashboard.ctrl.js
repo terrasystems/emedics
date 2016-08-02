@@ -2,28 +2,28 @@
 	/*jshint -W117, -W097*/
 	angular.module('modules.dash')
 
-		.controller('DashCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO, userTypes) {
+		.controller('dashboardCtrl', function ($scope, $rootScope,$log,pouchDB, localStorageService, $state, $translate, http, blockUI, DTO, userTypes) {
 			var vm = this;
 			vm.user = localStorageService.get('user');
 
-			vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.private.dashboard.tasks', disable: false},
-				{heading: $translate.instant('REFERENCES'), route: 'main.private.dashboard.references', disable: false },
-				{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.private.dashboard.notifications', disable: false },
-				{heading: $translate.instant('MYFORMS'), route:'main.private.dashboard.catalog', disable: false},
-				{heading: $translate.instant('DRAFTS'), route:'main.private.dashboard.drafts', disable: false}
+			vm.tabData = [{heading: $translate.instant('TASKS'), route: 'main.dashboard.tasks', disable: false},
+				{heading: $translate.instant('REFERENCES'), route: 'main.dashboard.references', disable: false },
+				{heading: $translate.instant('NOTIFICATIONS'),badge: 0, route: 'main.dashboard.notifications', disable: false },
+				{heading: $translate.instant('MYFORMS'), route:'main.dashboard.catalog', disable: false},
+				{heading: $translate.instant('DRAFTS'), route:'main.dashboard.drafts', disable: false}
 			];
 
 			if (userTypes.patient !==vm.user.userType) {
 				vm.tabData.push({
 					heading: $translate.instant('PATIENTS'),
-					route: 'main.private.dashboard.patients',
+					route: 'main.dashboard.patients',
 					disable: false
 				});
 			}
 
 			if (vm.user.admin || (vm.user.userType === userTypes.staff)) {
 				vm.tabData.push({heading: $translate.instant('STAFF'),
-					route:'main.private.dashboard.staff',
+					route:'main.dashboard.staff',
 					disable: false});
 			}
 

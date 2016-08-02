@@ -6,7 +6,7 @@ angular.module('modules.dash')
 		var vm = this;
 
 		if (!$stateParams.id || $stateParams.id === '' || $stateParams.id === null) {
-			$state.go('main.private.dashboard.staff');
+			$state.go('main.dashboard.staff');
 			return;
 		}
 	    vm.staffDTO = DTO.staffDTO();
@@ -147,7 +147,7 @@ angular.module('modules.dash')
 					blockUI.stop();
 					if (res.state) {
 						alertService.success(res.state.msg);
-						$state.go('main.private.dashboard.staff');
+						$state.go('main.dashboard.staff');
 					}
 				});
 		};

@@ -2,48 +2,29 @@
 /*jshint -W117, -W097*/
 
 angular.module('modules.dash')
-	.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO) {
+	.controller('patientsEditorCtrl', function($state, http, blockUI, $timeout, alertService, $scope, DTO){
 		var vm = this;
-		vm.user = localStorageService.get('user');
+		vm.patientsDTO = DTO.patientsDTO();
 
-		vm.tabPatient = function() {
-			vm.referencesDTO = DTO.referencesDTO();
-			vm.referencesDTO.userType = 'patient';
-		};
-
-		vm.tabDoctor = function(){
-			vm.referencesDTO = DTO.referencesDTO();
-			vm.referencesDTO.userType = 'doctor';
-		};
-		vm.tabDoctor();
-
-		vm.onSubmit = function () {
-			http.post('/references/create', vm.referencesDTO)
-				.then(function () {
+		vm.addPatients = function () {
+			http.post('/patients/create', vm.patientsDTO)
+				.then(function (res) {
 					blockUI.stop();
-					$state.go('main.private.dashboard.references');
+					if (res.state) {
+						alertService.success(res.state.msg);
+					}
+					$timeout(function () {
+						$state.go('main.dashboard.patients');
+					}, 500);
 				});
 		};
 
-		vm.getTypes = function() {
-			vm.criteriaDTO = DTO.criteriaDTO();
-			vm.criteriaDTO.type = 'doctor';
-			 http.post('/types/all', vm.criteriaDTO)
-				 .then(function (res) {
-					 blockUI.stop();
-					 if (res.result) {
-						 vm.types = res.result;
-					 }
-				 });
-		};
-		vm.getTypes();
 
-	//TODO: Guys please move this dtpicker to service!!!!!!!
-	//Datepicker
+//Datepicker
 		$scope.today = function() {
 			$scope.dt = new Date();
-		};
 
+		};
 		$scope.today();
 
 		$scope.clear = function() {
@@ -69,7 +50,6 @@ angular.module('modules.dash')
 		};
 
 		$scope.toggleMin();
-
 
 		$scope.open1 = function() {
 			$scope.popup1.opened = true;
@@ -97,7 +77,6 @@ angular.module('modules.dash')
 
 		var tomorrow = new Date();
 		tomorrow.setDate(tomorrow.getDate() + 1);
-
 		var afterTomorrow = new Date();
 		afterTomorrow.setDate(tomorrow.getDate() + 1);
 		$scope.events = [

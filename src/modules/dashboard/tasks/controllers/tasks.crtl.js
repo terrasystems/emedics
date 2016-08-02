@@ -101,7 +101,7 @@ angular.module('modules.dash')
 		vm.allTasks();
 
 		vm.staffEdit = function (id) {
-			$state.go('main.private.dashboard.user.templates', {id: id});
+			$state.go('main.dashboard.user.templates', {id: id});
 		};
 
 		vm.onAssignTask = function (id, stafs, $event) {
@@ -182,7 +182,7 @@ angular.module('modules.dash')
 								if (res.result) {
 									alertService.success(res.state.message);
 									newTaskID = res.result.id;
-									$state.go('main.private.dashboard.patients.editor', {
+									$state.go('main.dashboard.patients.editor', {
 										id: newTaskID,
 										type: 'tasks',
 										patId: patientId

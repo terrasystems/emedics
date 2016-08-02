@@ -1,0 +1,30 @@
+<div class="pad"></div>
+<button type="submit" ng-click="vm.return();" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left">&nbsp;</i></button>
+
+<p></p><p></p>
+
+<div class="row">
+	<p class="col-md-4 col-sm-4"><label><span translate="NAME"></span></label>: {{vm.forUser.name}}</p>
+	<p class="col-md-4 col-sm-4"><label><span translate="EMAIL"></span></label>: {{vm.forUser.email}}</p>
+	<p class="col-md-4 col-sm-4"><label><span translate="PHONE"></span></label>: {{vm.forUser.phone || ' -'}}</p>
+</div>
+
+<div class="container ui-list-view">
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th translate="NAME"></th>
+			<th translate="COUNT"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-click="vm.openHistory(item);" ng-repeat="item in vm.templates">
+			<td>{{item.name}}</td>
+			<td>{{item.events.length}}</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<div ng-if="vm.templates.length==0" class="text-center"><span><h4><span translate="NO_DATA"></span></h4></span></div>
+
+</div>
