@@ -3,7 +3,7 @@
 
 	angular.module('modules.dash')
 
-		.controller('settingsCtrl', function ($translate, blockUI, http, DTO, regFields, alertService, userTypes, localStorageService) { //NOSONAR
+		.controller('settingsCtrl', function ($translate, auth, blockUI, http, DTO, regFields, alertService, userTypes, localStorageService) { //NOSONAR
 			var vm = this,
 					criteriaDTO = DTO.criteriaDTO(),
 					userDTO = DTO.userDTO(),
@@ -64,8 +64,7 @@
 
 			function onSubmitForm(form) {
 				if(form.$name === 'vm.passForm') {
-					changePassDTO.newPass = vm.pass.new;
-					changePassDTO.oldPass = vm.pass.old;
+					changePassDTO = DTO.mergeDTO(changePassDTO, vm.pass);
 					changePassword(changePassDTO);
 				} else {
 					userDTO = DTO.mergeDTO(userDTO, vm.settingsModel);
@@ -73,17 +72,16 @@
 				}
 			};
 
-			//TODO: implement post request to /user/edit
 			function saveSettings(userDTO) {
 				blockUI.start();
 				http.post('/user/edit', userDTO)
 					.then(function (res) {
 						alertService.success($translate.instant(res.msg));
+						auth.saveUserData(res.result);
 						blockUI.stop();
 					});
 			};
 
-			//TODO: implement post request to /user/change_pass
 			function changePassword(changePassDTO) {
 				blockUI.start();
 				http.post('/user/change_pass', changePassDTO)
