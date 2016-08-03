@@ -66,7 +66,7 @@
 
 				function insertTypes(index, res) {
 					_.each(vm.tabs[index].form.fields, function (field) {
-						if ('user.type' === field.key)
+						if ('type' === field.key)
 							field.templateOptions.options = _.map(res, function (item) {
 								item.value = {id: item.id, name: item.name, userType: item.userType};
 								return item;
@@ -86,10 +86,10 @@
 
 			vm.onSubmit = function () {
 
-				vm.userDTO = DTO.mergeDTO(DTO.userDTO(), vm.reg.user);
+				vm.userDTO = DTO.mergeDTO(DTO.userDTO(), vm.reg);
 				vm.userDTO.userType = vm.tabs[vm.active].type;
 				if (userTypes.org === vm.tabs[vm.active].type)
-					vm.reg.user.admin = true;
+					vm.reg.admin = true;
 
 			http.post('/auth/registration',vm.userDTO)
 				.then(function (res) {

@@ -7,7 +7,7 @@
 				[
 					{
 						className: 'col-md-12',
-						key: 'user.firstName',
+						key: 'firstName',
 						type: 'input',
 						templateOptions: {
 							label: $translate.instant('NAME'),
@@ -20,7 +20,7 @@
 					},
 					{
 						className: 'col-md-12',
-						key: 'user.lastName',
+						key: 'lastName',
 						type: 'input',
 						templateOptions: {
 							label: $translate.instant('LAST_NAME'),
@@ -33,7 +33,7 @@
 					},
 					{
 						className: 'col-md-12',
-						key: 'user.dob',
+						key: 'dob',
 						type: 'datepicker',
 						templateOptions: {
 							type: 'text',
@@ -47,7 +47,7 @@
 						 }*/
 					}, {
 					className: 'col-md-12',
-					key: 'user.email',
+					key: 'email',
 					type: 'input',
 					validators: {
 						EmailAddress: {
@@ -75,7 +75,7 @@
 				},
 					{
 						className: 'col-md-12',
-						key: 'user.pass',
+						key: 'pass',
 						type: 'input',
 						templateOptions: {
 							type: 'password',
@@ -88,7 +88,7 @@
 						}
 					}, {
 					className: 'col-md-12',
-					key: 'user.address',
+					key: 'address',
 					type: 'input',
 					templateOptions: {
 						required: false,
@@ -101,7 +101,7 @@
 				},
 					{
 						className: 'col-md-12',
-						key: 'user.phone',
+						key: 'phone',
 						type: 'input',
 						templateOptions: {
 							required: false,
@@ -121,7 +121,7 @@
 				return baseFields.concat([
 					{
 						className: 'col-md-12',
-						key: 'user.type',
+						key: 'type',
 						type: 'select',
 						templateOptions: {
 							required: true,
@@ -139,7 +139,7 @@
 				return baseFields.concat([
 					{
 						className: 'col-md-12',
-						key: 'user.orgname',
+						key: 'orgName',
 						type: 'input',
 						templateOptions: {
 							required: true,
@@ -152,7 +152,7 @@
 					},
 					{
 						className: 'col-md-12',
-						key: 'user.www',
+						key: 'website',
 						type: 'input',
 						templateOptions: {
 							required: false,
@@ -165,7 +165,7 @@
 					},
 					{
 						className: 'col-md-12',
-						key: 'user.type',
+						key: 'type',
 						type: 'select',
 						templateOptions: {
 							required: true,
@@ -202,7 +202,7 @@
 					},
 					{
 						className: 'col-md-12',
-						key: 'user.type',
+						key: 'type',
 						type: 'select',
 						templateOptions: {
 							required: true,
