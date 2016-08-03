@@ -4,7 +4,7 @@
 	/*jshint -W117, -W097*/
 
 	angular.module('modules.dash')
-		.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO,alertService) {
+		.controller('referencesEditorCtrl', function ($scope, $translate, $state, localStorageService, http, blockUI, DTO, alertService) {
 			var vm = this;
 			vm.user = localStorageService.get('user');
 			vm.criteriaDTO = DTO.criteriaDTO();
