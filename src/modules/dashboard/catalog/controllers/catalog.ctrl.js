@@ -89,23 +89,23 @@
 			vm.arr = [];
 
 			vm.getTemplates = function (type) {
+				var url;
 				if ('all' === type) {
-					 http.post('/catalog/all', DTO.criteriaDTO())
-						.then(function (res) {
-							blockUI.stop();
-							if (res.state) {
-								vm.template = res.result;
-							}
-						});
-				} else {
-					http.post('/mytemplates/all', DTO.criteriaDTO())
-						.then(function (res) {
-							blockUI.stop();
-							if (res.state) {
-								vm.template = res.result;
-							}
-						});
+					url = '/catalog/all';
 				}
+			 else {
+				 url = '/mytemplates/all';
+				}
+
+					 http.post(url, DTO.criteriaDTO())
+						.then(function (res) {
+							blockUI.stop();
+							if (res.state) {
+								vm.template = res.result;
+							}
+						});
+
+
 
 			};
 
