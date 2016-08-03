@@ -107,7 +107,8 @@
 				patientsDTO: patientsDTO,
 				catalogFilter: catalogFilter,
 				userDTO: userDTO,
-				loginDTO: loginDTO
+				loginDTO: loginDTO,
+				changePassDTO: changePassDTO
 			};
 
 			//region <body>
@@ -227,6 +228,13 @@
 				return {
 					email: null,
 					password: null
+				}
+			};
+
+			function changePassDTO() {
+				return {
+					oldPass: null,
+					newPass: null
 				}
 			};
 			//endregion
