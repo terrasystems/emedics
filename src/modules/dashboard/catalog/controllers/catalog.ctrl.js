@@ -1,6 +1,6 @@
 (function () {
 
-	/*jshint -W117, -W097*/
+	/*jshint -W117, -W097, -W007*/
 
 	angular.module('modules.dash')
 
@@ -11,18 +11,58 @@
 			vm.myForms = [];
 			vm.user = localStorageService.get('user');
 			vm.filter = DTO.catalogFilter();
-			vm.patCheckboxes = ['All', 'Free', 'Paid'];
-			vm.docCheckboxes = ['Med', 'Pat'];
+			vm.patCheckboxes = ['all', 'free', 'paid'];
+			vm.docCheckboxes = ['medical', 'patient'];
 
-       if ('DOCTOR' === vm.userType.userType) {
-					vm.checkboxes= vm.patCheckboxes.concat(vm.docCheckboxes);
-				}else{
-	       vm.checkboxes=vm.patCheckboxes;
-       }
+			if ('DOCTOR' === vm.userType.userType) {
+				vm.checkboxes = vm.patCheckboxes.concat(vm.docCheckboxes);
+			} else {
+				vm.checkboxes = vm.patCheckboxes;
+			}
+			function applyFilter() {
 
+				function checkFilter(item, filter) {
+					return true;
+				}
 
+				vm.FormTemplate = _.filter(vm.FormTemplate, function (item) {
+					if (checkFilter(item, vm.filter)) {
+						return item;
+					}
+				});
+			}
 
-
+			vm.check = function (type) {
+				if (('all' !== type) && (true === vm.filter[type])) {
+					return;
+				}
+				switch (type) {
+					case 'patient':
+					{
+						vm.filter.medical = true;
+						break;
+					}
+					case 'medical':
+					{
+						vm.filter.patient = true;
+						break;
+					}
+					case 'free':
+					{
+						vm.filter.paid = true;
+						break;
+					}
+					case 'paid':
+					{
+						vm.filter.free = true;
+						break;
+					}
+					default :
+					{
+						selectAll();
+					}
+				}
+			}
 
 			function selectAll() {
 				var countTrue = 0, keys;
@@ -48,32 +88,42 @@
 
 			vm.arr = [];
 
-			vm.getAllTemplates = function () {
-				return http.post('/catalog/all', DTO.criteriaDTO())
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							vm.FormTemplate = res.result;
-						}
-						return res.result;
-					});
+			vm.getTemplates = function (type) {
+				if ('all' === type) {
+					 http.post('/catalog/all', DTO.criteriaDTO())
+						.then(function (res) {
+							blockUI.stop();
+							if (res.state) {
+								vm.template = res.result;
+							}
+						});
+				} else {
+					http.post('/mytemplates/all', DTO.criteriaDTO())
+						.then(function (res) {
+							blockUI.stop();
+							if (res.state) {
+								vm.template = res.result;
+							}
+						});
+				}
+
 			};
 
-			vm.getAllTemplates();
+			//vm.getTemplates('all');
 
 
-			vm.getMyTemplates = function () {
-				return http.post('/mytemplates/all', DTO.criteriaDTO())
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							vm.myForms = res.result;
-						}
-						return res.result;
-					});
-			};
-
-			vm.getMyTemplates();
+			//vm.getMyTemplates = function () {
+			//	http.post('/mytemplates/all', DTO.criteriaDTO())
+			//		.then(function (res) {
+			//			blockUI.stop();
+			//			if (res.state) {
+			//				vm.myForms = res.result;
+			//			}
+			//
+			//		});
+			//};
+			//
+			//vm.getMyTemplates();
 
 
 			vm.Buy = function () {
@@ -110,6 +160,7 @@
 
 			vm.AddTask = function (obj) {
 
+				console.log('added' + obj);
 			};
 
 		});

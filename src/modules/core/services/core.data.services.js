@@ -188,7 +188,7 @@
 			}
 
 			function catalogFilter() {
-				return {all: true, paid: true, free: true, patient: true, med: true, search: ''};
+				return {all: true, paid: true, free: true, patient: true, medical: true, search: ''};
 			};
 
 			function userDTO() {

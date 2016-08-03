@@ -3,11 +3,12 @@
 
 		<uib-tabset>
 			<div class="search_criterias pull-right" >
+				<input style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px" placeholder="search forms..." type="text"/>
 				<label ng-repeat="checkbox in vm.checkboxes">
-					<input type="checkbox" data-checklist-model="user.roles" data-checklist-value="role"> {{checkbox}}
+					<input  style="width: 30px;" type="checkbox" ng-model="vm.filter[checkbox]" ng-change="vm.check(checkbox)"> {{checkbox}}
 				</label>
 			</div>
-			<uib-tab ng-click="vm.getAllTemplates();" index="0" heading="Main">
+			<uib-tab ng-click="vm.getTemplates('all');" index="0" heading="Main">
 				<table class="table table-hover header-fixed1">
 					<thead>
 						<tr>
@@ -19,7 +20,7 @@
 					</thead>
 
 					<tbody>
-					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
+					<tr ng-repeat="form in vm.template | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
@@ -46,7 +47,7 @@
 				</table>
 			</uib-tab>
 
-			<uib-tab ng-click="vm.getMyTemplates();" index="1" heading="My">
+			<uib-tab ng-click="vm.getTemplates('my');" index="1" heading="My">
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You	dont have any forms</h5></div>
 
 				<table class="table table-hover header-fixed1">
@@ -60,7 +61,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="forms in vm.myForms | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
+						<tr ng-repeat="forms in vm.template | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
 							<td>{{forms.templateDto.number}}</td>
 							<td>{{forms.templateDto.name}}</td>
 							<td>{{forms.templateDto.descr}}</td>
