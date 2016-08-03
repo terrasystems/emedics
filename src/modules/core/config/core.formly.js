@@ -47,11 +47,9 @@
 
 			formlyConfig.setType({
 				name: 'datepicker',
-				template: '<div class="input-group">' +
-				'<input placeholder="choose your birth date" aria-describedby="basic-addon2" type="text" id="{{::id}}" name="{{::id}}" ng-model="model[options.key]" class="form-control col-md-12 col-sm-12 col-lg-12 " ng-click="datepicker.open($event)" uib-datepicker-popup="{{to.datepickerOptions.format}}" is-open="datepicker.opened" datepicker-options="to.datepickerOptions"/>' +
-				'<span class="input-group-addon" id="basic-addon2" >' +
-				'<i class="glyphicon glyphicon-calendar"></i>' +
-				'</span></div>',
+				template: '<div class="">' +
+				'<input placeholder="choose your birth date" aria-describedby="basic-addon" type="text" id="{{::id}}" name="{{::id}}" ng-model="model[options.key]" class="form-control col-md-12 col-sm-12 col-lg-12 " ng-click="datepicker.open($event)" uib-datepicker-popup="{{to.datepickerOptions.format}}" is-open="datepicker.opened" datepicker-options="to.datepickerOptions"/>' +
+				'</div>',
 				wrapper: ['bootstrapLabel', 'bootstrapHasError'],
 				defaultOptions: {
 					ngModelAttrs: ngModelAttrs,

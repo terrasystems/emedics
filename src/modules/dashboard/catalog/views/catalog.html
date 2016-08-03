@@ -9,7 +9,6 @@
 				<label ng-show="vm.userType.type === 'doctor' || vm.userType.type === 'stuff'" class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xMED" ng-change="vm.onMed();">Med</label>
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xBOUGHT" ng-change="vm.onBought();">Bought</label>
 				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xFREE" ng-change="vm.onFree();">Free</label>
-				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
 			</div>
 			<uib-tab ng-click="vm.getAllTemplates();" index="0" heading="Main">
 				<table class="table table-hover header-fixed1">

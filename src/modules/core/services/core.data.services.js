@@ -22,16 +22,26 @@
 		.service('alertService', function (toastr) {
 			return {
 				success: function (msg, titleText, msgParam) {
-					toastr.success(msg, titleText, msgParam);
+					if (msg || titleText) {
+
+						toastr.success(msg, titleText, msgParam);
+					}
 				},
 				warning: function (msg, titleText, msgParam) {
-					toastr.warning(msg, titleText, msgParam);
+					if (msg || titleText) {
+
+						toastr.warning(msg, titleText, msgParam);
+					}
 				},
 				error: function (msg, titleText, msgParam) {
-					toastr.error(msg, titleText, msgParam);
+					if (msg || titleText) {
+						toastr.error(msg, titleText, msgParam);
+					}
 				},
 				info: function (msg, titleText, msgParam) {
-					toastr.info(msg, titleText, msgParam);
+					if (msg || titleText) {
+						toastr.info(msg, titleText, msgParam);
+					}
 				}
 			};
 		})
