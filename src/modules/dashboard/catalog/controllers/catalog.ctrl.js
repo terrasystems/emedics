@@ -3,34 +3,70 @@
 	/*jshint -W117, -W097, -W007*/
 
 	angular.module('modules.dash')
+		.controller('catalogCtrl', catalogCtrl);
 
-		.controller('catalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
+	function catalogCtrl (http, blockUI, localStorageService, $scope, DTO, $log) {
+		{
 			var vm = this;
-			vm.userType = localStorageService.get('user');
-			vm.FormTemplate = [];
-			vm.myForms = [];
-			vm.user = localStorageService.get('user');
+			vm.template = [];
+			vm.user = localStorageService.get('user')? localStorageService.get('user'):{};
 			vm.filter = DTO.catalogFilter();
 			vm.patCheckboxes = ['all', 'free', 'paid'];
 			vm.docCheckboxes = ['medical', 'patient'];
 
-			if ('DOCTOR' === vm.userType.userType) {
+			if ('DOCTOR' === vm.user.userType) {
 				vm.checkboxes = vm.patCheckboxes.concat(vm.docCheckboxes);
 			} else {
 				vm.checkboxes = vm.patCheckboxes;
 			}
+
+			$scope.$watch(
+
+				'vm.filter'
+				,
+				function (newValue, oldValue) {
+
+					if (!angular.equals(newValue, oldValue)) {
+						applyFilter();
+					}
+				}, true
+			);
+
+			function checkFilter(item, filter) {
+				var mass=[], result = true;
+
+				if(filter.free && !filter.paid){
+					mass.push({field:'commerce', value:false});
+				}
+				if(filter.paid && !filter.free){
+					mass.push({field:'commerce', value:true});
+				}
+				if (filter.patient && !filter.medical){
+					mass.push({field:'type', value:'PATIENT'});
+				}
+				if (filter.medical && !filter.patient){
+					mass.push({field:'type',value:'MEDICAL'});
+				}
+				_.each(mass, function (res) {
+					if (item[res.field] !== res.value){
+						result = false;
+					}
+
+				});
+				return result;
+
+			};
+
 			function applyFilter() {
 
-				function checkFilter(item, filter) {
-					return true;
-				}
 
-				vm.FormTemplate = _.filter(vm.FormTemplate, function (item) {
+
+				vm.filterTemplate = _.filter(vm.template, function (item) {
 					if (checkFilter(item, vm.filter)) {
 						return item;
 					}
 				});
-			}
+			};
 
 			vm.check = function (type) {
 				if (('all' !== type) && (true === vm.filter[type])) {
@@ -96,41 +132,28 @@
 				if ('all' === type) {
 					url = '/catalog/all';
 				}
-			 else {
-				 url = '/mytemplates/all';
+				else {
+					url = '/mytemplates/all';
 				}
 
-					 http.post(url, DTO.criteriaDTO())
-						.then(function (res) {
-							blockUI.stop();
-							if (res.state) {
-								vm.template = res.result;
-							}
-						});
+				http.post(url, DTO.criteriaDTO())
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							vm.template = res.result;
+							vm.filterTemplate = res.result;
+						}
+					});
 
 
 
 			};
 
-			//vm.getTemplates('all');
-
-
-			//vm.getMyTemplates = function () {
-			//	http.post('/mytemplates/all', DTO.criteriaDTO())
-			//		.then(function (res) {
-			//			blockUI.stop();
-			//			if (res.state) {
-			//				vm.myForms = res.result;
-			//			}
-			//
-			//		});
-			//};
-			//
-			//vm.getMyTemplates();
+			vm.getTemplates('all');
 
 
 			vm.Buy = function () {
-				console.log('PAID');
+				$log.debug('PAID');
 			};
 
 			vm.Load = function (id) {
@@ -163,8 +186,11 @@
 
 			vm.AddTask = function (obj) {
 
-				console.log('added' + obj);
+				$log.debug('added' + obj);
 			};
 
-		});
+		}
+	};
+
+
 })();

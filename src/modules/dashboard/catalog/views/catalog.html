@@ -20,7 +20,7 @@
 					</thead>
 
 					<tbody>
-					<tr ng-repeat="form in vm.template | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
+					<tr ng-repeat="form in vm.filterTemplate" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
@@ -61,7 +61,7 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="forms in vm.template | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
+						<tr ng-repeat="forms in vm.filterTemplate" ng-click="vm.onClick(form.id)" >
 							<td>{{forms.templateDto.number}}</td>
 							<td>{{forms.templateDto.name}}</td>
 							<td>{{forms.templateDto.descr}}</td>
