@@ -35,20 +35,13 @@
 			function checkFilter(item, filter) {
 				var mass=[], result = true;
 
-				if(filter.free && !filter.paid){
-					mass.push({field:'commerce', value:false});
-				}
-				if(filter.paid && !filter.free){
-					mass.push({field:'commerce', value:true});
-				}
-				if (filter.patient && !filter.medical){
-					mass.push({field:'type', value:'PATIENT'});
-				}
-				if (filter.medical && !filter.patient){
-					mass.push({field:'type',value:'MEDICAL'});
-				}
+				filter.free && !filter.paid && mass.push({key:'commerce', value:false});
+				filter.paid && !filter.free && mass.push({key:'commerce', value:true});
+				filter.patient && !filter.medical && mass.push({key:'type', value:'PATIENT'});
+				filter.medical && !filter.patient && mass.push({key:'type',value:'MEDICAL'});
+
 				_.each(mass, function (res) {
-					if (item[res.field] !== res.value){
+					if (item[res.key] !== res.value){
 						result = false;
 					}
 
@@ -58,12 +51,13 @@
 			}
 
 			function applyFilter() {
-          vm.filterTemplate = _.filter(vm.template, function (item) {
+
+				vm.filterTemplate = _.filter(vm.template, function (item) {
 					if (checkFilter(item, vm.filter)) {
 						return item;
 					}
 				});
-			}
+			};
 
 			vm.check = function (type) {
 				if (('all' !== type) && (true === vm.filter[type])) {
@@ -115,7 +109,7 @@
 				_.each(keys, function (key) {
 					countTrue += vm.filter[key] ? 1 : 0;
 				});
-				if (countTrue < keys.length) {
+				if ((vm.filter.all) || (countTrue < keys.length)){
 					checkAll(true);
 				} else {
 					checkAll(false);
