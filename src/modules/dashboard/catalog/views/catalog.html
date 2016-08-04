@@ -3,7 +3,7 @@
 
 		<uib-tabset>
 			<div class="search_criterias pull-right" >
-				<input style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px" placeholder="search forms..." type="text"/>
+				<!--<input style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px" placeholder="search forms..." type="text"/>-->
 				<label ng-repeat="checkbox in vm.checkboxes">
 					<input  style="width: 30px;" type="checkbox" ng-model="vm.filter[checkbox]" ng-change="vm.check(checkbox)"> {{checkbox}}
 				</label>
@@ -27,16 +27,16 @@
 						<td>{{form.commercialEnum}}
 							<div class="pull-right btn-group btn-group-xs">
 								<button class="btn btn-danger btn-small"
-										ng-click="vm.Buy(form.id);form.isPay=true;form.isLoad=true;"
-										ng-disabled="form.isPay"
+										ng-click="vm.buy(form.id);"
+										ng-if="form.commerce === true"
 										translate="BUY">
 								</button>
 								<button class="btn btn-success btn-small"
-										ng-click="vm.Load(form.id);form.isLoad=true;"
+										ng-click="vm.load(form.id);"
 										translate="LOAD">
 								</button>
 								<button class="btn btn btn-info btn-small"
-										ng-click="vm.View(form.id);"
+										ng-click="vm.view(form.id);"
 										translate="VIEW">
 								</button>
 							</div>
@@ -68,12 +68,12 @@
 							<td>{{forms.type}}
 								<div class=" pull-right btn-group btn-group-xs">
 									<button class="btn btn-danger  btn-small"
-											ng-click="vm.Remove(forms.id);">
+											ng-click="vm.remove(forms.id);">
 										<i class="glyphicon glyphicon-trash"></i>
 									</button>
 									<button style="float: right"
 											class="btn btn-success btn-small"
-											ng-click="vm.AddTask(forms);">
+											ng-click="vm.addTask(forms);">
 										<span translate="LOAD"></span>
 									</button>
 								</div>

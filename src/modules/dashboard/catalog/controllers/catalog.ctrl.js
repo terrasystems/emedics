@@ -14,7 +14,7 @@
 			vm.patCheckboxes = ['all', 'free', 'paid'];
 			vm.docCheckboxes = ['medical', 'patient'];
 
-			if ('DOCTOR' === vm.user.userType) {
+			if ('DOCTOR' === vm.user.userType || 'ORG' === vm.user.userType) {
 				vm.checkboxes = vm.patCheckboxes.concat(vm.docCheckboxes);
 			} else {
 				vm.checkboxes = vm.patCheckboxes;
@@ -55,18 +55,15 @@
 				});
 				return result;
 
-			};
+			}
 
 			function applyFilter() {
-
-
-
-				vm.filterTemplate = _.filter(vm.template, function (item) {
+          vm.filterTemplate = _.filter(vm.template, function (item) {
 					if (checkFilter(item, vm.filter)) {
 						return item;
 					}
 				});
-			};
+			}
 
 			vm.check = function (type) {
 				if (('all' !== type) && (true === vm.filter[type])) {
@@ -98,7 +95,7 @@
 						selectAll();
 					}
 				}
-			}
+			};
 
 			function selectAll() {
 				var countTrue = 0, keys, allwaysTrueKeys = ['patient', 'free'];
@@ -152,11 +149,11 @@
 			vm.getTemplates('all');
 
 
-			vm.Buy = function () {
+			vm.buy = function () {
 				$log.debug('PAID');
 			};
 
-			vm.Load = function (id) {
+			vm.load = function (id) {
 				http.get('/mytemplates/add/' + id)
 					.then(function (res) {
 
@@ -166,7 +163,7 @@
 				);
 			};
 
-			vm.View = function (id) {
+			vm.view = function (id) {
 				http.get('/catalog/view/' + id)
 					.then(function (res) {
 						blockUI.stop();
@@ -174,17 +171,17 @@
 					});
 			};
 
-			vm.Remove = function (id) {
+			vm.remove = function (id) {
 				http.get('/mytemplates/remove/' + id)
 					.then(function (res) {
-						vm.getMyTemplates();
+						vm.getTemplates();
 						blockUI.stop();
 
 						return res.result;
 					});
 			};
 
-			vm.AddTask = function (obj) {
+			vm.addTask = function (obj) {
 
 				$log.debug('added' + obj);
 			};
