@@ -355,6 +355,23 @@ module.exports = function(grunt) {
 		'configureProxies',
 		'connect:livereload',
 		'watch']);
+
+	grunt.registerTask('serve-compress', [
+		'clean:dist',
+		'includeSource:dist',
+		'wiredep:dist',
+		'useminPrepare',
+		'ngtemplates',
+		'concat',
+		'replace:dist',
+		'ngAnnotate:dist',
+		'copy:dist',
+		'cssmin',
+		'uglify',
+		'usemin',
+		'configureProxies',
+		'connect:livereload',
+		'watch']);
 	grunt.registerTask('buildA', [
 		//'oneskyExport',
 		'clean:dist',
