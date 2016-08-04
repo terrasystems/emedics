@@ -156,6 +156,7 @@
 
 		function taskDTO() {
 			return {
+				_id: null,
 				id: null,
 				fromUser: null,
 				toUser: null,
@@ -165,9 +166,7 @@
 				date: null,
 				status: null,
 				model: null,
-				_id: null,
-				_rev: null,
-				_type: null
+				type: null
 			};
 
 		}
