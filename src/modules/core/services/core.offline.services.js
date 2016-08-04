@@ -2,7 +2,7 @@
 	/*jshint -W117, -W097, -W089, -W061*/
 
 	angular.module('modules.core')
-		.service('offlineRepository', function ($q, $log, localStorageService, pouchDB, $http, constants, designDoc) {
+		.service('offlineRepository', function ($q, $log, alertService, localStorageService, pouchDB, $http, constants, designDoc) { //NOSONAR
 			var vm = this
 
 			function syncOnline() {
@@ -22,57 +22,35 @@
 				});
 			};
 
-			//Save or add draft document
-			function addDraft(id, info, model) {
-				var deferred = $q.defer();
-				if (id === 'add') {
-					id = 'draft:' + info.rawData.template.id;
-
-				}// else {
-				vm.db.get(id).then(function (doc) {
-					doc.body = {sections: model, formInfo: info};
-
-					vm.db.put(doc, function (res) {
-						deferred.resolve(res);
-					});
+			//create or update offline draft document
+			function addPouchDoc(doc) {
+				var deferred = $q.defer(),
+						type = doc && doc.type && doc.type.toUpperCase()+'_' || '';
+				vm.db.get(doc._id).then(function (res) {
+					if (!_.isEqual(_.omit(res, '_rev'), doc)) { // check if docs are equal to not update on every page refresh
+						doc._rev = res._rev;
+						vm.db.put(doc).then(function (res) {
+							alertService.success(res.ok, type+'UPDATED');
+						}, function (err) {
+							alertService.error(err.message, type+'UPDATE_ERROR');
+						});
+					}
 				}, function (error) {
-					if (404 === error.status) {
-						var doc = {
-							_id: 'draft:' + info.rawData.template.id,
-							type: 'draft',
-							name: info.name,
-							body: {sections: model, formInfo: info}
-						};
-						vm.db.put(doc, function (res) {
-							deferred.resolve(res);
+					if (error && error.name === 'not_found') {
+						vm.db.put(doc).then(function (res) {
+							alertService.success(res.ok, type+'CREATED');
+						}, function (err) {
+							alertService.error(err.message, type+'CREATE_ERROR');
 						});
 					}
 				});
-				//}
 				return deferred.promise;
 			}
 
-			function createDesignDoc(db) {
+			function createDesignDoc() {
 				// create a design doc
-				var designDoc = designDoc;
-				// get/set design
-				function putDoc(created) {
-					db.post(designDoc).then(function (res) {
-						$log.debug('design Doc '+created+', ', res.rev);
-					}, function (err) {
-						if (err.status !== 409)
-							$log.error('design Doc put failed, ', err);
-					});
-				}
-
-				db.get('_design/index').then(function (doc) {
-					if (!_.isEqual(_.omit(doc, '_rev'), designDoc)) { // check if docs are equal to not update on every page refresh
-						designDoc._rev = doc._rev;
-						putDoc('created');
-					}
-				}, function () {
-					putDoc('updated');
-				});
+				var ddoc = designDoc.index;
+					addPouchDoc(ddoc);
 			};
 
 			function getAllTasks() {
@@ -148,16 +126,27 @@
 			function loadTask() {
 
 			};
+
+			function deleteTask(_id) {
+				var deferred = $q.defer();
+				vm.db.get(_id).then(function (doc) {
+					vm.db.remove(doc).then(function (res) {
+						deferred.resolve(res);
+					});
+				});
+				return deferred.promise;
+			};
+
 			function init() {
 				vm.user = localStorageService.get('user');
 				vm.db = pouchDB(vm.user.id);
 				vm.serv.__proto__ = vm.db;
-				createDesignDoc(vm.db);
+				createDesignDoc();
 			};
 			vm.serv = {
 				init: init,
 				syncOnline: syncOnline,
-				addDraft: addDraft,
+				addPouchDoc: addPouchDoc,
 				getAllTasks: getAllTasks,
 				getAllTemplates: getAllTemplates,
 				getUserTemplates: getUserTemplates,
@@ -167,7 +156,8 @@
 				getTask: getTask,
 				sendTask: sendTask,
 				loadTask: loadTask,
-				editTask: editTask
+				editTask: editTask,
+				deleteTask : deleteTask
 			}
 			return vm.serv;
 		})
