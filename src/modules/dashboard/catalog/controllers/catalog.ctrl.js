@@ -65,12 +65,15 @@
 			}
 
 			function selectAll() {
-				var countTrue = 0, keys;
+				var countTrue = 0, keys, allwaysTrueKeys = ['patient', 'free'];
 
 				function checkAll(check) {
 					vm.filter.all = check;
 					_.each(keys, function (key) {
 						vm.filter[key] = check;
+					});
+					_.each(allwaysTrueKeys, function (key) {
+						vm.filter[key] = true;
 					});
 				}
 
