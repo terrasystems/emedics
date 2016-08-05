@@ -1,0 +1,26 @@
+<div class="row ">
+	<div class="content_modal">
+		<h4>{{vm.filterTitle}}:</h4>
+		<ui-select
+				multiple
+				ng-model="vm.search"
+				   theme="bootstrap"
+				   title="Choose a person"
+				   on-select="vm.onSelect($item)">
+			<ui-select-match placeholder="{{vm.placeholder}}...">{{$item.firstName}} {{$item.lastName}}</ui-select-match>
+			<ui-select-choices refresh="vm.findReferences($select.search)"
+							   refresh-delay="1"
+							   repeat="person in vm.references">
+				<div ng-bind-html="person.name | highlight: $select.search"></div>
+				<small> {{person.email}}</small>
+				<small>{{person.AddNew}}</small>
+			</ui-select-choices>
+		</ui-select>
+		<button ng-click="vm.addReference(person.id);" class="btn btn-success pull-right" translate="ADD"></button>
+
+
+
+	</div>
+</div>
+
+

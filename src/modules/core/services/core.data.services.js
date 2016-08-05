@@ -193,8 +193,9 @@
 		}
 
 		function catalogFilter() {
-			return {all: true, paid: true, free: true, patient: true, medical: true, search: ''};
-		};
+			return {commerce:[{key:'all',value:'all'},{key:'paid',value:true}, {key:'free',value:false}],
+			type:[{key:'all',value:'all'},{key:'patient',value: 'PATIENT'}, {key:'medical',value: 'MEDICAL'}], search: null};
+		}
 
 		function userDTO() {
 			return {

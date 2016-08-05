@@ -2,25 +2,41 @@
 	<div class="row ui-list-view">
 
 		<uib-tabset>
-			<div class="search_criterias pull-right" >
-				<!--<input style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px" placeholder="search forms..." type="text"/>-->
-				<label ng-repeat="checkbox in vm.checkboxes">
-					<input  style="width: 30px;" type="checkbox" ng-model="vm.filter[checkbox]" ng-change="vm.check(checkbox)"> {{checkbox}}
-				</label>
+			<div class="search_criterias pull-right">
+				<input ng-model="vm.find"
+					   style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px"
+					   placeholder="search forms..." type="text"/>
+				<ui-select ng-model="vm.filter.type" on-select="vm.applyFilter()" theme="bootstrap">
+					<ui-select-match  placeholder="Select type">{{$select.selected.key}}</ui-select-match>
+					<ui-select-choices repeat="type.value as type in vm.filterDTO.type ">
+						<div ng-bind-html="type.key | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+
+				<ui-select ng-model="vm.filter.commerce" on-select="vm.applyFilter()" theme="bootstrap">
+					<ui-select-match  placeholder="Select type">{{$select.selected.key}}</ui-select-match>
+					<ui-select-choices repeat="type.value as type in vm.filterDTO.commerce">
+						<div ng-bind-html="type.key | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+
 			</div>
+
+
 			<uib-tab ng-click="vm.getTemplates('all');" index="0" heading="Main">
 				<table class="table table-hover header-fixed1">
 					<thead>
-						<tr>
-							<th translate="NUMBER"></th>
-							<th translate="NAME"></th>
-							<th translate="DESCR"></th>
-							<th translate="STATUS"></th>
-						</tr>
+					<tr>
+						<th translate="NUMBER"></th>
+						<th translate="NAME"></th>
+						<th translate="DESCR"></th>
+						<th translate="STATUS"></th>
+					</tr>
 					</thead>
 
 					<tbody>
-					<tr ng-repeat="form in vm.filterTemplate" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
+					<tr ng-repeat="form in vm.filtered |filter:vm.find" ng-click="vm.onClick(form.id)"
+						ng-class="{'s-row-yellow': form.load}">
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
@@ -48,37 +64,38 @@
 			</uib-tab>
 
 			<uib-tab ng-click="vm.getTemplates('my');" index="1" heading="My">
-				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You	dont have any forms</h5></div>
+				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You
+					dont have any forms</h5></div>
 
 				<table class="table table-hover header-fixed1">
 					<thead>
-						<tr>
-							<th translate="NUMBER"></th>
-							<th translate="NAME"></th>
-							<th translate="DESCR"></th>
-							<th translate="STATUS"></th>
-						</tr>
+					<tr>
+						<th translate="NUMBER"></th>
+						<th translate="NAME"></th>
+						<th translate="DESCR"></th>
+						<th translate="STATUS"></th>
+					</tr>
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="forms in vm.filterTemplate" ng-click="vm.onClick(form.id)" >
-							<td>{{forms.templateDto.number}}</td>
-							<td>{{forms.templateDto.name}}</td>
-							<td>{{forms.templateDto.descr}}</td>
-							<td>{{forms.type}}
-								<div class=" pull-right btn-group btn-group-xs">
-									<button class="btn btn-danger  btn-small"
-											ng-click="vm.remove(forms.id);">
-										<i class="glyphicon glyphicon-trash"></i>
-									</button>
-									<button style="float: right"
-											class="btn btn-success btn-small"
-											ng-click="vm.addTask(forms);">
-										<span translate="LOAD"></span>
-									</button>
-								</div>
-							</td>
-						</tr>
+					<tr ng-repeat="forms in vm.filterTemplate" ng-click="vm.onClick(form.id)">
+						<td>{{forms.templateDto.number}}</td>
+						<td>{{forms.templateDto.name}}</td>
+						<td>{{forms.templateDto.descr}}</td>
+						<td>{{forms.type}}
+							<div class=" pull-right btn-group btn-group-xs">
+								<button class="btn btn-danger  btn-small"
+										ng-click="vm.remove(forms.id);">
+									<i class="glyphicon glyphicon-trash"></i>
+								</button>
+								<button style="float: right"
+										class="btn btn-success btn-small"
+										ng-click="vm.addTask(forms);">
+									<span translate="LOAD"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
 					</tbody>
 
 				</table>

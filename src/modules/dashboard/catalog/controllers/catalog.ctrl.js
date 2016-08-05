@@ -2,186 +2,149 @@
 
 	/*jshint -W117, -W097, -W007*/
 
+	function catalogCtrl(http, blockUI, localStorageService, $scope, DTO, $log, userTypes) {
+
+		var vm = this;
+		vm.filtered = [];
+		vm.find = '';
+		vm.user = localStorageService.get('user') ? localStorageService.get('user') : {};
+		vm.filterDTO = DTO.catalogFilter();
+		vm.filter = {commerce:'all', type:'all'};
+		vm.confFilter = [];
+		vm.filterTemplate = [];
+		vm.patCheckboxes = ['all', 'free', 'paid'];
+		vm.docCheckboxes = ['all', 'medical', 'patient'];
+
+
+		function applyCommerce(commerce, arr) {
+			if ('all' === commerce) {
+				return arr;
+			}
+			else {
+				return _.filter(arr, {commerce: commerce});
+			}
+		};
+
+		function applyType(type, arr) {
+			if ('all' === type) {
+				return arr;
+			}
+			else {
+				return _.filter(arr, {type: type});
+			}
+		}
+
+		function applySearch(search, arr) {
+			if (search) {
+				return _.filter(arr, {name: search});
+			} else
+			{
+				return arr;
+			}
+		}
+
+		vm.applyFilter = function () {
+			vm.filtered = applyCommerce(vm.filter.commerce, vm.template);
+			vm.filtered = applyType(vm.filter.type, vm.filtered);
+			vm.filtered = applySearch(vm.filter.search, vm.filtered);
+		};
+
+
+		/*
+		 vm.checkByType = function (type) {
+		 switch (type) {
+		 case'medical':
+		 {
+		 vm.filtered = apllyTypes('MEDICAL');
+		 break;
+		 }
+		 case'patient':
+		 {
+		 vm.filtered = apllyTypes('PATIENT');
+		 break;
+		 }
+		 case'paid':
+		 vm.filtered = apllyCommerce(null, true);
+		 break;
+
+		 case'free':
+		 vm.filtered = apllyCommerce(null, false);
+		 break;
+		 default:
+		 {
+		 vm.filtered = JSON.parse(JSON.stringify(vm.template));
+		 }
+		 }
+
+		 };
+		 */
+		vm.getTemplates = function (type) {
+			var url;
+			if ('all' === type) {
+				url = '/catalog/all';
+			}
+			else {
+				url = '/mytemplates/all';
+			}
+
+			http.post(url, DTO.criteriaDTO())
+				.then(function (res) {
+					blockUI.stop();
+					if (res.state) {
+						vm.template = res.result;
+						vm.filtered = angular.copy(res.result);
+					}
+				});
+
+
+		};
+
+		vm.getTemplates('all');
+
+
+		vm.buy = function () {
+			$log.debug('PAID');
+		};
+
+		vm.load = function (id) {
+			http.get('/mytemplates/add/' + id)
+				.then(function (res) {
+
+					return res.result;
+
+				}
+			);
+		};
+
+		vm.view = function (id) {
+			http.get('/catalog/view/' + id)
+				.then(function (res) {
+					blockUI.stop();
+					return res.result;
+				});
+		};
+
+		vm.remove = function (id) {
+			http.get('/mytemplates/remove/' + id)
+				.then(function (res) {
+					vm.getTemplates();
+					blockUI.stop();
+
+					return res.result;
+				});
+		};
+
+		vm.addTask = function (obj) {
+
+			$log.debug('added' + obj);
+		};
+
+
+	}
+
+
 	angular.module('modules.dash')
 		.controller('catalogCtrl', catalogCtrl);
-
-	function catalogCtrl (http, blockUI, localStorageService, $scope, DTO, $log) {
-		{
-			var vm = this;
-			vm.template = [];
-			vm.user = localStorageService.get('user')? localStorageService.get('user'):{};
-			vm.filter = DTO.catalogFilter();
-			vm.patCheckboxes = ['all', 'free', 'paid'];
-			vm.docCheckboxes = ['medical', 'patient'];
-
-			if ('DOCTOR' === vm.user.userType || 'ORG' === vm.user.userType) {
-				vm.checkboxes = vm.patCheckboxes.concat(vm.docCheckboxes);
-			} else {
-				vm.checkboxes = vm.patCheckboxes;
-			}
-
-			$scope.$watch(
-
-				'vm.filter'
-				,
-				function (newValue, oldValue) {
-
-					if (!angular.equals(newValue, oldValue)) {
-						applyFilter();
-					}
-				}, true
-			);
-
-			function checkFilter(item, filter) {
-				var mass=[], result = true;
-
-				filter.free && !filter.paid && mass.push({key:'commerce', value:false});
-				filter.paid && !filter.free && mass.push({key:'commerce', value:true});
-				filter.patient && !filter.medical && mass.push({key:'type', value:'PATIENT'});
-				filter.medical && !filter.patient && mass.push({key:'type',value:'MEDICAL'});
-
-				_.each(mass, function (res) {
-					if (item[res.key] !== res.value){
-						result = false;
-					}
-
-				});
-				return result;
-
-			}
-
-			function applyFilter() {
-
-				vm.filterTemplate = _.filter(vm.template, function (item) {
-					if (checkFilter(item, vm.filter)) {
-						return item;
-					}
-				});
-			};
-
-			vm.check = function (type) {
-				if (('all' !== type) && (true === vm.filter[type])) {
-					return;
-				}
-				switch (type) {
-					case 'patient':
-					{
-						vm.filter.medical = true;
-						break;
-					}
-					case 'medical':
-					{
-						vm.filter.patient = true;
-						break;
-					}
-					case 'free':
-					{
-						vm.filter.paid = true;
-						break;
-					}
-					case 'paid':
-					{
-						vm.filter.free = true;
-						break;
-					}
-					default :
-					{
-						selectAll();
-					}
-				}
-			};
-
-			function selectAll() {
-				var countTrue = 0, keys, allwaysTrueKeys = ['patient', 'free'];
-
-				function checkAll(check) {
-					vm.filter.all = check;
-					_.each(keys, function (key) {
-						vm.filter[key] = check;
-					});
-					_.each(allwaysTrueKeys, function (key) {
-						vm.filter[key] = true;
-					});
-				}
-
-				keys = _.difference(Object.keys(vm.filter), ['search', 'all']);
-
-				_.each(keys, function (key) {
-					countTrue += vm.filter[key] ? 1 : 0;
-				});
-				if ((vm.filter.all) || (countTrue < keys.length)){
-					checkAll(true);
-				} else {
-					checkAll(false);
-				}
-			}
-
-			vm.arr = [];
-
-			vm.getTemplates = function (type) {
-				var url;
-				if ('all' === type) {
-					url = '/catalog/all';
-				}
-				else {
-					url = '/mytemplates/all';
-				}
-
-				http.post(url, DTO.criteriaDTO())
-					.then(function (res) {
-						blockUI.stop();
-						if (res.state) {
-							vm.template = res.result;
-							vm.filterTemplate = res.result;
-						}
-					});
-
-
-
-			};
-
-			vm.getTemplates('all');
-
-
-			vm.buy = function () {
-				$log.debug('PAID');
-			};
-
-			vm.load = function (id) {
-				http.get('/mytemplates/add/' + id)
-					.then(function (res) {
-
-						return res.result;
-
-					}
-				);
-			};
-
-			vm.view = function (id) {
-				http.get('/catalog/view/' + id)
-					.then(function (res) {
-						blockUI.stop();
-						return res.result;
-					});
-			};
-
-			vm.remove = function (id) {
-				http.get('/mytemplates/remove/' + id)
-					.then(function (res) {
-						vm.getTemplates();
-						blockUI.stop();
-
-						return res.result;
-					});
-			};
-
-			vm.addTask = function (obj) {
-
-				$log.debug('added' + obj);
-			};
-
-		}
-	};
 
 
 })();
