@@ -15,11 +15,12 @@
 					</tr>
 					</thead>
 					<tbody>
+					<p id="p">pizda</p>
 					<tr ng-click=""  ng-repeat="draft in vm.list.rows track by $index">
 						<td>{{draft.doc.date}}</td>
 						<td>{{draft.doc.descr}}</td>
 						<td>
-							<div class="btn-group btn-group-xs">
+							<div id ="row" class="btn-group btn-group-xs">
 								<button style="margin-top: 10px;" class="btn btn-danger red green" ng-click="vm.onDelete(draft.doc._id)">x</button>
 
 								<button style="margin-top: 10px;" class="btn btn-danger red green" ng-click="vm.onSend(draft)">
