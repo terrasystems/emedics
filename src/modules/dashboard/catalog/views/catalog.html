@@ -3,15 +3,12 @@
 
 		<uib-tabset>
 			<div class="search_criterias pull-right" >
-				<input class="form_search" placeholder="search your form" style="" type="text" ng-model="vm.filter_.searchStr" />
-				<label class="checkbox-inline" style="color:red"><input type="checkbox" ng-model="vm.filter_.xALL" ng-change="onAll();">All</label>
-				<label ng-show="vm.userType.type === 'doctor' || vm.userType.type === 'stuff'" class="checkbox-inline" style="color:green"><input type="checkbox"  ng-model="vm.filter_.xPAT" ng-change="vm.onPat();">Patient</label>
-				<label ng-show="vm.userType.type === 'doctor' || vm.userType.type === 'stuff'" class="checkbox-inline" style="color:green"><input type="checkbox" ng-model="vm.filter_.xMED" ng-change="vm.onMed();">Med</label>
-				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xBOUGHT" ng-change="vm.onBought();">Bought</label>
-				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xFREE" ng-change="vm.onFree();">Free</label>
-				<label class="checkbox-inline" style="color:blue"><input type="checkbox" ng-model="vm.filter_.xGIFT" ng-change="vm.onGift();">Gift</label>
+				<!--<input style="border-radius: 10px;border-radius: 10px;outline: none; padding-left: 3px" placeholder="search forms..." type="text"/>-->
+				<label ng-repeat="checkbox in vm.checkboxes">
+					<input  style="width: 30px;" type="checkbox" ng-model="vm.filter[checkbox]" ng-change="vm.check(checkbox)"> {{checkbox}}
+				</label>
 			</div>
-			<uib-tab ng-click="vm.getAllTemplates();" index="0" heading="Main">
+			<uib-tab ng-click="vm.getTemplates('all');" index="0" heading="Main">
 				<table class="table table-hover header-fixed1">
 					<thead>
 						<tr>
@@ -23,23 +20,23 @@
 					</thead>
 
 					<tbody>
-					<tr ng-repeat="form in vm.FormTemplate | filter:vm.filterByCategory" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
+					<tr ng-repeat="form in vm.filterTemplate" ng-click="vm.onClick(form.id)" ng-class="{'s-row-yellow': form.load}">
 						<td>{{form.number}}</td>
 						<td>{{form.name}}</td>
 						<td>{{form.descr}}</td>
 						<td>{{form.commercialEnum}}
 							<div class="pull-right btn-group btn-group-xs">
 								<button class="btn btn-danger btn-small"
-										ng-click="vm.Buy(form.id);form.isPay=true;form.isLoad=true;"
-										ng-disabled="form.isPay"
+										ng-click="vm.buy(form.id);"
+										ng-if="form.commerce === true"
 										translate="BUY">
 								</button>
 								<button class="btn btn-success btn-small"
-										ng-click="vm.Load(form.id);form.isLoad=true;"
+										ng-click="vm.load(form.id);"
 										translate="LOAD">
 								</button>
 								<button class="btn btn btn-info btn-small"
-										ng-click="vm.View(form.id);"
+										ng-click="vm.view(form.id);"
 										translate="VIEW">
 								</button>
 							</div>
@@ -50,7 +47,7 @@
 				</table>
 			</uib-tab>
 
-			<uib-tab ng-click="vm.getMyTemplates();" index="1" heading="My">
+			<uib-tab ng-click="vm.getTemplates('my');" index="1" heading="My">
 				<div ng-show="vm.myForms.length == 0" class="alert alert-info" role="alert"><h5 class="noData_msg">You	dont have any forms</h5></div>
 
 				<table class="table table-hover header-fixed1">
@@ -64,19 +61,19 @@
 					</thead>
 
 					<tbody>
-						<tr ng-repeat="forms in vm.myForms | filter:vm.filterByCategoryMy" ng-click="vm.onClick(form.id)" >
+						<tr ng-repeat="forms in vm.filterTemplate" ng-click="vm.onClick(form.id)" >
 							<td>{{forms.templateDto.number}}</td>
 							<td>{{forms.templateDto.name}}</td>
 							<td>{{forms.templateDto.descr}}</td>
 							<td>{{forms.type}}
 								<div class=" pull-right btn-group btn-group-xs">
 									<button class="btn btn-danger  btn-small"
-											ng-click="vm.Remove(forms.id);">
+											ng-click="vm.remove(forms.id);">
 										<i class="glyphicon glyphicon-trash"></i>
 									</button>
 									<button style="float: right"
 											class="btn btn-success btn-small"
-											ng-click="vm.AddTask(forms);">
+											ng-click="vm.addTask(forms);">
 										<span translate="LOAD"></span>
 									</button>
 								</div>

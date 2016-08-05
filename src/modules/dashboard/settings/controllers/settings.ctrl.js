@@ -1,93 +1,95 @@
-'use strict';
-/*jshint -W117, -W097*/
+(function () {
+	/*jshint -W117, -W097*/
 
-angular.module('modules.dash')
+	angular.module('modules.dash')
 
-	.controller('settingsCtrl', function ($state,DTO,alertService, blockUI, $rootScope, http, settings_fields, auth, $translate) {
-		var vm = this;
-		vm.settings_fields = settings_fields;
-		vm.settings_model = {};
-		vm.settings_options = {};
-		vm.changedPass = DTO.changedPass;
-		vm.PassConfirm = DTO.confirmPass;
-		var base = $rootScope.db;
+		.controller('settingsCtrl', function ($translate, auth, blockUI, http, DTO, regFields, alertService, userTypes, localStorageService) { //NOSONAR
+			var vm = this,
+					criteriaDTO = DTO.criteriaDTO(),
+					userDTO = DTO.userDTO(),
+					changePassDTO = DTO.changePassDTO();
+			vm.settingsModel = localStorageService.get('user');
+			vm.settingsFields = {};
+			vm.onSubmitForm = onSubmitForm;
+			vm.settingsModel.userType === userTypes.patient  ? null : criteriaDTO.type = vm.settingsModel.type.userType;
 
-		http.get('private/userInfo')
-			.then(function (res) {
-				blockUI.stop();
-				vm.settings_model = res.user;
-				vm.settings_model.isHideOrgType = !res.user.org;
-				vm.settings_model.isHideDoctorType = (res.user.type !== 'doctor') || res.user.org;
-			});
+			selectFormlyFieldsByType();
+			removePassField();
+			getTypes();
 
-		vm.getTypesDoc = function() {
-			http.get('public/dashboard/doc_type/doctor')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result)) {
-						res.result.map(function (item) {
-							var x = angular.copy(item.id);
-							delete item.id;
-							item.value = x;
-							item.name = $translate.instant(item.name);
-							return item;
-						});
-						vm.settings_fields[6].templateOptions.options = res.result;
-					}
+			// functions declarations:
+			// prepare formly fields
+			function selectFormlyFieldsByType() {
+				switch (vm.settingsModel.userType) {
+					case userTypes.patient:
+						vm.settingsFields = regFields.patient();
+						break;
+					case userTypes.doctor:
+						vm.settingsFields = regFields.doctor();
+						break;
+					case userTypes.org:
+						vm.settingsFields = regFields.org();
+						break;
+					default:
+						break;
+				}
+			};
+			// remove pass field from form
+			function removePassField() {
+				var idx = _.findIndex(vm.settingsFields, function(field) { return field.key === 'pass'; });
+				vm.settingsFields.splice(idx, 1);
+			};
+
+			// add select types to form
+			function getTypes() {
+				blockUI.start();
+				http.post('/types/all', criteriaDTO)
+					.then(function (res) {
+						addTypesToFieldOptions(res.result);
+						blockUI.stop();
+					});
+			};
+
+			function addTypesToFieldOptions(types) {
+				var idx = _.findIndex(vm.settingsFields, function(field) { return field.key === 'type'; });
+				vm.settingsFields[idx].templateOptions.options = _.map(types, function (item) {
+					item.value = {
+						id: item.id,
+						name: item.name,
+						userType: item.userType
+					};
+					return item;
 				});
-		};
-		vm.getTypesDoc();
+			};
 
-		vm.getTypesOrg = function() {
-			http.get('public/dashboard/doc_type/organization')
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result && angular.isArray(res.result)) {
-						res.result.map(function (item) {
-							var x = angular.copy(item.id);
-							delete item.id;
-							item.value = x;
-							item.name = $translate.instant(item.name);
-							return item;
-						});
-						vm.settings_fields[5].templateOptions.options = res.result;
-					}
-				});
-		};
-		vm.getTypesOrg();
+			function onSubmitForm(form) {
+				if(form.$name === 'vm.passForm') {
+					changePassDTO = DTO.mergeDTO(changePassDTO, vm.pass);
+					changePassword(changePassDTO);
+				} else {
+					userDTO = DTO.mergeDTO(userDTO, vm.settingsModel);
+					saveSettings(userDTO);
+				}
+			};
 
-		vm.onSave = function () {
-			http.post('private/user_edit', vm.settings_model)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						alertService.success(res.state.message);
-						auth.saveUserData(res);
-						$rootScope.$broadcast('change.username');
-					}
-				});
-		};
+			function saveSettings(userDTO) {
+				blockUI.start();
+				http.post('/user/edit', userDTO)
+					.then(function (res) {
+						alertService.success($translate.instant(res.msg));
+						auth.saveUserData(res.result);
+						blockUI.stop();
+					});
+			};
 
-		vm.onChangePass = function () {
-			http.post('private/change_pass', vm.changedPass)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						alertService.success(res.state.message);
-						vm.changedPass = {oldPass: '', newPass: ''};
-						vm.PassConfirm = {confirm: ''};
-					}
-				});
-		};
+			function changePassword(changePassDTO) {
+				blockUI.start();
+				http.post('/user/change_pass', changePassDTO)
+					.then(function (res) {
+						alertService.success($translate.instant(res.msg));
+						blockUI.stop();
+					});
+			};
 
-		vm.cleanCache = function (){
-			base.destroy().then(function (response) {
-			// success
-			}).catch(function (err) {
-				console.log(err);
-			}).then(function(){
-				window.location.reload();
-			});
-		};
-
-	});
+		});
+})();

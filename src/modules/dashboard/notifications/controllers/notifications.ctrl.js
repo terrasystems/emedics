@@ -1,56 +1,59 @@
-'use strict';
-/*jshint -W117, -W097*/
+(function () {
 
-angular.module('modules.dash')
 
-	.controller('notificationsCtrl', function (http, $scope, blockUI, alertService, $rootScope, DTO) {
-		var vm = this;
-		vm.UnreadNotifications = [];
+	/*jshint -W117, -W097*/
 
-		vm.allNotifications = function (val) {
-			var criteriaDTO = DTO.criteriaDTO();
-			criteriaDTO.search = val;
-			return http.post('/notifications/all', criteriaDTO)
-				.then(function (res) {
-					blockUI.stop();
-					if (angular.isArray(res.result)) {
-						vm.UnreadNotifications = res.result;
-					}
-					return res.result;
-				});
-		};
-		vm.allNotifications();
+	angular.module('modules.dash')
 
-		vm.Accept = function (id) {
-			http.get('/notifications/accept/' + id)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result) {
+		.controller('notificationsCtrl', function (http, $scope, blockUI, alertService, $rootScope, DTO) {
+			var vm = this;
+			vm.UnreadNotifications = [];
+
+			vm.allNotifications = function (val) {
+				var criteriaDTO = DTO.criteriaDTO();
+				criteriaDTO.search = val;
+				return http.post('/notifications/all', criteriaDTO)
+					.then(function (res) {
+						blockUI.stop();
+						if (angular.isArray(res.result)) {
+							vm.UnreadNotifications = res.result;
+						}
 						return res.result;
-					}
-					$rootScope.$broadcast('calc.notif');
-					vm.allNotifications();
-				});
-		};
+					});
+			};
+			vm.allNotifications();
 
-		$rootScope.$broadcast('calc.notif');
+			vm.Accept = function (id) {
+				http.get('/notifications/accept/' + id)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.result) {
+							return res.result;
+						}
+						$rootScope.$broadcast('calc.notif');
+						vm.allNotifications();
+					});
+			};
 
-		vm.Decline = function (id) {
-			http.get('/notifications/decline/' + id)
-				.then(function (res) {
-					blockUI.stop();
-					if (res.result) {
-						return res.result;
+			$rootScope.$broadcast('calc.notif');
 
-					}
-					$rootScope.$broadcast('calc.notif');
-					vm.allNotifications();
-				});
-		};
+			vm.Decline = function (id) {
+				http.get('/notifications/decline/' + id)
+					.then(function (res) {
+						blockUI.stop();
+						if (res.result) {
+							return res.result;
 
-		vm.convertDate = function (d) {
-			var y = new Date(d);
-			return y.toLocaleString().replace(',', ' / ');
-		};
+						}
+						$rootScope.$broadcast('calc.notif');
+						vm.allNotifications();
+					});
+			};
 
-	});
+			vm.convertDate = function (d) {
+				var y = new Date(d);
+				return y.toLocaleString().replace(',', ' / ');
+			};
+
+		});
+})();

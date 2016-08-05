@@ -6,8 +6,8 @@
 				<div class="col-md-12 form-group ">
 						<button class="btn btn-primary" ui-sref="main.dashboard.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;"></span></button>
 
-						<form ng-submit="vm.onSave()" name="vm.settingsForm" novalidate>
-							<formly-form  model="vm.settings_model" fields="vm.settings_fields" form="vm.settingsForm" options="vm.settings_options">
+						<form ng-submit="vm.onSubmitForm(vm.settingsForm)" name="vm.settingsForm" novalidate>
+							<formly-form  model="vm.settingsModel" fields="vm.settingsFields" form="vm.settingsForm" options="vm.settings_options">
 								<button type="submit"
 										class="btn btn_submit btn-default login-button submit-button"
 										ng-disabled="vm.settingsForm.$invalid" translate="SAVE">
@@ -22,17 +22,17 @@
 		</div>
 	</uib-tab>
 
-	<uib-tab index="2" heading="{{'CHANGE_PASS' | translate}}">
+	<uib-tab index="1" heading="{{'CHANGE_PASS' | translate}}">
 		<div class="container form-list">
 			<div class="row ">
 				<div class="col-md-12 form-group  ">
 					<button class="btn btn-primary" ui-sref="main.dashboard.tasks"><i class="glyphicon glyphicon-arrow-left"></i><span style="margin-left: 10px;"></span></button>
 
-					<form name="infoForm">
+					<form name="vm.passForm">
 
 						<div class="input-group input-group-md info">
 							<span class="input-group-addon" id="sizing-addon11" translate="OLD_PASS"></span>
-							<input ng-model="vm.changedPass.oldPass"
+							<input ng-model="vm.pass.old"
 								   type="password"
 								   class="form-control"
 								   placeholder="{{'OLD_PASS2' | translate}}"
@@ -41,7 +41,7 @@
 						</div>
 						<div class="input-group input-group-md info">
 							<span class="input-group-addon" id="sizing-addon11" translate="NEW_PASS"></span>
-							<input ng-model="vm.changedPass.newPass"
+							<input ng-model="vm.pass.new"
 								   type="password"
 								   class="form-control"
 								   placeholder="{{'NEW_PASS2' | translate}}"
@@ -50,20 +50,20 @@
 						</div>
 						<div class="input-group input-group-md info">
 							<span class="input-group-addon" id="sizing-addon11" translate="CONFIRM"></span>
-							<input ng-model="vm.PassConfirm.confirm"
+							<input ng-model="vm.pass.confirm"
 								   type="password"
 								   class="form-control"
 								   placeholder="{{'CONFIRM_PASS' | translate}}"
 								   aria-describedby="sizing-addon3"
 								   required>
 						</div>
-						<button ng-click="vm.onChangePass();"
-								ng-disabled="vm.changedPass.newPass !== vm.PassConfirm.confirm || infoForm.$invalid"
+						<button ng-click="vm.onSubmitForm(vm.passForm);"
+								ng-disabled="vm.pass.new !== vm.pass.confirm || passForm.$invalid"
 								type="submit"
 								class="btn btn-success pull-right">
 							<span translate="CHANGE"></span>
 						</button>
-						<span ng-show="vm.changedPass.newPass !== vm.PassConfirm.confirm" translate="CONFIRM_PASS2"></span>
+						<span ng-show="vm.pass.new !== vm.pass.confirm" translate="CONFIRM_PASS2"></span>
 
 					</form>
 				</div>

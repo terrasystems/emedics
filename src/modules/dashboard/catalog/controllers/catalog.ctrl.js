@@ -1,265 +1,187 @@
-'use strict';
-/*jshint -W117, -W097*/
+(function () {
 
-angular.module('modules.dash')
+	/*jshint -W117, -W097, -W007*/
 
-	.controller('catalogCtrl', function (http, blockUI, alertService, $state, $uibModal, localStorageService, $stateParams, $scope, $q, DTO) {
-		var vm = this;
-		vm.userType = localStorageService.get('user');
-		vm.FormTemplate = [];
-		vm.myForms = [];
-		vm.user = localStorageService.get('user');
-		vm.filter = DTO.catalogFilter();
+	angular.module('modules.dash')
+		.controller('catalogCtrl', catalogCtrl);
 
-		function selectAll() {
-			var countTrue = 0, keys;
+	function catalogCtrl (http, blockUI, localStorageService, $scope, DTO, $log) {
+		{
+			var vm = this;
+			vm.template = [];
+			vm.user = localStorageService.get('user')? localStorageService.get('user'):{};
+			vm.filter = DTO.catalogFilter();
+			vm.patCheckboxes = ['all', 'free', 'paid'];
+			vm.docCheckboxes = ['medical', 'patient'];
 
-			function checkAll(check) {
-				vm.filter.all = check;
-				_.each(keys, function (key) {
-					vm.filter[key] = check;
+			if ('DOCTOR' === vm.user.userType || 'ORG' === vm.user.userType) {
+				vm.checkboxes = vm.patCheckboxes.concat(vm.docCheckboxes);
+			} else {
+				vm.checkboxes = vm.patCheckboxes;
+			}
+
+			$scope.$watch(
+
+				'vm.filter'
+				,
+				function (newValue, oldValue) {
+
+					if (!angular.equals(newValue, oldValue)) {
+						applyFilter();
+					}
+				}, true
+			);
+
+			function checkFilter(item, filter) {
+				var mass=[], result = true;
+
+				filter.free && !filter.paid && mass.push({key:'commerce', value:false});
+				filter.paid && !filter.free && mass.push({key:'commerce', value:true});
+				filter.patient && !filter.medical && mass.push({key:'type', value:'PATIENT'});
+				filter.medical && !filter.patient && mass.push({key:'type',value:'MEDICAL'});
+
+				_.each(mass, function (res) {
+					if (item[res.key] !== res.value){
+						result = false;
+					}
+
+				});
+				return result;
+
+			}
+
+			function applyFilter() {
+
+				vm.filterTemplate = _.filter(vm.template, function (item) {
+					if (checkFilter(item, vm.filter)) {
+						return item;
+					}
 				});
 			};
 
-			keys = _.difference(Object.keys(vm.filter), ['search', 'all']);
-
-			_.each(keys, function (key) {
-				countTrue += vm.filter[key] ? 1 : 0;
-			});
-			if (countTrue < keys.length) {
-				checkAll(true);
-			} else {
-				checkAll(false)
-			}
-		}
-
-		//vm.isPatient = ((vm.user.type).toUpperCase() === 'PATIENT');
-
-		//vm.filter_ = {};
-		//function onAll() {
-		//	vm.filter_.xALL = true;
-		//	vm.filter_.xPAT = false;
-		//	vm.filter_.xMED = false;
-		//	vm.filter_.xBOUGHT = false;
-		//	vm.filter_.xFREE = false;
-		//	vm.filter_.xGIFT = false;
-		//	vm.filter_.searchStr = '';
-		//}
-		//
-		//onAll();
-		//
-		//vm.onNoAll = function () {
-		//	vm.filter_.xALL = false;
-		//};
-		//
-		//vm.onPat = function () {
-		//	vm.filter_.xMED = (vm.filter_.xPAT) ? false : vm.filter_.xMED;
-		//	vm.onNoAll();
-		//};
-		//
-		//vm.onMed = function () {
-		//	vm.filter_.xPAT = (vm.filter_.xMED) ? false : vm.filter_.xPAT;
-		//	vm.onNoAll();
-		//};
-		//
-		//vm.onBought = function () {
-		//	if (vm.filter_.xBOUGHT) {
-		//		vm.filter_.xFREE = false;
-		//		vm.filter_.xGIFT = false;
-		//	}
-		//	vm.onNoAll();
-		//};
-		//
-		//vm.onFree = function () {
-		//	if (vm.filter_.xFREE) {
-		//		vm.filter_.xBOUGHT = false;
-		//		vm.filter_.xGIFT = false;
-		//	}
-		//	vm.onNoAll();
-		//};
-		//
-		//vm.onGift = function () {
-		//	if (vm.filter_.xGIFT) {
-		//		vm.filter_.xBOUGHT = false;
-		//		vm.filter_.xFREE = false;
-		//	}
-		//	vm.onNoAll();
-		//};
-		//
-		//vm.filterByCategoryMy = function (item) {
-		//	if (!vm.filter_.xALL) {
-		//		if (!(
-		//				(vm.filter_.xPAT && item.templateDto.typeEnum === 'PATIENT') ||
-		//				(vm.filter_.xMED && item.templateDto.typeEnum === 'MEDICAL') ||
-		//				(!vm.filter_.xPAT && !vm.filter_.xMED)
-		//			) || !(
-		//				(vm.filter_.xBOUGHT && item.templateDto.commercialEnum === 'PAID') ||
-		//				(vm.filter_.xFREE && item.templateDto.commercialEnum === 'FREE') ||
-		//				(vm.filter_.xGIFT && item.templateDto.commercialEnum === 'GIFT') ||
-		//				(!vm.filter_.xBOUGHT && !vm.filter_.xFREE && !vm.filter_.xGIFT)
-		//			)
-		//		) {
-		//			return;
-		//		}
-		//	}
-		//	if (vm.filter_.searchStr !== '') {
-		//		if (item.templateDto.name.toUpperCase().indexOf(vm.filter_.searchStr.toUpperCase()) === -1) {
-		//			return;
-		//		}
-		//	}
-		//	return item;
-		//};
-		//
-		//vm.filterByCategory = function (item) {
-		//	if (!vm.filter_.xALL) {
-		//		if (!(
-		//				(vm.filter_.xPAT && item.typeEnum === 'PATIENT') ||
-		//				(vm.filter_.xMED && item.typeEnum === 'MEDICAL') ||
-		//				(!vm.filter_.xPAT && !vm.filter_.xMED)
-		//			) || !(
-		//				(vm.filter_.xBOUGHT && item.commercialEnum === 'PAID') ||
-		//				(vm.filter_.xFREE && item.commercialEnum === 'FREE') ||
-		//				(vm.filter_.xGIFT && item.commercialEnum === 'GIFT') ||
-		//				(!vm.filter_.xBOUGHT && !vm.filter_.xFREE && !vm.filter_.xGIFT)
-		//			)
-		//		) {
-		//			return;
-		//		}
-		//	}
-		//	if (vm.filter_.searchStr !== '') {
-		//		if (item.name.toUpperCase().indexOf(vm.filter_.searchStr.toUpperCase()) === -1) {
-		//			return;
-		//		}
-		//	}
-		//	return item;
-		//};
-
-		vm.arr = [];
-
-		vm.getAllTemplates = function () {
-			return http.post('/catalog/all', DTO.criteriaDTO())
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						vm.FormTemplate = res.result;
-					}
-					return res.result;
-				});
-		};
-
-		vm.getAllTemplates();
-
-
-		vm.getMyTemplates = function () {
-			return http.post('/catalog/all', DTO.criteriaDTO())
-				.then(function (res) {
-					blockUI.stop();
-					if (res.state) {
-						vm.myForms = res.result;
-					}
-					return res.result;
-				});
-		};
-
-		vm.getMyTemplates();
-
-		//vm.myForms.forEach(function (e) {
-		//	var item = {};
-		//	item.id = e.templateDto.id;
-		//	item.type = e.type;
-		//	vm.arr.push(item);
-		//});
-		//
-		//vm.convertFormTemplate = function (arr) {
-		//	arr.map(function (item) {
-		//		item.isPay = false;
-		//		item.isLoad = false;
-		//		item.isPreview = false;
-		//		return item;
-		//	});
-		//	vm.arr.forEach(function (e) {
-		//		arr.map(function (item) {
-		//			if (item.id == e.id) {
-		//				if (e.type == 'PAID') {
-		//					item.isPay = true;
-		//					item.isLoad = true;
-		//				}
-		//				else {
-		//					item.isPay = false;
-		//					item.isLoad = true;
-		//				}
-		//			}
-		//			return item;
-		//		});
-		//	});
-		//	return arr;
-		//};
-
-
-		vm.Buy = function () {
-			console.log('PAID');
-		};
-
-		vm.Load = function (id) {
-			http.get('/mytemplates/add' + id)
-				.then(function (res) {
-
-					return res.result;
-					//var paramsPOST = DTO.createTask;
-					//paramsPOST.template.id = rest.result;
-					//paramsPOST.template.type = vm.templateParams.typeEnum;
-					//vm.Send(paramsPOST);
+			vm.check = function (type) {
+				if (('all' !== type) && (true === vm.filter[type])) {
+					return;
 				}
-			);
-		};
+				switch (type) {
+					case 'patient':
+					{
+						vm.filter.medical = true;
+						break;
+					}
+					case 'medical':
+					{
+						vm.filter.patient = true;
+						break;
+					}
+					case 'free':
+					{
+						vm.filter.paid = true;
+						break;
+					}
+					case 'paid':
+					{
+						vm.filter.free = true;
+						break;
+					}
+					default :
+					{
+						selectAll();
+					}
+				}
+			};
 
-		vm.View = function (id) {
-			http.get('/catalog/view' + id)
-				.then(function (res) {
-					blockUI.stop();
-					return res.result;
+			function selectAll() {
+				var countTrue = 0, keys, allwaysTrueKeys = ['patient', 'free'];
+
+				function checkAll(check) {
+					vm.filter.all = check;
+					_.each(keys, function (key) {
+						vm.filter[key] = check;
+					});
+					_.each(allwaysTrueKeys, function (key) {
+						vm.filter[key] = true;
+					});
+				}
+
+				keys = _.difference(Object.keys(vm.filter), ['search', 'all']);
+
+				_.each(keys, function (key) {
+					countTrue += vm.filter[key] ? 1 : 0;
 				});
-		};
+				if ((vm.filter.all) || (countTrue < keys.length)){
+					checkAll(true);
+				} else {
+					checkAll(false);
+				}
+			}
 
-		vm.Remove = function (id) {
-			http.get('/mytemplates/remove' + id)
-				.then(function (res) {
-					vm.getMyTemplates();
-					blockUI.stop();
+			vm.arr = [];
 
-					return res.result;
-				});
-		};
+			vm.getTemplates = function (type) {
+				var url;
+				if ('all' === type) {
+					url = '/catalog/all';
+				}
+				else {
+					url = '/mytemplates/all';
+				}
 
-		vm.AddTask = function (obj) {
+				http.post(url, DTO.criteriaDTO())
+					.then(function (res) {
+						blockUI.stop();
+						if (res.state) {
+							vm.template = res.result;
+							vm.filterTemplate = res.result;
+						}
+					});
 
-		};
 
-		//vm.Send = function(cfg) {
-		//	if (vm.user.type === 'patient' || cfg.template.type === 'MEDICAL') {
-		//		http.post('private/dashboard/tasks/create', cfg)
-		//			.then(function (res) {
-		//				blockUI.stop();
-		//				alertService.add(0, res.state.message);
-		//			});
-		//	} else {
-		//		var config = {
-		//			templateUrl: 'modules/dashboard/views/modal.sendTaskMulti.html',
-		//			controller: 'modalSendTaskMultiCtrl',
-		//			controllerAs: 'vm',
-		//			resolve: {
-		//				model: function($q) {
-		//					var deferred = $q.defer();
-		//					deferred.resolve({data: {template_id: cfg.template.id}});
-		//					return deferred.promise;
-		//				}
-		//			}
-		//		};
-		//		var result = $uibModal.open(config);
-		//		result.result.then(function () {
-		//			$state.go('main.dashboard.catalog');
-		//		});
-		//	}
-		//};
 
-	});
+			};
+
+			vm.getTemplates('all');
+
+
+			vm.buy = function () {
+				$log.debug('PAID');
+			};
+
+			vm.load = function (id) {
+				http.get('/mytemplates/add/' + id)
+					.then(function (res) {
+
+						return res.result;
+
+					}
+				);
+			};
+
+			vm.view = function (id) {
+				http.get('/catalog/view/' + id)
+					.then(function (res) {
+						blockUI.stop();
+						return res.result;
+					});
+			};
+
+			vm.remove = function (id) {
+				http.get('/mytemplates/remove/' + id)
+					.then(function (res) {
+						vm.getTemplates();
+						blockUI.stop();
+
+						return res.result;
+					});
+			};
+
+			vm.addTask = function (obj) {
+
+				$log.debug('added' + obj);
+			};
+
+		}
+	};
+
+
+})();

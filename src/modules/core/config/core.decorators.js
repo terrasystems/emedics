@@ -4,6 +4,11 @@
 		.config(function ($stateProvider, statesList, $urlMatcherFactoryProvider) {
 
 			$stateProvider.decorator('state', function (state) {
+				//expected states
+				if (_.includes(['main.auth.activation', 'main.auth.validationkey'],state.name)){
+					return state;
+				}
+
 				var moduleName = state.name.split('.'),
 					moduleNameStripped = state.name.split('.'),
 					mainViewName = 'content@main',

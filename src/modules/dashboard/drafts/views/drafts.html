@@ -9,15 +9,15 @@
 				<table class="table table-hover">
 					<thead>
 					<tr>
-						<th translate="NAME"></th>
 						<th translate="DATE"></th>
+						<th translate="DESCR"></th>
 						<th translate="ACTION"></th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr ng-click=""  ng-repeat="draft in vm.list.rows track by $index">
-						<td>{{draft.doc.draftName}}</td>
-						<td>{{vm.convertDateTime(draft.doc.body.changeDateTime)}}</td>
+						<td>{{draft.doc.date}}</td>
+						<td>{{draft.doc.descr}}</td>
 						<td>
 							<div class="btn-group btn-group-xs">
 								<button style="margin-top: 10px;" class="btn btn-danger red green" ng-click="vm.onDelete(draft.doc._id)">x</button>
